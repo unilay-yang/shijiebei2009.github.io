@@ -29,7 +29,7 @@ date: 2015-04-09 20:12:45
 
 ## 大众点评网(2015/6 ~ Now)
 ### POI部门（Point of Interest）
-负责NLP相关数据分析工作，工作语言Python
+####菜单匹配——工作语言Python
 用户点评菜单与系统中商户输入菜单进行匹配，使用到的匹配方案是：
 * 精确匹配
 * 基于词典精确匹配
@@ -41,6 +41,16 @@ date: 2015-04-09 20:12:45
  - 计算公共子串(有序且连续)
  - 根据评分公式计算相似度
 
+####商户去重——工作语言Java
+由爬虫组负责从美团、糯米之类的竞争对手网站上抓取商户信息，与点评网已有的两千多万海量商户信息进行比较/去重。
+
+使用内部研发框架Pigeon2，该框架主要解决如下问题
+* 分布式服务通信框架（RPC），当垂直应用越来越多，应用之间交互不可避免，将核心业务抽取出来，作为独立的服务，通过Pigeon可以实现应用之间的交互
+* 基于Pigeon实现服务监控治理、资源调度等
+
+使用内部研发框架Lion，该框架是一个配置管理平台，可以实时推动配置变更，管理Service的服务地址。
+
+匹配方案整理中.....
 ## 张江徐汇科企联研资源共享平台(2014/8 ~ 2014/11)
 
 ### 文档分析模块
@@ -85,11 +95,11 @@ date: 2015-04-09 20:12:45
 - 云和开放平台：新浪SAE
 - 业余玩耍：Scala/Python/Android/CeontOS/Hadoop
 - NLP相关：IKanalyzer/Paoding/FudanNLP/LTP/Stanford coreNLP/RDF/OWL/Jena
-- 开发工具：Eclipse/IntellJ IDEA
+- 开发工具：Eclipse/IntelliJ IDEA
 
 ---
 # 致谢
-感谢您花时间阅读我的简历，期待能有机会和您共事。[PDF版简历下载](http://pan.baidu.com/s/1gddDq2R)
+感谢您花时间阅读我的简历，期待能有机会和您共事。
 
 
   [1]: http://7xig3q.com1.z0.glb.clouddn.com/dianping-logo.jpg
