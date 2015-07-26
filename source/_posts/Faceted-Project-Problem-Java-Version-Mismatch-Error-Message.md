@@ -3,6 +3,7 @@ date: 2015-06-02 16:38:58
 tags: [Java, eclipse]
 categories: Programming Notes
 toc: false
+
 ---
 
 在eclipse的 "problems" 选项卡中显示如下错误信息
@@ -22,12 +23,13 @@ Resource:groupping
 ![][4]
 
 
-  [1]: http://7xig3q.com1.z0.glb.clouddn.com/Problems%20Panel.png
-  [2]: http://7xig3q.com1.z0.glb.clouddn.com/Project%20Facets%20Properties.png
-  [3]: http://7xig3q.com1.z0.glb.clouddn.com/Project%20Facets%20Configuration.png
-  [4]: http://7xig3q.com1.z0.glb.clouddn.com/match%20the%20java%20compiler%20compliance%20level.png
+  [1]: http://7xig3q.com1.z0.glb.clouddn.com/eclipse-problems-panel.png
+  [2]: http://7xig3q.com1.z0.glb.clouddn.com/eclipse-project-facets-configuration.png
+  [3]: http://7xig3q.com1.z0.glb.clouddn.com/project-facets-properties.png
+  [4]: http://7xig3q.com1.z0.glb.clouddn.com/matching-java-compiler-compliance-level.png
 
 
 参考资料
 【1】http://javahonk.com/project-facet-java-is-not-supported-by-target-runtime/
 【2】http://stackoverflow.com/questions/2239959/faceted-project-prblem-java-version-mismatch-error-message
+
