@@ -24,12 +24,12 @@ date: 2015-07-07 21:14:59
 整数 Levenshtein距离(字符 str1[1..lenStr1], 字符 str2[1..lenStr2])
    声明 int d[0..lenStr1, 0..lenStr2]
    声明 int i, j, cost
- 
+
    for i = 由 0 至 lenStr1
        d[i, 0] := i
    for j = 由 0 至 lenStr2
        d[0, j] := j
- 
+
    for i = 由 1 至 lenStr1
        for j = 由 1 至 lenStr2
            若 str1[i] = str2[j] 则 cost := 0
@@ -39,7 +39,7 @@ date: 2015-07-07 21:14:59
                                 d[i  , j-1] + 1,     // 插入
                                 d[i-1, j-1] + cost   // 替换
                             )
- 
+
    返回 d[lenStr1, lenStr2]
 ```
 ###Python实现
@@ -48,7 +48,7 @@ date: 2015-07-07 21:14:59
 """
 Created on 2015/7/7  10:08
 使用动态规划算法实现编辑距离的计算
-@author: Administrator
+@author: Wang Xu
 """
 import numpy as np
 
