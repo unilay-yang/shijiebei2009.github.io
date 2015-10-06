@@ -242,3 +242,4 @@ public class Main3 {
 }
 ```
 ***本文代码均在牛客网在线OJ测试通过。算法如有疏漏或不妥之处，还望不吝赐教！***
+***转载请注明出处：http://codepub.cn/2015/09/23/2016-campus-recruitment-of-mushroom-street-programming-problem-resolution-technology/***
