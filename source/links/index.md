@@ -1,5 +1,6 @@
 title: Links
 date: 2015-06-14 18:41:08
+
 ---
 
 本页面收录了本人经常关注的一些博客，并且将博文质量较高的推荐给大家。有需要交换友链的也请留言，您的博客地址会添加到友链条目。需要添加友链的童鞋，请先把本blog地址加入你的友链列表，然后在此处留言并贴下地址，待我确认本blog已经被你添加之后，我会尽快地将你们留下的地址更新到我的友链列表。
@@ -7,6 +8,8 @@ date: 2015-06-14 18:41:08
 ###推荐博客
 [巩朋，就职于Google](http://lucida.me/)
 [大牛，从小就开始编程Beyond the Void](https://www.byvoid.com/)
+[刘未鹏，在南大待了七年](http://mindhacks.cn/)
+[苏杰，阿里待了八年，产品经理](http://iamsujie.com/)
 
 ###推荐站点
 [开源自由的汉语言处理包](http://hanlp.linrunsoft.com/)
@@ -18,5 +21,9 @@ date: 2015-06-14 18:41:08
 ###友链
 [代码馆](http://www.codepub.cn)
 
-###红杏—科学上网
-[推荐使用红杏邀请链接](http://honx.in/i/VK-tSc6vDyRoS9bB)
+###时空隧道—科学上网
+>给你推荐一款海外网站加速工具，为科技工作者、海外归国人员、企业团队、外贸工作者提供海外上网服务，永久免费。 
+国外网址：https://chrome.google.com/webstore/detail/hfinpallhogllbckokkaefjjcjhjpnln
+国外网址：http://www.suidao.in/invi/m5VBYH
+国内网址：http://suidao.wuseyi.com/invi/m5VBYH
+时空隧道邀请码 m5VBYH

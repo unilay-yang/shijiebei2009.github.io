@@ -1,0 +1,75 @@
+title: 私人珍藏工具箱
+date: 2015-10-07 14:40:32
+tags: [Tools]
+categories: Life-Talk
+
+---
+
+###自序
+好用趁手的工具可以极大的提高工作效率，这也是我强推用Mac取代Windows的原因，在Mac平台能让你点两下完成的操作绝对不会让你点三下，而且Mac先天适合程序员，想想在Mac上开一个Terminal可以完成诸多事情，而在Windows上你要开Cmd/Git/Cygwin/SecureCRT等诸多窗口来实现同样的功能。工具虽多，莫要贪杯哦，否则就是舍本逐末了。一定要善于利用工具，而不要贪大贪全！所以本文仅列出我在平常的工作学习中使用的频率最高的一些软件。
+
+###平台工具箱
++ Everything：是速度最快的文件名搜索软件。其速度之快令人震惊，百G硬盘几十万个文件，可以在几秒钟之内完成索引；文件名搜索瞬间呈现结果，简直是秒杀Windows搜索功能
++ SecureCRT：是VanDyke Software的一个商业SSH、Telnet客户端和虚拟终端软件
++ 文本编辑器：Sublime Text3，好用、漂亮、强大、极客
++ 知识管理工具：为知笔记
++ 鼠标手势工具：StrokesPlus，前进后退翻页放大缩小关闭全部鼠标手势搞定，再也不用一个个点了，极大解放你的鼠标手
++ Ad Muncher：俗称大奶牛，富有盛名的广告拦截软件。历史悠久，口碑极好。现已成为免费软件，[下载地址](https://www.admuncher.com/download)
++ ManicTime：分秒不漏的记录你在用电脑的时候到底在干什么，可以自动分类各种操作，形成统计报表。督促自己干正事的利器，[下载地址](http://www.manictime.com/)，[破解版点这里](http://www.ttrar.com/html/ManicTime-Professional.html)
++ 远程控制软件：TeamViewer是一个能在任何防火墙和NAT代理的后台用于远程控制，桌面共享和文件传输的简单且快速的解决方案
++ FastStone Capture：话不多说，简单好用小巧的截图工具，推荐
++ 邮箱客户端：Foxmail，张小龙出品，必属精品，哈哈有广告之嫌
++ 虚拟机软件：Oracle VM VirtualBox，远比VMware好用
++ 视频播放器：PotPlayer，韩国人开发的绿色播放器，强大、小巧、免费，最棒的是其视频加速播放功能，在我与国内的常用视频播放软件的对比实验中，视频加速播放依然保留语音画面流畅度的没有超过它的，在我观看学习视频的过程中，为我节约了大量时间，我通常是2-2.5倍加速播放
++ Python的IDE：JetBrains PyCharm，专业强大
++ Java的IDE：IntelliJ IDEA，一句话，用了IDEA之后再也不愿用Eclipse了
++ 浏览器：Chrome，不需要理由，不理解的请绕道吧、
++ 超级牛逼的两台电脑用网线直连进行文件传输工具：飞秋，只需要设置IP为同一网段即可，在我从公司离职，将文件资料转移到我的笔记本上的时候超级有用
+
+
+###Chrome Plugins
+- AdBlock：最受欢迎的Chrome扩展，拥有超过4000万用户！屏蔽整个互联网上的广告
+- Adkill and Media Download：去视频广告、视频音频下载、正常显示反盗链图片三合一
+- Firebug Lite for Google Chrome™：前端调试必备，不多说
+- JSONView：验证和查看JSON格式数据
+- Octotree：是不是受够了Github上面一层一层点击目录？那么用我吧，帮你在左侧自动生成目录树
+- Page load time：显示页面加载时间
+- Proxy SwitchyOmega：轻松快捷地管理和切换多个代理设置
+- SimpleUndoClose：这个简单的弹出可让您轻而易举的撤销关闭的标签！特别是我不小心关闭了页面，这个工具太有用了
+- Xpath Finder：帮助你在chrome devtools里查找Xpath匹配元素
+- 超级拖曳：超级拖曳，附带6个最常用鼠标手势
+- 穿越：专门为科研、外贸、开发人员服务的上网加速工具，chrome内核浏览器专用，请勿滥用
+- 时空隧道：时空隧道是一款速度最快的海外网站加速插件，可轻松访问google、gmail、facebook、twitter、youtube等网站，永久免费，每天累积2小时，另外推出高级VIP服务
+- Markdown Reader：Read markdown file in Chrome
+
+
+###翻墙工具
+一直用的都是红杏翻墙，但是近期诸多VPN被封，红杏也难逃厄运，上不了Google对一名开发人员来说简直就是噩梦，最近终于发现一款以前免费，现在不免费了，并且速度比红杏还要快的翻墙利器。时空隧道在之前每天提供两个小时的免费使用时间，当然，可以冻结、解冻。
+
+关于安装方法请参考[这里](http://suidaoin.lofter.com/)，如果您要注册的话，很高兴你能填上我的邀请码。
+
+>给你推荐一款海外网站加速工具，为科技工作者、海外归国人员、企业团队、外贸工作者提供海外上网服务，永久免费。 
+国外网址：https://chrome.google.com/webstore/detail/hfinpallhogllbckokkaefjjcjhjpnln
+国外网址：http://www.suidao.in/invi/m5VBYH
+国内网址：http://suidao.wuseyi.com/invi/m5VBYH
+时空隧道邀请码 m5VBYH
+
+
+###在用机器
+- PC1：MacBook Pro MJLQ2CH/A 15.6
+- PC2：微星（MSI）GE60 2QL-1047XCN 15.6 + 12G内存 + 128G固态硬盘 + i7四核八线程
+- 手机：华为荣耀6
+- 阅读器：Kindle Paperwhite 3 黑色
+- 机械键盘：樱桃（Cherry）MX-BOARD 2.0 C 黑色红轴高帽键机械键盘
+- 鼠标：微软无线便携蓝影4000鼠标，完全无需鼠标垫
+
+###Mac的一些优势
+1. Mac的基本功能完善且贴心。区域截屏很好用，Spotlight搜索、启动程序非常方便，无需像Win额外安装软件
+2. Mac下没有很多Win下多余的东西。几乎不用担心病毒，不用整理硬盘，不用分区，几乎没有死机，不用关机，基本没用过进程管理器。所有和使用无关的东西，都被藏起来，用户很容易学习和使用
+3. Mac设置简单。拿网络设置说，Mac下很快就可以设置好（包括复杂的801.x安全认证），而且可以方便的切换多套配置（家里、办公室），在Win下却非常困难，需要专业人员完成
+4. 软件。Mac下的软件都很Mac，操作风格统一，简单好用，使用非常顺畅
+5. 系统是一个整体。所有的软件的工具栏都是统一的，UI、操作相似；所有软件下都可以检查字母拼写；所有浏览器的密码保存都是统一存在keychain中
+6. Mac很少有更新，不像Win更新了也还是原样
+7. 无数的细节。比如复制是Command+c，用大拇指和其他手指配合
+8. 对于开发人员，结合了Windows、Linux的优点
+9. 右下角的弹窗战争，在Mac上，完全没遇到过右下角弹窗的事情。就连Mac通知中心的事情也是我可以方便的自己控制的

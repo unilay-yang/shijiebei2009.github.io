@@ -129,15 +129,15 @@ $$X(S1)=a\_4\*3!+a\_3\*2!+a\_2\*1!+a\_1\*0!=9$$
 
 所以问题变成由9能否唯一地映射出一组a4、a3、a2、a1？首先如果不考虑ai的范围，那么有如下：
 
-$$1*3!+1*2!+1*1!+0*0!=9$$
+$$1\*3!+1\*2!+1\*1!+0\*0!=9$$
 
-$$0*3!+4*2!+1*1!+0*0!=9$$
+$$0\*3!+4\*2!+1\*1!+0\*0!=9$$
 
-$$0*3!+3*2!+3*1!+0*0!=9$$
+$$0\*3!+3\*2!+3\*1!+0\*0!=9$$
 
-$$0*3!+2*2!+5*1!+0*0!=9$$
+$$0\*3!+2\*2!+5\*1!+0\*0!=9$$
 
-......，但是每一个ai其实是有取值范围的，首先要知道ai表示的含义，其代表在当前剩余的序列中ai是处于第几大的位置，那么满足`0<=ai<=i`，同时a0必然为0，因为最后始终剩余一个元素。所以上式中只有第一个满足条件，那么a4=1，a3=1，a2=1，a1=1。推导出`S1=["b","c","d","a"]`。
+......，但是每一个ai其实是有取值范围的，首先要知道ai表示的含义，其代表在当前剩余的序列中ai是处于第几大的位置，那么满足`0<=ai<=i`，同时a1必然为0，因为最后始终剩余一个元素。所以上式中只有第一个满足条件，那么a4=1，a3=1，a2=1，a1=1。推导出`S1=["b","c","d","a"]`。
 
 **Java算法实现**：
 ```java
@@ -295,8 +295,6 @@ public class Main {
 
 **Java算法实现**：
 ```java
-package baidu;
-
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
@@ -335,6 +333,8 @@ public class Main3 {
                 for (int j = a; j <= b; j++) {//
                     for (int k = 1; k <= x; k++) {
                         if (k >= j) {
+//                            print(v);
+//                            System.out.println();
                             v[i][k] = v[i][k] + v[i - 1][k - j] / sum;
                         }
                     }
@@ -342,17 +342,20 @@ public class Main3 {
             }
             //输出取n个数和为x的概率
             System.out.println(dec.format(v[n][x]));
-//            for (int i = 0; i < v.length; i++) {
-//                for (int j = 0; j < v[i].length; j++) {
-//                    System.out.print(v[i][j] + "  ");
-//                }
-//                System.out.println();
-//
-//            }
+
+        }
+    }
+
+    private static void print(double[][] v) {
+        for (int i = 0; i < v.length; i++) {
+            for (int j = 0; j < v[i].length; j++) {
+                System.out.print(v[i][j] + "\t");
+            }
+            System.out.println();
+
         }
     }
 }
-
 ```
 参考资料
 【1】http://www.jeepshoe.org/416642954.htm
