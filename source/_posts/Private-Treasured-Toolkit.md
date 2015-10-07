@@ -23,7 +23,7 @@ categories: Life-Talk
 + 视频播放器：PotPlayer，韩国人开发的绿色播放器，强大、小巧、免费，最棒的是其视频加速播放功能，在我与国内的常用视频播放软件的对比实验中，视频加速播放依然保留语音画面流畅度的没有超过它的，在我观看学习视频的过程中，为我节约了大量时间，我通常是2-2.5倍加速播放
 + Python的IDE：JetBrains PyCharm，专业强大
 + Java的IDE：IntelliJ IDEA，一句话，用了IDEA之后再也不愿用Eclipse了
-+ 浏览器：Chrome，不需要理由，不理解的请绕道吧、
++ 浏览器：Chrome，不需要理由，不理解的请绕道吧
 + 超级牛逼的两台电脑用网线直连进行文件传输工具：飞秋，只需要设置IP为同一网段即可，在我从公司离职，将文件资料转移到我的笔记本上的时候超级有用
 
 
@@ -48,11 +48,13 @@ categories: Life-Talk
 
 关于安装方法请参考[这里](http://suidaoin.lofter.com/)，如果您要注册的话，很高兴你能填上我的邀请码。
 
->给你推荐一款海外网站加速工具，为科技工作者、海外归国人员、企业团队、外贸工作者提供海外上网服务，永久免费。 
+>给你推荐一款海外网站加速工具，为科技工作者、海外归国人员、企业团队、外贸工作者提供海外上网服务，永久免费。
 国外网址：https://chrome.google.com/webstore/detail/hfinpallhogllbckokkaefjjcjhjpnln
 国外网址：http://www.suidao.in/invi/m5VBYH
 国内网址：http://suidao.wuseyi.com/invi/m5VBYH
 时空隧道邀请码 m5VBYH
+如果地址打不开的话，可以试试：http://www.jeepshoe.org/412418412.htm
+百度云下载隧道插件的链接：http://pan.baidu.com/s/1hq2ABJY
 
 
 ###在用机器
