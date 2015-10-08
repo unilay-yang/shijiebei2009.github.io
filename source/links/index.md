@@ -22,8 +22,10 @@ date: 2015-06-14 18:41:08
 [代码馆](http://www.codepub.cn)
 
 ###时空隧道—科学上网
->给你推荐一款海外网站加速工具，为科技工作者、海外归国人员、企业团队、外贸工作者提供海外上网服务，永久免费。 
+>给你推荐一款海外网站加速工具，为科技工作者、海外归国人员、企业团队、外贸工作者提供海外上网服务，永久免费。
 国外网址：https://chrome.google.com/webstore/detail/hfinpallhogllbckokkaefjjcjhjpnln
 国外网址：http://www.suidao.in/invi/m5VBYH
 国内网址：http://suidao.wuseyi.com/invi/m5VBYH
 时空隧道邀请码 m5VBYH
+如果地址打不开的话，可以试试：http://www.jeepshoe.org/412418412.htm
+百度云下载隧道插件的链接：http://pan.baidu.com/s/1hq2ABJY

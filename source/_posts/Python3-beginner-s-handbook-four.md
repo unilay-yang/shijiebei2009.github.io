@@ -1,4 +1,3 @@
-title: "Python3 beginner's handbook four"
 date: 2015-07-13 23:03:44
 title: "Python3入门手册之四"
 tags: [Python3]

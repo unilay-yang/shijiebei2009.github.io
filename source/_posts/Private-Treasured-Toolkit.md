@@ -75,3 +75,5 @@ categories: Life-Talk
 7. 无数的细节。比如复制是Command+c，用大拇指和其他手指配合
 8. 对于开发人员，结合了Windows、Linux的优点
 9. 右下角的弹窗战争，在Mac上，完全没遇到过右下角弹窗的事情。就连Mac通知中心的事情也是我可以方便的自己控制的
+
+***转载请注明出处：http://codepub.cn/2015/10/07/Private-Treasured-Toolkit/***
