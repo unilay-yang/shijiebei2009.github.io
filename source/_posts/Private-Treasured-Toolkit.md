@@ -25,6 +25,7 @@ categories: Life-Talk
 + Java的IDE：IntelliJ IDEA，一句话，用了IDEA之后再也不愿用Eclipse了
 + 浏览器：Chrome，不需要理由，不理解的请绕道吧
 + 超级牛逼的两台电脑用网线直连进行文件传输工具：飞秋，只需要设置IP为同一网段即可，在我从公司离职，将文件资料转移到我的笔记本上的时候超级有用
++ Gif录屏工具：GifCam，非常棒的屏幕录像工具，可生成Gif格式图片
 
 
 ###Chrome Plugins
@@ -62,8 +63,10 @@ categories: Life-Talk
 - PC2：微星（MSI）GE60 2QL-1047XCN 15.6 + 12G内存 + 128G固态硬盘 + i7四核八线程
 - 手机：华为荣耀6
 - 阅读器：Kindle Paperwhite 3 黑色
-- 机械键盘：樱桃（Cherry）MX-BOARD 2.0 C 黑色红轴高帽键机械键盘
-- 鼠标：微软无线便携蓝影4000鼠标，完全无需鼠标垫
+- 机械键盘：樱桃（Cherry）MX-BOARD 2.0 C 黑色红轴高帽键
+- 鼠标1：微软无线便携蓝影4000鼠标，完全无需鼠标垫
+- 鼠标2：罗技（Logitech）M545无线鼠标；全新升级，赛车造型，实用侧键，精准度高！
+
 
 ###Mac的一些优势
 1. Mac的基本功能完善且贴心。区域截屏很好用，Spotlight搜索、启动程序非常方便，无需像Win额外安装软件
