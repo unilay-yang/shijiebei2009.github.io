@@ -2,18 +2,21 @@ title: 搜狗2016校园招聘之编程题解析-大数据开发
 mathjax: true
 tags: [Java]
 categories: Algorithms
+date: 2015-09-29 19:20:41
+title: 2016-campus-recruitment-of-sougou-programming-problem-resolution-big-data-development/
 date: 2015-10-24 23:26:47
-
+tags:
 ---
 
 ###最近邻居
-![](http://7xig3q.com1.z0.glb.clouddn.com/chaos_reduction_sougou_examination_2.png)
+![](http://7xig3q.com1.z0.glb.clouddn.com/nearest_neighbor_sougou_examination_1.png)
+
 **解题思路**：
 1. 使用JDK中的Point2D类，该类定义了坐标系空间中的一个点
 2. Point2D是一个抽象类，但是在该类内部定义了静态的Double类，并且Double继承自Point2D
 3. 可以通过Double的构造方法来实例化空间中的某个点
 4. 将所有的输入数据全部实例化并存放在一个Point2D.Double的数组中
-5. 对该数组进行暴力破解，计算其中任意两个点之间的距离，时间复杂度为$O(n^2)$，并保留下最小的两个点的编号
+5. 对该数组进行暴力破解，计算其中任意两个点之间的距离，时间复杂度为$O(n^2)$，并保留下最小的两个点的编号，且编号小的在前
 
 **Java算法实现**：
 ```java
@@ -87,13 +90,14 @@ public class Main {
 ```
 
 ###混乱还原
-![](http://7xig3q.com1.z0.glb.clouddn.com/nearest_neighbor_sougou_examination_1.png)
+
+![](http://7xig3q.com1.z0.glb.clouddn.com/chaos_reduction_sougou_examination_2.png)
 
 **解题思路**：
 1. 利用伪随机特性，只要时间种子一样且上限一样，其实随机数每次都会产生相同的数
 2. 既然要求还原，那么我们从后往前执行对应的操作即可
-3. 使用一个额外的栈来存储使用到的随机数
-4. 在乱序操作中，是将随机产生的位置对应的元素与最后一个元素进行交换，那么还原的时候，就要从第一个元素开始并且与最后产生的随机数对应的元素进行交换
+3. 使用一个额外的栈来存储所产生的随机数
+4. 在乱序操作中，是将随机数对应的元素与最后一个元素进行交换，那么还原的时候，就要从第一个元素开始与最后产生的那个随机数对应的元素进行交换，依次类推，直到栈空即可
 
 **Java算法实现**：
 ```java
@@ -178,3 +182,5 @@ public class Main {
     }
 }
 ```
+***算法如有疏漏或不妥之处，还望不吝赐教！***
+***转载请注明出处：http://codepub.cn/2015/10/24/2016-campus-recruitment-of-sougou-programming-problem-resolution-big-data-development/***
