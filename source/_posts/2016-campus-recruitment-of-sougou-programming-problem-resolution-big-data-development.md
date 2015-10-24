@@ -2,10 +2,8 @@ title: 搜狗2016校园招聘之编程题解析-大数据开发
 mathjax: true
 tags: [Java]
 categories: Algorithms
-date: 2015-09-29 19:20:41
-title: 2016-campus-recruitment-of-sougou-programming-problem-resolution-big-data-development/
 date: 2015-10-24 23:26:47
-tags:
+
 ---
 
 ###最近邻居
