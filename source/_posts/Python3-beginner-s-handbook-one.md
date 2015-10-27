@@ -2,14 +2,15 @@ title: "Python3入门手册之一"
 date: 2015-07-02 21:41:03
 tags: [Python3]
 categories: Programming Notes
+
 ---
 *Version：Python 3.4.3 (v3.4.3:9b73f1c3e601, Feb 24 2015, 22:44:40) [MSC v.1600 64 bit (AMD64)] on win32*
 
-***There are two ways of constructing a software design: one way is to make it so simple that there are obviously no deficiences; the other is to make it so complicated that there are no obvious deficiences.***
-——C.A.R.Hoare
+**There are two ways of constructing a software design: one way is to make it so simple that there are obviously no deficiences; the other is to make it so complicated that there are no obvious deficiences.**
+--- C.A.R.Hoare
 
-***Success in life is a matter not so much of talent and opportunity as of concentration and perseverance***
-——C.W.Wendte
+**Success in life is a matter not so much of talent and opportunity as of concentration and perseverance**
+--- C.W.Wendte
 
 
 ###选择Python的原因
@@ -475,22 +476,22 @@ Look into my eyes, look into my eyes,
 >>> print(s)
 Elements are written as "<tag>text</tag>".
 >>> print(html.escape(s))
-Elements are written as &quot;&lt;tag&gt;text&lt;/tag&gt;&quot;.
+Elements are written as "<tag>text</tag>".
 
 >>> # Disable escaping of quotes
 >>> print(html.escape(s, quote=False))
-Elements are written as "&lt;tag&gt;text&lt;/tag&gt;".
+Elements are written as "<tag>text</tag>".
 >>>
 ```
 如果你接收到了一些含有编码值的原始文本，需要手动去做替换，通常你只需要使用`HTML`或者`XML`解析器的一些相关工具函数/方法即可。比如：
 ```python
->>> s = 'Spicy &quot;Jalape&#241;o&quot.'
+>>> s = 'Spicy "Jalape&#241;o&quot.'
 >>> from html.parser import HTMLParser
 >>> p = HTMLParser()
 >>> p.unescape(s)
 'Spicy "Jalapeño".'
 >>>
->>> t = 'The prompt is &gt;&gt;&gt;'
+>>> t = 'The prompt is >>>'
 >>> from xml.sax.saxutils import unescape
 >>> unescape(t)
 'The prompt is >>>'

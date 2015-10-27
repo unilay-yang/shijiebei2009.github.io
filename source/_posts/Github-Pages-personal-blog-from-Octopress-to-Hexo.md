@@ -2,6 +2,7 @@ title: "Github Pages个人博客，从Octopress转向Hexo"
 date: 2015-04-06 16:03:13
 tags: [Hexo, Github, Octopress]
 categories: Git/GitHub
+
 ---
 
 环境&版本
@@ -109,8 +110,8 @@ $ npm install hexo-deployer-git --save
 #### 添加插件
 添加sitemap和feed插件
 ```bash
-$ npm install hexo-generator-sitemap
 $ npm install hexo-generator-feed
+$ npm install hexo-generator-sitemap
 ```
 修改_config.yml，增加以下内容
 ```
@@ -129,6 +130,8 @@ feed:
 sitemap:
   path: sitemap.xml
 ```
+配完之后，就可以访问`http://codepub.cn/atom.xml`和`http://codepub.cn/sitemap.xml`，发现这两个文件已经成功生成了。
+
 #### 添加404公益页面
 GitHub Pages有提供制作404页面的指引：[Custom 404 Pages](https://help.github.com/articles/custom-404-pages)。
 
@@ -202,7 +205,7 @@ Windows本地markdown工具：[markdownpad](http://markdownpad.com/)
 ```
 添加完该文件之后，要在D:/hexo/themes/jacman/_config.yml文件中启用，如下所示，添加zhifubao
 ```bash
-widgets: 
+widgets:
 - category
 - tag
 - links
@@ -210,6 +213,7 @@ widgets:
 - zhifubao
 - rss
 ```
+
 ##### 二维码捐赠
 首先需要到[这里](https://qr.alipay.com/paipai/open.htm)获取你的支付宝账户的二维码图片，支付宝提供了自定义功能，可以添加自定义文字。
 
@@ -222,10 +226,10 @@ widgets:
 </center>
 <br/>
 ```
-&lt;center&gt;可以让图片居中显示，注意将图片链接地址换成你的即可。
+`<center>`可以让图片居中显示，注意将图片链接地址换成你的即可。
 
-### 其它
-#### 推荐
+### 其它实用功能
+#### 插件推荐
 [hexo官方文档](http://hexo.io/docs/)
 [hexo插件大全](https://github.com/hexojs/hexo/wiki/Plugins)
 [自定义网站logo](http://www.faviconer.com/)
@@ -286,11 +290,11 @@ baidusitemap:
 baidu_search:     ## http://zn.baidu.com/
   enable: true
   id: "1433674487421172828" ## e.g. "783281470518440642"  for your baidu search id
-  site: http://codepub.cn ## your can change to your site instead of the default site
+  site: http://zhannei.baidu.com/cse/search ## your can change to your site instead of the default site
 ```
 #### 使用不蒜子添加访客统计
 详情参考[搞定你的网站计数](http://ibruce.info/2015/04/04/busuanzi/)，具体做法很简单，就是在你的`themes/your themes/layout/_partial/footer.ejs`底部加入这段脚本
-```js
+```javascript
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 ```
 然后在`<p class="copyright"></p>`中间添加如下统计信息即可
@@ -303,21 +307,28 @@ baidu_search:     ## http://zn.baidu.com/
 ####为jacman主题添加最新评论
 本方法针对使用hexo搭建Github Pages静态博客，并且使用jacman主题的童鞋们。
 
-首先在\themes\jacman\layout\_widget目录下新建latest_comment.ejs，放入“多说”最新评论代码，其中“多说”的最新评论代码[点我获取](http://dev.duoshuo.com/docs/4ff28d95552860f21f000010)，注意修改***var duoshuoQuery = {short_name:"您的多说二级域名"};***将其中的“short_name”设置为在多说配置的二级域名即可。在latest_comment.ejs的首行注意添加
+首先在`\themes\jacman\layout\_widget`目录下新建`latest_comment.ejs`，放入“多说”最新评论代码，其中“多说”的最新评论代码[点我获取](http://dev.duoshuo.com/docs/4ff28d95552860f21f000010)，注意修改***var duoshuoQuery = {short_name:"您的多说二级域名"};***将其中的“short_name”设置为在多说配置的二级域名即可。在`latest_comment.ejs`的首行注意添加
 ```html
 <p class="asidetitle">最新评论</p>
 ```
-然后进入***\themes\jacman\_config.yml***：在widgets下添加latest_comment即可，注意Windows下编码一定要采用UTF-8无BOM编码。
+然后进入`\themes\jacman\_config.yml`：在`widgets`下添加`latest_comment`即可，注意Windows下编码一定要采用UTF-8无BOM编码。
+
+####为jacman主题添加热评文章
+与上一条类似，首先在`\themes\jacman\layout\_widget`目录下新建`hot_comments.ejs`，然后去你在多说网站的后台管理界面`http://codepub.duoshuo.com/admin/tools/`中点击工具->热评文章获取代码，将代码复制到`hot_comments.ejs`文件中。同样在行首添加
+```html
+<p class="asidetitle">热评文章</p>
+```
+然后在`_config.yml`中启用该widgets即可。
 
 ####Jacman主题问题解答
-Q：如何添加数学公式 mathjax？
-A：主题支持写 LaTex 数学公式。只需要在文章文件开头的front-matter中，加上一行 **mathjax: true**，即可在文中写 LaTex 公式。
+Q：如何添加数学公式`mathjax`？
+A：主题支持写`LaTex`数学公式。只需要在文章文件开头的`front-matter`中，加上一行`mathjax: true`，即可在文中写`LaTex`公式。
 
 Q：自定义字体 ShowCustomFont
 A：是否启用自定义字体，默认开启，主要用于显示网站底部的字体。如果你有一定前端基础可以修改 **font.styl** 替换为你喜欢的字体。
 
 Q：图片默认都是居左的，我怎么设置能让图片居中呢？
-A：使用 **&lt;img src="" style="display:block;margin:auto"/&gt;**的HTML标签或者是使用**&lt;center&gt;**包裹图片。
+A：使用 `<img src="" style="display:block;margin:auto"/>`的HTML标签或者是使用`<center>`包裹图片。
 
 Q：如何建立一篇图片类文章（Gallery Post）？
 A：使用**hexo new photo "your titile"**建立图片类文章，或者直接新建一个 Markdown 文件，将其**front-matter**修改为如下，即可看到主题为图片类文章提供的样式。
@@ -332,13 +343,13 @@ photos:
 ```
 
 Q：我在配置文件中给某一项设置了值，但为什么总是看不到效果啊？
-A：_config.yml文件中的每个属性值前面必须留一个空格，建议在 Sublime/Notepad++ 中开启显示所有空格模式。另每篇文章的 front-matter 也要注意这个问题。
+A：`_config.yml`文件中的每个属性值前面必须留一个空格，建议在`Sublime/Notepad++`中开启显示所有空格模式。另每篇文章的`front-matter`也要注意这个问题。
 
-Q：如何建立自我介绍页面（About 页面）？
-A：首先在主目录找到**_config.yml**，找到url添加**about_dir: about**到这个板块。然后在/source里面建立about文件夹。在about文件夹里建立index.md。编辑index.md就和发布其他的文章一样，格式都一样。
+Q：如何建立自我介绍页面（About页面）？
+A：首先在主目录找到`_config.yml`，找到url添加`about_dir: about`到这个板块。然后在/source里面建立about文件夹。在about文件夹里建立index.md。编辑index.md就和发布其他的文章一样，格式都一样。
 
 Q：楼主我不喜欢你的配色，怎么换主题的颜色呢？
-A：包括颜色在内的很多变量都在jacman/source/css/_base/variable.styl文件中，可以修改成你喜欢的。
+A：包括颜色在内的很多变量都在`jacman/source/css/_base/variable.styl`文件中，可以修改成你喜欢的。
 
 参考资料
 【1】http://wuchong.me/blog/2014/11/20/how-to-use-jacman/#
