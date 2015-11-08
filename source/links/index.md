@@ -10,7 +10,7 @@ date: 2015-06-14 18:41:08
 [大牛，从小就开始编程Beyond the Void](https://www.byvoid.com/)
 [刘未鹏，在南大待了七年](http://mindhacks.cn/)
 [苏杰，阿里待了八年，产品经理](http://iamsujie.com/)
-
+[张宴的博客](http://zyan.cc/)
 ###推荐站点
 [开源自由的汉语言处理包](http://hanlp.linrunsoft.com/)
 [NLPCN一个非盈利的自然语言处理组织](http://www.nlpcn.org/)
