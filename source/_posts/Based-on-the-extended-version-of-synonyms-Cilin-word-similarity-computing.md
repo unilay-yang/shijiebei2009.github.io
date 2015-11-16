@@ -44,7 +44,7 @@ Cb30A03@ 这方
 
 ####Java代码实现
 ```java
-package edu.shu.similarity.cilin;
+package cn.codepub.algorithms.similarity.cilin;
 
 import com.google.common.base.Preconditions;
 import lombok.extern.log4j.Log4j2;
@@ -64,7 +64,7 @@ import static java.lang.Math.cos;
  * Created with IntelliJ IDEA. 2015/8/2 21:54
  * </p>
  * <p>
- * ClassName:WordSimilarity
+ * ClassName:WordSimilarity 同义词词林扩展版计算词语相似度
  * </p>
  * <p>
  * Description:<br/>
@@ -94,16 +94,15 @@ public class WordSimilarity {
      * }
      * </p>
      */
-
     //定义一些常数先
-    private final double a = 0.65;
-    private final double b = 0.8;
-    private final double c = 0.9;
-    private final double d = 0.96;
-    private final double e = 0.5;
-    private final double f = 0.1;
+    private static final double a = 0.65;
+    private static final double b = 0.8;
+    private static final double c = 0.9;
+    private static final double d = 0.96;
+    private static final double e = 0.5;
+    private static final double f = 0.1;
 
-    private final double degrees = 180;
+    private static final double degrees = 180;
 
 
     //存放的是以词为key，以该词的编码为values的List集合，其中一个词可能会有多个编码
@@ -115,41 +114,44 @@ public class WordSimilarity {
      * 读取同义词词林并将其注入wordsEncode和encodeWords
      */
     private static void readCiLin() {
-        InputStream input = WordSimilarity.class.getClassLoader().getResourceAsStream("cilin.txt");
+
+        InputStream input = WordSimilarity.class.getClass().getResourceAsStream("/cilin.txt");
         List<String> contents = null;
         try {
             contents = IOUtils.readLines(input);
-        } catch (IOException e) {
-            e.printStackTrace();
-            log.error(e.getMessage());
-        }
-        for (String content : contents) {
-            content = Preconditions.checkNotNull(content);
-            String[] strsArr = content.split(" ");
-            String[] strs = Preconditions.checkNotNull(strsArr);
-            String encode = null;
-            int length = strs.length;
-            if (length > 1) {
-                encode = strs[0];//获取编码
-            }
-            ArrayList<String> encodeWords_values = new ArrayList<String>();
-            for (int i = 1; i < length; i++) {
-                encodeWords_values.add(strs[i]);
-            }
-            encodeWords.put(encode, encodeWords_values);//以编码为key，其后所有值为value
-            for (int i = 1; i < length; i++) {
-                String key = strs[i];
-                if (wordsEncode.containsKey(strs[i])) {
-                    ArrayList<String> values = wordsEncode.get(key);
-                    values.add(encode);
-                    //重新放置回去
-                    wordsEncode.put(key, values);//以某个value为key，其可能的所有编码为value
-                } else {
-                    ArrayList<String> temp = new ArrayList<String>();
-                    temp.add(encode);
-                    wordsEncode.put(key, temp);
+
+            for (String content : contents) {
+                content = Preconditions.checkNotNull(content);
+                String[] strsArr = content.split(" ");
+                String[] strs = Preconditions.checkNotNull(strsArr);
+                String encode = null;
+                int length = strs.length;
+                if (length > 1) {
+                    encode = strs[0];//获取编码
+                }
+                ArrayList<String> encodeWords_values = new ArrayList<String>();
+                for (int i = 1; i < length; i++) {
+                    encodeWords_values.add(strs[i]);
+                }
+                encodeWords.put(encode, encodeWords_values);//以编码为key，其后所有值为value
+                for (int i = 1; i < length; i++) {
+                    String key = strs[i];
+                    if (wordsEncode.containsKey(strs[i])) {
+                        ArrayList<String> values = wordsEncode.get(key);
+                        values.add(encode);
+                        //重新放置回去
+                        wordsEncode.put(key, values);//以某个value为key，其可能的所有编码为value
+                    } else {
+                        ArrayList<String> temp = new ArrayList<String>();
+                        temp.add(encode);
+                        wordsEncode.put(key, temp);
+                    }
                 }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("load dictionary failed！");
+            log.error(e.getMessage());
         }
     }
 
@@ -160,7 +162,10 @@ public class WordSimilarity {
      * @param word2
      * @return 相似度值
      */
-    public double getSimilarity(String word1, String word2) {
+    public static double getSimilarity(String word1, String word2) {
+        //在计算时候再加载，实现懒加载
+        readCiLin();
+
         //如果比较词没有出现在同义词词林中，则相似度为0
         if (!wordsEncode.containsKey(word1) || !wordsEncode.containsKey(word2)) {
             return 0;
@@ -179,9 +184,9 @@ public class WordSimilarity {
                 int length = StringUtils.length(commonStr);
                 double k = getK(e1, e2);
                 double n = getN(commonStr);
-                log.info("k--" + k);
-                log.info("n--" + n);
-                log.info("length--" + length);
+                log.info("k-->" + k);
+                log.info("n-->" + n);
+                log.info("encode length-->" + length);
                 double res = 0;
                 //如果有一个以“@”那么表示自我封闭，肯定不在一棵树上，直接返回f
                 if (e1.endsWith("@") || e2.endsWith("@") || 0 == length) {
@@ -212,7 +217,7 @@ public class WordSimilarity {
                         res = e;
                     }
                 }
-                log.info("res :" + res);
+                log.info("res: " + res);
                 if (res > maxValue) {
                     maxValue = res;
                 }
@@ -250,7 +255,7 @@ public class WordSimilarity {
      * @param word
      * @return
      */
-    public ArrayList<String> getEncode(String word) {
+    protected static ArrayList<String> getEncode(String word) {
         return wordsEncode.get(word);
     }
 
@@ -261,7 +266,7 @@ public class WordSimilarity {
      * @param encodeHead 输入两个字符串的公共开头
      * @return 经过计算之后得到N的值
      */
-    public int getN(String encodeHead) {
+    protected static int getN(String encodeHead) {
         int length = StringUtils.length(encodeHead);
         switch (length) {
             case 1:
@@ -277,7 +282,7 @@ public class WordSimilarity {
         }
     }
 
-    public int getCount(String encodeHead, int end) {
+    protected static int getCount(String encodeHead, int end) {
         Set<String> res = new HashSet<String>();
         Iterator<String> iter = encodeWords.keySet().iterator();
         while (iter.hasNext()) {
@@ -299,7 +304,7 @@ public class WordSimilarity {
      * @param encode2 第二个编码
      * @return 这两个编码对应的分支间的距离，用k表示
      */
-    public int getK(String encode1, String encode2) {
+    protected static int getK(String encode1, String encode2) {
         String temp1 = encode1.substring(0, 1);
         String temp2 = encode2.substring(0, 1);
         if (StringUtils.equalsIgnoreCase(temp1, temp2)) {
@@ -336,7 +341,7 @@ public class WordSimilarity {
      * @param encode2
      * @return
      */
-    public String getCommonStr(String encode1, String encode2) {
+    protected static String getCommonStr(String encode1, String encode2) {
         int length = StringUtils.length(encode1);
         StringBuilder sb = new StringBuilder();
 
@@ -410,7 +415,6 @@ public class WordSimilarity {
     }
 
 }
-
 ```
 说明，词语相似度是个数值，一般取值范围在[0，1]之间，在原论文中，使用cos函数计算主要是将值归一化到[0，1]之间，可以将cos函数看作是一个调节因子。
 
@@ -433,7 +437,7 @@ testGetSimilarity的测试结果如下所示：
 
 以上仅为个人理解，如若发现错误，欢迎大家积极留言指正！
 
-目前整个项目已经推送到GitHub上了，地址[点我](https://github.com/shijiebei2009/TongYiCiCiLin)。注意在文章末尾所注的参考资料中的链接里面的计算方法在求n的时候存在错误，希望莫要受其误导！
+代码已经推送到GitHub上了，地址[点我](https://github.com/shijiebei2009/Algorithms/blob/master/src%2Fmain%2Fjava%2Fcn%2Fcodepub%2Falgorithms%2Fsimilarity%2Fcilin%2FWordSimilarity.java)。注意在文章末尾所注的参考资料中的链接里面的计算方法在求n的时候存在错误，希望莫要受其误导！
 
 参考资料：
 【1】http://www.cnblogs.com/einyboy/archive/2012/09/09/2677265.html
