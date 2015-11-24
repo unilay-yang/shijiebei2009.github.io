@@ -84,12 +84,12 @@ baidusitemap:
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
-  #type: git
-  #repository: git@github.com:shijiebei2009/shijiebei2009.github.io.git
+  type: git
+  repository: git@github.com:shijiebei2009/shijiebei2009.github.io.git
   #branch: master
-  #repo: git@gitcafe.com:codepub/codepub.git
-  #branch: gitcafe-pages
-  #message: gitcafe successfully push done!
+  repo: git@gitcafe.com:codepub/codepub.git
+  branch: gitcafe-pages
+  message: gitcafe successfully push done!
   type: git
   repo: git@github.com:shijiebei2009/shijiebei2009.github.io.git
   branch: master
