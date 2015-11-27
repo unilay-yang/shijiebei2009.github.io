@@ -68,6 +68,7 @@ Plugins:
 - hexo-generator-sitemap
 # http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
+# theme: next
 theme: jacman
 stylus: 
   compress: true
@@ -85,12 +86,13 @@ baidusitemap:
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: git@github.com:shijiebei2009/shijiebei2009.github.io.git
+  #repository: git@github.com:shijiebei2009/shijiebei2009.github.io.git
   #branch: master
-  repo: git@gitcafe.com:codepub/codepub.git
-  branch: gitcafe-pages
-  message: gitcafe successfully push done!
-  type: git
   repo: git@github.com:shijiebei2009/shijiebei2009.github.io.git
+  #git@gitcafe.com:codepub/codepub.git
+  #branch: gitcafe-pages
+  #message: gitcafe successfully push done!
+  #type: git
+  #repo: git@github.com:shijiebei2009/shijiebei2009.github.io.git
   branch: master
   message: github successfully push done!
