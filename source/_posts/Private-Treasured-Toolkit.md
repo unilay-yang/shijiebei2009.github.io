@@ -18,7 +18,7 @@ categories: Life-Talk
 + ManicTime：分秒不漏的记录你在用电脑的时候到底在干什么，可以自动分类各种操作，形成统计报表。督促自己干正事的利器，[下载地址](http://www.manictime.com/)，[破解版点这里](http://www.ttrar.com/html/ManicTime-Professional.html)
 + 远程控制软件：TeamViewer是一个能在任何防火墙和NAT代理的后台用于远程控制，桌面共享和文件传输的简单且快速的解决方案
 + FastStone Capture：话不多说，简单好用小巧的截图工具，推荐
-+ 邮箱客户端：Foxmail，张小龙出品，必属精品，哈哈有广告之嫌
++ 邮箱客户端：WPS Mail，做的很不错，登录邮箱之后会自动进行配置
 + 虚拟机软件：Oracle VM VirtualBox，远比VMware好用
 + 视频播放器：PotPlayer，韩国人开发的绿色播放器，强大、小巧、免费，最棒的是其视频加速播放功能，在我与国内的常用视频播放软件的对比实验中，视频加速播放依然保留语音画面流畅度的没有超过它的，在我观看学习视频的过程中，为我节约了大量时间，我通常是2-2.5倍加速播放
 + Python的IDE：JetBrains PyCharm，专业强大

@@ -14,6 +14,7 @@ date: 2015-06-14 18:41:08
 [Free Mind，机器学习推荐博客](http://freemind.pluskid.org/)
 [中科大李博杰，偏底层研究](http://ring0.me/)
 [赵劼，侧重.NET，多年微软MVP](http://blog.zhaojie.me/)
+[王垠的博客，文章少而精](http://www.yinwang.org/)
 
 ###推荐站点
 [开源自由的汉语言处理包](http://hanlp.linrunsoft.com/)
