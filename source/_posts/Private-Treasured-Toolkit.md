@@ -55,7 +55,7 @@ categories: Life-Talk
 国内网址：http://suidao.wuseyi.com/invi/m5VBYH
 时空隧道邀请码 m5VBYH
 如果地址打不开的话，可以试试：http://www.jeepshoe.org/412418412.htm
-百度云下载隧道插件的链接：http://pan.baidu.com/s/1hq2ABJY
+我的百度云分享时空隧道下载链接：http://pan.baidu.com/s/1eQEyMum
 
 
 ###在用机器
