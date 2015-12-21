@@ -1,0 +1,631 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  
+  <meta charset="UTF-8">
+  
+    <title>基于同义词词林扩展版的词语相似度计算 | IT草根</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Wang Xu">
+    
+
+    
+    <meta name="description" content="词语相似度计算词义相似度计算在很多领域中都有广泛的应用，例如信息检索、信息抽取、文本分类、词义排歧、基于实例的机器翻译等等。国内目前主要是使用知网和同义词词林来进行词语的相似度计算。
+本文主要是根据《基于同义词词林的词语相似度计算方法—田久乐》论文中所提出的分层算法实现相似度计算，程序采用Java语言编写。
+同义词词林扩展版《同义词词林》是梅家驹等人于1983年编纂而成，这本词典中不仅包括了一个词">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于同义词词林扩展版的词语相似度计算">
+<meta property="og:url" content="http://www.codepub.cn/2015/08/04/Based-on-the-extended-version-of-synonyms-Cilin-word-similarity-computing/index.html">
+<meta property="og:site_name" content="IT草根">
+<meta property="og:description" content="词语相似度计算词义相似度计算在很多领域中都有广泛的应用，例如信息检索、信息抽取、文本分类、词义排歧、基于实例的机器翻译等等。国内目前主要是使用知网和同义词词林来进行词语的相似度计算。
+本文主要是根据《基于同义词词林的词语相似度计算方法—田久乐》论文中所提出的分层算法实现相似度计算，程序采用Java语言编写。
+同义词词林扩展版《同义词词林》是梅家驹等人于1983年编纂而成，这本词典中不仅包括了一个词">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/tongyici-cilin-structure.jpg">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/tongyici-cilin-encode.jpg">
+<meta property="og:updated_time" content="2015-12-09T14:32:52.470Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于同义词词林扩展版的词语相似度计算">
+<meta name="twitter:description" content="词语相似度计算词义相似度计算在很多领域中都有广泛的应用，例如信息检索、信息抽取、文本分类、词义排歧、基于实例的机器翻译等等。国内目前主要是使用知网和同义词词林来进行词语的相似度计算。
+本文主要是根据《基于同义词词林的词语相似度计算方法—田久乐》论文中所提出的分层算法实现相似度计算，程序采用Java语言编写。
+同义词词林扩展版《同义词词林》是梅家驹等人于1983年编纂而成，这本词典中不仅包括了一个词">
+
+    
+    <link rel="alternative" href="/atom.xml" title="IT草根" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.gif">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.gif">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.gif" alt="IT草根" title="IT草根"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="IT草根">IT草根</a></h1>
+				<h2 class="blog-motto">WangXu&#39;s 代码馆 BLOG</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/resume">Resume</a></li>
+					
+						<li><a href="/links">Links</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+						<form class="search">
+							<label>Search</label>
+						<input type="text" class="st-default-search-input" id="ts-search-input" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/04/Based-on-the-extended-version-of-synonyms-Cilin-word-similarity-computing/" title="基于同义词词林扩展版的词语相似度计算" itemprop="url">基于同义词词林扩展版的词语相似度计算</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.codepub.cn/about" title="Wang Xu" target="_blank" itemprop="author">Wang Xu</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-04T14:06:36.000Z" itemprop="datePublished"> 发表于 2015-08-04</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#词语相似度计算"><span class="toc-number">1.</span> <span class="toc-text">词语相似度计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#同义词词林扩展版"><span class="toc-number">2.</span> <span class="toc-text">同义词词林扩展版</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Java代码实现"><span class="toc-number">3.</span> <span class="toc-text">Java代码实现</span></a></li></ol>
+		
+		</div>
+		
+		<h4 id="词语相似度计算">词语相似度计算</h4><p>词义相似度计算在很多领域中都有广泛的应用，例如信息检索、信息抽取、文本分类、词义排歧、基于实例的机器翻译等等。国内目前主要是使用知网和同义词词林来进行词语的相似度计算。</p>
+<p>本文主要是根据《基于同义词词林的词语相似度计算方法—田久乐》论文中所提出的分层算法实现相似度计算，程序采用Java语言编写。</p>
+<h4 id="同义词词林扩展版">同义词词林扩展版</h4><p>《同义词词林》是梅家驹等人于1983年编纂而成，这本词典中不仅包括了一个词语的同义词，也包含了一定数量的同类词，即广义的相关词。《同义词词林扩展版》是由哈尔滨工业大学信息检索实验室所重新修订所得。该版收录词语近7万条，全部按意义进行编排，是一部同义类词典。</p>
+<p>同义词词林按照树状的层次结构把所有收录的词条组织到一起，把词汇分成大、中、小三类，大类有12个，中类有97个，小类有1400个。每个小类里都有很多的词，这些词又根据词义的远近和相关性分成了若干个词群（段落）。每个段落中的词语又进一步分成了若干个行，同一行的词语要么词义相同，要么词义有很强的相关性。</p>
+<p>《同义词词林》提供了5层编码，第1级用大写英文字母表示；第2级用小写英文字母表示；第3级用二位十进制整数表示；第4级用大写英文字母表示；第5级用二位十进制整数表示。例如：<br>Cb30A01= 这里 这边 此地 此间 此处 此<br>Cb30A02# 该地 该镇 该乡 该站 该区 该市 该村<br>Cb30A03@ 这方</p>
+<p>分层及编码表如下所示<br><img src="http://7xig3q.com1.z0.glb.clouddn.com/tongyici-cilin-structure.jpg" alt=""><br><img src="http://7xig3q.com1.z0.glb.clouddn.com/tongyici-cilin-encode.jpg" alt=""></p>
+<p>由于第5级有的行是同义词，有的行是相关词，有的行只有一个词，分类结果需要特别说明，可以分出具体的3种情况。使用特殊符号对这3种情况进行区别对待，所以第8位的标记有3种，分别是“=”代表“相等”、“同义”；“#”代表“不等”、“同类”，属于相关词语；“@”代表“自我封闭”、“独立”，它在词典中既没有同义词，也没有相关词。</p>
+<p>在对文本内容进行相似度计算中，采用该论文中给出的计算公式，两个义项的相似度用<code>Sim</code>表示<br>若两个义项不在同一棵树上，<code>Sim(A,B)=f</code><br>若两个义项在同一棵树上：<br>若在第2层分支，系数为a <code>Sim(A,B)=1*a*cos*(n*π/180)((n-k+1)/n)</code><br>若在第3层分支，系数为b <code>Sim(A,B)=1*1*b*cos*(n*π/180)((n-k+1)/n)</code><br>若在第4层分支，系数为c <code>Sim(A,B)=1*1*1*c×cos*(n*π/180)((n-k+1)/n)</code><br>若在第5层分支，系数为d <code>Sim(A,B)=1*1*1*1*d*cos*(n*π/180)((n-k+1)/n)</code></p>
+<p>当编码相同，而只有末尾是“#”时，那么认为其相似度为e。<br>例如<code>Ad02B04# 非洲人 亚洲人</code>  则其相似度为e。</p>
+<p>其中n是分支层的节点分支总数，k是两个分支间的距离。<br>如：人 <code>Aa01A01=</code> 和 少儿 <code>Ab04B01=</code><br>以A开头的子分支只有14个，分别是<code>Aa...，Ab...，Ac... ——— An...</code>，而不是以A开头的所有结点的个数，所以<code>n=14</code>；在第2层分支上，人的编码是<code>a</code>，少儿的编码是<code>b</code>，a和b之间差1，所以<code>k=1</code>。</p>
+<p>该文献中给出的参数值为<code>a=0.65</code>，<code>b=0.8</code>，<code>c=0.9</code>，<code>d=0.96</code>，<code>e=0.5</code>，<code>f=0.1</code>。</p>
+<h4 id="Java代码实现">Java代码实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.codepub.algorithms.similarity.cilin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.google.common.base.Preconditions;</span><br><span class="line"><span class="keyword">import</span> lombok.extern.log4j.Log4j2;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.io.IOUtils;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.lang3.StringUtils;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.Math.PI;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.Math.cos;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * Created with IntelliJ IDEA. 2015/8/2 21:54</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * ClassName:WordSimilarity 同义词词林扩展版计算词语相似度</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * Description:&lt;br/&gt;</span><br><span class="line"> * "=" 代表 相等 同义 &lt;br/&gt;</span><br><span class="line"> * "#" 代表 不等 同类 属于相关词语 &lt;br/&gt;</span><br><span class="line"> * "@" 代表 自我封闭 独立 它在词典中既没有同义词, 也没有相关词 &lt;br/&gt;</span><br><span class="line"> * &lt;/P&gt;</span><br><span class="line"> *</span><br><span class="line"> * <span class="doctag">@author</span> Wang Xu</span><br><span class="line"> * <span class="doctag">@version</span> V1.0.0</span><br><span class="line"> * <span class="doctag">@since</span> V1.0.0</span><br><span class="line"> */</span></span><br><span class="line"><span class="annotation">@Log</span>4j2</span><br><span class="line"><span class="comment">//注意使用Log4j2的注解，那么在pom中必须引入2.x版本的log4j，如果使用Log4j注解，pom中引入1.x版本的log4j</span></span><br><span class="line"><span class="comment">//相应的配置文件也要一致，2.x版本配置文件为log4j2.xml，1.x版本配置文件为log4j.xml</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WordSimilarity</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * when we use Lombok's Annotation, such as <span class="doctag">@Log</span>4j</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@Log</span>4j &lt;br/&gt;</span><br><span class="line">     * public class LogExample &#123;</span><br><span class="line">     * &#125;</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * will generate:</span><br><span class="line">     * public class LogExample &#123;</span><br><span class="line">     * private static final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.Logger.getLogger(LogExample.class);</span><br><span class="line">     * &#125;</span><br><span class="line">     * &lt;/p&gt;</span><br><span class="line">     */</span></span><br><span class="line">    <span class="comment">//定义一些常数先</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">double</span> a = <span class="number">0.65</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">double</span> b = <span class="number">0.8</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">double</span> c = <span class="number">0.9</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">double</span> d = <span class="number">0.96</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">double</span> e = <span class="number">0.5</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">double</span> f = <span class="number">0.1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">double</span> degrees = <span class="number">180</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//存放的是以词为key，以该词的编码为values的List集合，其中一个词可能会有多个编码</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String, ArrayList&lt;String&gt;&gt; wordsEncode = <span class="keyword">new</span> HashMap&lt;String, ArrayList&lt;String&gt;&gt;();</span><br><span class="line">    <span class="comment">//存放的是以编码为key，以该编码多对应的词为values的List集合，其中一个编码可能会有多个词</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String, ArrayList&lt;String&gt;&gt; encodeWords = <span class="keyword">new</span> HashMap&lt;String, ArrayList&lt;String&gt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 读取同义词词林并将其注入wordsEncode和encodeWords</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">readCiLin</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        InputStream input = WordSimilarity.class.getClass().getResourceAsStream(<span class="string">"/cilin.txt"</span>);</span><br><span class="line">        List&lt;String&gt; contents = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            contents = IOUtils.readLines(input);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (String content : contents) &#123;</span><br><span class="line">                content = Preconditions.checkNotNull(content);</span><br><span class="line">                String[] strsArr = content.split(<span class="string">" "</span>);</span><br><span class="line">                String[] strs = Preconditions.checkNotNull(strsArr);</span><br><span class="line">                String encode = <span class="keyword">null</span>;</span><br><span class="line">                <span class="keyword">int</span> length = strs.length;</span><br><span class="line">                <span class="keyword">if</span> (length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">                    encode = strs[<span class="number">0</span>];<span class="comment">//获取编码</span></span><br><span class="line">                &#125;</span><br><span class="line">                ArrayList&lt;String&gt; encodeWords_values = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; length; i++) &#123;</span><br><span class="line">                    encodeWords_values.add(strs[i]);</span><br><span class="line">                &#125;</span><br><span class="line">                encodeWords.put(encode, encodeWords_values);<span class="comment">//以编码为key，其后所有值为value</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; length; i++) &#123;</span><br><span class="line">                    String key = strs[i];</span><br><span class="line">                    <span class="keyword">if</span> (wordsEncode.containsKey(strs[i])) &#123;</span><br><span class="line">                        ArrayList&lt;String&gt; values = wordsEncode.get(key);</span><br><span class="line">                        values.add(encode);</span><br><span class="line">                        <span class="comment">//重新放置回去</span></span><br><span class="line">                        wordsEncode.put(key, values);<span class="comment">//以某个value为key，其可能的所有编码为value</span></span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        ArrayList&lt;String&gt; temp = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">                        temp.add(encode);</span><br><span class="line">                        wordsEncode.put(key, temp);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            System.err.println(<span class="string">"load dictionary failed！"</span>);</span><br><span class="line">            log.error(e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 对外暴露的接口，返回两个词的相似度的计算结果</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@param</span> word1</span><br><span class="line">     * <span class="doctag">@param</span> word2</span><br><span class="line">     * <span class="doctag">@return</span> 相似度值</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">getSimilarity</span><span class="params">(String word1, String word2)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//在计算时候再加载，实现懒加载</span></span><br><span class="line">        readCiLin();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//如果比较词没有出现在同义词词林中，则相似度为0</span></span><br><span class="line">        <span class="keyword">if</span> (!wordsEncode.containsKey(word1) || !wordsEncode.containsKey(word2)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//获取第一个词的编码</span></span><br><span class="line">        ArrayList&lt;String&gt; encode1 = getEncode(word1);</span><br><span class="line">        <span class="comment">//获取第二个词的编码</span></span><br><span class="line">        ArrayList&lt;String&gt; encode2 = getEncode(word2);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">double</span> maxValue = <span class="number">0</span>;<span class="comment">//最终的计算结果值，取所有相似度里面结果最大的那个</span></span><br><span class="line">        <span class="keyword">for</span> (String e1 : encode1) &#123;</span><br><span class="line">            <span class="keyword">for</span> (String e2 : encode2) &#123;</span><br><span class="line">                log.info(e1);</span><br><span class="line">                log.info(e2);</span><br><span class="line">                String commonStr = getCommonStr(e1, e2);</span><br><span class="line">                <span class="keyword">int</span> length = StringUtils.length(commonStr);</span><br><span class="line">                <span class="keyword">double</span> k = getK(e1, e2);</span><br><span class="line">                <span class="keyword">double</span> n = getN(commonStr);</span><br><span class="line">                log.info(<span class="string">"k--&gt;"</span> + k);</span><br><span class="line">                log.info(<span class="string">"n--&gt;"</span> + n);</span><br><span class="line">                log.info(<span class="string">"encode length--&gt;"</span> + length);</span><br><span class="line">                <span class="keyword">double</span> res = <span class="number">0</span>;</span><br><span class="line">                <span class="comment">//如果有一个以“@”那么表示自我封闭，肯定不在一棵树上，直接返回f</span></span><br><span class="line">                <span class="keyword">if</span> (e1.endsWith(<span class="string">"@"</span>) || e2.endsWith(<span class="string">"@"</span>) || <span class="number">0</span> == length) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (f &gt; maxValue) &#123;</span><br><span class="line">                        maxValue = f;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (<span class="number">1</span> == length) &#123;</span><br><span class="line">                    <span class="comment">//说明在第二层上计算</span></span><br><span class="line">                    res = a * cos(n * PI / degrees) * ((n - k + <span class="number">1</span>) / n);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">2</span> == length) &#123;</span><br><span class="line">                    <span class="comment">//说明在第三层上计算</span></span><br><span class="line">                    res = b * cos(n * PI / degrees) * ((n - k + <span class="number">1</span>) / n);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">4</span> == length) &#123;</span><br><span class="line">                    <span class="comment">//说明在第四层上计算</span></span><br><span class="line">                    res = c * cos(n * PI / degrees) * ((n - k + <span class="number">1</span>) / n);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">5</span> == length) &#123;</span><br><span class="line">                    <span class="comment">//说明在第五层上计算</span></span><br><span class="line">                    res = d * cos(n * PI / degrees) * ((n - k + <span class="number">1</span>) / n);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">//注意不存在前面七个字符相同，而结尾不同的情况，所以这个分支一定是8个字符都相同，那么只需比较结尾即可</span></span><br><span class="line">                    <span class="keyword">if</span> (e1.endsWith(<span class="string">"="</span>) &amp;&amp; e2.endsWith(<span class="string">"="</span>)) &#123;</span><br><span class="line">                        <span class="comment">//说明两个完全相同</span></span><br><span class="line">                        res = <span class="number">1</span>;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (e1.endsWith(<span class="string">"#"</span>) &amp;&amp; e2.endsWith(<span class="string">"#"</span>)) &#123;</span><br><span class="line">                        <span class="comment">//只有结尾不同，说明结尾是“#”</span></span><br><span class="line">                        res = e;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                log.info(<span class="string">"res: "</span> + res);</span><br><span class="line">                <span class="keyword">if</span> (res &gt; maxValue) &#123;</span><br><span class="line">                    maxValue = res;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 判断一个词在同义词词林中是否是自我封闭的，是否是独立的</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@param</span> source</span><br><span class="line">     * <span class="doctag">@return</span></span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isIndependent</span><span class="params">(String source)</span> </span>&#123;</span><br><span class="line">        Iterator&lt;String&gt; iter = wordsEncode.keySet().iterator();</span><br><span class="line">        <span class="keyword">while</span> (iter.hasNext()) &#123;</span><br><span class="line">            String key = iter.next();</span><br><span class="line">            <span class="keyword">if</span> (StringUtils.equalsIgnoreCase(key, source)) &#123;</span><br><span class="line">                ArrayList&lt;String&gt; values = wordsEncode.get(key);</span><br><span class="line">                <span class="keyword">for</span> (String value : values) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (value.endsWith(<span class="string">"@"</span>)) &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 根据word的内容，返回其对应的编码</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@param</span> word</span><br><span class="line">     * <span class="doctag">@return</span></span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">static</span> ArrayList&lt;String&gt; <span class="title">getEncode</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> wordsEncode.get(word);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 计算N的值，N表示所在分支层分支数，如：人 Aa01A01= 和 少儿 Ab04B01=，以A开头的子分支只有14个</span><br><span class="line">     * 这一点在论文中说的非常不清晰，所以以国人的文章进行编码真是痛苦</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@param</span> encodeHead 输入两个字符串的公共开头</span><br><span class="line">     * <span class="doctag">@return</span> 经过计算之后得到N的值</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getN</span><span class="params">(String encodeHead)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> length = StringUtils.length(encodeHead);</span><br><span class="line">        <span class="keyword">switch</span> (length) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> getCount(encodeHead, <span class="number">2</span>);</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                <span class="keyword">return</span> getCount(encodeHead, <span class="number">4</span>);</span><br><span class="line">            <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">                <span class="keyword">return</span> getCount(encodeHead, <span class="number">5</span>);</span><br><span class="line">            <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">                <span class="keyword">return</span> getCount(encodeHead, <span class="number">7</span>);</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">(String encodeHead, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        Set&lt;String&gt; res = <span class="keyword">new</span> HashSet&lt;String&gt;();</span><br><span class="line">        Iterator&lt;String&gt; iter = encodeWords.keySet().iterator();</span><br><span class="line">        <span class="keyword">while</span> (iter.hasNext()) &#123;</span><br><span class="line">            String curr = iter.next();</span><br><span class="line">            <span class="keyword">if</span> (curr.startsWith(encodeHead)) &#123;</span><br><span class="line">                String temp = curr.substring(<span class="number">0</span>, end);</span><br><span class="line">                <span class="keyword">if</span> (res.contains(temp)) &#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    res.add(temp);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * <span class="doctag">@param</span> encode1 第一个编码</span><br><span class="line">     * <span class="doctag">@param</span> encode2 第二个编码</span><br><span class="line">     * <span class="doctag">@return</span> 这两个编码对应的分支间的距离，用k表示</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getK</span><span class="params">(String encode1, String encode2)</span> </span>&#123;</span><br><span class="line">        String temp1 = encode1.substring(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">        String temp2 = encode2.substring(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.equalsIgnoreCase(temp1, temp2)) &#123;</span><br><span class="line">            temp1 = encode1.substring(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">            temp2 = encode2.substring(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> Math.abs(temp1.charAt(<span class="number">0</span>) - temp2.charAt(<span class="number">0</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.equalsIgnoreCase(temp1, temp2)) &#123;</span><br><span class="line">            temp1 = encode1.substring(<span class="number">2</span>, <span class="number">4</span>);</span><br><span class="line">            temp2 = encode2.substring(<span class="number">2</span>, <span class="number">4</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> Math.abs(temp1.charAt(<span class="number">0</span>) - temp2.charAt(<span class="number">0</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.equalsIgnoreCase(temp1, temp2)) &#123;</span><br><span class="line">            temp1 = encode1.substring(<span class="number">4</span>, <span class="number">5</span>);</span><br><span class="line">            temp2 = encode2.substring(<span class="number">4</span>, <span class="number">5</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> Math.abs(Integer.valueOf(temp1) - Integer.valueOf(temp2));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.equalsIgnoreCase(temp1, temp2)) &#123;</span><br><span class="line">            temp1 = encode1.substring(<span class="number">5</span>, <span class="number">7</span>);</span><br><span class="line">            temp2 = encode2.substring(<span class="number">5</span>, <span class="number">7</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> Math.abs(temp1.charAt(<span class="number">0</span>) - temp2.charAt(<span class="number">0</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> Math.abs(Integer.valueOf(temp1) - Integer.valueOf(temp2));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 获取编码的公共部分字符串</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@param</span> encode1</span><br><span class="line">     * <span class="doctag">@param</span> encode2</span><br><span class="line">     * <span class="doctag">@return</span></span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">static</span> String <span class="title">getCommonStr</span><span class="params">(String encode1, String encode2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> length = StringUtils.length(encode1);</span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (encode1.charAt(i) == encode2.charAt(i)) &#123;</span><br><span class="line">                sb.append(encode1.charAt(i));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> sbLen = StringUtils.length(sb);</span><br><span class="line">        <span class="comment">//注意第三层和第五层均有两个字符，所以长度不可能出现3和6的情况</span></span><br><span class="line">        <span class="keyword">if</span> (sbLen == <span class="number">3</span> || sbLen == <span class="number">6</span>) &#123;</span><br><span class="line">            sb.deleteCharAt(sbLen - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> String.valueOf(sb);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testGetN</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        readCiLin();</span><br><span class="line">        <span class="keyword">int</span> a = getN(<span class="string">"A"</span>);</span><br><span class="line">        System.out.println(a);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testGetK</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> k = getK(<span class="string">"Aa01A01="</span>, <span class="string">"Aa01A01="</span>);</span><br><span class="line">        System.out.println(k);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testGetCommonStr</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String commonStr = getCommonStr(<span class="string">"Aa01A01="</span>, <span class="string">"Aa01A03="</span>);</span><br><span class="line">        System.out.println(commonStr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testGetSimilarity</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        readCiLin();</span><br><span class="line">        <span class="keyword">double</span> similarity = getSimilarity(<span class="string">"人民"</span>, <span class="string">"国民"</span>);</span><br><span class="line">        System.out.println(<span class="string">"人民--"</span> + <span class="string">"国民:"</span> + similarity);</span><br><span class="line">        similarity = getSimilarity(<span class="string">"人民"</span>, <span class="string">"群众"</span>);</span><br><span class="line">        System.out.println(<span class="string">"人民--"</span> + <span class="string">"群众:"</span> + similarity);</span><br><span class="line">        similarity = getSimilarity(<span class="string">"人民"</span>, <span class="string">"党群"</span>);</span><br><span class="line">        System.out.println(<span class="string">"人民--"</span> + <span class="string">"党群:"</span> + similarity);</span><br><span class="line">        similarity = getSimilarity(<span class="string">"人民"</span>, <span class="string">"良民"</span>);</span><br><span class="line">        System.out.println(<span class="string">"人民--"</span> + <span class="string">"良民:"</span> + similarity);</span><br><span class="line">        similarity = getSimilarity(<span class="string">"人民"</span>, <span class="string">"同志"</span>);</span><br><span class="line">        System.out.println(<span class="string">"人民--"</span> + <span class="string">"同志:"</span> + similarity);</span><br><span class="line">        similarity = getSimilarity(<span class="string">"人民"</span>, <span class="string">"成年人"</span>);</span><br><span class="line">        System.out.println(<span class="string">"人民--"</span> + <span class="string">"成年人:"</span> + similarity);</span><br><span class="line">        similarity = getSimilarity(<span class="string">"人民"</span>, <span class="string">"市民"</span>);</span><br><span class="line">        System.out.println(<span class="string">"人民--"</span> + <span class="string">"市民:"</span> + similarity);</span><br><span class="line">        similarity = getSimilarity(<span class="string">"人民"</span>, <span class="string">"亲属"</span>);</span><br><span class="line">        System.out.println(<span class="string">"人民--"</span> + <span class="string">"亲属:"</span> + similarity);</span><br><span class="line">        similarity = getSimilarity(<span class="string">"人民"</span>, <span class="string">"志愿者"</span>);</span><br><span class="line">        System.out.println(<span class="string">"人民--"</span> + <span class="string">"志愿者:"</span> + similarity);</span><br><span class="line">        similarity = getSimilarity(<span class="string">"人民"</span>, <span class="string">"先锋"</span>);</span><br><span class="line">        System.out.println(<span class="string">"人民--"</span> + <span class="string">"先锋:"</span> + similarity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testGetSimilarity2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        readCiLin();</span><br><span class="line">        <span class="keyword">double</span> similarity = getSimilarity(<span class="string">"非洲人"</span>, <span class="string">"亚洲人"</span>);</span><br><span class="line">        System.out.println(similarity);</span><br><span class="line">        <span class="keyword">double</span> similarity1 = getSimilarity(<span class="string">"骄傲"</span>, <span class="string">"仔细"</span>);</span><br><span class="line">        System.out.println(similarity1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>说明，词语相似度是个数值，一般取值范围在[0，1]之间，在原论文中，使用cos函数计算主要是将值归一化到[0，1]之间，可以将cos函数看作是一个调节因子。</p>
+<p>testGetSimilarity的测试结果如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">人民--国民:<span class="number">1.0</span></span><br><span class="line">人民--群众:<span class="number">0.9576614882494312</span></span><br><span class="line">人民--党群:<span class="number">0.8978076452338418</span></span><br><span class="line">人民--良民:<span class="number">0.7182461161870735</span></span><br><span class="line">人民--同志:<span class="number">0.6630145969121822</span></span><br><span class="line">人民--成年人:<span class="number">0.6306922220793977</span></span><br><span class="line">人民--市民:<span class="number">0.5405933332109123</span></span><br><span class="line">人民--亲属:<span class="number">0.36039555547394153</span></span><br><span class="line">人民--志愿者:<span class="number">0.22524722217121346</span></span><br><span class="line">人民--先锋:<span class="number">0.18019777773697077</span></span><br></pre></td></tr></table></figure>
+<p>本文使用的是同义词词林的扩展版，而原论文使用的是同义词词林，由于两者存在微小差距，所以本文计算结果与论文中的计算结果存在稍许误差，如果算法没错，这是可以理解的！</p>
+<p>以上仅为个人理解，如若发现错误，欢迎大家积极留言指正！</p>
+<p>代码已经推送到GitHub上了，地址<a href="https://github.com/shijiebei2009/Algorithms/blob/master/src%2Fmain%2Fjava%2Fcn%2Fcodepub%2Falgorithms%2Fsimilarity%2Fcilin%2FWordSimilarity.java" target="_blank" rel="external">点我</a>。注意在文章末尾所注的参考资料中的链接里面的计算方法在求n的时候存在错误，希望莫要受其误导！</p>
+<p>参考资料：<br>【1】<a href="http://www.cnblogs.com/einyboy/archive/2012/09/09/2677265.html" target="_blank" rel="external">http://www.cnblogs.com/einyboy/archive/2012/09/09/2677265.html</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Algorithms/">Algorithms</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Java/">Java</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=2067139" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2067139" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/08/29/Selenium-simulated-user-login-alipay-account-query-transaction-details/" title="使用Selenium模拟用户登录支付宝账户查询交易详情">
+  <strong>上一篇：</strong><br/>
+  <span>
+  使用Selenium模拟用户登录支付宝账户查询交易详情</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/07/30/Lombok-development-guidelines/"  title="Lombok开发指南">
+ <strong>下一篇：</strong><br/> 
+ <span>Lombok开发指南
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/08/04/Based-on-the-extended-version-of-synonyms-Cilin-word-similarity-computing/" data-title="基于同义词词林扩展版的词语相似度计算" data-url="http://www.codepub.cn/2015/08/04/Based-on-the-extended-version-of-synonyms-Cilin-word-similarity-computing/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#词语相似度计算"><span class="toc-number">1.</span> <span class="toc-text">词语相似度计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#同义词词林扩展版"><span class="toc-number">2.</span> <span class="toc-text">同义词词林扩展版</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Java代码实现"><span class="toc-number">3.</span> <span class="toc-text">Java代码实现</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Algorithms/" title="Algorithms">Algorithms<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Database/" title="Database">Database<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git-GitHub/" title="Git/GitHub">Git/GitHub<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life-Talk/" title="Life-Talk">Life-Talk<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Operating-System/" title="Operating System">Operating System<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Programming-Notes/" title="Programming Notes">Programming Notes<sup>22</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python3/" title="Python3">Python3<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/LTP/" title="LTP">LTP<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/IT/" title="IT">IT<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elite/" title="Elite">Elite<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tools/" title="Tools">Tools<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySql/" title="MySql">MySql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Lombok/" title="Lombok">Lombok<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Selenium/" title="Selenium">Selenium<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DLL/" title="DLL">DLL<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tomcat/" title="Tomcat">Tomcat<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Guava/" title="Guava">Guava<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Github/" title="Github">Github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Octopress/" title="Octopress">Octopress<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Eclipse/" title="Eclipse">Eclipse<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <p class="asidetitle">最新评论</p>
+<div>
+	<ul class="ds-recent-comments" data-num-items="10" data-show-avatars="1" data-show-time="1" data-show-admin="1" data-excerpt-length="70"></ul>
+	<!--多说js加载开始，一个页面只需要加载一次 -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!--多说js加载结束，一个页面只需要加载一次 -->
+</div>
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/DLL/" style="font-size: 10px;">DLL</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Elite/" style="font-size: 10px;">Elite</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/IntelliJ/" style="font-size: 10px;">IntelliJ</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/LTP/" style="font-size: 13.33px;">LTP</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/Python3/" style="font-size: 16.67px;">Python3</a> <a href="/tags/Selenium/" style="font-size: 10px;">Selenium</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Struts2/" style="font-size: 10px;">Struts2</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a>
+    </div>
+  </div>
+
+
+  <br/>
+<p class="asidetitle">热评文章</p>
+<!-- 多说热评文章 start -->
+<div>
+<div class="ds-top-threads" data-range="monthly" data-num-items="8"></div>
+<!-- 多说热评文章 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+<br/>
+
+  <p class="asidetitle">打赏他</p>
+<div>
+<form action="https://shenghuo.alipay.com/send/payment/fill.htm" method="POST" target="_blank" accept-charset="GBK">
+    <br/>
+    <input name="optEmail" type="hidden" value="18302118258" />
+    <input name="payAmount" type="hidden" value="10" />
+    <input id="title" name="title" type="hidden" value="博主，打赏你的！" />
+    <input name="memo" type="hidden" value="你Y加油，继续写博客！" />
+    <input name="pay" type="image" value="转账" src="http://7xig3q.com1.z0.glb.clouddn.com/alipay-donate-website.png" />
+</form>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello , I&#39;m Wang Xu in SHU. <br/>
+			志不强者智不达，言不信者行不果。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1779238484" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/shijiebei2009" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/4204922" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		
+		
+		<a href="https://www.linkedin.com/in/codepub" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		<a href="https://www.douban.com/people/shijiebei2009" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		<a href="https://www.zhihu.com/people/codepub.cn" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:wangx89@126.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="http://www.codepub.cn/about" target="_blank" title="Wang Xu">Wang Xu</a>
+		
+		<a href="http://tongji.baidu.com/web/welcome/ico?s=2c61418f187553bcc869b755930233ab" target="_blank">百度统计</a><br/>
+		本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+		</p>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','CEs2u-bRR6iHSt4ynbFA','2.0.0');
+</script>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"codepub"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F2c61418f187553bcc869b755930233ab' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+
+<a href="https://github.com/shijiebei2009"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>

@@ -1,0 +1,674 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  
+  <meta charset="UTF-8">
+  
+    <title>Python3入门手册之三 | IT草根</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Wang Xu">
+    
+
+    
+    <meta name="description" content="Version：Python 3.4.3 (v3.4.3:9b73f1c3e601, Feb 24 2015, 22:44:40) [MSC v.1600 64 bit (AMD64)] on win32
+文件与I/O读写文本数据使用带有rt模式的open()函数读取文本文件1234567with open(&apos;test.csv&apos;, mode=&apos;rt&apos;, encoding=&apos;utf-8&apos;) as f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python3入门手册之三">
+<meta property="og:url" content="http://www.codepub.cn/2015/07/06/Python3-beginner-s-handbook-three/index.html">
+<meta property="og:site_name" content="IT草根">
+<meta property="og:description" content="Version：Python 3.4.3 (v3.4.3:9b73f1c3e601, Feb 24 2015, 22:44:40) [MSC v.1600 64 bit (AMD64)] on win32
+文件与I/O读写文本数据使用带有rt模式的open()函数读取文本文件1234567with open(&apos;test.csv&apos;, mode=&apos;rt&apos;, encoding=&apos;utf-8&apos;) as f">
+<meta property="og:updated_time" content="2015-07-06T12:56:55.411Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python3入门手册之三">
+<meta name="twitter:description" content="Version：Python 3.4.3 (v3.4.3:9b73f1c3e601, Feb 24 2015, 22:44:40) [MSC v.1600 64 bit (AMD64)] on win32
+文件与I/O读写文本数据使用带有rt模式的open()函数读取文本文件1234567with open(&apos;test.csv&apos;, mode=&apos;rt&apos;, encoding=&apos;utf-8&apos;) as f">
+
+    
+    <link rel="alternative" href="/atom.xml" title="IT草根" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.gif">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.gif">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.gif" alt="IT草根" title="IT草根"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="IT草根">IT草根</a></h1>
+				<h2 class="blog-motto">WangXu&#39;s 代码馆 BLOG</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/resume">Resume</a></li>
+					
+						<li><a href="/links">Links</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+						<form class="search">
+							<label>Search</label>
+						<input type="text" class="st-default-search-input" id="ts-search-input" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/06/Python3-beginner-s-handbook-three/" title="Python3入门手册之三" itemprop="url">Python3入门手册之三</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.codepub.cn/about" title="Wang Xu" target="_blank" itemprop="author">Wang Xu</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-06T12:50:25.000Z" itemprop="datePublished"> 发表于 2015-07-06</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#文件与I/O"><span class="toc-number">1.</span> <span class="toc-text">文件与I/O</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#读写文本数据"><span class="toc-number">1.1.</span> <span class="toc-text">读写文本数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#读写字节数据"><span class="toc-number">1.2.</span> <span class="toc-text">读写字节数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#向不存在的文件中写入数据"><span class="toc-number">1.3.</span> <span class="toc-text">向不存在的文件中写入数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符串的I/O操作"><span class="toc-number">1.4.</span> <span class="toc-text">字符串的I/O操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#读写压缩文件"><span class="toc-number">1.5.</span> <span class="toc-text">读写压缩文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#读取二进制数据到可变缓冲区中"><span class="toc-number">1.6.</span> <span class="toc-text">读取二进制数据到可变缓冲区中</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件路径名的操作"><span class="toc-number">1.7.</span> <span class="toc-text">文件路径名的操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#增加或改变已打开文件的编码"><span class="toc-number">1.8.</span> <span class="toc-text">增加或改变已打开文件的编码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建临时文件和文件夹"><span class="toc-number">1.9.</span> <span class="toc-text">创建临时文件和文件夹</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#与串行端口的数据通信"><span class="toc-number">1.10.</span> <span class="toc-text">与串行端口的数据通信</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#序列化Python对象"><span class="toc-number">1.11.</span> <span class="toc-text">序列化Python对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据编码和处理"><span class="toc-number">2.</span> <span class="toc-text">数据编码和处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#读写CSV数据"><span class="toc-number">2.1.</span> <span class="toc-text">读写CSV数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#读写JSON数据"><span class="toc-number">2.2.</span> <span class="toc-text">读写JSON数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解析简单的XML数据"><span class="toc-number">2.3.</span> <span class="toc-text">解析简单的XML数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#增量式解析大型XML文件"><span class="toc-number">2.4.</span> <span class="toc-text">增量式解析大型XML文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#将字典转换为XML"><span class="toc-number">2.5.</span> <span class="toc-text">将字典转换为XML</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解析和修改XML"><span class="toc-number">2.6.</span> <span class="toc-text">解析和修改XML</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#编码和解码十六进制数"><span class="toc-number">2.7.</span> <span class="toc-text">编码和解码十六进制数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#编码解码Base64数据"><span class="toc-number">2.8.</span> <span class="toc-text">编码解码Base64数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#读写二进制数组数据"><span class="toc-number">2.9.</span> <span class="toc-text">读写二进制数组数据</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<p><em>Version：Python 3.4.3 (v3.4.3:9b73f1c3e601, Feb 24 2015, 22:44:40) [MSC v.1600 64 bit (AMD64)] on win32</em></p>
+<h3 id="文件与I/O">文件与I/O</h3><h4 id="读写文本数据">读写文本数据</h4><p>使用带有<code>rt</code>模式的<code>open()</code>函数读取文本文件<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'test.csv'</span>, mode=<span class="string">'rt'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    data = f.read()</span><br><span class="line">    print(data)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'test.csv'</span>, mode=<span class="string">'rt'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">        print(line, end=<span class="string">''</span>)</span><br></pre></td></tr></table></figure></p>
+<p>类似的，为了写入一个文本文件，使用带有<code>wt</code>模式的<code>open()</code>函数，如果之前文件内容存在则清除并覆盖掉<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'dest.csv'</span>, mode=<span class="string">'wt'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">'text1'</span>)  <span class="comment"># 注意该方式写入文件默认没有换行符，需手动添加</span></span><br><span class="line">    f.write(<span class="string">'text2'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'dest.csv'</span>, mode=<span class="string">'wt'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    print(<span class="string">'text1'</span>, file=f)  <span class="comment"># 该方式写入文件默认换行，无需手动添加</span></span><br><span class="line">    print(<span class="string">'text2'</span>, file=f)</span><br></pre></td></tr></table></figure></p>
+<p>如果是在已存在文件中添加内容，使用模式为<code>at</code>的<code>open()</code>函数。<code>with</code>控制块结束时，文件会自动关闭。你也可以不使用<code>with</code>语句，但是这时候你就必须记得手动关闭文件。</p>
+<p><strong>使用print输出元组</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">row = (<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>)</span><br><span class="line">print(*row, sep=<span class="string">','</span>, end=<span class="string">'。'</span>) <span class="comment"># Prints a,b,c。</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="读写字节数据">读写字节数据</h4><p>使用模式为<code>rb</code>或<code>wb</code>的<code>open()</code>函数来读取或写入二进制数据<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'dest2.csv'</span>, mode=<span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">b'HelloWorld!'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'dest2.csv'</span>, mode=<span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    print(f.read())</span><br></pre></td></tr></table></figure></p>
+<p>在读取二进制数据的时候，字节字符串和文本字符串的语义差异可能会导致一个潜在的陷阱。特别需要注意的是，索引和迭代动作返回的是字节的值而不是字节字符串。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Text string</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>t = <span class="string">'Hello World'</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>t[<span class="number">0</span>]</span><br><span class="line"><span class="string">'H'</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">for</span> c <span class="keyword">in</span> t:</span><br><span class="line"><span class="prompt">... </span>    print(c)</span><br><span class="line">...</span><br><span class="line">H</span><br><span class="line">e</span><br><span class="line">l</span><br><span class="line">l</span><br><span class="line">o</span><br><span class="line">...</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Byte string</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>b = <span class="string">b'Hello World'</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>b[<span class="number">0</span>]</span><br><span class="line"><span class="number">72</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">for</span> c <span class="keyword">in</span> b:</span><br><span class="line"><span class="prompt">... </span>    print(c)</span><br><span class="line">...</span><br><span class="line"><span class="number">72</span></span><br><span class="line"><span class="number">101</span></span><br><span class="line"><span class="number">108</span></span><br><span class="line"><span class="number">108</span></span><br><span class="line"><span class="number">111</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<h4 id="向不存在的文件中写入数据">向不存在的文件中写入数据</h4><p>如果只允许向不存在的文件写入数据，可以在<code>open()</code>函数中使用<code>x</code>模式来代替<code>w</code>模式来解决这个问题。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'dest2.csv'</span>, mode=<span class="string">'xt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">'test'</span>)</span><br><span class="line"></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"E:/workspaces/Python3/edu/shu/python/study/FileAndIO.py"</span>, line <span class="number">33</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'dest2.csv'</span>, mode=<span class="string">'xt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">FileExistsError: [Errno <span class="number">17</span>] File exists: <span class="string">'dest2.csv'</span></span><br></pre></td></tr></table></figure></p>
+<p>由提示信息可知，当该文件在系统中已经存在的时候，是不允许继续向其中写入内容的。如果文件是二进制的，使用<code>xb</code>来代替<code>xt</code>。</p>
+<h4 id="字符串的I/O操作">字符串的I/O操作</h4><p>使用<code>io.StringIO()</code>和<code>io.BytesIO()</code>类来创建类文件对象操作字符串数据<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> io</span><br><span class="line"></span><br><span class="line">s = io.StringIO()</span><br><span class="line">s.write(<span class="string">'Hello World!'</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'\nthis is a test'</span>, file=s)</span><br><span class="line"><span class="comment"># 向控制台输出内容</span></span><br><span class="line">print(s.getvalue())</span><br><span class="line"></span><br><span class="line">s = io.StringIO(<span class="string">'Hello World!\n'</span>)</span><br><span class="line"><span class="comment"># 先读取4个字符</span></span><br><span class="line">print(s.read(<span class="number">4</span>))</span><br><span class="line"><span class="comment"># 读取剩下的字符</span></span><br><span class="line">print(s.read())</span><br></pre></td></tr></table></figure></p>
+<p><code>io.StringIO</code>只能用于文本。如果你要操作二进制数据，要使用<code>io.BytesIO</code>类来代替<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span>s = io.BytesIO()</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>s.write(<span class="string">b'binary data'</span>)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>s.getvalue()</span><br><span class="line"><span class="string">b'binary data'</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="读写压缩文件">读写压缩文件</h4><p><code>gzip</code>和<code>bz2</code>模块可以很容易的处理这些文件。两个模块都为<code>open()</code>函数提供了另外的实现来解决这个问题<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># gzip compression</span></span><br><span class="line"><span class="keyword">import</span> gzip</span><br><span class="line"><span class="keyword">with</span> gzip.open(<span class="string">'somefile.gz'</span>, <span class="string">'rt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    text = f.read()</span><br><span class="line"></span><br><span class="line"><span class="comment"># bz2 compression</span></span><br><span class="line"><span class="keyword">import</span> bz2</span><br><span class="line"><span class="keyword">with</span> bz2.open(<span class="string">'somefile.bz2'</span>, <span class="string">'rt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    text = f.read()</span><br></pre></td></tr></table></figure></p>
+<p>类似的，为了写入压缩数据，可以这样做<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># gzip compression</span></span><br><span class="line"><span class="keyword">import</span> gzip</span><br><span class="line"><span class="keyword">with</span> gzip.open(<span class="string">'somefile.gz'</span>, <span class="string">'wt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(text)</span><br><span class="line"></span><br><span class="line"><span class="comment"># bz2 compression</span></span><br><span class="line"><span class="keyword">import</span> bz2</span><br><span class="line"><span class="keyword">with</span> bz2.open(<span class="string">'somefile.bz2'</span>, <span class="string">'wt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(text)</span><br></pre></td></tr></table></figure></p>
+<p>大部分情况下读写压缩数据都是很简单的。但是要注意的是选择一个正确的文件模式是非常重要的。如果你不指定模式，那么默认的就是二进制模式，如果这时候程序想要接受的是文本数据，那么就会出错。<br>当写入压缩数据时，可以使用<code>compresslevel</code>这个可选的关键字参数来指定一个压缩级别。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> gzip.open(<span class="string">'somefile.gz'</span>, <span class="string">'wt'</span>, compresslevel=<span class="number">5</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(text)</span><br></pre></td></tr></table></figure></p>
+<p>默认的等级是<code>9</code>，也是最高的压缩等级。等级越低性能越好，但是数据压缩程度也越低。</p>
+<p>最后一点，<code>gzip.open()</code>和<code>bz2.open()</code>还有一个很少被知道的特性，它们可以作用在一个已存在并以二进制模式打开的文件上。比如，下面代码是可行的：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gzip</span><br><span class="line">f = open(<span class="string">'somefile.gz'</span>, <span class="string">'rb'</span>)</span><br><span class="line"><span class="keyword">with</span> gzip.open(f, <span class="string">'rt'</span>) <span class="keyword">as</span> g:</span><br><span class="line">    text = g.read()</span><br></pre></td></tr></table></figure></p>
+<p>这样就允许<code>gzip</code>和<code>bz2</code>模块可以工作在许多类文件对象上，比如套接字，管道和内存中文件等。</p>
+<h4 id="读取二进制数据到可变缓冲区中">读取二进制数据到可变缓冲区中</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os.path</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_into_buffer</span><span class="params">(filename)</span>:</span></span><br><span class="line">    buf = bytearray(os.path.getsize(filename))</span><br><span class="line">    <span class="keyword">with</span> open(filename, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.readinto(buf)</span><br><span class="line">    <span class="keyword">return</span> buf</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Write a sample file</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">with</span> open(<span class="string">'sample.bin'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line"><span class="prompt">... </span>    f.write(<span class="string">b'Hello World'</span>)</span><br><span class="line">...</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>buf = read_into_buffer(<span class="string">'sample.bin'</span>)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>buf</span><br><span class="line">bytearray(<span class="string">b'Hello World'</span>)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>buf[<span class="number">0</span>:<span class="number">5</span>] = <span class="string">b'Hallo'</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>buf</span><br><span class="line">bytearray(<span class="string">b'Hallo World'</span>)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">with</span> open(<span class="string">'newsample.bin'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line"><span class="prompt">... </span>    f.write(buf)</span><br><span class="line">...</span><br><span class="line"><span class="number">11</span></span><br></pre></td></tr></table></figure>
+<p>文件对象的<code>readinto()</code>方法能被用来为预先分配内存的数组填充数据，甚至包括由<code>array</code>模块或<code>numpy</code>库创建的数组。和普通<code>read()</code>方法不同的是，<code>readinto()</code>填充已存在的缓冲区而不是为新对象重新分配内存再返回它们。因此，你可以使用它来避免大量的内存分配操作。比如，如果你读取一个由相同大小的记录组成的二进制文件时，你可以像下面这样写：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">record_size = <span class="number">32</span> <span class="comment"># Size of each record (adjust value)</span></span><br><span class="line"></span><br><span class="line">buf = bytearray(record_size)</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        n = f.readinto(buf)</span><br><span class="line">        <span class="keyword">if</span> n &lt; record_size:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="comment"># Use the contents of buf</span></span><br><span class="line">        ...</span><br></pre></td></tr></table></figure></p>
+<h4 id="文件路径名的操作">文件路径名的操作</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">import</span> os</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>path = <span class="string">'/Users/beazley/Data/data.csv'</span></span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Get the last component of the path</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>os.path.basename(path)</span><br><span class="line"><span class="string">'data.csv'</span></span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Get the directory name</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>os.path.dirname(path)</span><br><span class="line"><span class="string">'/Users/beazley/Data'</span></span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Join path components together</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>os.path.join(<span class="string">'tmp'</span>, <span class="string">'data'</span>, os.path.basename(path))</span><br><span class="line"><span class="string">'tmp/data/data.csv'</span></span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Expand the user's home directory</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>path = <span class="string">'~/Data/data.csv'</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>os.path.expanduser(path)</span><br><span class="line"><span class="string">'/Users/beazley/Data/data.csv'</span></span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Split the file extension</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>os.path.splitext(path)</span><br><span class="line">(<span class="string">'~/Data/data'</span>, <span class="string">'.csv'</span>)</span><br></pre></td></tr></table></figure>
+<p>对于任何的文件名的操作，你都应该使用<code>os.path</code>模块，而不是使用标准字符串操作来构造自己的代码。特别是为了可移植性考虑的时候更应如此，因为<code>os.path</code>模块知道<code>Unix</code>和<code>Windows</code>系统之间的差异并且能够可靠地处理类似<code>Data/data.csv</code>和<code>Data\data.csv</code>这样的文件名。其次，你真的不应该浪费时间去重复造轮子。通常最好是直接使用已经为你准备好的功能。</p>
+<p>使用如下方式测试文件的类型，如果测试的文件不存在的时候，结果都会返回<strong>False</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Is a regular file</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>os.path.isfile(<span class="string">'/etc/passwd'</span>)</span><br><span class="line"><span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Is a directory</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>os.path.isdir(<span class="string">'/etc/passwd'</span>)</span><br><span class="line"><span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Is a symbolic link</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>os.path.islink(<span class="string">'/usr/local/bin/python3'</span>)</span><br><span class="line"><span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Get the file linked to</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>os.path.realpath(<span class="string">'/usr/local/bin/python3'</span>)</span><br><span class="line"><span class="string">'/usr/local/bin/python3.3'</span></span><br></pre></td></tr></table></figure></p>
+<p>如果你还想获取元数据(比如文件大小或者是修改日期)，也可以使用<code>os.path</code>模块来解决<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span>os.path.getsize(<span class="string">'/etc/passwd'</span>)</span><br><span class="line"><span class="number">3669</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>os.path.getmtime(<span class="string">'/etc/passwd'</span>)</span><br><span class="line"><span class="number">1272478234.0</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">import</span> time</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>time.ctime(os.path.getmtime(<span class="string">'/etc/passwd'</span>))</span><br><span class="line"><span class="string">'Wed Apr 28 13:10:34 2010'</span></span><br></pre></td></tr></table></figure></p>
+<p>使用<code>os.listdir()</code>函数来获取某个目录中的文件列表<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">names = os.listdir(<span class="string">'somedir'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>获取目录中的列表是很容易的，但是其返回结果只是目录中实体名列表而已。如果你还想获取其他的元信息，比如文件大小，修改时间等等，你或许还需要使用到<code>os.path</code>模块中的函数或者<code>os.stat()</code>函数来收集数据。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Example of getting a directory listing</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> os.path</span><br><span class="line"><span class="keyword">import</span> glob</span><br><span class="line"></span><br><span class="line">pyfiles = glob.glob(<span class="string">'*.py'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get file sizes and modification dates</span></span><br><span class="line">name_sz_date = [(name, os.path.getsize(name), os.path.getmtime(name))</span><br><span class="line">                <span class="keyword">for</span> name <span class="keyword">in</span> pyfiles]</span><br><span class="line"><span class="keyword">for</span> name, size, mtime <span class="keyword">in</span> name_sz_date:</span><br><span class="line">    print(name, size, mtime)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Alternative: Get file metadata</span></span><br><span class="line">file_metadata = [(name, os.stat(name)) <span class="keyword">for</span> name <span class="keyword">in</span> pyfiles]</span><br><span class="line"><span class="keyword">for</span> name, meta <span class="keyword">in</span> file_metadata:</span><br><span class="line">    print(name, meta.st_size, meta.st_mtime)</span><br></pre></td></tr></table></figure></p>
+<h4 id="增加或改变已打开文件的编码">增加或改变已打开文件的编码</h4><p>如果你想给一个以二进制模式打开的文件添加<code>Unicode</code>编码/解码方式，可以使用<code>io.TextIOWrapper()</code>对象包装它。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="keyword">import</span> io</span><br><span class="line"></span><br><span class="line">u = urllib.request.urlopen(<span class="string">'http://www.python.org'</span>)</span><br><span class="line">f = io.TextIOWrapper(u, encoding=<span class="string">'utf-8'</span>)</span><br><span class="line">text = f.read()</span><br></pre></td></tr></table></figure></p>
+<p>如果你想修改一个已经打开的文本模式的文件的编码方式，可以先使用<code>detach()</code>方法移除掉已存在的文本编码层，并使用新的编码方式代替。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>sys.stdout.encoding</span><br><span class="line"><span class="string">'UTF-8'</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding=<span class="string">'latin-1'</span>)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>sys.stdout.encoding</span><br><span class="line"><span class="string">'latin-1</span></span><br></pre></td></tr></table></figure></p>
+<p>在文本模式打开的文件中写入原始的字节数据，将字节数据直接写入文件的缓冲区即可。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>sys.stdout.write(<span class="string">b'Hello\n'</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">    File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">TypeError: must be str, <span class="keyword">not</span> bytes</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>sys.stdout.buffer.write(<span class="string">b'Hello\n'</span>)</span><br><span class="line">Hello</span><br><span class="line"><span class="number">5</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>类似的，能够通过读取文本文件的<code>buffer</code>属性来读取二进制数据。</p>
+<h4 id="创建临时文件和文件夹">创建临时文件和文件夹</h4><p><code>tempfile</code>模块中有很多的函数可以完成这任务。为了创建一个匿名的临时文件，可以使用<code>tempfile.TemporaryFile</code>：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tempfile <span class="keyword">import</span> TemporaryFile</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> TemporaryFile(<span class="string">'w+t'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="comment"># Read/write to the file</span></span><br><span class="line">    f.write(<span class="string">'Hello World\n'</span>)</span><br><span class="line">    f.write(<span class="string">'Testing\n'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Seek back to beginning and read the data</span></span><br><span class="line">    f.seek(<span class="number">0</span>)</span><br><span class="line">    data = f.read()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Temporary file is destroyed</span></span><br></pre></td></tr></table></figure></p>
+<p><code>TemporaryFile()</code>的第一个参数是文件模式，通常来讲文本模式使用<code>w+t</code>，二进制模式使用<code>w+b</code>。这个模式同时支持读和写操作，在这里是很有用的，因为当你关闭文件去改变模式的时候，文件实际上已经不存在了。<code>TemporaryFile()</code>另外还支持跟内置的<code>open()</code>函数一样的参数。</p>
+<p>在大多数<code>Unix</code>系统上，通过<code>TemporaryFile()</code>创建的文件都是匿名的，甚至连目录都没有。如果你想打破这个限制，可以使用<code>NamedTemporaryFile()</code>来代替。比如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tempfile <span class="keyword">import</span> NamedTemporaryFile</span><br><span class="line"><span class="keyword">with</span> NamedTemporaryFile(<span class="string">'w+t'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    print(<span class="string">'filename is:'</span>, f.name)</span><br><span class="line">    ...</span><br><span class="line"><span class="comment"># File automatically destroyed</span></span><br></pre></td></tr></table></figure></p>
+<p>这里，被打开文件的<code>f.name</code>属性包含了该临时文件的文件名。当你需要将文件名传递给其他代码来打开这个文件的时候，这个就很有用了。和<code>TemporaryFile()</code>一样，结果文件关闭时会被自动删除掉。如果你不想这么做，可以传递一个关键字参数<code>delte=False</code>即可。比如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> NamedTemporaryFile(<span class="string">'w+t'</span>, delete=<span class="keyword">False</span>) <span class="keyword">as</span> f:</span><br><span class="line">    print(<span class="string">'filename is:'</span>, f.name)</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
+<p>为了创建一个临时目录，可以使用<code>tempfile.TemporaryDirectory()</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tempfile <span class="keyword">import</span> TemporaryDirectory</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> TemporaryDirectory() <span class="keyword">as</span> dirname:</span><br><span class="line">    print(<span class="string">'dirname is:'</span>, dirname)</span><br><span class="line">    <span class="comment"># Use the directory</span></span><br><span class="line">    ...</span><br><span class="line"><span class="comment"># Directory and all contents destroyed</span></span><br></pre></td></tr></table></figure></p>
+<p><code>TemporaryFile()</code>、<code>NamedTemporaryFile()</code>和<code>TemporaryDirectory()</code>函数应该是处理临时文件目录的最简单的方式了，因为它们会自动处理所有的创建和清理步骤。在一个更低的级别，你可以使用<code>mkstemp()</code>和<code>mkdtemp()</code>来创建临时文件和目录。</p>
+<h4 id="与串行端口的数据通信">与串行端口的数据通信</h4><p>尽管你可以通过使用Python内置的I/O模块来完成这个任务，但对于串行通信最好的选择是使用<a href="http://pyserial.sourceforge.net/" target="_blank" rel="external">pySerial</a>包。这个包的使用非常简单，先安装<code>pySerial</code>，使用类似下面这样的代码就能很容易的打开一个串行端口：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> serial</span><br><span class="line">ser = serial.Serial(<span class="string">'/dev/tty.usbmodem641'</span>, <span class="comment"># Device name varies</span></span><br><span class="line">                    baudrate=<span class="number">9600</span>,</span><br><span class="line">                    bytesize=<span class="number">8</span>,</span><br><span class="line">                    parity=<span class="string">'N'</span>,</span><br><span class="line">                    stopbits=<span class="number">1</span>)</span><br></pre></td></tr></table></figure></p>
+<p>设备名对于不同的设备和操作系统是不一样的。比如，在<code>Windows</code>系统上，你可以使用0，1等表示的一个设备来打开通信端口<code>COM0</code>和<code>COM1</code>。一旦端口打开，那就可以使用<code>read()</code>，<code>readline()</code>和<code>write()</code>函数读写数据了。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ser.write(<span class="string">b'G1 X50 Y50\r\n'</span>)</span><br><span class="line">resp = ser.readline()</span><br></pre></td></tr></table></figure></p>
+<h4 id="序列化Python对象">序列化Python对象</h4><p>对于序列化最普遍的做法就是使用<code>pickle</code>模块。为了将一个对象保存到一个文件中，可以这样做：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line">data = ... <span class="comment"># Some Python object</span></span><br><span class="line">f = open(<span class="string">'somefile'</span>, <span class="string">'wb'</span>)</span><br><span class="line">pickle.dump(data, f)</span><br></pre></td></tr></table></figure></p>
+<p>为了将一个对象转储为一个字符串，可以使用<code>pickle.dumps()</code>：<br><code>s = pickle.dumps(data)</code><br>为了从字节流中恢复一个对象，使用<code>picle.load()</code>或<code>pickle.loads()</code>函数。比如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Restore from a file</span></span><br><span class="line">f = open(<span class="string">'somefile'</span>, <span class="string">'rb'</span>)</span><br><span class="line">data = pickle.load(f)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Restore from a string</span></span><br><span class="line">data = pickle.loads(s)</span><br></pre></td></tr></table></figure></p>
+<h3 id="数据编码和处理">数据编码和处理</h3><h4 id="读写CSV数据">读写CSV数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> namedtuple</span><br><span class="line"><span class="comment"># 将CSV中的数据读入元组中，并允许使用列名如row.Symbol和row.Change（Symbol和Change是CSV文件中的列名）</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'stock.csv'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f_csv = csv.reader(f)</span><br><span class="line">    headings = next(f_csv)</span><br><span class="line">    Row = namedtuple(<span class="string">'Row'</span>, headings)</span><br><span class="line">    <span class="keyword">for</span> r <span class="keyword">in</span> f_csv:</span><br><span class="line">        row = Row(*r)</span><br><span class="line">        <span class="comment"># Process row</span></span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
+<p>另外一个选择就是将数据读取到一个字典序列中去。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'stocks.csv'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f_csv = csv.DictReader(f)</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> f_csv:</span><br><span class="line">        <span class="comment"># process row</span></span><br><span class="line">        ...</span><br></pre></td></tr></table></figure></p>
+<p>在这个版本中，你可以使用列名去访问每一行的数据了。比如，<code>row[&#39;Symbol&#39;]</code>或者<code>row[&#39;Change&#39;]</code>。</p>
+<p>为了写入<code>CSV</code>数据，你仍然可以使用<code>CSV</code>模块，不过这时候先创建一个<code>writer</code>对象。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">headers = [<span class="string">'Symbol'</span>,<span class="string">'Price'</span>,<span class="string">'Date'</span>,<span class="string">'Time'</span>,<span class="string">'Change'</span>,<span class="string">'Volume'</span>]</span><br><span class="line">rows = [(<span class="string">'AA'</span>, <span class="number">39.48</span>, <span class="string">'6/11/2007'</span>, <span class="string">'9:36am'</span>, -<span class="number">0.18</span>, <span class="number">181800</span>),</span><br><span class="line">         (<span class="string">'AIG'</span>, <span class="number">71.38</span>, <span class="string">'6/11/2007'</span>, <span class="string">'9:36am'</span>, -<span class="number">0.15</span>, <span class="number">195500</span>),</span><br><span class="line">         (<span class="string">'AXP'</span>, <span class="number">62.58</span>, <span class="string">'6/11/2007'</span>, <span class="string">'9:36am'</span>, -<span class="number">0.46</span>, <span class="number">935000</span>),</span><br><span class="line">       ]</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'stocks.csv'</span>,<span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f_csv = csv.writer(f)</span><br><span class="line">    f_csv.writerow(headers)</span><br><span class="line">    f_csv.writerows(rows)</span><br></pre></td></tr></table></figure></p>
+<p>如果你有一个字典序列的数据，可以像这样做<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">headers = [<span class="string">'Symbol'</span>, <span class="string">'Price'</span>, <span class="string">'Date'</span>, <span class="string">'Time'</span>, <span class="string">'Change'</span>, <span class="string">'Volume'</span>]</span><br><span class="line">rows = [&#123;<span class="string">'Symbol'</span>:<span class="string">'AA'</span>, <span class="string">'Price'</span>:<span class="number">39.48</span>, <span class="string">'Date'</span>:<span class="string">'6/11/2007'</span>,</span><br><span class="line">        <span class="string">'Time'</span>:<span class="string">'9:36am'</span>, <span class="string">'Change'</span>:-<span class="number">0.18</span>, <span class="string">'Volume'</span>:<span class="number">181800</span>&#125;,</span><br><span class="line">        &#123;<span class="string">'Symbol'</span>:<span class="string">'AIG'</span>, <span class="string">'Price'</span>: <span class="number">71.38</span>, <span class="string">'Date'</span>:<span class="string">'6/11/2007'</span>,</span><br><span class="line">        <span class="string">'Time'</span>:<span class="string">'9:36am'</span>, <span class="string">'Change'</span>:-<span class="number">0.15</span>, <span class="string">'Volume'</span>: <span class="number">195500</span>&#125;,</span><br><span class="line">        &#123;<span class="string">'Symbol'</span>:<span class="string">'AXP'</span>, <span class="string">'Price'</span>: <span class="number">62.58</span>, <span class="string">'Date'</span>:<span class="string">'6/11/2007'</span>,</span><br><span class="line">        <span class="string">'Time'</span>:<span class="string">'9:36am'</span>, <span class="string">'Change'</span>:-<span class="number">0.46</span>, <span class="string">'Volume'</span>: <span class="number">935000</span>&#125;,</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'stocks.csv'</span>,<span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f_csv = csv.DictWriter(f, headers)</span><br><span class="line">    f_csv.writeheader()</span><br><span class="line">    f_csv.writerows(rows)</span><br></pre></td></tr></table></figure></p>
+<h4 id="读写JSON数据">读写JSON数据</h4><p><code>json</code>模块提供了一种很简单的方式来编码和解码JSON数据。其中两个主要的函数是<code>json.dumps()</code>和<code>json.loads()</code>，要比其他序列化函数库如<code>pickle</code>的接口少得多。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line">data = &#123;</span><br><span class="line">    <span class="string">'name'</span> : <span class="string">'ACME'</span>,</span><br><span class="line">    <span class="string">'shares'</span> : <span class="number">100</span>,</span><br><span class="line">    <span class="string">'price'</span> : <span class="number">542.23</span></span><br><span class="line">&#125;</span><br><span class="line">json_str = json.dumps(data)</span><br></pre></td></tr></table></figure></p>
+<p>将JSON编码的字符串转回一个Python数据结构<br><code>data = json.loads(json_str)</code><br>如果你要处理的是文件而不是字符串，你可以使用<code>json.dump()</code>和<code>json.load()</code>来编码和解码JSON数据。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Writing JSON data</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'data.json'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    json.dump(data, f)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Reading data back</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'data.json'</span>, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    data = json.load(f)</span><br></pre></td></tr></table></figure></p>
+<h4 id="解析简单的XML数据">解析简单的XML数据</h4><p>可以使用<code>xml.etree.ElementTree</code>模块从简单的XML文档中提取数据。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen</span><br><span class="line"><span class="keyword">from</span> xml.etree.ElementTree <span class="keyword">import</span> parse</span><br><span class="line"></span><br><span class="line"><span class="comment"># Download the RSS feed and parse it</span></span><br><span class="line">u = urlopen(<span class="string">'http://planet.python.org/rss20.xml'</span>)</span><br><span class="line">doc = parse(u)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Extract and output tags of interest</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> doc.iterfind(<span class="string">'channel/item'</span>):</span><br><span class="line">    title = item.findtext(<span class="string">'title'</span>)</span><br><span class="line">    date = item.findtext(<span class="string">'pubDate'</span>)</span><br><span class="line">    link = item.findtext(<span class="string">'link'</span>)</span><br><span class="line"></span><br><span class="line">    print(title)</span><br><span class="line">    print(date)</span><br><span class="line">    print(link)</span><br><span class="line">    print()</span><br></pre></td></tr></table></figure></p>
+<p><code>xml.etree.ElementTree.parse()</code>函数解析整个XML文档并将其转换成一个文档对象。然后，你就能使用<code>find()</code>、<code>iterfind()</code>和<code>findtext()</code>等方法来搜索特定的XML元素了。这些函数的参数就是某个指定的标签名，例如<code>channel/item</code>或<code>title</code>。</p>
+<p><code>ElementTree</code>模块中的每个元素有一些重要的属性和方法，在解析的时候非常有用。<code>tag</code>属性包含了标签的名字，<code>text</code>属性包含了内部的文本，而<code>get()</code>方法能获取属性值。</p>
+<p>有一点要强调的是<code>xml.etree.ElementTree</code>并不是<code>XML</code>解析的唯一方法。对于更高级的应用程序，你需要考虑使用<code>lxml</code>。它使用了和<code>ElementTree</code>同样的编程接口，因此上面的例子同样也适用于<code>lxml</code>。你只需要将刚开始的<code>import</code>语句换成<code>from lxml.etree import parse</code>就行了。<code>lxml</code>完全遵循<code>XML</code>标准，并且速度也非常快，同时还支持验证，<code>XSLT</code>和<code>XPath</code>等特性。</p>
+<h4 id="增量式解析大型XML文件">增量式解析大型XML文件</h4><p>任何时候只要你遇到增量式的数据处理时，第一时间就应该想到迭代器和生成器。 下面是一个很简单的函数，只使用很少的内存就能增量式的处理一个大型XML文件。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> xml.etree.ElementTree <span class="keyword">import</span> iterparse</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_and_remove</span><span class="params">(filename, path)</span>:</span></span><br><span class="line">    path_parts = path.split(<span class="string">'/'</span>)</span><br><span class="line">    doc = iterparse(filename, (<span class="string">'start'</span>, <span class="string">'end'</span>))</span><br><span class="line">    <span class="comment"># Skip the root element</span></span><br><span class="line">    next(doc)</span><br><span class="line"></span><br><span class="line">    tag_stack = []</span><br><span class="line">    elem_stack = []</span><br><span class="line">    <span class="keyword">for</span> event, elem <span class="keyword">in</span> doc:</span><br><span class="line">        <span class="keyword">if</span> event == <span class="string">'start'</span>:</span><br><span class="line">            tag_stack.append(elem.tag)</span><br><span class="line">            elem_stack.append(/)</span><br><span class="line">        <span class="keyword">elif</span> event == <span class="string">'end'</span>:</span><br><span class="line">            <span class="keyword">if</span> tag_stack == path_parts:</span><br><span class="line">                <span class="keyword">yield</span> elem</span><br><span class="line">                elem_stack[-<span class="number">2</span>].remove(elem)</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                tag_stack.pop()</span><br><span class="line">                elem_stack.pop()</span><br><span class="line">            <span class="keyword">except</span> IndexError:</span><br><span class="line">                <span class="keyword">pass</span></span><br></pre></td></tr></table></figure></p>
+<p><code>iterparse()</code>方法允许对<code>XML</code>文档进行增量操作。使用时，你需要提供文件名和一个包含下面一种或多种类型的事件列表：<code>start</code>,<code>end</code>,<code>start-ns</code>和<code>end-ns</code>。由<code>iterparse()</code>创建的迭代器会产生形如(event, elem)的元组，其中<code>event</code>是上述事件列表中的某一个，而<code>elem</code>是相应的XML元素。</p>
+<p><code>start</code>事件在某个元素第一次被创建并且还没有被插入其他数据(如子元素)时被创建。而<code>end</code>事件在某个元素已经完成时被创建。尽管没有在例子中演示，<code>start-ns</code>和<code>end-ns</code>事件被用来处理<code>XML</code>文档命名空间的声明。</p>
+<h4 id="将字典转换为XML">将字典转换为XML</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> xml.etree.ElementTree <span class="keyword">import</span> Element</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dict_to_xml</span><span class="params">(tag, d)</span>:</span></span><br><span class="line"><span class="string">'''</span><br><span class="line">Turn a simple dict of key/value pairs into XML</span><br><span class="line">'''</span></span><br><span class="line">elem = Element(tag)</span><br><span class="line"><span class="keyword">for</span> key, val <span class="keyword">in</span> d.items():</span><br><span class="line">    child = Element(key)</span><br><span class="line">    child.text = str(val)</span><br><span class="line">    elem.append(child)</span><br><span class="line"><span class="keyword">return</span> elem</span><br></pre></td></tr></table></figure>
+<p>对于<code>I/O</code>操作，使用<code>xml.etree.ElementTree</code>中的<code>tostring()</code>函数很容易就能将它转换成一个字节字符串。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">from</span> xml.etree.ElementTree <span class="keyword">import</span> tostring</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>tostring(e)</span><br><span class="line"><span class="string">b'&lt;stock&gt;&lt;price&gt;490.1&lt;/price&gt;&lt;shares&gt;100&lt;/shares&gt;&lt;name&gt;GOOG&lt;/name&gt;&lt;/stock&gt;'</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure></p>
+<p><code>xml.sax.saxutils</code>中的<code>escape()</code>和<code>unescape()</code>函数提供对HTML实体的转换方法<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">from</span> xml.sax.saxutils <span class="keyword">import</span> escape, unescape</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>escape(<span class="string">'&lt;spam&gt;'</span>)</span><br><span class="line"><span class="string">'&amp;lt;spam&amp;gt;'</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>unescape(_)</span><br><span class="line"><span class="string">'&lt;spam&gt;'</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="解析和修改XML">解析和修改XML</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">from</span> xml.etree.ElementTree <span class="keyword">import</span> parse, Element</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>doc = parse(<span class="string">'pred.xml'</span>)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>root = doc.getroot()</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>root</span><br><span class="line">&lt;Element <span class="string">'stop'</span> at <span class="number">0x100770cb0</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Remove a few elements</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>root.remove(root.find(<span class="string">'sri'</span>))</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>root.remove(root.find(<span class="string">'cr'</span>))</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Insert a new element after &lt;nm&gt;...&lt;/nm&gt;</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>root.getchildren().index(root.find(<span class="string">'nm'</span>))</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>e = Element(<span class="string">'spam'</span>)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>e.text = <span class="string">'This is a test'</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>root.insert(<span class="number">2</span>, e)</span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Write back to a file</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>doc.write(<span class="string">'newpred.xml'</span>, xml_declaration=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="编码和解码十六进制数">编码和解码十六进制数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Initial byte string</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>s = <span class="string">b'hello'</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Encode as hex</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">import</span> binascii</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>h = binascii.b2a_hex(s)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>h</span><br><span class="line"><span class="string">b'68656c6c6f'</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Decode back to bytes</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>binascii.a2b_hex(h)</span><br><span class="line"><span class="string">b'hello'</span></span><br></pre></td></tr></table></figure>
+<p>类似的功能同样可以在<code>base64</code>模块中找到<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">import</span> base64</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>h = base64.b16encode(s)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>h</span><br><span class="line"><span class="string">b'68656C6C6F'</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>base64.b16decode(h)</span><br><span class="line"><span class="string">b'hello'</span></span><br></pre></td></tr></table></figure></p>
+<p>大部分情况下，通过使用上述的函数来转换十六进制是很简单的。上面两种技术的主要不同在于大小写的处理。函数<code>base64.b16decode()</code>和<code>base64.b16encode()</code>只能操作大写形式的十六进制字母，而<code>binascii</code>模块中的函数大小写都能处理。<br>还有一点需要注意的是编码函数所产生的输出总是一个字节字符串。如果想强制以<code>Unicode</code>形式输出，你需要增加一个额外的界面步骤。例如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span>h = base64.b16encode(s)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>print(h)</span><br><span class="line"><span class="string">b'68656C6C6F'</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>print(h.decode(<span class="string">'ascii'</span>))</span><br><span class="line"><span class="number">68656</span>C6C6F</span><br></pre></td></tr></table></figure></p>
+<p>在解码十六进制数时，函数<code>b16decode()</code>和<code>a2b_hex()</code>可以接受字节或<code>unicode</code>字符串。但是，<code>unicode</code>字符串必须仅仅只包含<code>ASCII</code>编码的十六进制数。</p>
+<h4 id="编码解码Base64数据">编码解码Base64数据</h4><p><code>base64</code>模块中有两个函数<code>b64encode()</code>and<code>b64decode()</code>可以帮你解决这个问题。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Some byte data</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>s = <span class="string">b'hello'</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Encode as Base64</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>a = base64.b64encode(s)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="string">b'aGVsbG8='</span></span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Decode from Base64</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>base64.b64decode(a)</span><br><span class="line"><span class="string">b'hello'</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="读写二进制数组数据">读写二进制数组数据</h4><p>可以使用<code>struct</code>模块处理二进制数据。下面是一段示例代码将一个Python元组列表写入一个二进制文件，并使用<code>struct</code>将每个元组编码为一个结构体。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> struct <span class="keyword">import</span> Struct</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_records</span><span class="params">(records, format, f)</span>:</span></span><br><span class="line">    <span class="string">'''</span><br><span class="line">    Write a sequence of tuples to a binary file of structures.</span><br><span class="line">    '''</span></span><br><span class="line">    record_struct = Struct(format)</span><br><span class="line">    <span class="keyword">for</span> r <span class="keyword">in</span> records:</span><br><span class="line">        f.write(record_struct.pack(*r))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Example</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    records = [ (<span class="number">1</span>, <span class="number">2.3</span>, <span class="number">4.5</span>),</span><br><span class="line">                (<span class="number">6</span>, <span class="number">7.8</span>, <span class="number">9.0</span>),</span><br><span class="line">                (<span class="number">12</span>, <span class="number">13.4</span>, <span class="number">56.7</span>) ]</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'data.b'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        write_records(records, <span class="string">'&lt;idd'</span>, f)</span><br></pre></td></tr></table></figure></p>
+<p>如果你打算以块的形式增量读取文件，你可以这样做：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> struct <span class="keyword">import</span> Struct</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_records</span><span class="params">(format, f)</span>:</span></span><br><span class="line">    record_struct = Struct(format)</span><br><span class="line">    chunks = iter(<span class="keyword">lambda</span>: f.read(record_struct.size), <span class="string">b''</span>)</span><br><span class="line">    <span class="keyword">return</span> (record_struct.unpack(chunk) <span class="keyword">for</span> chunk <span class="keyword">in</span> chunks)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Example</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'data.b'</span>,<span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> rec <span class="keyword">in</span> read_records(<span class="string">'&lt;idd'</span>, f):</span><br><span class="line">            <span class="comment"># Process rec</span></span><br><span class="line">            ...</span><br></pre></td></tr></table></figure></p>
+<p>如果你想将整个文件一次性读取到一个字节字符串中，然后在分片解析。那么你可以这样做：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> struct <span class="keyword">import</span> Struct</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">unpack_records</span><span class="params">(format, data)</span>:</span></span><br><span class="line">    record_struct = Struct(format)</span><br><span class="line">    <span class="keyword">return</span> (record_struct.unpack_from(data, offset)</span><br><span class="line">            <span class="keyword">for</span> offset <span class="keyword">in</span> range(<span class="number">0</span>, len(data), record_struct.size))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Example</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'data.b'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        data = f.read()</span><br><span class="line">    <span class="keyword">for</span> rec <span class="keyword">in</span> unpack_records(<span class="string">'&lt;idd'</span>, data):</span><br><span class="line">        <span class="comment"># Process rec</span></span><br><span class="line">        ...</span><br></pre></td></tr></table></figure></p>
+<p>参考资料<br>【1】<a href="http://code.google.com/p/proden/downloads/detail?name=A%20Byte%20of%20Python3(%E4%B8%AD%E6%96%87%E7%89%88).pdf" target="_blank" rel="external">A Byte of Python3</a><br>【2】<a href="http://python3-cookbook.readthedocs.org/zh_CN/latest/c01/p08_calculating_with_dict.html" target="_blank" rel="external">python3-cookbook</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Programming-Notes/">Programming Notes</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Python3/">Python3</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=2067139" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2067139" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/07/07/Python-implementation-string-similarity-edit-distance/" title="Python实现字符串相似度-编辑距离">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Python实现字符串相似度-编辑距离</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/07/04/Python3-beginner-s-handbook-two/"  title="Python3入门手册之二">
+ <strong>下一篇：</strong><br/> 
+ <span>Python3入门手册之二
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/07/06/Python3-beginner-s-handbook-three/" data-title="Python3入门手册之三" data-url="http://www.codepub.cn/2015/07/06/Python3-beginner-s-handbook-three/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#文件与I/O"><span class="toc-number">1.</span> <span class="toc-text">文件与I/O</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#读写文本数据"><span class="toc-number">1.1.</span> <span class="toc-text">读写文本数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#读写字节数据"><span class="toc-number">1.2.</span> <span class="toc-text">读写字节数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#向不存在的文件中写入数据"><span class="toc-number">1.3.</span> <span class="toc-text">向不存在的文件中写入数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符串的I/O操作"><span class="toc-number">1.4.</span> <span class="toc-text">字符串的I/O操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#读写压缩文件"><span class="toc-number">1.5.</span> <span class="toc-text">读写压缩文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#读取二进制数据到可变缓冲区中"><span class="toc-number">1.6.</span> <span class="toc-text">读取二进制数据到可变缓冲区中</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件路径名的操作"><span class="toc-number">1.7.</span> <span class="toc-text">文件路径名的操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#增加或改变已打开文件的编码"><span class="toc-number">1.8.</span> <span class="toc-text">增加或改变已打开文件的编码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建临时文件和文件夹"><span class="toc-number">1.9.</span> <span class="toc-text">创建临时文件和文件夹</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#与串行端口的数据通信"><span class="toc-number">1.10.</span> <span class="toc-text">与串行端口的数据通信</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#序列化Python对象"><span class="toc-number">1.11.</span> <span class="toc-text">序列化Python对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据编码和处理"><span class="toc-number">2.</span> <span class="toc-text">数据编码和处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#读写CSV数据"><span class="toc-number">2.1.</span> <span class="toc-text">读写CSV数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#读写JSON数据"><span class="toc-number">2.2.</span> <span class="toc-text">读写JSON数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解析简单的XML数据"><span class="toc-number">2.3.</span> <span class="toc-text">解析简单的XML数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#增量式解析大型XML文件"><span class="toc-number">2.4.</span> <span class="toc-text">增量式解析大型XML文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#将字典转换为XML"><span class="toc-number">2.5.</span> <span class="toc-text">将字典转换为XML</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解析和修改XML"><span class="toc-number">2.6.</span> <span class="toc-text">解析和修改XML</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#编码和解码十六进制数"><span class="toc-number">2.7.</span> <span class="toc-text">编码和解码十六进制数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#编码解码Base64数据"><span class="toc-number">2.8.</span> <span class="toc-text">编码解码Base64数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#读写二进制数组数据"><span class="toc-number">2.9.</span> <span class="toc-text">读写二进制数组数据</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Algorithms/" title="Algorithms">Algorithms<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Database/" title="Database">Database<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git-GitHub/" title="Git/GitHub">Git/GitHub<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life-Talk/" title="Life-Talk">Life-Talk<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Operating-System/" title="Operating System">Operating System<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Programming-Notes/" title="Programming Notes">Programming Notes<sup>22</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python3/" title="Python3">Python3<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/LTP/" title="LTP">LTP<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/IT/" title="IT">IT<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elite/" title="Elite">Elite<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tools/" title="Tools">Tools<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySql/" title="MySql">MySql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Lombok/" title="Lombok">Lombok<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Selenium/" title="Selenium">Selenium<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DLL/" title="DLL">DLL<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tomcat/" title="Tomcat">Tomcat<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Guava/" title="Guava">Guava<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Github/" title="Github">Github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Octopress/" title="Octopress">Octopress<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Eclipse/" title="Eclipse">Eclipse<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <p class="asidetitle">最新评论</p>
+<div>
+	<ul class="ds-recent-comments" data-num-items="10" data-show-avatars="1" data-show-time="1" data-show-admin="1" data-excerpt-length="70"></ul>
+	<!--多说js加载开始，一个页面只需要加载一次 -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!--多说js加载结束，一个页面只需要加载一次 -->
+</div>
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/DLL/" style="font-size: 10px;">DLL</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Elite/" style="font-size: 10px;">Elite</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/IntelliJ/" style="font-size: 10px;">IntelliJ</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/LTP/" style="font-size: 13.33px;">LTP</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/Python3/" style="font-size: 16.67px;">Python3</a> <a href="/tags/Selenium/" style="font-size: 10px;">Selenium</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Struts2/" style="font-size: 10px;">Struts2</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a>
+    </div>
+  </div>
+
+
+  <br/>
+<p class="asidetitle">热评文章</p>
+<!-- 多说热评文章 start -->
+<div>
+<div class="ds-top-threads" data-range="monthly" data-num-items="8"></div>
+<!-- 多说热评文章 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+<br/>
+
+  <p class="asidetitle">打赏他</p>
+<div>
+<form action="https://shenghuo.alipay.com/send/payment/fill.htm" method="POST" target="_blank" accept-charset="GBK">
+    <br/>
+    <input name="optEmail" type="hidden" value="18302118258" />
+    <input name="payAmount" type="hidden" value="10" />
+    <input id="title" name="title" type="hidden" value="博主，打赏你的！" />
+    <input name="memo" type="hidden" value="你Y加油，继续写博客！" />
+    <input name="pay" type="image" value="转账" src="http://7xig3q.com1.z0.glb.clouddn.com/alipay-donate-website.png" />
+</form>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello , I&#39;m Wang Xu in SHU. <br/>
+			志不强者智不达，言不信者行不果。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1779238484" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/shijiebei2009" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/4204922" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		
+		
+		<a href="https://www.linkedin.com/in/codepub" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		<a href="https://www.douban.com/people/shijiebei2009" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		<a href="https://www.zhihu.com/people/codepub.cn" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:wangx89@126.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="http://www.codepub.cn/about" target="_blank" title="Wang Xu">Wang Xu</a>
+		
+		<a href="http://tongji.baidu.com/web/welcome/ico?s=2c61418f187553bcc869b755930233ab" target="_blank">百度统计</a><br/>
+		本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+		</p>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','CEs2u-bRR6iHSt4ynbFA','2.0.0');
+</script>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"codepub"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F2c61418f187553bcc869b755930233ab' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+
+<a href="https://github.com/shijiebei2009"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>

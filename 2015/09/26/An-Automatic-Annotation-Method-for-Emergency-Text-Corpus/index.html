@@ -1,0 +1,640 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  
+  <meta charset="UTF-8">
+  
+    <title>一种面向突发事件的文本语料自动标注方法 | IT草根</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Wang Xu">
+    
+
+    
+    <meta name="description" content="自序人生天地间，若白驹之过隙，忽然而已。无奈诸多俗务缠身，难得清闲。一直都是忙忙碌碌，然而碌碌无为，只顾埋头前行，偶有机会驻足回首，实乃吾之大幸。
+因为我的父母是地地道道、兀兀穷年的农民，我这一路摸爬滚打全靠自己不断摸索总结。在人生的道路上，我一直很感谢能给我人生上面指导的人，而技术上面的指导却不是我迫切需要的，技术可以通过Google获得，然而人生的经验却只有过来人才能予以传授。不过我还是信奉我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一种面向突发事件的文本语料自动标注方法">
+<meta property="og:url" content="http://www.codepub.cn/2015/09/26/An-Automatic-Annotation-Method-for-Emergency-Text-Corpus/index.html">
+<meta property="og:site_name" content="IT草根">
+<meta property="og:description" content="自序人生天地间，若白驹之过隙，忽然而已。无奈诸多俗务缠身，难得清闲。一直都是忙忙碌碌，然而碌碌无为，只顾埋头前行，偶有机会驻足回首，实乃吾之大幸。
+因为我的父母是地地道道、兀兀穷年的农民，我这一路摸爬滚打全靠自己不断摸索总结。在人生的道路上，我一直很感谢能给我人生上面指导的人，而技术上面的指导却不是我迫切需要的，技术可以通过Google获得，然而人生的经验却只有过来人才能予以传授。不过我还是信奉我">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/xml-schema-of-cec-annotation.png">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/ltp_framework.png">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/automatic-annotation.gif">
+<meta property="og:updated_time" content="2015-09-27T06:55:04.830Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一种面向突发事件的文本语料自动标注方法">
+<meta name="twitter:description" content="自序人生天地间，若白驹之过隙，忽然而已。无奈诸多俗务缠身，难得清闲。一直都是忙忙碌碌，然而碌碌无为，只顾埋头前行，偶有机会驻足回首，实乃吾之大幸。
+因为我的父母是地地道道、兀兀穷年的农民，我这一路摸爬滚打全靠自己不断摸索总结。在人生的道路上，我一直很感谢能给我人生上面指导的人，而技术上面的指导却不是我迫切需要的，技术可以通过Google获得，然而人生的经验却只有过来人才能予以传授。不过我还是信奉我">
+
+    
+    <link rel="alternative" href="/atom.xml" title="IT草根" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.gif">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.gif">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.gif" alt="IT草根" title="IT草根"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="IT草根">IT草根</a></h1>
+				<h2 class="blog-motto">WangXu&#39;s 代码馆 BLOG</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/resume">Resume</a></li>
+					
+						<li><a href="/links">Links</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+						<form class="search">
+							<label>Search</label>
+						<input type="text" class="st-default-search-input" id="ts-search-input" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/09/26/An-Automatic-Annotation-Method-for-Emergency-Text-Corpus/" title="一种面向突发事件的文本语料自动标注方法" itemprop="url">一种面向突发事件的文本语料自动标注方法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.codepub.cn/about" title="Wang Xu" target="_blank" itemprop="author">Wang Xu</a>
+		
+  <p class="article-time">
+    <time datetime="2015-09-26T13:34:28.000Z" itemprop="datePublished"> 发表于 2015-09-26</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#自序"><span class="toc-number">1.</span> <span class="toc-text">自序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CEC简介"><span class="toc-number">2.</span> <span class="toc-text">CEC简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CEC语料库"><span class="toc-number">2.1.</span> <span class="toc-text">CEC语料库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#事件的定义是什么"><span class="toc-number">2.2.</span> <span class="toc-text">事件的定义是什么</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CEC如何构建"><span class="toc-number">2.3.</span> <span class="toc-text">CEC如何构建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CEC标注标签规范"><span class="toc-number">2.4.</span> <span class="toc-text">CEC标注标签规范</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CEC标注样例"><span class="toc-number">2.5.</span> <span class="toc-text">CEC标注样例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LTP（Language_Technology_Platform）平台云简介"><span class="toc-number">3.</span> <span class="toc-text">LTP（Language Technology Platform）平台云简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的工作-用机器进行标注"><span class="toc-number">4.</span> <span class="toc-text">我的工作-用机器进行标注</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何实现"><span class="toc-number">5.</span> <span class="toc-text">如何实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#挖掘事件要素规则"><span class="toc-number">5.1.</span> <span class="toc-text">挖掘事件要素规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构建触发词表"><span class="toc-number">5.2.</span> <span class="toc-text">构建触发词表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用同义词词林（扩展版）扩充触发词表"><span class="toc-number">5.3.</span> <span class="toc-text">使用同义词词林（扩展版）扩充触发词表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用户自定义事件要素词典"><span class="toc-number">5.4.</span> <span class="toc-text">用户自定义事件要素词典</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h3 id="自序">自序</h3><p>人生天地间，若白驹之过隙，忽然而已。无奈诸多俗务缠身，难得清闲。一直都是忙忙碌碌，然而碌碌无为，只顾埋头前行，偶有机会驻足回首，实乃吾之大幸。</p>
+<p>因为我的父母是地地道道、兀兀穷年的农民，我这一路摸爬滚打全靠自己不断摸索总结。在人生的道路上，我一直很感谢能给我人生上面指导的人，而技术上面的指导却不是我迫切需要的，技术可以通过Google获得，然而人生的经验却只有过来人才能予以传授。不过我还是信奉我那句话，有变化就有机遇，一定要勇于拥抱变化。</p>
+<p>我一直自认为是一个简简单单、没有心机、毫无城府、专心搬砖的人，所以坐下来细细思索，发现没有其它东西以飨读者，唯有一点点技术心得值得予以分享。下面就介绍一下在研究生期间所做的一点点工作。</p>
+<h3 id="CEC简介">CEC简介</h3><h4 id="CEC语料库">CEC语料库</h4><p><code>Chinese Emergency Corpus</code>简称<code>CEC</code>，中文名称为<code>中文突发事件语料库</code>，是根据上海大学刘宗田教授所提出的<a href="http://www.jsjkx.com/jsjkx/ch/reader/view_abstract.aspx?file_no=091146&amp;flag=1" target="_blank" rel="external">《面向事件的本体研究》</a>由人工标注所构建完成，目前整个语料库在重新进行了编码转换、XML格式化、错误修复之后托管在GitHub上了，<a href="https://github.com/shijiebei2009/CEC-Corpus" target="_blank" rel="external">地址点我</a>。</p>
+<h4 id="事件的定义是什么">事件的定义是什么</h4><p><code>事件</code>指在某个特定的时间和环境下发生的、由若干角色参与、表现出若干动作特征的一件事情。形式上，事件可表示为<code>e</code>，定义为一个六元组：<code>e ::= (A, O, T, P, S, L)</code>其中，事件六元组中的元素称为事件要素，分别表示动作（Action）、对象（Object）、时间（Time）、地点（Place）、状态（Status）、语言表现（Language Expressions）。</p>
+<ul>
+<li>A(动作)：A表示事件所包含的动作或动作序列的集合，在文本中，动作通常是作为识别一个事件的触发词</li>
+<li>O(对象)：O表示一个事件中的对象集合，包括事件中所有的参与者和涉及到的对象。对象可分别是动作的施动者(主体)和受动者(客体)</li>
+<li>T(时间)：T表示事件发生的时刻或时间段，时间分为绝对时间和相对时间，两类时间都可以通过计算转换成形如[t1,t2]的序偶表示，以此描述事件的开始、发展和结束时间，当开始时间和结束时间一样时，表示事件发生在瞬间</li>
+<li>P(地点)：表示事件发生的地点；例如：在小池塘里游泳, 场所：小池塘, 场所特征：水中</li>
+<li>S(状态)：表示事件发生过程中对象的状态集合，由事件发生的前置条件、后置结果集合组成。前置条件指为进行该事件, 各要素应当或可能满足的约束条件, 它们可以是事件发生的触发条件;中间断言指事件发生过程的中间状态各要素满足的条件;事件发生后,事件各要素将引起变化或者各要素状态的变迁, 这些变化和变迁后的结果, 将成为事件的后置条件。</li>
+<li>L(语言表现)：事件的语言表现规律, 包括核心词集合、核心词表现、核心词搭配等。核心词是事件在句子中常用的标志性词汇。核心词表现则为在句子中各要素的表示与核心词之间的位置关系。核心词搭配是指核心词与其他词汇的固有的搭配。可以为事件附上不同语言种类的表现, 例如中文、英文、法文等等。</li>
+</ul>
+<p>在事件的六个要素中，前五个要素是事件的内在要素。</p>
+<h4 id="CEC如何构建">CEC如何构建</h4><p>事件本体是以<strong>“事件”</strong>为认知单元，研究事件的组成以及事件之间的关系，并对事件进行归纳和概括，形成事件类，进而构建事件本体模型。研究本体，必然要先构建语料库，所以在互联网上选取了突发事件语料来进行语料的事件标注，突发事件的分类体系，包括三个层次：一级4个大类（自然灾害类N、事故灾难类A、公共卫生事件P、社会安全事件S），二级33个子类，三级94个小类。我们标注的CEC语料库主要包括五类：地震、火灾、交通事故、恐怖袭击、食物中毒。合计332篇。</p>
+<h4 id="CEC标注标签规范">CEC标注标签规范</h4><p><img src="http://7xig3q.com1.z0.glb.clouddn.com/xml-schema-of-cec-annotation.png" alt=""></p>
+<h4 id="CEC标注样例">CEC标注样例</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">Body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">Title</span>&gt;</span>成都网友称震感强烈 女同事当即哭泣<span class="tag">&lt;/<span class="title">Title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">ReportTime</span> <span class="attribute">type</span>=<span class="value">"absTime"</span>&gt;</span>2008年05月12日16:15<span class="tag">&lt;/<span class="title">ReportTime</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">Content</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">Paragraph</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">Sentence</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">Event</span> <span class="attribute">eid</span>=<span class="value">"e1"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">Time</span> <span class="attribute">type</span>=<span class="value">"relTime"</span> <span class="attribute">tid</span>=<span class="value">"t1"</span>&gt;</span>5月12日14时28分<span class="tag">&lt;/<span class="title">Time</span>&gt;</span>，</span><br><span class="line">        <span class="tag">&lt;<span class="title">Location</span> <span class="attribute">lid</span>=<span class="value">"l1"</span>&gt;</span>四川<span class="tag">&lt;/<span class="title">Location</span>&gt;</span>发生7.8级</span><br><span class="line">        <span class="tag">&lt;<span class="title">Denoter</span> <span class="attribute">type</span>=<span class="value">"emergency"</span> <span class="attribute">did</span>=<span class="value">"d1"</span>&gt;</span>地震<span class="tag">&lt;/<span class="title">Denoter</span>&gt;</span>。</span><br><span class="line">      <span class="tag">&lt;/<span class="title">Event</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">Sentence</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">Sentence</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">Event</span> <span class="attribute">eid</span>=<span class="value">"e2"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">Time</span> <span class="attribute">type</span>=<span class="value">"relTime"</span> <span class="attribute">tid</span>=<span class="value">"t2"</span>&gt;</span>15时50分<span class="tag">&lt;/<span class="title">Time</span>&gt;</span>，新民网</span><br><span class="line">        <span class="tag">&lt;<span class="title">Participant</span> <span class="attribute">sid</span>=<span class="value">"s1"</span>&gt;</span>记者<span class="tag">&lt;/<span class="title">Participant</span>&gt;</span>网上</span><br><span class="line">        <span class="tag">&lt;<span class="title">Denoter</span> <span class="attribute">type</span>=<span class="value">"action"</span> <span class="attribute">did</span>=<span class="value">"d2"</span>&gt;</span>连线<span class="tag">&lt;/<span class="title">Denoter</span>&gt;</span>成都网友</span><br><span class="line">        <span class="tag">&lt;<span class="title">Participant</span> <span class="attribute">oid</span>=<span class="value">"o2"</span>&gt;</span>姚先生<span class="tag">&lt;/<span class="title">Participant</span>&gt;</span>。</span><br><span class="line">      <span class="tag">&lt;/<span class="title">Event</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">Sentence</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">Paragraph</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">Content</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">eRelation</span> <span class="attribute">relType</span>=<span class="value">"Causal"</span> <span class="attribute">cause_eid</span>=<span class="value">"e1"</span> <span class="attribute">effect_eid</span>=<span class="value">"e5"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">Body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="LTP（Language_Technology_Platform）平台云简介">LTP（Language Technology Platform）平台云简介</h3><p>语言技术平台（Language Technology Platform，LTP）是哈工大社会计算与信息检索研究中心历时十年研制的一整套开放中文自然语言处理系统。LTP制定了基于XML的语言处理结果表示，并在此基础上提供了一整套自底向上的丰富、高效、高精度的中文自然语言处理模块（包括词法、句法、语义等5项中文处理核心技术，在多次国内外技术评测中获得优异成绩，特别是获得CoNLL 2009国际句法和语义分析联合评测的第一名），应用程序接口，可视化工具，以及能够以网络服务使用的语言技术云。学术版LTP已共享给500多家研究机构免费使用，百度、腾讯、华为、金山等企业付费使用LTP商业版本。2010年，LTP荣获行业最高奖—“钱伟长中文信息处理科学技术一等奖”。</p>
+<p>语言技术平台的总体结构如下所示</p>
+<p><img src="http://7xig3q.com1.z0.glb.clouddn.com/ltp_framework.png" alt=""></p>
+<p>若想进一步了解，请<a href="http://www.ltp-cloud.com/intro/" target="_blank" rel="external">点我</a>进入LTP官网进行查看。</p>
+<h3 id="我的工作-用机器进行标注">我的工作-用机器进行标注</h3><p>在我们构建CEC的过程中全部由人工进行标注，先用网络爬虫从网络上爬取突发事件类的新闻报道，之后人工对事件的要素进行识别，然后添加对应的标签以及属性等。此过程费时费力，而且由于不同的人有不同的判断，易造成标注过程中的标准不一致，进而为整个语料库带来一些歧义性的标注内容，所以应该由机器进行初步的标注，人工在机器标注的基础之上进行深入细致的分析，修正等。</p>
+<p><strong>效果图</strong></p>
+<p><img src="http://7xig3q.com1.z0.glb.clouddn.com/automatic-annotation.gif" alt=""></p>
+<h3 id="如何实现">如何实现</h3><h4 id="挖掘事件要素规则">挖掘事件要素规则</h4><p>借助于人工构建的CEC语料库，使用LTP对CEC语料库中的原文本（未标注的文本）进行词性标注、命名实体识别、语义角色标注等一系列基础性工作，之后与CEC语料库进行对比，抽取出事件的每个要素所对应的词性、语义角色等，这样可以获取到大量的有序的词性集合以及语义角色集合，既然词性和语义角色标注都是有序的，那么很自然的想到利用序列模式挖掘算法对词性集合、语义角色集合进行频繁项集挖掘，我采用的是韩家炜于2004年提出的PrefixSpan序列模式挖掘算法，有兴趣的可以去读读他的论文，地址<a href="https://www.cs.sfu.ca/~jpei/publications/spg.pdf" target="_blank" rel="external">点我</a>。</p>
+<h4 id="构建触发词表">构建触发词表</h4><p>根据触发词类型的不同，分别抽取出每一种类型的触发词构建成触发词表。在CEC语料库中触发词共有七种，分别是：突发事件(emergency) 、移动事件(movement)、声明类事件(statement)、原子动作事件(action) 、操作事件(operation) 、状态改变事件(stateChange)、感知事件(perception)。</p>
+<h4 id="使用同义词词林（扩展版）扩充触发词表">使用同义词词林（扩展版）扩充触发词表</h4><p>首先要知道为什么需要扩充触发词表？既然触发词表由CEC中抽取所得，限于CEC规模有限，触发词表的数量亦必然有限，那么需要使用同义词词林对其进行扩充，在扩充的过程中，并不是将与某个触发词是同义词的所有义项全部扩充进触发词表，而是有一定的阈值，对于满足一定阈值的同义词项才认为均是合法的，予以扩充。</p>
+<h4 id="用户自定义事件要素词典">用户自定义事件要素词典</h4><p>同样的，我们不禁要问一下，为什么需要用户自定义要素词典呢？同样是限于CEC规模，挖掘的要素识别规则必然有限，亦不能涵盖大量未知的情况，所以需要人工定义事件要素词典，并且该词典可以采用倒序排列，按照文本串的长度由长到短排序，这样机器识别要素的时候，可以防止过分切分事件要素，类似于切词里面的正向最大切分。</p>
+<p>本算法有一定的领域局限性，目前仅限于突发事件类的新闻报道，且准确率有待进一步提高，此为后话。有关实现的具体细节，请参考我的论文：《一种面向突发事件的文本语料自动标注方法》</p>
+<p><strong><em>转载请注明出处：<a href="http://codepub.cn/2015/09/26/An-Automatic-Annotation-Method-for-Emergency-Text-Corpus/" target="_blank" rel="external">http://codepub.cn/2015/09/26/An-Automatic-Annotation-Method-for-Emergency-Text-Corpus/</a></em></strong></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Algorithms/">Algorithms</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Java/">Java</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=2067139" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2067139" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/09/29/2016-campus-recruitment-of-baidu-programming-problem-resolution-software-development/" title="百度2016校园招聘之编程题解析-软件研发">
+  <strong>上一篇：</strong><br/>
+  <span>
+  百度2016校园招聘之编程题解析-软件研发</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/09/23/2016-campus-recruitment-of-mushroom-street-programming-problem-resolution-technology/"  title="蘑菇街2016校园招聘之编程题解析--技术类">
+ <strong>下一篇：</strong><br/> 
+ <span>蘑菇街2016校园招聘之编程题解析--技术类
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/09/26/An-Automatic-Annotation-Method-for-Emergency-Text-Corpus/" data-title="一种面向突发事件的文本语料自动标注方法" data-url="http://www.codepub.cn/2015/09/26/An-Automatic-Annotation-Method-for-Emergency-Text-Corpus/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#自序"><span class="toc-number">1.</span> <span class="toc-text">自序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CEC简介"><span class="toc-number">2.</span> <span class="toc-text">CEC简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CEC语料库"><span class="toc-number">2.1.</span> <span class="toc-text">CEC语料库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#事件的定义是什么"><span class="toc-number">2.2.</span> <span class="toc-text">事件的定义是什么</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CEC如何构建"><span class="toc-number">2.3.</span> <span class="toc-text">CEC如何构建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CEC标注标签规范"><span class="toc-number">2.4.</span> <span class="toc-text">CEC标注标签规范</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CEC标注样例"><span class="toc-number">2.5.</span> <span class="toc-text">CEC标注样例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LTP（Language_Technology_Platform）平台云简介"><span class="toc-number">3.</span> <span class="toc-text">LTP（Language Technology Platform）平台云简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的工作-用机器进行标注"><span class="toc-number">4.</span> <span class="toc-text">我的工作-用机器进行标注</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何实现"><span class="toc-number">5.</span> <span class="toc-text">如何实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#挖掘事件要素规则"><span class="toc-number">5.1.</span> <span class="toc-text">挖掘事件要素规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构建触发词表"><span class="toc-number">5.2.</span> <span class="toc-text">构建触发词表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用同义词词林（扩展版）扩充触发词表"><span class="toc-number">5.3.</span> <span class="toc-text">使用同义词词林（扩展版）扩充触发词表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用户自定义事件要素词典"><span class="toc-number">5.4.</span> <span class="toc-text">用户自定义事件要素词典</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Algorithms/" title="Algorithms">Algorithms<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Database/" title="Database">Database<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git-GitHub/" title="Git/GitHub">Git/GitHub<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life-Talk/" title="Life-Talk">Life-Talk<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Operating-System/" title="Operating System">Operating System<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Programming-Notes/" title="Programming Notes">Programming Notes<sup>22</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python3/" title="Python3">Python3<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/LTP/" title="LTP">LTP<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/IT/" title="IT">IT<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elite/" title="Elite">Elite<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tools/" title="Tools">Tools<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySql/" title="MySql">MySql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Lombok/" title="Lombok">Lombok<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Selenium/" title="Selenium">Selenium<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DLL/" title="DLL">DLL<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tomcat/" title="Tomcat">Tomcat<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Guava/" title="Guava">Guava<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Github/" title="Github">Github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Octopress/" title="Octopress">Octopress<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Eclipse/" title="Eclipse">Eclipse<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <p class="asidetitle">最新评论</p>
+<div>
+	<ul class="ds-recent-comments" data-num-items="10" data-show-avatars="1" data-show-time="1" data-show-admin="1" data-excerpt-length="70"></ul>
+	<!--多说js加载开始，一个页面只需要加载一次 -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!--多说js加载结束，一个页面只需要加载一次 -->
+</div>
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/DLL/" style="font-size: 10px;">DLL</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Elite/" style="font-size: 10px;">Elite</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/IntelliJ/" style="font-size: 10px;">IntelliJ</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/LTP/" style="font-size: 13.33px;">LTP</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/Python3/" style="font-size: 16.67px;">Python3</a> <a href="/tags/Selenium/" style="font-size: 10px;">Selenium</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Struts2/" style="font-size: 10px;">Struts2</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a>
+    </div>
+  </div>
+
+
+  <br/>
+<p class="asidetitle">热评文章</p>
+<!-- 多说热评文章 start -->
+<div>
+<div class="ds-top-threads" data-range="monthly" data-num-items="8"></div>
+<!-- 多说热评文章 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+<br/>
+
+  <p class="asidetitle">打赏他</p>
+<div>
+<form action="https://shenghuo.alipay.com/send/payment/fill.htm" method="POST" target="_blank" accept-charset="GBK">
+    <br/>
+    <input name="optEmail" type="hidden" value="18302118258" />
+    <input name="payAmount" type="hidden" value="10" />
+    <input id="title" name="title" type="hidden" value="博主，打赏你的！" />
+    <input name="memo" type="hidden" value="你Y加油，继续写博客！" />
+    <input name="pay" type="image" value="转账" src="http://7xig3q.com1.z0.glb.clouddn.com/alipay-donate-website.png" />
+</form>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello , I&#39;m Wang Xu in SHU. <br/>
+			志不强者智不达，言不信者行不果。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1779238484" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/shijiebei2009" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/4204922" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		
+		
+		<a href="https://www.linkedin.com/in/codepub" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		<a href="https://www.douban.com/people/shijiebei2009" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		<a href="https://www.zhihu.com/people/codepub.cn" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:wangx89@126.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="http://www.codepub.cn/about" target="_blank" title="Wang Xu">Wang Xu</a>
+		
+		<a href="http://tongji.baidu.com/web/welcome/ico?s=2c61418f187553bcc869b755930233ab" target="_blank">百度统计</a><br/>
+		本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+		</p>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','CEs2u-bRR6iHSt4ynbFA','2.0.0');
+</script>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"codepub"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F2c61418f187553bcc869b755930233ab' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+
+<a href="https://github.com/shijiebei2009"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>

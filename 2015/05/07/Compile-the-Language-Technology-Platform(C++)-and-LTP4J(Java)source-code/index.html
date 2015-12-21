@@ -1,0 +1,707 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  
+  <meta charset="UTF-8">
+  
+    <title>编译哈工大语言技术平台云LTP（C++）源码及LTP4J（Java）源码 | IT草根</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Wang Xu">
+    
+
+    
+    <meta name="description" content="JDK：java version “1.8.0_31”Java(TM) SE Runtime Environment (build 1.8.0_31-b13)Java HotSpot(TM) 64-Bit Server VM (build 25.31-b07, mixed mode)OS：win7 64bitcmake：V2.8.12/V3.2.2LTP：V3.2.0LTP4J：V1.0Micro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编译哈工大语言技术平台云LTP（C++）源码及LTP4J（Java）源码">
+<meta property="og:url" content="http://www.codepub.cn/2015/05/07/Compile-the-Language-Technology-Platform(C++)-and-LTP4J(Java)source-code/index.html">
+<meta property="og:site_name" content="IT草根">
+<meta property="og:description" content="JDK：java version “1.8.0_31”Java(TM) SE Runtime Environment (build 1.8.0_31-b13)Java HotSpot(TM) 64-Bit Server VM (build 25.31-b07, mixed mode)OS：win7 64bitcmake：V2.8.12/V3.2.2LTP：V3.2.0LTP4J：V1.0Micro">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/cmake-configure-ltp4j-x64.png">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/Add-x64-library-directory.png">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/cmake-configure-ltp-x64.png">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/ltp-success.png">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/ltp4j-eclipse.png">
+<meta property="og:updated_time" content="2015-06-17T11:44:50.469Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编译哈工大语言技术平台云LTP（C++）源码及LTP4J（Java）源码">
+<meta name="twitter:description" content="JDK：java version “1.8.0_31”Java(TM) SE Runtime Environment (build 1.8.0_31-b13)Java HotSpot(TM) 64-Bit Server VM (build 25.31-b07, mixed mode)OS：win7 64bitcmake：V2.8.12/V3.2.2LTP：V3.2.0LTP4J：V1.0Micro">
+
+    
+    <link rel="alternative" href="/atom.xml" title="IT草根" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.gif">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.gif">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.gif" alt="IT草根" title="IT草根"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="IT草根">IT草根</a></h1>
+				<h2 class="blog-motto">WangXu&#39;s 代码馆 BLOG</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/resume">Resume</a></li>
+					
+						<li><a href="/links">Links</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+						<form class="search">
+							<label>Search</label>
+						<input type="text" class="st-default-search-input" id="ts-search-input" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/07/Compile-the-Language-Technology-Platform(C++)-and-LTP4J(Java)source-code/" title="编译哈工大语言技术平台云LTP（C++）源码及LTP4J（Java）源码" itemprop="url">编译哈工大语言技术平台云LTP（C++）源码及LTP4J（Java）源码</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.codepub.cn/about" title="Wang Xu" target="_blank" itemprop="author">Wang Xu</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-07T14:13:15.000Z" itemprop="datePublished"> 发表于 2015-05-07</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#编译LTP4J-jar"><span class="toc-number">1.</span> <span class="toc-text">编译LTP4J.jar</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#下载Ant"><span class="toc-number">1.1.</span> <span class="toc-text">下载Ant</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置Ant环境变量"><span class="toc-number">1.2.</span> <span class="toc-text">配置Ant环境变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#编译LTP4J"><span class="toc-number">1.3.</span> <span class="toc-text">编译LTP4J</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译C++代理程序"><span class="toc-number">2.</span> <span class="toc-text">编译C++代理程序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装CMake"><span class="toc-number">2.1.</span> <span class="toc-text">安装CMake</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#下载LTP的C++源码"><span class="toc-number">2.2.</span> <span class="toc-text">下载LTP的C++源码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置LTP的安装路径"><span class="toc-number">2.3.</span> <span class="toc-text">配置LTP的安装路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构建VC_Project"><span class="toc-number">2.4.</span> <span class="toc-text">构建VC Project</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译源码"><span class="toc-number">3.</span> <span class="toc-text">编译源码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#编译LTP"><span class="toc-number">3.1.</span> <span class="toc-text">编译LTP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#再次编译LTP4J"><span class="toc-number">3.2.</span> <span class="toc-text">再次编译LTP4J</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在Eclipse中使用离线版LTP"><span class="toc-number">4.</span> <span class="toc-text">在Eclipse中使用离线版LTP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置Eclipse中项目所需资源"><span class="toc-number">4.1.</span> <span class="toc-text">配置Eclipse中项目所需资源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#本地接口使用示例"><span class="toc-number">4.2.</span> <span class="toc-text">本地接口使用示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#等等，最后一步"><span class="toc-number">4.3.</span> <span class="toc-text">等等，最后一步</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#其他错误"><span class="toc-number">4.4.</span> <span class="toc-text">其他错误</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<p>JDK：java version “1.8.0_31”<br>Java(TM) SE Runtime Environment (build 1.8.0_31-b13)<br>Java HotSpot(TM) 64-Bit Server VM (build 25.31-b07, mixed mode)<br>OS：win7 64bit<br>cmake：V2.8.12/V3.2.2<br>LTP：V3.2.0<br>LTP4J：V1.0<br>Microsoft VS C++：V2010</p>
+<h3 id="编译LTP4J-jar">编译LTP4J.jar</h3><h4 id="下载Ant">下载Ant</h4><p>ltp4j的源码使用ant进行编译，首先需要下载ant，<a href="http://ant.apache.org/bindownload.cgi" target="_blank" rel="external">点我下载</a></p>
+<h4 id="配置Ant环境变量">配置Ant环境变量</h4><p>我的电脑—&gt;属性—&gt;高级系统设置—&gt;环境变量<br>新建ANT_HOME值为：“D:\apache-ant-1.9.4”<br>编辑PATH，在PATH变量值的末尾添加：“;%ANT_HOME%\bin”<br>验证是否配置成功，打开cmd，输入ant：</p>
+<blockquote>
+<p>C:\Users\TKPad&gt;ant<br>Buildfile: build.xml does not exist!<br>Build failed</p>
+</blockquote>
+<p>这样的话，说明配置成功，因为ant默认运行build.xml文件，该文件需要手动创建。</p>
+<h4 id="编译LTP4J">编译LTP4J</h4><p>首先需要<a href="https://github.com/HIT-SCIR/ltp4j" target="_blank" rel="external">下载ltp4j源代码</a>，下载完成之后，解压，比如我的地址为：D:\ltp4j-master（推荐重命名为ltp4j），打开cmd，进入d盘ltp4j项目根目录下，运行ant命令，得到：</p>
+<blockquote>
+<p>D:\ltp4j&gt;ant<br>Buildfile: D:\ltp4j\build.xml<br>clean:<br>   [delete] Deleting directory D:\ltp4j\output<br>compile:<br>    [mkdir] Created dir: D:\ltp4j\output\classes<br>    [javac] D:\ltp4j\build.xml:17: warning: ‘includeantruntime’ was not set, def<br>aulting to build.sysclasspath=last; set to false for repeatable builds<br>    [javac] Compiling 7 source files to D:\ltp4j\output\classes<br>jar:<br>    [mkdir] Created dir: D:\ltp4j\output\jar<br>      [jar] Building jar: D:\ltp4j\output\jar\ltp4j.jar<br>main:<br>BUILD SUCCESSFUL<br>Total time: 4 seconds</p>
+</blockquote>
+<p>说明编译成功！查看目录：D:\ltp4j\output\jar，发现存在ltp4j.jar文件，这时该Jar包就可以使用了。</p>
+<h3 id="编译C++代理程序">编译C++代理程序</h3><h4 id="安装CMake">安装CMake</h4><p>ltp4j使用的C++代理程序使用编译工具CMake构建项目。 在编译代理程序之前，你需要首先安装CMake。 CMake的网站在<a href="http://www.cmake.org/" target="_blank" rel="external">这里</a>。如果你是Windows用户，请下载CMake的二进制安装包；如果你是Linux，Mac OS或Cygwin的用户，可以通过编译源码的方式安装CMake，当然，你也可以使用Linux的软件源来安装。</p>
+<p>下载地址点<a href="http://www.cmake.org/download/" target="_blank" rel="external">这里</a>，我选择的是Windows ZIP    cmake-3.2.2-win32-x86.zip</p>
+<h4 id="下载LTP的C++源码">下载LTP的C++源码</h4><p><a href="https://github.com/HIT-SCIR/ltp" target="_blank" rel="external">下载地址</a>，下载完成之后解压，我的存放路径为：D:\ltp-master（推荐重命名为ltp）。</p>
+<h4 id="配置LTP的安装路径">配置LTP的安装路径</h4><p>修改D:\ltp4j目录下的CMakeLists.txt文件，修改如下部分的斜体加粗部分为你自己的LTP源码路径</p>
+<blockquote>
+<p>find_package(JNI)<br><strong><em>set (LTP_HOME “D:/ltp” CACHE STRING “Use to specified ltp path”)</em></strong><br>set (LIBRARY_OUTPUT_PATH    \${PROJECT_SOURCE_DIR}/libs)<br>set (JNI_SOURCE_DIR         \${PROJECT_SOURCE_DIR}/jni)</p>
+</blockquote>
+<h4 id="构建VC_Project">构建VC Project</h4><p>在项目文件夹下新建一个名为build的文件夹，使用CMake Gui，在source code中填入项目文件夹，在binaries中填入build文件夹。然后Configure —&gt; Generate。</p>
+<p>在点击configure之后出现如下错误：</p>
+<blockquote>
+<p>The C compiler identification is unknown The CXX compiler identification is unknown<br>CMake Error at CMakeLists.txt:2 (project): No CMAKE_C_COMPILER could be found.<br>CMake Error at CMakeLists.txt:2 (project): No CMAKE_CXX_COMPILER could be found.Configuring incomplete, errors occurred!<br>See also “D:/ltp4j/build/CMakeFiles/CMakeOutput.log”.<br>See also “D:/ltp4j/build/CMakeFiles/CMakeError.log”.</p>
+</blockquote>
+<p>那么可能是你的电脑上还没有C++编译环境，需要安装Microsoft Visual Studio C++，VS 2010 express版下载地址为：<a href="thunder://QUFodHRwOi8vZG93bmxvYWQubWljcm9zb2Z0LmNvbS9kb3dubG9hZC81L0MvMS81QzE1NjkyMi1DQTEwLTQ5RDgtQjdFNy05QkYwOTJDM0I2RUIvVlMyMDEwRXhwcmVzc0NIUy5pc29aWg==/" target="_blank" rel="external">点我下载VS2010</a></p>
+<p>安装完成之后，再次编译，如果出现：</p>
+<blockquote>
+<p>The C compiler “C:/Program Files (x86)/Microsoft Visual Studio 10.0/VC/bin/cl.exe” is not able to compile a simple test program.</p>
+</blockquote>
+<p>那么参考<a href="http://stackoverflow.com/questions/14590947/cmake-configuring-fails-cl-exe-is-not-able-to-compile-a-simple-test-program" target="_blank" rel="external">文章</a>里面的解决办法，说简单点就是以管理员权限运行c1.exe<br>解决办法如下：</p>
+<ol>
+<li>Right-Click-&gt;Properties on cl.exe in your VS install directory (the exact path appears in the CMake error);</li>
+<li>Choose the Compatibility Tab;</li>
+<li>Check “Run this program as administrator” in the “Privilege Level” box.</li>
+</ol>
+<p>之后再次尝试编译，出现如下错误：</p>
+<blockquote>
+<p>CMake Error at CMakeLists.txt:2 (project):<br>  Cannot enable 64-bit tools with Visual Studio 2010 Express.<br>  Install the Microsoft Windows SDK v7.1 to get 64-bit tools:<br>    <a href="http://msdn.microsoft.com/en-us/windows/bb980924.aspx" target="_blank" rel="external">http://msdn.microsoft.com/en-us/windows/bb980924.aspx</a><br>Configuring incomplete, errors occurred!</p>
+</blockquote>
+<p>主要是因为32位版本不兼容造成的，<a href="http://msdn.microsoft.com/en-us/windows/bb980924.aspx" target="_blank" rel="external">打开地址</a>，点击download下载Microsoft Windows SDK for Windows 7 and .NET Framework 4，下载完成之后运行即是在线安装的形式。如果以cmd命令行的形式运行cmake，需要将cmake的bin目录路径加入到操作系统的path变量中。</p>
+<p>在configure阶段，再次出错</p>
+<blockquote>
+<p>The C compiler identification is MSVC 16.0.30319.1<br>The CXX compiler identification is MSVC 16.0.30319.1<br>Check for working C compiler using: Visual Studio 10<br>Check for working C compiler using: Visual Studio 10 — broken<br>CMake Error at D:/cmake-2.8.12.1-win32-x86/share/cmake-2.8/Modules/CMakeTestCCompiler.cmake:61 (message):<br>  The C compiler “C:/Program Files (x86)/Microsoft Visual Studio<br>  10.0/VC/bin/cl.exe” is not able to compile a simple test program.<br>  It fails with the following output:<br>   Change Dir: D:/ltp4j/build/CMakeFiles/CMakeTmp<br>  Run Build Command:C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe<br>  cmTryCompileExec1255268599.vcxproj /p:Configuration=Debug<br>  /p:VisualStudioVersion=10.0<br>  Microsoft(R) 生成引擎版本 4.0.30319.17929<br>  [Microsoft .NET Framework 版本 4.0.30319.18063]<br>  版权所有(C) Microsoft Corporation 2007。保留所有权利。<br>  生成启动时间为 2015/5/6 9:46:05。<br>  节点 1<br>  上的项目“D:\ltp4j\build\CMakeFiles\CMakeTmp\cmTryCompileExec1255268599.vcxproj”(默认目标)。<br>  PrepareForBuild:<br>    正在创建目录“cmTryCompileExec1255268599.dir\Debug\”。<br>    正在创建目录“D:\ltp4j\build\CMakeFiles\CMakeTmp\Debug\”。<br>  InitializeBuildStatus: 正在创建“cmTryCompileExec1255268599.dir\Debug\cmTryCompileExec1255268599.unsuccessfulbuild”，因为已指定“AlwaysCreate”。<br>  ClCompile:<br>    C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D “CMAKE_INTDIR=\”Debug\”” /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo”cmTryCompileExec1255268599.dir\Debug\“ /Fd”cmTryCompileExec1255268599.dir\Debug\vc100.pdb” /Gd /TC /analyze- /errorReport:queue testCCompiler.c<br>    用于 80x86 的 Microsoft (R) 32 位 C/C++ 优化编译器 16.00.30319.01 版<br>    版权所有(C) Microsoft Corporation。保留所有权利。<br>    cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D “CMAKE_INTDIR=\”Debug\”” /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo”cmTryCompileExec1255268599.dir\Debug\“ /Fd”cmTryCompileExec1255268599.dir\Debug\vc100.pdb” /Gd /TC /analyze- /errorReport:queue testCCompiler.c<br>    testCCompiler.c<br>  ManifestResourceCompile:<br>    C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo”cmTryCompileExec1255268599.dir\Debug\cmTryCompileExec1255268599.exe.embed.manifest.res” cmTryCompileExec1255268599.dir\Debug\cmTryCompileExec1255268599_manifest.rc<br>  Link:<br>    C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:”D:\ltp4j\build\CMakeFiles\CMakeTmp\Debug\cmTryCompileExec1255268599.exe” /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /ManifestFile:”cmTryCompileExec1255268599.dir\Debug\cmTryCompileExec1255268599.exe.intermediate.manifest” /MANIFESTUAC:”level=’asInvoker’ uiAccess=’false’” /DEBUG /PDB:”D:/ltp4j/build/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec1255268599.pdb” /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:”D:/ltp4j/build/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec1255268599.lib” /MACHINE:X86 cmTryCompileExec1255268599.dir\Debug\cmTryCompileExec1255268599.exe.embed.manifest.res<br>    cmTryCompileExec1255268599.dir\Debug\testCCompiler.obj  /machine:X86 /debug<br>  LINK : fatal error LNK1123: 转换到 COFF 期间失败: 文件无效或损坏<br>  [D:\ltp4j\build\CMakeFiles\CMakeTmp\cmTryCompileExec1255268599.vcxproj]<br>  已完成生成项目“D:\ltp4j\build\CMakeFiles\CMakeTmp\cmTryCompileExec1255268599.vcxproj”(默认目标)的操作<br>  失败。<br>  生成失败。<br>  “D:\ltp4j\build\CMakeFiles\CMakeTmp\cmTryCompileExec1255268599.vcxproj”(默认目标)<br>  (1) -&gt;<br>  (Link 目标) -&gt;<br>    LINK : fatal error LNK1123: 转换到 COFF 期间失败: 文件无效或损坏 [D:\ltp4j\build\CMakeFiles\CMakeTmp\cmTryCompileExec1255268599.vcxproj]<br>      0 个警告<br>      1 个错误<br>  已用时间 00:00:00.81<br>  CMake will not be able to correctly generate this project.<br>Call Stack (most recent call first):<br>  CMakeLists.txt:2 (project)<br>Configuring incomplete, errors occurred!<br>See also “D:/ltp4j/build/CMakeFiles/CMakeOutput.log”.<br>See also “D:/ltp4j/build/CMakeFiles/CMakeError.log”.</p>
+</blockquote>
+<p>该问题可能是由于.NET Framework 4.5导致，解决办法是：</p>
+<p><em>CMake doesn’t seem to work if .net 4.5 is installed.  If you run into this issue you have to uninstall .net 4.5.  Uninstalling .net 4.5 seems to break Visual Studio so then you have to re-install VS2010.</em></p>
+<p>简单点说就是，卸载.net 4.5，安装.net 4.0（如果电脑已经安装，就不必装了），在卸载.net 4.5会破坏VS2010，所以需要重新再安装一遍VS2010。<a href="http://www.pcl-users.org/CMake-configuration-error-using-Windows-7-td4028623.html" target="_blank" rel="external">参考文章1</a>、<a href="http://stackoverflow.com/questions/14590947/cmake-configuring-fails-cl-exe-is-not-able-to-compile-a-simple-test-program" target="_blank" rel="external">参考文章2</a>；安装完毕之后，重新以管理员身份的权限运行cmake-gui.exe，点击configure之后，会弹出对话框，如果是VC++2010的话，建议选择Visual Studio 10，如下图：<br><img src="http://7xig3q.com1.z0.glb.clouddn.com/cmake-configure-ltp4j-x64.png" alt="cmake-configure"><br>点击finish-&gt;configure，此时进度条开始变为绿色滚动。</p>
+<blockquote>
+<p>The C compiler identification is MSVC 16.0.30319.1<br>The CXX compiler identification is MSVC 16.0.30319.1<br>Check for working C compiler using: Visual Studio 10<br>Check for working C compiler using: Visual Studio 10 — works<br>Detecting C compiler ABI info<br>Detecting C compiler ABI info - done<br>Check for working CXX compiler using: Visual Studio 10<br>Check for working CXX compiler using: Visual Studio 10 — works<br>Detecting CXX compiler ABI info<br>Detecting CXX compiler ABI info - done<br>Found JNI: D:/Program Files/Java/jdk1.8.0_31/lib/jawt.lib<br>Configuring done</p>
+</blockquote>
+<p>configure结束之后点击generate。<br>如果您依然没有运行成功，那么建议使用cmake3.x之前的版本，原因是：</p>
+<blockquote>
+<p>Visual Studio 11 Win64 is the wrong generator for Visual Studio 2013. You need to use Visual Studio 12 2013 Win64 if you are using cmake-3.x or Visual Studio 12 Win64 for cmake-2.8.x.</p>
+</blockquote>
+<p>cmake3.x之前的版本下载地址：<a href="http://www.cmake.org/files/v2.8/" target="_blank" rel="external">http://www.cmake.org/files/v2.8/</a></p>
+<h3 id="编译源码">编译源码</h3><p>构建后得到ALL_BUILD、RUN_TESTS、ZERO_CHECK三个VC Project。使用VS打开ALL_BUILD项目，选择Release(*)方式构建项目。</p>
+<p>(注<em>：boost::multi_array与VS2010不兼容的bug已经在3.1.0中得到修复，3.1.x及以上版本已经可以使用Debug方式构建，但出于效率考虑，仍旧建议使用Release方式构建。</em>)</p>
+<p><strong><em>注意事项</em></strong></p>
+<ul>
+<li>该处编译需要设置Java环境变量JAVA_HOME。</li>
+<li>需要保持c++编译器与JDK同是32位或者64位，否则JVM不能加载生成的动态库</li>
+</ul>
+<p>编译源码出现</p>
+<blockquote>
+<p>LINK : fatal error LNK1104: cannot open file ‘kernel32.lib’</p>
+</blockquote>
+<p>原因是</p>
+<blockquote>
+<p>Check the VC++ directories, in VS 2010 these can be found in your project properties. Check whether “\$(WindowsSdkDir)\lib” is included in the directories list, if not, manually add it. If you’re building for X64 platform, you should select X64 from the “Platform” ComboBox, and make sure that “$(WindowsSdkDir)\lib\x64” is included in the directories list.</p>
+</blockquote>
+<p>如果X64目录不包含在库目录中，需要手动添加到库目录中。如下图所示<br><img src="http://7xig3q.com1.z0.glb.clouddn.com/Add-x64-library-directory.png" alt="添加x64库"></p>
+<h4 id="编译LTP">编译LTP</h4><p>再次编译LTP4J出现如下错误：</p>
+<blockquote>
+<p>LINK : fatal error LNK1181: cannot open input file ‘postagger.lib’<br>LINK : fatal error LNK1181: cannot open input file ‘ner.lib’</p>
+</blockquote>
+<p>这是因为在编译LTP4J之前需要编译LTP，使用cmake构建LTP，如下图<br><img src="http://7xig3q.com1.z0.glb.clouddn.com/cmake-configure-ltp-x64.png" alt="LTP-x64"><br>之后在LTP的build目录下会生成VS Project，用VS打开D:\ltp\build\ALL_BUILD.vcxproj，使用Release X64方式进行编译，如果顺利的话，编译结果见下图<br><img src="http://7xig3q.com1.z0.glb.clouddn.com/ltp-success.png" alt="ltp编译成功"></p>
+<h4 id="再次编译LTP4J">再次编译LTP4J</h4><p>在LTP编译成功之后，将D:\ltp\lib\Release下的所有文件拷贝到D:\ltp4j\build目录下，然后在VS中打开D:\ltp4j\build\ALL_BUILD.vcxproj，选择Release X64进行编译，编译结果如下：</p>
+<blockquote>
+<p>1&gt;——— 已启动生成: 项目: ZERO_CHECK, 配置: Release x64 ———<br>2&gt;——— 已启动生成: 项目: split_sentence_jni, 配置: Release x64 ———<br>3&gt;——— 已启动生成: 项目: segmentor_jni, 配置: Release x64 ———<br>4&gt;——— 已启动生成: 项目: srl_jni, 配置: Release x64 ———<br>5&gt;——— 已启动生成: 项目: parser_jni, 配置: Release x64 ———<br>2&gt;     Creating library D:/ltp4j/libs/Release/split_sentence_jni.lib and object D:/ltp4j/libs/Release/split_sentence_jni.exp<br>3&gt;     Creating library D:/ltp4j/libs/Release/segmentor_jni.lib and object D:/ltp4j/libs/Release/segmentor_jni.exp<br>3&gt;  segmentor_jni.vcxproj -&gt; D:\ltp4j\libs\Release\segmentor_jni.dll<br>4&gt;     Creating library D:/ltp4j/libs/Release/srl_jni.lib and object D:/ltp4j/libs/Release/srl_jni.exp<br>5&gt;     Creating library D:/ltp4j/libs/Release/parser_jni.lib and object D:/ltp4j/libs/Release/parser_jni.exp<br>2&gt;  split_sentence_jni.vcxproj -&gt; D:\ltp4j\libs\Release\split_sentence_jni.dll<br>5&gt;  parser_jni.vcxproj -&gt; D:\ltp4j\libs\Release\parser_jni.dll<br>4&gt;  srl_jni.vcxproj -&gt; D:\ltp4j\libs\Release\srl_jni.dll<br>6&gt;——— 已启动生成: 项目: ner_jni, 配置: Release x64 ———<br>7&gt;——— 已启动生成: 项目: postagger_jni, 配置: Release x64 ———<br>6&gt;     Creating library D:/ltp4j/libs/Release/ner_jni.lib and object D:/ltp4j/libs/Release/ner_jni.exp<br>7&gt;     Creating library D:/ltp4j/libs/Release/postagger_jni.lib and object D:/ltp4j/libs/Release/postagger_jni.exp<br>6&gt;  ner_jni.vcxproj -&gt; D:\ltp4j\libs\Release\ner_jni.dll<br>7&gt;  postagger_jni.vcxproj -&gt; D:\ltp4j\libs\Release\postagger_jni.dll<br>8&gt;——— 已跳过生成: 项目: ALL_BUILD, 配置: Release x64 ———<br>8&gt;没有为此解决方案配置选中要生成的项目<br>========== 生成: 成功 7 个，失败 0 个，最新 0 个，跳过 1 个 ==========</p>
+</blockquote>
+<h3 id="在Eclipse中使用离线版LTP">在Eclipse中使用离线版LTP</h3><h4 id="配置Eclipse中项目所需资源">配置Eclipse中项目所需资源</h4><p>在Eclipse中新建Java Project</p>
+<ul>
+<li><em>导入ltp4j.jar</em></li>
+<li><em>windows下将ltp4j的libs文件夹中生成的所有动态库、以及原ltp lib文件夹下的splitsnt、segmentor、postagger、ner、parser、srl 6个动态库拷贝到项目根目录</em></li>
+<li><em>linux下export LD_LIBRARY_PATH=#jni动态库路径#</em><br>配置完成之后，项目视图如下所示：<br><img src="http://7xig3q.com1.z0.glb.clouddn.com/ltp4j-eclipse.png" alt="项目结构图"><h4 id="本地接口使用示例">本地接口使用示例</h4></li>
+</ul>
+<p>分词接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> edu.hit.ir.ltp4j.Segmentor;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * </span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * ClassName TestSegment</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * Description 分词接口</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> * </span><br><span class="line"> * <span class="doctag">@author</span> TKPad wangx89@126.com</span><br><span class="line"> *         &lt;p&gt;</span><br><span class="line"> *         Date 2015年5月7日 下午10:09:23</span><br><span class="line"> *         &lt;/p&gt;</span><br><span class="line"> * <span class="doctag">@version</span> V1.0.0</span><br><span class="line"> *</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSegment</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// /MyTest/</span></span><br><span class="line">		<span class="keyword">if</span> (Segmentor.create(<span class="string">"ltp_data/cws.model"</span>) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">			System.err.println(<span class="string">"load failed"</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		String sent = <span class="string">"我是中国人"</span>;</span><br><span class="line">		List&lt;String&gt; words = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">		<span class="keyword">int</span> size = Segmentor.segment(sent, words);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">			System.out.print(words.get(i));</span><br><span class="line">			<span class="keyword">if</span> (i == size - <span class="number">1</span>) &#123;</span><br><span class="line">				System.out.println();</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				System.out.print(<span class="string">"\t"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		Segmentor.release();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>词性标注接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> edu.hit.ir.ltp4j.Postagger;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * </span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * ClassName TestPostag</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * Description 词性标注接口</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> * </span><br><span class="line"> * <span class="doctag">@author</span> TKPad wangx89@126.com</span><br><span class="line"> *         &lt;p&gt;</span><br><span class="line"> *         Date 2015年5月7日 下午10:09:55</span><br><span class="line"> *         &lt;/p&gt;</span><br><span class="line"> * <span class="doctag">@version</span> V1.0.0</span><br><span class="line"> *</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestPostag</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (Postagger.create(<span class="string">"ltp_data/pos.model"</span>) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">			System.err.println(<span class="string">"load failed"</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		List&lt;String&gt; words = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">		words.add(<span class="string">"我"</span>);</span><br><span class="line">		words.add(<span class="string">"是"</span>);</span><br><span class="line">		words.add(<span class="string">"中国"</span>);</span><br><span class="line">		words.add(<span class="string">"人"</span>);</span><br><span class="line">		List&lt;String&gt; postags = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">int</span> size = Postagger.postag(words, postags);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">			System.out.print(words.get(i) + <span class="string">"_"</span> + postags.get(i));</span><br><span class="line">			<span class="keyword">if</span> (i == size - <span class="number">1</span>) &#123;</span><br><span class="line">				System.out.println();</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				System.out.print(<span class="string">"|"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		Postagger.release();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>命名实体识别接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> edu.hit.ir.ltp4j.NER;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * </span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * ClassName TestNer</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * Description 命名实体识别接口</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> * </span><br><span class="line"> * <span class="doctag">@author</span> TKPad wangx89@126.com</span><br><span class="line"> *         &lt;p&gt;</span><br><span class="line"> *         Date 2015年5月7日 下午10:08:26</span><br><span class="line"> *         &lt;/p&gt;</span><br><span class="line"> * <span class="doctag">@version</span> V1.0.0</span><br><span class="line"> *</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestNer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (NER.create(<span class="string">"ltp_data/ner.model"</span>) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">			System.err.println(<span class="string">"load failed"</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		List&lt;String&gt; words = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">		List&lt;String&gt; tags = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">		List&lt;String&gt; ners = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">		words.add(<span class="string">"中国"</span>);</span><br><span class="line">		tags.add(<span class="string">"ns"</span>);</span><br><span class="line">		words.add(<span class="string">"国际"</span>);</span><br><span class="line">		tags.add(<span class="string">"n"</span>);</span><br><span class="line">		words.add(<span class="string">"广播"</span>);</span><br><span class="line">		tags.add(<span class="string">"n"</span>);</span><br><span class="line">		words.add(<span class="string">"电台"</span>);</span><br><span class="line">		tags.add(<span class="string">"n"</span>);</span><br><span class="line">		words.add(<span class="string">"创办"</span>);</span><br><span class="line">		tags.add(<span class="string">"v"</span>);</span><br><span class="line">		words.add(<span class="string">"于"</span>);</span><br><span class="line">		tags.add(<span class="string">"p"</span>);</span><br><span class="line">		words.add(<span class="string">"1941年"</span>);</span><br><span class="line">		tags.add(<span class="string">"m"</span>);</span><br><span class="line">		words.add(<span class="string">"12月"</span>);</span><br><span class="line">		tags.add(<span class="string">"m"</span>);</span><br><span class="line">		words.add(<span class="string">"3日"</span>);</span><br><span class="line">		tags.add(<span class="string">"m"</span>);</span><br><span class="line">		words.add(<span class="string">"。"</span>);</span><br><span class="line">		tags.add(<span class="string">"wp"</span>);</span><br><span class="line"></span><br><span class="line">		NER.recognize(words, tags, ners);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; words.size(); i++) &#123;</span><br><span class="line">			System.out.println(ners.get(i));</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		NER.release();</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>依存句法分析接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> edu.hit.ir.ltp4j.Parser;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * </span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * ClassName TestParser</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * Description 依存句法分析接口</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> * </span><br><span class="line"> * <span class="doctag">@author</span> TKPad wangx89@126.com</span><br><span class="line"> *         &lt;p&gt;</span><br><span class="line"> *         Date 2015年5月7日 下午10:11:09</span><br><span class="line"> *         &lt;/p&gt;</span><br><span class="line"> * <span class="doctag">@version</span> V1.0.0</span><br><span class="line"> *</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestParser</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (Parser.create(<span class="string">"ltp_data/parser.model"</span>) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">			System.err.println(<span class="string">"load failed"</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		List&lt;String&gt; words = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">		List&lt;String&gt; tags = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">		words.add(<span class="string">"一把手"</span>);</span><br><span class="line">		tags.add(<span class="string">"n"</span>);</span><br><span class="line">		words.add(<span class="string">"亲自"</span>);</span><br><span class="line">		tags.add(<span class="string">"d"</span>);</span><br><span class="line">		words.add(<span class="string">"过问"</span>);</span><br><span class="line">		tags.add(<span class="string">"v"</span>);</span><br><span class="line">		words.add(<span class="string">"。"</span>);</span><br><span class="line">		tags.add(<span class="string">"wp"</span>);</span><br><span class="line">		List&lt;Integer&gt; heads = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">		List&lt;String&gt; deprels = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">int</span> size = Parser.parse(words, tags, heads, deprels);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">			System.out.print(heads.get(i) + <span class="string">":"</span> + deprels.get(i));</span><br><span class="line">			<span class="keyword">if</span> (i == size - <span class="number">1</span>) &#123;</span><br><span class="line">				System.out.println();</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				System.out.print(<span class="string">"        "</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		Parser.release();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>语义角色标注接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> edu.hit.ir.ltp4j.Pair;</span><br><span class="line"><span class="keyword">import</span> edu.hit.ir.ltp4j.SRL;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * </span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * ClassName TestSrl</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * Description 语义角色标注接口</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> * </span><br><span class="line"> * <span class="doctag">@author</span> TKPad wangx89@126.com</span><br><span class="line"> *         &lt;p&gt;</span><br><span class="line"> *         Date 2015年5月7日 下午10:11:46</span><br><span class="line"> *         &lt;/p&gt;</span><br><span class="line"> * <span class="doctag">@version</span> V1.0.0</span><br><span class="line"> *</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSrl</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SRL.create(<span class="string">"ltp_data/srl"</span>);</span><br><span class="line">		ArrayList&lt;String&gt; words = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">		words.add(<span class="string">"一把手"</span>);</span><br><span class="line">		words.add(<span class="string">"亲自"</span>);</span><br><span class="line">		words.add(<span class="string">"过问"</span>);</span><br><span class="line">		words.add(<span class="string">"。"</span>);</span><br><span class="line">		ArrayList&lt;String&gt; tags = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">		tags.add(<span class="string">"n"</span>);</span><br><span class="line">		tags.add(<span class="string">"d"</span>);</span><br><span class="line">		tags.add(<span class="string">"v"</span>);</span><br><span class="line">		tags.add(<span class="string">"wp"</span>);</span><br><span class="line">		ArrayList&lt;String&gt; ners = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">		ners.add(<span class="string">"O"</span>);</span><br><span class="line">		ners.add(<span class="string">"O"</span>);</span><br><span class="line">		ners.add(<span class="string">"O"</span>);</span><br><span class="line">		ners.add(<span class="string">"O"</span>);</span><br><span class="line">		ArrayList&lt;Integer&gt; heads = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">		heads.add(<span class="number">2</span>);</span><br><span class="line">		heads.add(<span class="number">2</span>);</span><br><span class="line">		heads.add(-<span class="number">1</span>);</span><br><span class="line">		heads.add(<span class="number">2</span>);</span><br><span class="line">		ArrayList&lt;String&gt; deprels = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">		deprels.add(<span class="string">"SBV"</span>);</span><br><span class="line">		deprels.add(<span class="string">"ADV"</span>);</span><br><span class="line">		deprels.add(<span class="string">"HED"</span>);</span><br><span class="line">		deprels.add(<span class="string">"WP"</span>);</span><br><span class="line">		List&lt;Pair&lt;Integer, List&lt;Pair&lt;String, Pair&lt;Integer, Integer&gt;&gt;&gt;&gt;&gt; srls = <span class="keyword">new</span> ArrayList&lt;Pair&lt;Integer, List&lt;Pair&lt;String, Pair&lt;Integer, Integer&gt;&gt;&gt;&gt;&gt;();</span><br><span class="line">		SRL.srl(words, tags, ners, heads, deprels, srls);</span><br><span class="line">		System.out.println(srls.size());</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; srls.size(); ++i) &#123;</span><br><span class="line">			System.out.println(srls.get(i).first + <span class="string">":"</span>);</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; srls.get(i).second.size(); ++j) &#123;</span><br><span class="line">				System.out.println(<span class="string">"   tpye = "</span> + srls.get(i).second.get(j).first + <span class="string">" beg = "</span></span><br><span class="line">						+ srls.get(i).second.get(j).second.first + <span class="string">" end = "</span> + srls.get(i).second.get(j).second.second);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		SRL.release();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="等等，最后一步">等等，最后一步</h4><p><strong><em>注意点</em></strong><br>在ltp4j中提供的ltp_data中的model仅仅是作为你测试代码的正确性，其并非完整的model，如果需要在生产环境中使用，需要到<a href="http://pan.baidu.com/share/link?shareid=1988562907&amp;uk=2738088569#path=%252Fltp-models" target="_blank" rel="external">这里</a>下载完整版的model，将下载的完整版ltp_data拷贝到项目中即可。</p>
+<h4 id="其他错误">其他错误</h4><blockquote>
+<p>Cannot open include file: ‘ammintrin.h’: No such file or directory</p>
+</blockquote>
+<p>参考文章：<br><a href="http://wishmesh.com/2011/04/fatal-error-c1083-cannot-open-include-file-ammintrin-h-no-such-file-or-directory/" target="_blank" rel="external">http://wishmesh.com/2011/04/fatal-error-c1083-cannot-open-include-file-ammintrin-h-no-such-file-or-directory/</a></p>
+<p><a href="https://connect.microsoft.com/VisualStudio/feedback/details/660584/" target="_blank" rel="external">https://connect.microsoft.com/VisualStudio/feedback/details/660584/</a></p>
+<p>参考资料：<br>【1】<a href="http://www.ltp-cloud.com/" target="_blank" rel="external">哈工大LTP官网</a><br>【2】<a href="https://github.com/HIT-SCIR/ltp4j" target="_blank" rel="external">LTP4J的github地址</a><br>【3】<a href="https://github.com/HIT-SCIR/ltp" target="_blank" rel="external">LTP的github地址</a><br>【4】<a href="https://github.com/HIT-SCIR/ltp/blob/master/doc/ltp-document-3.0.md" target="_blank" rel="external">LTP3.0参考文档</a><br>【5】<a href="https://github.com/HIT-SCIR/ltp4j/blob/master/doc/ltp4j-document-1.0.md" target="_blank" rel="external">LTP4J1.0参考文档</a><br>【6】<a href="http://blog.csdn.net/yapingxin/article/details/7414084" target="_blank" rel="external">VS2010与64位系统</a><br>【7】<a href="http://cn.mathworks.com/matlabcentral/answers/116701-microsoft-visual-c-2010-microsoft-windows-sdk-7-1" target="_blank" rel="external">安装 Microsoft Visual C++ 2010 和 Microsoft Windows SDK 7.1</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Programming-Notes/">Programming Notes</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/LTP/">LTP</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=2067139" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2067139" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/05/12/Recommended-processing-method-of-text-with-bom-in-Java/" title="Java处理带BOM文本的推荐方法">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Java处理带BOM文本的推荐方法</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/04/25/Segmentation-of-natural-paragraph-in-Java-code/"  title="Java代码实现按照文本的自然段落进行切分">
+ <strong>下一篇：</strong><br/> 
+ <span>Java代码实现按照文本的自然段落进行切分
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/05/07/Compile-the-Language-Technology-Platform(C++)-and-LTP4J(Java)source-code/" data-title="编译哈工大语言技术平台云LTP（C++）源码及LTP4J（Java）源码" data-url="http://www.codepub.cn/2015/05/07/Compile-the-Language-Technology-Platform(C++)-and-LTP4J(Java)source-code/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#编译LTP4J-jar"><span class="toc-number">1.</span> <span class="toc-text">编译LTP4J.jar</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#下载Ant"><span class="toc-number">1.1.</span> <span class="toc-text">下载Ant</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置Ant环境变量"><span class="toc-number">1.2.</span> <span class="toc-text">配置Ant环境变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#编译LTP4J"><span class="toc-number">1.3.</span> <span class="toc-text">编译LTP4J</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译C++代理程序"><span class="toc-number">2.</span> <span class="toc-text">编译C++代理程序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装CMake"><span class="toc-number">2.1.</span> <span class="toc-text">安装CMake</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#下载LTP的C++源码"><span class="toc-number">2.2.</span> <span class="toc-text">下载LTP的C++源码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置LTP的安装路径"><span class="toc-number">2.3.</span> <span class="toc-text">配置LTP的安装路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构建VC_Project"><span class="toc-number">2.4.</span> <span class="toc-text">构建VC Project</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译源码"><span class="toc-number">3.</span> <span class="toc-text">编译源码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#编译LTP"><span class="toc-number">3.1.</span> <span class="toc-text">编译LTP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#再次编译LTP4J"><span class="toc-number">3.2.</span> <span class="toc-text">再次编译LTP4J</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在Eclipse中使用离线版LTP"><span class="toc-number">4.</span> <span class="toc-text">在Eclipse中使用离线版LTP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置Eclipse中项目所需资源"><span class="toc-number">4.1.</span> <span class="toc-text">配置Eclipse中项目所需资源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#本地接口使用示例"><span class="toc-number">4.2.</span> <span class="toc-text">本地接口使用示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#等等，最后一步"><span class="toc-number">4.3.</span> <span class="toc-text">等等，最后一步</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#其他错误"><span class="toc-number">4.4.</span> <span class="toc-text">其他错误</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Algorithms/" title="Algorithms">Algorithms<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Database/" title="Database">Database<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git-GitHub/" title="Git/GitHub">Git/GitHub<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life-Talk/" title="Life-Talk">Life-Talk<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Operating-System/" title="Operating System">Operating System<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Programming-Notes/" title="Programming Notes">Programming Notes<sup>22</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python3/" title="Python3">Python3<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/LTP/" title="LTP">LTP<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/IT/" title="IT">IT<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elite/" title="Elite">Elite<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tools/" title="Tools">Tools<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySql/" title="MySql">MySql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Lombok/" title="Lombok">Lombok<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Selenium/" title="Selenium">Selenium<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DLL/" title="DLL">DLL<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tomcat/" title="Tomcat">Tomcat<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Guava/" title="Guava">Guava<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Github/" title="Github">Github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Octopress/" title="Octopress">Octopress<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Eclipse/" title="Eclipse">Eclipse<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <p class="asidetitle">最新评论</p>
+<div>
+	<ul class="ds-recent-comments" data-num-items="10" data-show-avatars="1" data-show-time="1" data-show-admin="1" data-excerpt-length="70"></ul>
+	<!--多说js加载开始，一个页面只需要加载一次 -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!--多说js加载结束，一个页面只需要加载一次 -->
+</div>
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/DLL/" style="font-size: 10px;">DLL</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Elite/" style="font-size: 10px;">Elite</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/IntelliJ/" style="font-size: 10px;">IntelliJ</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/LTP/" style="font-size: 13.33px;">LTP</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/Python3/" style="font-size: 16.67px;">Python3</a> <a href="/tags/Selenium/" style="font-size: 10px;">Selenium</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Struts2/" style="font-size: 10px;">Struts2</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a>
+    </div>
+  </div>
+
+
+  <br/>
+<p class="asidetitle">热评文章</p>
+<!-- 多说热评文章 start -->
+<div>
+<div class="ds-top-threads" data-range="monthly" data-num-items="8"></div>
+<!-- 多说热评文章 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+<br/>
+
+  <p class="asidetitle">打赏他</p>
+<div>
+<form action="https://shenghuo.alipay.com/send/payment/fill.htm" method="POST" target="_blank" accept-charset="GBK">
+    <br/>
+    <input name="optEmail" type="hidden" value="18302118258" />
+    <input name="payAmount" type="hidden" value="10" />
+    <input id="title" name="title" type="hidden" value="博主，打赏你的！" />
+    <input name="memo" type="hidden" value="你Y加油，继续写博客！" />
+    <input name="pay" type="image" value="转账" src="http://7xig3q.com1.z0.glb.clouddn.com/alipay-donate-website.png" />
+</form>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello , I&#39;m Wang Xu in SHU. <br/>
+			志不强者智不达，言不信者行不果。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1779238484" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/shijiebei2009" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/4204922" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		
+		
+		<a href="https://www.linkedin.com/in/codepub" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		<a href="https://www.douban.com/people/shijiebei2009" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		<a href="https://www.zhihu.com/people/codepub.cn" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:wangx89@126.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="http://www.codepub.cn/about" target="_blank" title="Wang Xu">Wang Xu</a>
+		
+		<a href="http://tongji.baidu.com/web/welcome/ico?s=2c61418f187553bcc869b755930233ab" target="_blank">百度统计</a><br/>
+		本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+		</p>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','CEs2u-bRR6iHSt4ynbFA','2.0.0');
+</script>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"codepub"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F2c61418f187553bcc869b755930233ab' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+
+<a href="https://github.com/shijiebei2009"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>

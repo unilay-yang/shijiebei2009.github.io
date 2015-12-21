@@ -1,0 +1,642 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  
+  <meta charset="UTF-8">
+  
+    <title>使用Selenium模拟用户登录支付宝账户查询交易详情 | IT草根</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Wang Xu">
+    
+
+    
+    <meta name="description" content="Selenium简介Selenium是一个用于Web应用程序测试的工具。Selenium测试直接运行在浏览器中，就像真正的用户在操作一样。支持的浏览器包括IE、Mozilla Firefox、Chrome等。这个工具的主要功能包括：测试与浏览器的兼容性——测试你的应用程序看是否能够很好得工作在不同浏览器和操作系统之上。测试系统功能——创建回归测试检验软件功能和用户需求。支持自动录制动作和自动生成.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Selenium模拟用户登录支付宝账户查询交易详情">
+<meta property="og:url" content="http://www.codepub.cn/2015/08/29/Selenium-simulated-user-login-alipay-account-query-transaction-details/index.html">
+<meta property="og:site_name" content="IT草根">
+<meta property="og:description" content="Selenium简介Selenium是一个用于Web应用程序测试的工具。Selenium测试直接运行在浏览器中，就像真正的用户在操作一样。支持的浏览器包括IE、Mozilla Firefox、Chrome等。这个工具的主要功能包括：测试与浏览器的兼容性——测试你的应用程序看是否能够很好得工作在不同浏览器和操作系统之上。测试系统功能——创建回归测试检验软件功能和用户需求。支持自动录制动作和自动生成.">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/automatic-query-alipay-treasure-transaction-information.gif">
+<meta property="og:updated_time" content="2015-09-27T06:55:04.833Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Selenium模拟用户登录支付宝账户查询交易详情">
+<meta name="twitter:description" content="Selenium简介Selenium是一个用于Web应用程序测试的工具。Selenium测试直接运行在浏览器中，就像真正的用户在操作一样。支持的浏览器包括IE、Mozilla Firefox、Chrome等。这个工具的主要功能包括：测试与浏览器的兼容性——测试你的应用程序看是否能够很好得工作在不同浏览器和操作系统之上。测试系统功能——创建回归测试检验软件功能和用户需求。支持自动录制动作和自动生成.">
+
+    
+    <link rel="alternative" href="/atom.xml" title="IT草根" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.gif">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.gif">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.gif" alt="IT草根" title="IT草根"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="IT草根">IT草根</a></h1>
+				<h2 class="blog-motto">WangXu&#39;s 代码馆 BLOG</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/resume">Resume</a></li>
+					
+						<li><a href="/links">Links</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+						<form class="search">
+							<label>Search</label>
+						<input type="text" class="st-default-search-input" id="ts-search-input" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/29/Selenium-simulated-user-login-alipay-account-query-transaction-details/" title="使用Selenium模拟用户登录支付宝账户查询交易详情" itemprop="url">使用Selenium模拟用户登录支付宝账户查询交易详情</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.codepub.cn/about" title="Wang Xu" target="_blank" itemprop="author">Wang Xu</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-29T13:39:00.000Z" itemprop="datePublished"> 发表于 2015-08-29</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Selenium简介"><span class="toc-number">1.</span> <span class="toc-text">Selenium简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Selenium的优势"><span class="toc-number">2.</span> <span class="toc-text">Selenium的优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Selenium-WebDriver"><span class="toc-number">3.</span> <span class="toc-text">Selenium-WebDriver</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Selenium开发环境"><span class="toc-number">4.</span> <span class="toc-text">Selenium开发环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Selenium启动浏览器"><span class="toc-number">5.</span> <span class="toc-text">Selenium启动浏览器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#启动Firefox"><span class="toc-number">5.1.</span> <span class="toc-text">启动Firefox</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启动Chrome"><span class="toc-number">5.2.</span> <span class="toc-text">启动Chrome</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启动IE"><span class="toc-number">5.3.</span> <span class="toc-text">启动IE</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见问题的处理方法"><span class="toc-number">6.</span> <span class="toc-text">常见问题的处理方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模拟用户登录支付宝查询交易信息的程序"><span class="toc-number">7.</span> <span class="toc-text">模拟用户登录支付宝查询交易信息的程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#效果图"><span class="toc-number">8.</span> <span class="toc-text">效果图</span></a></li></ol>
+		
+		</div>
+		
+		<h3 id="Selenium简介">Selenium简介</h3><p><code>Selenium</code>是一个用于Web应用程序测试的工具。<code>Selenium</code>测试直接运行在浏览器中，就像真正的用户在操作一样。支持的浏览器包括IE、Mozilla Firefox、Chrome等。这个工具的主要功能包括：测试与浏览器的兼容性——测试你的应用程序看是否能够很好得工作在不同浏览器和操作系统之上。测试系统功能——创建回归测试检验软件功能和用户需求。支持自动录制动作和自动生成<code>.Net</code>、<code>Java</code>、<code>Perl</code>等不同语言的测试脚本。<code>Selenium</code>是<code>ThoughtWorks</code>专门为Web应用程序编写的一个验收测试工具。</p>
+<h3 id="Selenium的优势">Selenium的优势</h3><p>据<code>Selenium</code>主页所说，与其他测试工具相比，使用<code>Selenium</code>的最大好处是：<code>Selenium</code>测试直接在浏览器中运行，就像真实用户所做的一样。<code>Selenium</code>测试可以在<code>Windows</code>、<code>Linux</code>和<code>Macintosh</code>上的<code>Internet Explorer</code>、<code>Mozilla</code>和<code>Firefox</code>中运行。其他测试工具都不能覆盖如此多的平台。使用<code>Selenium</code>和在浏览器中运行测试还有很多其他好处。下面是主要的两大好处：</p>
+<ul>
+<li>通过编写模仿用户操作的<code>Selenium</code>测试脚本，可以从终端用户的角度来测试应用程序</li>
+<li>通过在不同浏览器中运行测试，更容易发现浏览器的不兼容性</li>
+</ul>
+<p><code>Selenium</code>的核心，也称<code>browser bot</code>，是用<code>JavaScript</code>编写的。这使得测试脚本可以在受支持的浏览器中运行。<code>browser bot</code>负责执行从测试脚本接收到的命令，测试脚本要么是用<code>HTML</code>的表布局编写的，要么是使用一种受支持的编程语言编写的。</p>
+<h3 id="Selenium-WebDriver">Selenium-WebDriver</h3><p><code>Selenium-WebDriver</code>支持如下浏览器，在所有支持这些浏览器的操作系统中能都运行良好。</p>
+<ul>
+<li>Google Chrome 12.0.712.0+</li>
+<li>Internet Explorer 6, 7, 8, 9 - 32 and 64-bit where applicable</li>
+<li>Firefox 3.0, 3.5, 3.6, 4.0, 5.0, 6, 7</li>
+<li>Opera 11.5+</li>
+<li>HtmlUnit 2.9</li>
+<li>Android – 2.3+ for phones and tablets (devices &amp; emulators)</li>
+<li>iOS 3+ for phones (devices &amp; emulators) and 3.2+ for tablets (devices &amp; emulators)</li>
+</ul>
+<h3 id="Selenium开发环境">Selenium开发环境</h3><p>如欲使用Java语言，那么JDK的环境是必备的。使用<code>Selenium</code>来驱动浏览器，那么必须要有<a href="http://pan.baidu.com/s/1o6quY5G" target="_blank" rel="external">浏览器驱动包</a>，同样还需要<a href="http://pan.baidu.com/s/1o6vKGh8" target="_blank" rel="external">Selenium的Jar包</a>，点击下载即可。</p>
+<h3 id="Selenium启动浏览器">Selenium启动浏览器</h3><h4 id="启动Firefox">启动Firefox</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//后一个参数是Firefox的安装路径</span></span><br><span class="line">System.setProperty(<span class="string">"webdriver.firefox.bin"</span>, <span class="string">"C:/Program Files (x86)/Mozilla Firefox/firefox.exe"</span>);</span><br><span class="line">WebDriver driver = <span class="keyword">new</span> FirefoxDriver();</span><br><span class="line">driver.get(<span class="string">"www.baidu.com"</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="启动Chrome">启动Chrome</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//后一个参数是Chrome浏览器的驱动，需要下载</span></span><br><span class="line">System.setProperty(<span class="string">"webdriver.chrome.driver"</span>, <span class="string">"D:/chromedriver.exe"</span>);</span><br><span class="line">WebDriver driver = <span class="keyword">new</span> ChromeDriver();</span><br><span class="line">driver.get(<span class="string">"www.baidu.com"</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="启动IE">启动IE</h4><p>作为开发人员，建议您应该远离IE，虽然我不太愿意提供IE的启动方式给您！<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System.setProperty(<span class="string">"webdriver.ie.driver"</span>, <span class="string">"D:/IEDriverServer.exe"</span>);</span><br><span class="line">WebDriver driver = <span class="keyword">new</span> InternetExplorerDriver();</span><br><span class="line">driver.get(<span class="string">"www.baidu.com"</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="常见问题的处理方法">常见问题的处理方法</h3><blockquote>
+<p>How to select any element from the web element with “display: none” attribute using Selenium ?<br>特别是在处理因为<code>&lt;select&gt;</code>标签中带有<code>style=&#39;display:none&#39;</code>而无法设置option的情况时很有效！</p>
+</blockquote>
+<p>方法：</p>
+<blockquote>
+<p>Use execute_script() to set the display property of that element and then use the Selenium Select for selecting a required value.</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">JavascriptExecutor js = (JavascriptExecutor) driver;<span class="comment">//将driver对象强转成JavascriptExecutor</span></span><br><span class="line">js.executeScript(<span class="string">"document.getElementById('J-select-range').style.display='inline';"</span>);<span class="comment">//修改display的值，也可以修改为display='list-item'</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Element is not currently visible and may not be manipulated</p>
+</blockquote>
+<p>一般这种错误是因为父元素有<code>style=&#39;display:none&#39;</code>属性或者是页面还没有加载完全，最简单的就是使用<code>Thread.sleep(1000);</code>休息一秒之后再操作。当然也可以使用until方法直到其出现再对其进行操作。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">WebDriverWait wait = <span class="keyword">new</span> WebDriverWait(driver, <span class="number">300</span>);</span><br><span class="line">WebElement selectElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(<span class="string">"formLevel:levels_input"</span>)));</span><br><span class="line">Select select = <span class="keyword">new</span> Select(selectElement);</span><br><span class="line">select.selectByVisibleText(<span class="string">"SECURITY"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="模拟用户登录支付宝查询交易信息的程序">模拟用户登录支付宝查询交易信息的程序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.openqa.selenium.By;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.JavascriptExecutor;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebElement;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.chrome.ChromeDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.support.ui.Select;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 注意此流程适应于旧版支付宝，新版支付宝页面未测试</span><br><span class="line"> *</span><br><span class="line"> * <span class="doctag">@author</span> Wang Xu 2015/8/29</span><br><span class="line"> * <span class="doctag">@version</span> V1.0.0</span><br><span class="line"> * <span class="doctag">@since</span> V1.0.0</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SeleniumAlipay</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> WebDriver driver;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//    定义自己的休眠方法，精简代码量</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sleep</span><span class="params">(<span class="keyword">long</span> time)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(time);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            System.out.println(e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//    登录操作，负责将界面跳转到交易记录界面</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">login</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//        启动火狐浏览器</span></span><br><span class="line"><span class="comment">//        System.setProperty("webdriver.firefox.bin", "C:/Program Files (x86)/Mozilla Firefox/firefox.exe");</span></span><br><span class="line"><span class="comment">//        WebDriver driver = new FirefoxDriver();</span></span><br><span class="line"><span class="comment">//        启动Chrome浏览器</span></span><br><span class="line">        System.setProperty(<span class="string">"webdriver.chrome.driver"</span>, <span class="string">"D:/chromedriver.exe"</span>);</span><br><span class="line">        driver = <span class="keyword">new</span> ChromeDriver();</span><br><span class="line"><span class="comment">//        获取登录页面</span></span><br><span class="line">        driver.get(<span class="string">"https://auth.alipay.com/login/index.htm?goto=https%3A%2F%2Fwww.alipay.com%2F"</span>);</span><br><span class="line"><span class="comment">//        获取用户名输入框</span></span><br><span class="line">        driver.findElement(By.id(<span class="string">"J-input-user"</span>)).clear();</span><br><span class="line">        driver.findElement(By.id(<span class="string">"J-input-user"</span>)).sendKeys(<span class="string">"支付宝账户"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//        休息500ms，否则，速度太快，会将密码内容填充到用户名输入框中</span></span><br><span class="line">        sleep(<span class="number">500</span>);</span><br><span class="line"><span class="comment">//        获取密码输入框</span></span><br><span class="line">        driver.findElement(By.id(<span class="string">"password_rsainput"</span>)).clear();</span><br><span class="line">        driver.findElement(By.id(<span class="string">"password_rsainput"</span>)).sendKeys(<span class="string">"密码"</span>);</span><br><span class="line"><span class="comment">//        休息8秒等待用户输入验证码</span></span><br><span class="line">        sleep(<span class="number">8000</span>);</span><br><span class="line"><span class="comment">//        当前URL 0 ：https://authsu18.alipay.com/login/certCheck.htm?goto=https%3A%2F%2Fwww.alipay.com%2F</span></span><br><span class="line">        System.out.println(<span class="string">"当前URL 0 ："</span> + driver.getCurrentUrl());</span><br><span class="line">        driver.get(<span class="string">"https://www.alipay.com/"</span>);</span><br><span class="line"><span class="comment">//        点击个人用户登录</span></span><br><span class="line">        driver.findElement(By.className(<span class="string">"personal-login"</span>)).click();</span><br><span class="line"><span class="comment">//        当前URL 1 ：https://www.alipay.com/</span></span><br><span class="line">        System.out.println(<span class="string">"当前URL 1 ："</span> + driver.getCurrentUrl());</span><br><span class="line">        sleep(<span class="number">2000</span>);</span><br><span class="line"></span><br><span class="line">        WebElement myAlipay = driver.findElement(By.className(<span class="string">"am-button-innerNav,button-myalipay"</span>));</span><br><span class="line">        System.out.println(<span class="string">"myAlipay isSelected ："</span> + myAlipay.isSelected());<span class="comment">//false</span></span><br><span class="line">        System.out.println(<span class="string">"myAlipay isEnabled ："</span> + myAlipay.isEnabled());<span class="comment">//true</span></span><br><span class="line">        System.out.println(<span class="string">"myAlipay isDisplayed ："</span> + myAlipay.isDisplayed());<span class="comment">//true</span></span><br><span class="line"><span class="comment">//        点击进入我的支付宝按钮</span></span><br><span class="line">        driver.findElement(By.className(<span class="string">"am-button-innerNav,button-myalipay"</span>)).click();</span><br><span class="line"><span class="comment">//        当前URL 2 ：https://my.alipay.com/portal/i.htm</span></span><br><span class="line">        System.out.println(<span class="string">"当前URL 2 ："</span> + driver.getCurrentUrl());</span><br><span class="line"><span class="comment">//        boolean selected1 = driver.findElement(By.className("fn-ml10")).isSelected();</span></span><br><span class="line"><span class="comment">//        System.out.println("收支明细是否选中：" + selected1);</span></span><br><span class="line"><span class="comment">//        org.openqa.selenium.NoSuchElementException: no such keyword: Element was not in a form, so could not submit.</span></span><br><span class="line"><span class="comment">//        driver.findElement(By.className("fn-ml10")).submit();//跳转收支明细</span></span><br><span class="line"><span class="comment">//        Exception in thread "main" org.openqa.selenium.WebDriverException: unknown error: Element is not clickable at point</span></span><br><span class="line"><span class="comment">//        driver.findElement(By.xpath("//*[@id=\"J-trend-consume\"]/div/div[1]/div/a[1]")).click();</span></span><br><span class="line"><span class="comment">//        driver.findElement(By.className("fn-ml10")).click();</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//        无反应，看样子一直不会让你点的了</span></span><br><span class="line"><span class="comment">//        WebDriverWait webDriverWait = new WebDriverWait(driver, 3);</span></span><br><span class="line"><span class="comment">//        webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"J-trend-consume\"]/div/div[1]/div/a[1]")));</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//        跳转到收支明细界面</span></span><br><span class="line"><span class="comment">//        driver.get("https://xlab.alipay.com/consume/record/items.htm");</span></span><br><span class="line">        <span class="comment">//跳转到交易记录界面</span></span><br><span class="line">        driver.get(<span class="string">"https://consumeprod.alipay.com/record/index.htm"</span>);</span><br><span class="line">        String currentUrl = driver.getCurrentUrl();</span><br><span class="line"><span class="comment">//        当前URL 3 ：https://consumeprod.alipay.com/record/advanced.htm</span></span><br><span class="line">        System.out.println(<span class="string">"当前URL 3 ："</span> + currentUrl);</span><br><span class="line">        sleep(<span class="number">1000</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        login();</span><br><span class="line">        String oppositeUser = getOppositeUser(<span class="string">"20150826110500100010740029003925"</span>);</span><br><span class="line">        System.out.println(<span class="string">"交易方对方信息："</span> + oppositeUser);</span><br><span class="line">        oppositeUser = getOppositeUser(<span class="string">"20150720110500100010740025980311"</span>);</span><br><span class="line">        System.out.println(<span class="string">"交易方对方信息："</span> + oppositeUser);</span><br><span class="line">        oppositeUser = getOppositeUser(<span class="string">"2015081521001004740064396260"</span>);</span><br><span class="line">        System.out.println(<span class="string">"交易方对方信息："</span> + oppositeUser);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//    获取交易对方信息</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">getOppositeUser</span><span class="params">(String transactionNo)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//获取关键字对应的下拉框</span></span><br><span class="line">        WebElement keywordInput = driver.findElement(By.id(<span class="string">"J-keyword"</span>));</span><br><span class="line">        keywordInput.clear();</span><br><span class="line">        keywordInput.sendKeys(transactionNo);</span><br><span class="line"></span><br><span class="line">        WebElement keywordSelect = driver.findElement(By.id(<span class="string">"keyword"</span>));</span><br><span class="line">        List&lt;WebElement&gt; options = keywordSelect.findElements(By.tagName(<span class="string">"option"</span>));</span><br><span class="line">        <span class="comment">//until方法表示直到可点再点</span></span><br><span class="line"><span class="comment">//        WebElement selectElement = wait.until(ExpectedConditions</span></span><br><span class="line"><span class="comment">//                .visibilityOfElementLocated(By.id("keyword")));</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//        需要执行JavaScript语句，所以强转driver</span></span><br><span class="line">        JavascriptExecutor js = (JavascriptExecutor) driver;</span><br><span class="line"><span class="comment">//        也可以这么用setAttribute("style","");</span></span><br><span class="line">        js.executeScript(<span class="string">"document.getElementById('keyword').style.display='list-item';"</span>);</span><br><span class="line">        js.executeScript(<span class="string">"document.getElementById('keyword').removeAttribute('smartracker');"</span>);</span><br><span class="line">        js.executeScript(<span class="string">"document.getElementById('keyword').options[1].selected = true;"</span>);</span><br><span class="line">        js.executeScript(<span class="string">"document.getElementById('J-select-range').style.display='list-item';"</span>);</span><br><span class="line"><span class="comment">//        设置交易时间选项</span></span><br><span class="line">        Select selectTime = <span class="keyword">new</span> Select(driver.findElement(By.id(<span class="string">"J-select-range"</span>)));</span><br><span class="line">        selectTime.selectByIndex(<span class="number">3</span>);<span class="comment">//选中的是最近三个月</span></span><br><span class="line">        System.out.println(<span class="string">"selectTime.isMultiple() : "</span> + selectTime.isMultiple());</span><br><span class="line"><span class="comment">//        设置关键字选项</span></span><br><span class="line">        Select selectKeyword = <span class="keyword">new</span> Select(driver.findElement(By.id(<span class="string">"keyword"</span>)));</span><br><span class="line">        <span class="comment">//        selectKeyword.selectByValue("bizInNo");//此处的value填写&lt;option&gt;标签中的value值</span></span><br><span class="line">        selectKeyword.selectByIndex(<span class="number">1</span>);<span class="comment">//选中的是交易号</span></span><br><span class="line">        System.out.println(<span class="string">"selectKeyword.isMultiple() : "</span> + selectKeyword.isMultiple());</span><br><span class="line"></span><br><span class="line">        WebElement queryButton = driver.findElement(By.id(<span class="string">"J-set-query-form"</span>));<span class="comment">//拿到搜索按钮</span></span><br><span class="line"><span class="comment">//        点击搜索按钮</span></span><br><span class="line">        queryButton.submit();</span><br><span class="line"></span><br><span class="line">        WebElement tr = driver.findElement(By.id(<span class="string">"J-item-1"</span>));<span class="comment">//先获取tr</span></span><br><span class="line">        WebElement td = tr.findElement(By.xpath(<span class="string">"//*[@id=\"J-item-1\"]/td[5]/p[1]"</span>));</span><br><span class="line">        <span class="keyword">return</span> td.getText();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="效果图">效果图</h3><p><img src="http://7xig3q.com1.z0.glb.clouddn.com/automatic-query-alipay-treasure-transaction-information.gif" alt=""></p>
+<p>参考资料<br>【1】<a href="http://baike.baidu.com/subview/478050/6464537.htm" target="_blank" rel="external">http://baike.baidu.com/subview/478050/6464537.htm</a><br>【2】<a href="http://blog.csdn.net/wanglha/article/details/39755613" target="_blank" rel="external">http://blog.csdn.net/wanglha/article/details/39755613</a><br>【3】<a href="http://webdriver.blog.51cto.com/10517592/1673920" target="_blank" rel="external">http://webdriver.blog.51cto.com/10517592/1673920</a><br>【4】<a href="http://blog.csdn.net/pf20050904/article/details/20052485" target="_blank" rel="external">http://blog.csdn.net/pf20050904/article/details/20052485</a><br>【5】<a href="http://www.open-open.com/doc/view/9f52277e5d9c4dd3b851ae54011e733a" target="_blank" rel="external">http://www.open-open.com/doc/view/9f52277e5d9c4dd3b851ae54011e733a</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Programming-Notes/">Programming Notes</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Selenium/">Selenium</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=2067139" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2067139" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/09/23/2016-campus-recruitment-of-mushroom-street-programming-problem-resolution-technology/" title="蘑菇街2016校园招聘之编程题解析--技术类">
+  <strong>上一篇：</strong><br/>
+  <span>
+  蘑菇街2016校园招聘之编程题解析--技术类</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/08/04/Based-on-the-extended-version-of-synonyms-Cilin-word-similarity-computing/"  title="基于同义词词林扩展版的词语相似度计算">
+ <strong>下一篇：</strong><br/> 
+ <span>基于同义词词林扩展版的词语相似度计算
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/08/29/Selenium-simulated-user-login-alipay-account-query-transaction-details/" data-title="使用Selenium模拟用户登录支付宝账户查询交易详情" data-url="http://www.codepub.cn/2015/08/29/Selenium-simulated-user-login-alipay-account-query-transaction-details/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Selenium简介"><span class="toc-number">1.</span> <span class="toc-text">Selenium简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Selenium的优势"><span class="toc-number">2.</span> <span class="toc-text">Selenium的优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Selenium-WebDriver"><span class="toc-number">3.</span> <span class="toc-text">Selenium-WebDriver</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Selenium开发环境"><span class="toc-number">4.</span> <span class="toc-text">Selenium开发环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Selenium启动浏览器"><span class="toc-number">5.</span> <span class="toc-text">Selenium启动浏览器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#启动Firefox"><span class="toc-number">5.1.</span> <span class="toc-text">启动Firefox</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启动Chrome"><span class="toc-number">5.2.</span> <span class="toc-text">启动Chrome</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启动IE"><span class="toc-number">5.3.</span> <span class="toc-text">启动IE</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见问题的处理方法"><span class="toc-number">6.</span> <span class="toc-text">常见问题的处理方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模拟用户登录支付宝查询交易信息的程序"><span class="toc-number">7.</span> <span class="toc-text">模拟用户登录支付宝查询交易信息的程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#效果图"><span class="toc-number">8.</span> <span class="toc-text">效果图</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Algorithms/" title="Algorithms">Algorithms<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Database/" title="Database">Database<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git-GitHub/" title="Git/GitHub">Git/GitHub<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life-Talk/" title="Life-Talk">Life-Talk<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Operating-System/" title="Operating System">Operating System<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Programming-Notes/" title="Programming Notes">Programming Notes<sup>22</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python3/" title="Python3">Python3<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/LTP/" title="LTP">LTP<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/IT/" title="IT">IT<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elite/" title="Elite">Elite<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tools/" title="Tools">Tools<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySql/" title="MySql">MySql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Lombok/" title="Lombok">Lombok<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Selenium/" title="Selenium">Selenium<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DLL/" title="DLL">DLL<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tomcat/" title="Tomcat">Tomcat<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Guava/" title="Guava">Guava<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Github/" title="Github">Github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Octopress/" title="Octopress">Octopress<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Eclipse/" title="Eclipse">Eclipse<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <p class="asidetitle">最新评论</p>
+<div>
+	<ul class="ds-recent-comments" data-num-items="10" data-show-avatars="1" data-show-time="1" data-show-admin="1" data-excerpt-length="70"></ul>
+	<!--多说js加载开始，一个页面只需要加载一次 -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!--多说js加载结束，一个页面只需要加载一次 -->
+</div>
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/DLL/" style="font-size: 10px;">DLL</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Elite/" style="font-size: 10px;">Elite</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/IntelliJ/" style="font-size: 10px;">IntelliJ</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/LTP/" style="font-size: 13.33px;">LTP</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/Python3/" style="font-size: 16.67px;">Python3</a> <a href="/tags/Selenium/" style="font-size: 10px;">Selenium</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Struts2/" style="font-size: 10px;">Struts2</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a>
+    </div>
+  </div>
+
+
+  <br/>
+<p class="asidetitle">热评文章</p>
+<!-- 多说热评文章 start -->
+<div>
+<div class="ds-top-threads" data-range="monthly" data-num-items="8"></div>
+<!-- 多说热评文章 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+<br/>
+
+  <p class="asidetitle">打赏他</p>
+<div>
+<form action="https://shenghuo.alipay.com/send/payment/fill.htm" method="POST" target="_blank" accept-charset="GBK">
+    <br/>
+    <input name="optEmail" type="hidden" value="18302118258" />
+    <input name="payAmount" type="hidden" value="10" />
+    <input id="title" name="title" type="hidden" value="博主，打赏你的！" />
+    <input name="memo" type="hidden" value="你Y加油，继续写博客！" />
+    <input name="pay" type="image" value="转账" src="http://7xig3q.com1.z0.glb.clouddn.com/alipay-donate-website.png" />
+</form>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello , I&#39;m Wang Xu in SHU. <br/>
+			志不强者智不达，言不信者行不果。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1779238484" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/shijiebei2009" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/4204922" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		
+		
+		<a href="https://www.linkedin.com/in/codepub" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		<a href="https://www.douban.com/people/shijiebei2009" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		<a href="https://www.zhihu.com/people/codepub.cn" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:wangx89@126.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="http://www.codepub.cn/about" target="_blank" title="Wang Xu">Wang Xu</a>
+		
+		<a href="http://tongji.baidu.com/web/welcome/ico?s=2c61418f187553bcc869b755930233ab" target="_blank">百度统计</a><br/>
+		本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+		</p>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','CEs2u-bRR6iHSt4ynbFA','2.0.0');
+</script>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"codepub"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F2c61418f187553bcc869b755930233ab' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+
+<a href="https://github.com/shijiebei2009"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>

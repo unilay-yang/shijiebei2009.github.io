@@ -1,0 +1,631 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  
+  <meta charset="UTF-8">
+  
+    <title>封装LTP4J的本地LTML调用接口 | IT草根</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Wang Xu">
+    
+
+    
+    <meta name="description" content="LTP4J简介LTP4J是对LTP的Java接口封装，众所周知LTP底层均是C++实现，所以对于需要Java接口的开发人员来说要通过调用LTP4J的接口实现调用LTP的目的，但是该项目仅仅封装了几个独立的方法，分别是NER/Parser/Postagger/Segmentor/SRL与之对应的实现功能是命名实体识别/依存句法分析/词性标注/分词/语义角色标注，LTP4J中封装的都是native方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="封装LTP4J的本地LTML调用接口">
+<meta property="og:url" content="http://www.codepub.cn/2015/05/13/Local-call-interface-of-LTP4J-project-for-LTML-encapsulation/index.html">
+<meta property="og:site_name" content="IT草根">
+<meta property="og:description" content="LTP4J简介LTP4J是对LTP的Java接口封装，众所周知LTP底层均是C++实现，所以对于需要Java接口的开发人员来说要通过调用LTP4J的接口实现调用LTP的目的，但是该项目仅仅封装了几个独立的方法，分别是NER/Parser/Postagger/Segmentor/SRL与之对应的实现功能是命名实体识别/依存句法分析/词性标注/分词/语义角色标注，LTP4J中封装的都是native方法">
+<meta property="og:updated_time" content="2015-06-20T09:59:09.204Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="封装LTP4J的本地LTML调用接口">
+<meta name="twitter:description" content="LTP4J简介LTP4J是对LTP的Java接口封装，众所周知LTP底层均是C++实现，所以对于需要Java接口的开发人员来说要通过调用LTP4J的接口实现调用LTP的目的，但是该项目仅仅封装了几个独立的方法，分别是NER/Parser/Postagger/Segmentor/SRL与之对应的实现功能是命名实体识别/依存句法分析/词性标注/分词/语义角色标注，LTP4J中封装的都是native方法">
+
+    
+    <link rel="alternative" href="/atom.xml" title="IT草根" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.gif">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.gif">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.gif" alt="IT草根" title="IT草根"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="IT草根">IT草根</a></h1>
+				<h2 class="blog-motto">WangXu&#39;s 代码馆 BLOG</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/resume">Resume</a></li>
+					
+						<li><a href="/links">Links</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+						<form class="search">
+							<label>Search</label>
+						<input type="text" class="st-default-search-input" id="ts-search-input" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/13/Local-call-interface-of-LTP4J-project-for-LTML-encapsulation/" title="封装LTP4J的本地LTML调用接口" itemprop="url">封装LTP4J的本地LTML调用接口</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.codepub.cn/about" title="Wang Xu" target="_blank" itemprop="author">Wang Xu</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-13T08:53:00.000Z" itemprop="datePublished"> 发表于 2015-05-13</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#LTP4J简介"><span class="toc-number">1.</span> <span class="toc-text">LTP4J简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java之native关键字"><span class="toc-number">2.</span> <span class="toc-text">Java之native关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LTML简介"><span class="toc-number">3.</span> <span class="toc-text">LTML简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#封装本地版LTML的Java调用接口"><span class="toc-number">4.</span> <span class="toc-text">封装本地版LTML的Java调用接口</span></a></li></ol>
+		
+		</div>
+		
+		<h3 id="LTP4J简介">LTP4J简介</h3><p>LTP4J是对LTP的Java接口封装，众所周知LTP底层均是C++实现，所以对于需要Java接口的开发人员来说要通过调用LTP4J的接口实现调用LTP的目的，但是该项目仅仅封装了几个独立的方法，分别是<strong>NER/Parser/Postagger/Segmentor/SRL</strong>与之对应的实现功能是<strong>命名实体识别/依存句法分析/词性标注/分词/语义角色标注</strong>，LTP4J中封装的都是native方法，无法查看源代码。</p>
+<h3 id="Java之native关键字">Java之native关键字</h3><p>Java native Interface简称JNI，即Java本地接口，JNI是一个编程框架，可以使得运行在<a href="https://zh.wikipedia.org/wiki/Java%E8%99%9A%E6%8B%9F%E6%9C%BA" target="_blank" rel="external">Java虚拟机</a>上的Java程序调用与平台相关的其它语言实现的程序，比如C/C++/汇编等。</p>
+<p>换言之，JNI允许用本地代码来解决纯粹用Java编程不能解决的平台相关的特性。对于Windows平台上的C++程序而言，在Java中将某个方法声明为native的，然后用C++程序实现该方法的具体功能，之后将C++程序编译为<a href="https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93" target="_blank" rel="external">DLL</a>文件即可。在Java虚拟机执行到该native方法的时候，会由操作系统去寻找对应的DLL文件进而调用该方法的C++实现。</p>
+<p>所以使用LTP4J的前提是需要编译LTP源码及LTP4J的源码，在Windows X64平台上编译LTP源码及LTP4J源码请参见：</p>
+<ul>
+<li><a href="http://codepub.cn/2015/05/07/Compile-the-Language-Technology-Platform(C++)-and-LTP4J(Java)source-code/" target="_blank" rel="external">编译哈工大语言技术平台云LTP（C++）源码及LTP4J（Java）源码</a></li>
+</ul>
+<p>在Windows平台上使用LTP4J需要处理BOM问题，解决办法请参见：</p>
+<ul>
+<li><a href="http://codepub.cn/2015/05/12/Recommended-processing-method-of-text-with-bom-in-Java/" target="_blank" rel="external">Java处理带BOM文本的推荐方法</a></li>
+</ul>
+<h3 id="LTML简介">LTML简介</h3><p>有关LTML的详细信息参见<a href="https://github.com/HIT-SCIR/ltp/blob/master/doc/ltp-document-3.0.md" target="_blank" rel="external">LTML数据表示</a><br>LTML 标准要求如下：结点标签分别为 xml4nlp, note, doc, para, sent, word, arg 共七种结点标签：</p>
+<ol>
+<li>xml4nlp 为根结点，无任何属性值；</li>
+<li>note 为标记结点，具有的属性分别为：sent, word, pos, ne, parser, srl；分别代表分句，分词，词性标注，命名实体识别，依存句法分析，词义消歧，语义角色标注；值为”n”，表明未做，值为”y”则表示完成，如pos=”y”，表示已经完成了词性标注；</li>
+<li>doc 为篇章结点，以段落为单位包含文本内容；无任何属性值；</li>
+<li>para 为段落结点，需含id 属性，其值从0 开始；</li>
+<li>sent 为句子结点，需含属性为id，cont；id 为段落中句子序号，其值从0 开始；cont 为句子内容；</li>
+<li>word 为分词结点，需含属性为id, cont；id 为句子中的词的序号，其值从0 开始，cont为分词内容；可选属性为 pos, ne, parent, relate；pos 的内容为词性标注内容；ne 为命名实体内容；parent 与relate 成对出现，parent 为依存句法分析的父亲结点id 号，relate 为相对应的关系；</li>
+<li>arg 为语义角色信息结点，任何一个谓词都会带有若干个该结点；其属性为id, type, beg，end；id 为序号，从0 开始；type 代表角色名称；beg 为开始的词序号，end 为结束的序号；</li>
+</ol>
+<p>LTP的在线版提供LTML格式的返回数据(亦即XML格式)，地址在<a href="http://www.ltp-cloud.com/demo/" target="_blank" rel="external">这里</a>，但是本地版不提供，需要自己封装。</p>
+<h3 id="封装本地版LTML的Java调用接口">封装本地版LTML的Java调用接口</h3><p>对外提供了两个接口，其一是根据文件内容获取完整的LTML标注结果，文件编码默认UTF-8，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> edu.shu.ltp4j.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> edu.shu.ltp4j.util.LTPUtil;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestGetFileLTML</span> </span>&#123;</span><br><span class="line">	<span class="annotation">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		String path = <span class="string">"test.txt"</span>;</span><br><span class="line">		LTPUtil ltpUtil = <span class="keyword">new</span> LTPUtil();</span><br><span class="line">		ltpUtil.setNe(<span class="keyword">true</span>);</span><br><span class="line">		ltpUtil.setParser(<span class="keyword">true</span>);</span><br><span class="line">		ltpUtil.setPos(<span class="keyword">true</span>);</span><br><span class="line">		ltpUtil.setSrl(<span class="keyword">true</span>);</span><br><span class="line">		String ltml = ltpUtil.getLTML(path);</span><br><span class="line">		System.out.println(ltml);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>本地分析输出结果：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">xml4nlp</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">note</span> <span class="attribute">ne</span>=<span class="value">"y"</span> <span class="attribute">parser</span>=<span class="value">"y"</span> <span class="attribute">pos</span>=<span class="value">"y"</span> <span class="attribute">sent</span>=<span class="value">"y"</span> <span class="attribute">srl</span>=<span class="value">"y"</span> <span class="attribute">word</span>=<span class="value">"y"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">doc</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">para</span> <span class="attribute">id</span>=<span class="value">"0"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="title">sent</span> <span class="attribute">cont</span>=<span class="value">"我爱你中国！"</span> <span class="attribute">id</span>=<span class="value">"0"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"我"</span> <span class="attribute">id</span>=<span class="value">"0"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"1"</span> <span class="attribute">pos</span>=<span class="value">"r"</span> <span class="attribute">relate</span>=<span class="value">"SBV"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"爱"</span> <span class="attribute">id</span>=<span class="value">"1"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"-1"</span> <span class="attribute">pos</span>=<span class="value">"v"</span> <span class="attribute">relate</span>=<span class="value">"HED"</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="title">arg</span> <span class="attribute">beg</span>=<span class="value">"0"</span> <span class="attribute">end</span>=<span class="value">"0"</span> <span class="attribute">id</span>=<span class="value">"0"</span> <span class="attribute">type</span>=<span class="value">"A0"</span> /&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="title">arg</span> <span class="attribute">beg</span>=<span class="value">"2"</span> <span class="attribute">end</span>=<span class="value">"3"</span> <span class="attribute">id</span>=<span class="value">"1"</span> <span class="attribute">type</span>=<span class="value">"A1"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="title">word</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"你"</span> <span class="attribute">id</span>=<span class="value">"2"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"3"</span> <span class="attribute">pos</span>=<span class="value">"r"</span> <span class="attribute">relate</span>=<span class="value">"ATT"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"中国"</span> <span class="attribute">id</span>=<span class="value">"3"</span> <span class="attribute">ne</span>=<span class="value">"S-Ns"</span> <span class="attribute">parent</span>=<span class="value">"1"</span> <span class="attribute">pos</span>=<span class="value">"ns"</span> <span class="attribute">relate</span>=<span class="value">"VOB"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"！"</span> <span class="attribute">id</span>=<span class="value">"4"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"1"</span> <span class="attribute">pos</span>=<span class="value">"wp"</span> <span class="attribute">relate</span>=<span class="value">"WP"</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="title">sent</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="title">para</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">para</span> <span class="attribute">id</span>=<span class="value">"1"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="title">sent</span> <span class="attribute">cont</span>=<span class="value">"事件语料的建立对事件及其关系识别和推理有重要意义，因此针对该语料库的建立进行研究有一定的理论意义和应用价值。"</span> <span class="attribute">id</span>=<span class="value">"0"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"事件"</span> <span class="attribute">id</span>=<span class="value">"0"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"1"</span> <span class="attribute">pos</span>=<span class="value">"n"</span> <span class="attribute">relate</span>=<span class="value">"ATT"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"语料"</span> <span class="attribute">id</span>=<span class="value">"1"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"3"</span> <span class="attribute">pos</span>=<span class="value">"n"</span> <span class="attribute">relate</span>=<span class="value">"ATT"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"的"</span> <span class="attribute">id</span>=<span class="value">"2"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"1"</span> <span class="attribute">pos</span>=<span class="value">"u"</span> <span class="attribute">relate</span>=<span class="value">"RAD"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"建立"</span> <span class="attribute">id</span>=<span class="value">"3"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"-1"</span> <span class="attribute">pos</span>=<span class="value">"v"</span> <span class="attribute">relate</span>=<span class="value">"HED"</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="title">arg</span> <span class="attribute">beg</span>=<span class="value">"4"</span> <span class="attribute">end</span>=<span class="value">"13"</span> <span class="attribute">id</span>=<span class="value">"0"</span> <span class="attribute">type</span>=<span class="value">"A1"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="title">word</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"对"</span> <span class="attribute">id</span>=<span class="value">"4"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"11"</span> <span class="attribute">pos</span>=<span class="value">"p"</span> <span class="attribute">relate</span>=<span class="value">"ADV"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"事件"</span> <span class="attribute">id</span>=<span class="value">"5"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"8"</span> <span class="attribute">pos</span>=<span class="value">"n"</span> <span class="attribute">relate</span>=<span class="value">"SBV"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"及其"</span> <span class="attribute">id</span>=<span class="value">"6"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"7"</span> <span class="attribute">pos</span>=<span class="value">"c"</span> <span class="attribute">relate</span>=<span class="value">"LAD"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"关系"</span> <span class="attribute">id</span>=<span class="value">"7"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"5"</span> <span class="attribute">pos</span>=<span class="value">"n"</span> <span class="attribute">relate</span>=<span class="value">"COO"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"识别"</span> <span class="attribute">id</span>=<span class="value">"8"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"4"</span> <span class="attribute">pos</span>=<span class="value">"v"</span> <span class="attribute">relate</span>=<span class="value">"POB"</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="title">arg</span> <span class="attribute">beg</span>=<span class="value">"5"</span> <span class="attribute">end</span>=<span class="value">"7"</span> <span class="attribute">id</span>=<span class="value">"0"</span> <span class="attribute">type</span>=<span class="value">"A0"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="title">word</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"和"</span> <span class="attribute">id</span>=<span class="value">"9"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"10"</span> <span class="attribute">pos</span>=<span class="value">"c"</span> <span class="attribute">relate</span>=<span class="value">"LAD"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"推理"</span> <span class="attribute">id</span>=<span class="value">"10"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"8"</span> <span class="attribute">pos</span>=<span class="value">"v"</span> <span class="attribute">relate</span>=<span class="value">"COO"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"有"</span> <span class="attribute">id</span>=<span class="value">"11"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"3"</span> <span class="attribute">pos</span>=<span class="value">"v"</span> <span class="attribute">relate</span>=<span class="value">"VOB"</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="title">arg</span> <span class="attribute">beg</span>=<span class="value">"12"</span> <span class="attribute">end</span>=<span class="value">"13"</span> <span class="attribute">id</span>=<span class="value">"0"</span> <span class="attribute">type</span>=<span class="value">"A1"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="title">word</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"重要"</span> <span class="attribute">id</span>=<span class="value">"12"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"13"</span> <span class="attribute">pos</span>=<span class="value">"a"</span> <span class="attribute">relate</span>=<span class="value">"ATT"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"意义"</span> <span class="attribute">id</span>=<span class="value">"13"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"11"</span> <span class="attribute">pos</span>=<span class="value">"n"</span> <span class="attribute">relate</span>=<span class="value">"VOB"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"，"</span> <span class="attribute">id</span>=<span class="value">"14"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"3"</span> <span class="attribute">pos</span>=<span class="value">"wp"</span> <span class="attribute">relate</span>=<span class="value">"WP"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"因此"</span> <span class="attribute">id</span>=<span class="value">"15"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"20"</span> <span class="attribute">pos</span>=<span class="value">"c"</span> <span class="attribute">relate</span>=<span class="value">"ADV"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"针对"</span> <span class="attribute">id</span>=<span class="value">"16"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"20"</span> <span class="attribute">pos</span>=<span class="value">"p"</span> <span class="attribute">relate</span>=<span class="value">"ADV"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"该"</span> <span class="attribute">id</span>=<span class="value">"17"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"18"</span> <span class="attribute">pos</span>=<span class="value">"r"</span> <span class="attribute">relate</span>=<span class="value">"ATT"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"语料库"</span> <span class="attribute">id</span>=<span class="value">"18"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"16"</span> <span class="attribute">pos</span>=<span class="value">"n"</span> <span class="attribute">relate</span>=<span class="value">"POB"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"的"</span> <span class="attribute">id</span>=<span class="value">"19"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"16"</span> <span class="attribute">pos</span>=<span class="value">"u"</span> <span class="attribute">relate</span>=<span class="value">"RAD"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"建立"</span> <span class="attribute">id</span>=<span class="value">"20"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"3"</span> <span class="attribute">pos</span>=<span class="value">"v"</span> <span class="attribute">relate</span>=<span class="value">"COO"</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="title">arg</span> <span class="attribute">beg</span>=<span class="value">"15"</span> <span class="attribute">end</span>=<span class="value">"15"</span> <span class="attribute">id</span>=<span class="value">"0"</span> <span class="attribute">type</span>=<span class="value">"DIS"</span> /&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="title">arg</span> <span class="attribute">beg</span>=<span class="value">"21"</span> <span class="attribute">end</span>=<span class="value">"30"</span> <span class="attribute">id</span>=<span class="value">"1"</span> <span class="attribute">type</span>=<span class="value">"A1"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="title">word</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"进行"</span> <span class="attribute">id</span>=<span class="value">"21"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"30"</span> <span class="attribute">pos</span>=<span class="value">"v"</span> <span class="attribute">relate</span>=<span class="value">"ATT"</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="title">arg</span> <span class="attribute">beg</span>=<span class="value">"22"</span> <span class="attribute">end</span>=<span class="value">"29"</span> <span class="attribute">id</span>=<span class="value">"0"</span> <span class="attribute">type</span>=<span class="value">"A1"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="title">word</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"研究"</span> <span class="attribute">id</span>=<span class="value">"22"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"21"</span> <span class="attribute">pos</span>=<span class="value">"v"</span> <span class="attribute">relate</span>=<span class="value">"VOB"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"有"</span> <span class="attribute">id</span>=<span class="value">"23"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"22"</span> <span class="attribute">pos</span>=<span class="value">"v"</span> <span class="attribute">relate</span>=<span class="value">"COO"</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="title">arg</span> <span class="attribute">beg</span>=<span class="value">"24"</span> <span class="attribute">end</span>=<span class="value">"27"</span> <span class="attribute">id</span>=<span class="value">"0"</span> <span class="attribute">type</span>=<span class="value">"A1"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="title">word</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"一定"</span> <span class="attribute">id</span>=<span class="value">"24"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"27"</span> <span class="attribute">pos</span>=<span class="value">"b"</span> <span class="attribute">relate</span>=<span class="value">"ATT"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"的"</span> <span class="attribute">id</span>=<span class="value">"25"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"24"</span> <span class="attribute">pos</span>=<span class="value">"u"</span> <span class="attribute">relate</span>=<span class="value">"RAD"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"理论"</span> <span class="attribute">id</span>=<span class="value">"26"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"27"</span> <span class="attribute">pos</span>=<span class="value">"n"</span> <span class="attribute">relate</span>=<span class="value">"ATT"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"意义"</span> <span class="attribute">id</span>=<span class="value">"27"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"23"</span> <span class="attribute">pos</span>=<span class="value">"n"</span> <span class="attribute">relate</span>=<span class="value">"VOB"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"和"</span> <span class="attribute">id</span>=<span class="value">"28"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"29"</span> <span class="attribute">pos</span>=<span class="value">"c"</span> <span class="attribute">relate</span>=<span class="value">"LAD"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"应用"</span> <span class="attribute">id</span>=<span class="value">"29"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"23"</span> <span class="attribute">pos</span>=<span class="value">"v"</span> <span class="attribute">relate</span>=<span class="value">"COO"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"价值"</span> <span class="attribute">id</span>=<span class="value">"30"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"20"</span> <span class="attribute">pos</span>=<span class="value">"n"</span> <span class="attribute">relate</span>=<span class="value">"VOB"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"。"</span> <span class="attribute">id</span>=<span class="value">"31"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"3"</span> <span class="attribute">pos</span>=<span class="value">"wp"</span> <span class="attribute">relate</span>=<span class="value">"WP"</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="title">sent</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="title">para</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">doc</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">xml4nlp</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>其二根据一个完整的句子获取到完整的LTML标注结果，完整的句子意思是使用“。|？|！|；”进行切分的结果，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> edu.shu.ltp4j.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> edu.shu.ltp4j.util.LTPUtil;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestGetSentectLTML</span> </span>&#123;</span><br><span class="line">	<span class="annotation">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSentence</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		LTPUtil ltpUtil = <span class="keyword">new</span> LTPUtil();</span><br><span class="line">		ltpUtil.setNe(<span class="keyword">true</span>);</span><br><span class="line">		ltpUtil.setParser(<span class="keyword">true</span>);</span><br><span class="line">		ltpUtil.setPos(<span class="keyword">true</span>);</span><br><span class="line">		ltpUtil.setSrl(<span class="keyword">true</span>);</span><br><span class="line">		String s = <span class="string">"事件语料的建立对事件及其关系识别和推理有重要意义，因此针对该语料库的建立进行研究有一定的理论意义和应用价值。"</span>;</span><br><span class="line">		String ltmlBySentence = ltpUtil.getLTMLBySentence(s);</span><br><span class="line">		System.out.println(ltmlBySentence);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>本地分析输出结果：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">xml4nlp</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">note</span> <span class="attribute">ne</span>=<span class="value">"y"</span> <span class="attribute">parser</span>=<span class="value">"y"</span> <span class="attribute">pos</span>=<span class="value">"y"</span> <span class="attribute">sent</span>=<span class="value">"y"</span> <span class="attribute">srl</span>=<span class="value">"y"</span> <span class="attribute">word</span>=<span class="value">"y"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">doc</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">para</span> <span class="attribute">id</span>=<span class="value">"0"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="title">sent</span> <span class="attribute">cont</span>=<span class="value">"事件语料的建立对事件及其关系识别和推理有重要意义，因此针对该语料库的建立进行研究有一定的理论意义和应用价值。"</span> <span class="attribute">id</span>=<span class="value">"0"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"事件"</span> <span class="attribute">id</span>=<span class="value">"0"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"1"</span> <span class="attribute">pos</span>=<span class="value">"n"</span> <span class="attribute">relate</span>=<span class="value">"ATT"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"语料"</span> <span class="attribute">id</span>=<span class="value">"1"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"3"</span> <span class="attribute">pos</span>=<span class="value">"n"</span> <span class="attribute">relate</span>=<span class="value">"ATT"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"的"</span> <span class="attribute">id</span>=<span class="value">"2"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"1"</span> <span class="attribute">pos</span>=<span class="value">"u"</span> <span class="attribute">relate</span>=<span class="value">"RAD"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"建立"</span> <span class="attribute">id</span>=<span class="value">"3"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"-1"</span> <span class="attribute">pos</span>=<span class="value">"v"</span> <span class="attribute">relate</span>=<span class="value">"HED"</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="title">arg</span> <span class="attribute">beg</span>=<span class="value">"4"</span> <span class="attribute">end</span>=<span class="value">"13"</span> <span class="attribute">id</span>=<span class="value">"0"</span> <span class="attribute">type</span>=<span class="value">"A1"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="title">word</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"对"</span> <span class="attribute">id</span>=<span class="value">"4"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"11"</span> <span class="attribute">pos</span>=<span class="value">"p"</span> <span class="attribute">relate</span>=<span class="value">"ADV"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"事件"</span> <span class="attribute">id</span>=<span class="value">"5"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"8"</span> <span class="attribute">pos</span>=<span class="value">"n"</span> <span class="attribute">relate</span>=<span class="value">"SBV"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"及其"</span> <span class="attribute">id</span>=<span class="value">"6"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"7"</span> <span class="attribute">pos</span>=<span class="value">"c"</span> <span class="attribute">relate</span>=<span class="value">"LAD"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"关系"</span> <span class="attribute">id</span>=<span class="value">"7"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"5"</span> <span class="attribute">pos</span>=<span class="value">"n"</span> <span class="attribute">relate</span>=<span class="value">"COO"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"识别"</span> <span class="attribute">id</span>=<span class="value">"8"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"4"</span> <span class="attribute">pos</span>=<span class="value">"v"</span> <span class="attribute">relate</span>=<span class="value">"POB"</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="title">arg</span> <span class="attribute">beg</span>=<span class="value">"5"</span> <span class="attribute">end</span>=<span class="value">"7"</span> <span class="attribute">id</span>=<span class="value">"0"</span> <span class="attribute">type</span>=<span class="value">"A0"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="title">word</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"和"</span> <span class="attribute">id</span>=<span class="value">"9"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"10"</span> <span class="attribute">pos</span>=<span class="value">"c"</span> <span class="attribute">relate</span>=<span class="value">"LAD"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"推理"</span> <span class="attribute">id</span>=<span class="value">"10"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"8"</span> <span class="attribute">pos</span>=<span class="value">"v"</span> <span class="attribute">relate</span>=<span class="value">"COO"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"有"</span> <span class="attribute">id</span>=<span class="value">"11"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"3"</span> <span class="attribute">pos</span>=<span class="value">"v"</span> <span class="attribute">relate</span>=<span class="value">"VOB"</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="title">arg</span> <span class="attribute">beg</span>=<span class="value">"12"</span> <span class="attribute">end</span>=<span class="value">"13"</span> <span class="attribute">id</span>=<span class="value">"0"</span> <span class="attribute">type</span>=<span class="value">"A1"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="title">word</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"重要"</span> <span class="attribute">id</span>=<span class="value">"12"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"13"</span> <span class="attribute">pos</span>=<span class="value">"a"</span> <span class="attribute">relate</span>=<span class="value">"ATT"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"意义"</span> <span class="attribute">id</span>=<span class="value">"13"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"11"</span> <span class="attribute">pos</span>=<span class="value">"n"</span> <span class="attribute">relate</span>=<span class="value">"VOB"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"，"</span> <span class="attribute">id</span>=<span class="value">"14"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"3"</span> <span class="attribute">pos</span>=<span class="value">"wp"</span> <span class="attribute">relate</span>=<span class="value">"WP"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"因此"</span> <span class="attribute">id</span>=<span class="value">"15"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"20"</span> <span class="attribute">pos</span>=<span class="value">"c"</span> <span class="attribute">relate</span>=<span class="value">"ADV"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"针对"</span> <span class="attribute">id</span>=<span class="value">"16"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"20"</span> <span class="attribute">pos</span>=<span class="value">"p"</span> <span class="attribute">relate</span>=<span class="value">"ADV"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"该"</span> <span class="attribute">id</span>=<span class="value">"17"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"18"</span> <span class="attribute">pos</span>=<span class="value">"r"</span> <span class="attribute">relate</span>=<span class="value">"ATT"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"语料库"</span> <span class="attribute">id</span>=<span class="value">"18"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"16"</span> <span class="attribute">pos</span>=<span class="value">"n"</span> <span class="attribute">relate</span>=<span class="value">"POB"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"的"</span> <span class="attribute">id</span>=<span class="value">"19"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"16"</span> <span class="attribute">pos</span>=<span class="value">"u"</span> <span class="attribute">relate</span>=<span class="value">"RAD"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"建立"</span> <span class="attribute">id</span>=<span class="value">"20"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"3"</span> <span class="attribute">pos</span>=<span class="value">"v"</span> <span class="attribute">relate</span>=<span class="value">"COO"</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="title">arg</span> <span class="attribute">beg</span>=<span class="value">"15"</span> <span class="attribute">end</span>=<span class="value">"15"</span> <span class="attribute">id</span>=<span class="value">"0"</span> <span class="attribute">type</span>=<span class="value">"DIS"</span> /&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="title">arg</span> <span class="attribute">beg</span>=<span class="value">"21"</span> <span class="attribute">end</span>=<span class="value">"30"</span> <span class="attribute">id</span>=<span class="value">"1"</span> <span class="attribute">type</span>=<span class="value">"A1"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="title">word</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"进行"</span> <span class="attribute">id</span>=<span class="value">"21"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"30"</span> <span class="attribute">pos</span>=<span class="value">"v"</span> <span class="attribute">relate</span>=<span class="value">"ATT"</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="title">arg</span> <span class="attribute">beg</span>=<span class="value">"22"</span> <span class="attribute">end</span>=<span class="value">"29"</span> <span class="attribute">id</span>=<span class="value">"0"</span> <span class="attribute">type</span>=<span class="value">"A1"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="title">word</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"研究"</span> <span class="attribute">id</span>=<span class="value">"22"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"21"</span> <span class="attribute">pos</span>=<span class="value">"v"</span> <span class="attribute">relate</span>=<span class="value">"VOB"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"有"</span> <span class="attribute">id</span>=<span class="value">"23"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"22"</span> <span class="attribute">pos</span>=<span class="value">"v"</span> <span class="attribute">relate</span>=<span class="value">"COO"</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="title">arg</span> <span class="attribute">beg</span>=<span class="value">"24"</span> <span class="attribute">end</span>=<span class="value">"27"</span> <span class="attribute">id</span>=<span class="value">"0"</span> <span class="attribute">type</span>=<span class="value">"A1"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="title">word</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"一定"</span> <span class="attribute">id</span>=<span class="value">"24"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"27"</span> <span class="attribute">pos</span>=<span class="value">"b"</span> <span class="attribute">relate</span>=<span class="value">"ATT"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"的"</span> <span class="attribute">id</span>=<span class="value">"25"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"24"</span> <span class="attribute">pos</span>=<span class="value">"u"</span> <span class="attribute">relate</span>=<span class="value">"RAD"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"理论"</span> <span class="attribute">id</span>=<span class="value">"26"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"27"</span> <span class="attribute">pos</span>=<span class="value">"n"</span> <span class="attribute">relate</span>=<span class="value">"ATT"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"意义"</span> <span class="attribute">id</span>=<span class="value">"27"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"23"</span> <span class="attribute">pos</span>=<span class="value">"n"</span> <span class="attribute">relate</span>=<span class="value">"VOB"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"和"</span> <span class="attribute">id</span>=<span class="value">"28"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"29"</span> <span class="attribute">pos</span>=<span class="value">"c"</span> <span class="attribute">relate</span>=<span class="value">"LAD"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"应用"</span> <span class="attribute">id</span>=<span class="value">"29"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"23"</span> <span class="attribute">pos</span>=<span class="value">"v"</span> <span class="attribute">relate</span>=<span class="value">"COO"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"价值"</span> <span class="attribute">id</span>=<span class="value">"30"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"20"</span> <span class="attribute">pos</span>=<span class="value">"n"</span> <span class="attribute">relate</span>=<span class="value">"VOB"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">word</span> <span class="attribute">cont</span>=<span class="value">"。"</span> <span class="attribute">id</span>=<span class="value">"31"</span> <span class="attribute">ne</span>=<span class="value">"O"</span> <span class="attribute">parent</span>=<span class="value">"3"</span> <span class="attribute">pos</span>=<span class="value">"wp"</span> <span class="attribute">relate</span>=<span class="value">"WP"</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="title">sent</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="title">para</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">doc</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">xml4nlp</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>整个项目的源代码已经上传到Github仓库，欢迎<a href="https://github.com/shijiebei2009/BuildLTMLForLTP" target="_blank" rel="external">下载使用</a>！</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Programming-Notes/">Programming Notes</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/LTP/">LTP</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=2067139" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2067139" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/05/14/Git-filtering-method-of-uploaded-files/" title="Git过滤上传的文件的方法">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Git过滤上传的文件的方法</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/05/12/Recommended-processing-method-of-text-with-bom-in-Java/"  title="Java处理带BOM文本的推荐方法">
+ <strong>下一篇：</strong><br/> 
+ <span>Java处理带BOM文本的推荐方法
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/05/13/Local-call-interface-of-LTP4J-project-for-LTML-encapsulation/" data-title="封装LTP4J的本地LTML调用接口" data-url="http://www.codepub.cn/2015/05/13/Local-call-interface-of-LTP4J-project-for-LTML-encapsulation/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#LTP4J简介"><span class="toc-number">1.</span> <span class="toc-text">LTP4J简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java之native关键字"><span class="toc-number">2.</span> <span class="toc-text">Java之native关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LTML简介"><span class="toc-number">3.</span> <span class="toc-text">LTML简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#封装本地版LTML的Java调用接口"><span class="toc-number">4.</span> <span class="toc-text">封装本地版LTML的Java调用接口</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Algorithms/" title="Algorithms">Algorithms<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Database/" title="Database">Database<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git-GitHub/" title="Git/GitHub">Git/GitHub<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life-Talk/" title="Life-Talk">Life-Talk<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Operating-System/" title="Operating System">Operating System<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Programming-Notes/" title="Programming Notes">Programming Notes<sup>22</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python3/" title="Python3">Python3<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/LTP/" title="LTP">LTP<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/IT/" title="IT">IT<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elite/" title="Elite">Elite<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tools/" title="Tools">Tools<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySql/" title="MySql">MySql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Lombok/" title="Lombok">Lombok<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Selenium/" title="Selenium">Selenium<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DLL/" title="DLL">DLL<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tomcat/" title="Tomcat">Tomcat<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Guava/" title="Guava">Guava<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Github/" title="Github">Github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Octopress/" title="Octopress">Octopress<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Eclipse/" title="Eclipse">Eclipse<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <p class="asidetitle">最新评论</p>
+<div>
+	<ul class="ds-recent-comments" data-num-items="10" data-show-avatars="1" data-show-time="1" data-show-admin="1" data-excerpt-length="70"></ul>
+	<!--多说js加载开始，一个页面只需要加载一次 -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!--多说js加载结束，一个页面只需要加载一次 -->
+</div>
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/DLL/" style="font-size: 10px;">DLL</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Elite/" style="font-size: 10px;">Elite</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/IntelliJ/" style="font-size: 10px;">IntelliJ</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/LTP/" style="font-size: 13.33px;">LTP</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/Python3/" style="font-size: 16.67px;">Python3</a> <a href="/tags/Selenium/" style="font-size: 10px;">Selenium</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Struts2/" style="font-size: 10px;">Struts2</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a>
+    </div>
+  </div>
+
+
+  <br/>
+<p class="asidetitle">热评文章</p>
+<!-- 多说热评文章 start -->
+<div>
+<div class="ds-top-threads" data-range="monthly" data-num-items="8"></div>
+<!-- 多说热评文章 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+<br/>
+
+  <p class="asidetitle">打赏他</p>
+<div>
+<form action="https://shenghuo.alipay.com/send/payment/fill.htm" method="POST" target="_blank" accept-charset="GBK">
+    <br/>
+    <input name="optEmail" type="hidden" value="18302118258" />
+    <input name="payAmount" type="hidden" value="10" />
+    <input id="title" name="title" type="hidden" value="博主，打赏你的！" />
+    <input name="memo" type="hidden" value="你Y加油，继续写博客！" />
+    <input name="pay" type="image" value="转账" src="http://7xig3q.com1.z0.glb.clouddn.com/alipay-donate-website.png" />
+</form>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello , I&#39;m Wang Xu in SHU. <br/>
+			志不强者智不达，言不信者行不果。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1779238484" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/shijiebei2009" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/4204922" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		
+		
+		<a href="https://www.linkedin.com/in/codepub" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		<a href="https://www.douban.com/people/shijiebei2009" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		<a href="https://www.zhihu.com/people/codepub.cn" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:wangx89@126.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="http://www.codepub.cn/about" target="_blank" title="Wang Xu">Wang Xu</a>
+		
+		<a href="http://tongji.baidu.com/web/welcome/ico?s=2c61418f187553bcc869b755930233ab" target="_blank">百度统计</a><br/>
+		本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+		</p>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','CEs2u-bRR6iHSt4ynbFA','2.0.0');
+</script>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"codepub"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F2c61418f187553bcc869b755930233ab' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+
+<a href="https://github.com/shijiebei2009"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>

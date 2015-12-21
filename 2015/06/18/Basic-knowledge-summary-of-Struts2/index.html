@@ -1,0 +1,753 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  
+  <meta charset="UTF-8">
+  
+    <title>Struts2基础知识汇总 | IT草根</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Wang Xu">
+    
+
+    
+    <meta name="description" content="力求用最简洁的文字表述最全面的知识，本Blog不适合零基础人员
+Struts2简介Struts2是由传统的Struts1、WebWork两个经典的MVC框架发展起来，如下图所示，无论从Struts2设计的角度还是在实际项目中的易用性来看，Struts2都是一个非常优秀的MVC框架，当然目前还有另外一个非常优秀的MVC框架——SpringMVC，以后再对它进行介绍。
+实现ActionStruts2的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Struts2基础知识汇总">
+<meta property="og:url" content="http://www.codepub.cn/2015/06/18/Basic-knowledge-summary-of-Struts2/index.html">
+<meta property="og:site_name" content="IT草根">
+<meta property="og:description" content="力求用最简洁的文字表述最全面的知识，本Blog不适合零基础人员
+Struts2简介Struts2是由传统的Struts1、WebWork两个经典的MVC框架发展起来，如下图所示，无论从Struts2设计的角度还是在实际项目中的易用性来看，Struts2都是一个非常优秀的MVC框架，当然目前还有另外一个非常优秀的MVC框架——SpringMVC，以后再对它进行介绍。
+实现ActionStruts2的">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/struts2-logo.png">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/webwork+struts=struts2.png">
+<meta property="og:updated_time" content="2015-06-18T13:31:54.168Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Struts2基础知识汇总">
+<meta name="twitter:description" content="力求用最简洁的文字表述最全面的知识，本Blog不适合零基础人员
+Struts2简介Struts2是由传统的Struts1、WebWork两个经典的MVC框架发展起来，如下图所示，无论从Struts2设计的角度还是在实际项目中的易用性来看，Struts2都是一个非常优秀的MVC框架，当然目前还有另外一个非常优秀的MVC框架——SpringMVC，以后再对它进行介绍。
+实现ActionStruts2的">
+
+    
+    <link rel="alternative" href="/atom.xml" title="IT草根" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.gif">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.gif">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.gif" alt="IT草根" title="IT草根"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="IT草根">IT草根</a></h1>
+				<h2 class="blog-motto">WangXu&#39;s 代码馆 BLOG</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/resume">Resume</a></li>
+					
+						<li><a href="/links">Links</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+						<form class="search">
+							<label>Search</label>
+						<input type="text" class="st-default-search-input" id="ts-search-input" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/06/18/Basic-knowledge-summary-of-Struts2/" title="Struts2基础知识汇总" itemprop="url">Struts2基础知识汇总</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.codepub.cn/about" title="Wang Xu" target="_blank" itemprop="author">Wang Xu</a>
+		
+  <p class="article-time">
+    <time datetime="2015-06-18T07:41:01.000Z" itemprop="datePublished"> 发表于 2015-06-18</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Struts2简介"><span class="toc-number">1.</span> <span class="toc-text">Struts2简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现Action"><span class="toc-number">2.</span> <span class="toc-text">实现Action</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Action访问Servlet_API"><span class="toc-number">2.1.</span> <span class="toc-text">Action访问Servlet API</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Action直接访问Servlet_API"><span class="toc-number">2.2.</span> <span class="toc-text">Action直接访问Servlet API</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用ServletActionContext访问Servlet_API"><span class="toc-number">2.3.</span> <span class="toc-text">使用ServletActionContext访问Servlet API</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Action包和命名空间"><span class="toc-number">3.</span> <span class="toc-text">Action包和命名空间</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置默认Action"><span class="toc-number">3.1.</span> <span class="toc-text">配置默认Action</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Struts2内建的支持结果类型"><span class="toc-number">4.</span> <span class="toc-text">Struts2内建的支持结果类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Struts2异常处理"><span class="toc-number">5.</span> <span class="toc-text">Struts2异常处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Struts2开启异常映射"><span class="toc-number">5.1.</span> <span class="toc-text">Struts2开启异常映射</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Struts2输出异常信息"><span class="toc-number">5.2.</span> <span class="toc-text">Struts2输出异常信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Convention插件与“约定”支持"><span class="toc-number">5.3.</span> <span class="toc-text">Convention插件与“约定”支持</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Action的搜索和映射约定"><span class="toc-number">5.3.1.</span> <span class="toc-text">Action的搜索和映射约定</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#按约定映射Result"><span class="toc-number">5.3.2.</span> <span class="toc-text">按约定映射Result</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Action链的约定"><span class="toc-number">5.3.3.</span> <span class="toc-text">Action链的约定</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#自动重加载映射"><span class="toc-number">5.3.4.</span> <span class="toc-text">自动重加载映射</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Struts2标签库"><span class="toc-number">6.</span> <span class="toc-text">Struts2标签库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Struts2标签库概述"><span class="toc-number">6.1.</span> <span class="toc-text">Struts2标签库概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OGNL表达式语言"><span class="toc-number">6.2.</span> <span class="toc-text">OGNL表达式语言</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Struts2拦截器"><span class="toc-number">7.</span> <span class="toc-text">Struts2拦截器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置默认拦截器"><span class="toc-number">7.1.</span> <span class="toc-text">配置默认拦截器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#拦截器的执行顺序"><span class="toc-number">7.2.</span> <span class="toc-text">拦截器的执行顺序</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<p><strong><em>力求用最简洁的文字表述最全面的知识，本Blog不适合零基础人员</em></strong><br><img src="http://7xig3q.com1.z0.glb.clouddn.com/struts2-logo.png" alt="logo"></p>
+<h3 id="Struts2简介">Struts2简介</h3><p>Struts2是由传统的Struts1、WebWork两个经典的MVC框架发展起来，如下图所示，无论从Struts2设计的角度还是在实际项目中的易用性来看，Struts2都是一个非常优秀的MVC框架，当然目前还有另外一个非常优秀的MVC框架——SpringMVC，以后再对它进行介绍。<br><img src="http://7xig3q.com1.z0.glb.clouddn.com/webwork+struts=struts2.png" alt="Struts2"></p>
+<h3 id="实现Action">实现Action</h3><p>Struts2的Action类是一个普通的POJO（通常应该包含一个无参数的execute方法），Struts2直接使用Action来封装HTTP请求参数，因此，Action类里还应该包含与请求参数对应的实例变量，并且为这些实例变量提供对应的setter和getter方法。注意其实实例变量是可以省略的，因为Struts2是通过对应的setter和getter方法来处理请求参数的，而不是通过实例变量名来处理请求参数的。</p>
+<h4 id="Action访问Servlet_API">Action访问Servlet API</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ActionContext ctx = ActionContext.getContext();<span class="comment">//相当于JSP中内置的request</span></span><br><span class="line">ctx.getApplication();<span class="comment">//返回Map对象，该对象模拟了ServletContext实例，相当于JSP中内置的application</span></span><br><span class="line">ctx.getSession();<span class="comment">//返回Map对象，该对象模拟了HttpSession实例，相当于JSP中内置的session</span></span><br></pre></td></tr></table></figure>
+<h4 id="Action直接访问Servlet_API">Action直接访问Servlet API</h4><p>Struts2提供了几个接口供我们直接访问ServletAPI</p>
+<ul>
+<li><code>ServletContextAware</code>: 实现该接口的Action可以直接访问Web应用的ServletContext实例</li>
+<li><code>ServletRequestAware</code>: 实现该接口的Action可以直接访问用户请求的HttpServletRequest实例</li>
+<li><code>ServletResponseAware</code>: 实现该接口的Action可以直接访问服务器响应的HttpServletResponse实例</li>
+</ul>
+<h4 id="使用ServletActionContext访问Servlet_API">使用ServletActionContext访问Servlet API</h4><p>Struts2还提供了一个ServletActionContext工具类，这个类包含如下几个静态方法</p>
+<ul>
+<li><code>static PageContext getPageContext()</code>: 取得Web应用的PageContext对象</li>
+<li><code>static HttpServletRequest getRequest()</code>: 取得Web应用的HttpServletRequest对象</li>
+<li><code>static HttpServletResponse getResponse()</code>: 取得Web应用的HttpServletResponse对象</li>
+<li><code>static ServletContext getServletContext()</code>: 取得Web应用的ServletContext对象</li>
+</ul>
+<h3 id="Action包和命名空间">Action包和命名空间</h3><p>在struts.xml中配置Action，如果没有指定namespace属性，那么该包使用默认的命名空间，如果namespace=”/“表示指定根命名空间。默认命名空间里的Action可以处理任何命名空间下的Action请求，但根命名空间下的Action只处理根命名空间下的Action请求，这是根命名空间和默认命名空间的区别。</p>
+<h4 id="配置默认Action">配置默认Action</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">package</span> <span class="attribute">name</span>=<span class="value">"..."</span> <span class="attribute">extends</span>=<span class="value">"struts-default"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">default-action-ref</span> <span class="attribute">name</span>=<span class="value">"simpleViewAction"</span>/&gt;</span></span><br><span class="line">    //当用户请求找不到对应的Action时，系统默认的Action将处理用户请求</span><br><span class="line">    <span class="tag">&lt;<span class="title">action</span> <span class="attribute">name</span>=<span class="value">"simpleViewAction"</span> <span class="attribute">class</span>=<span class="value">"..."</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">result...</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">action</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">package</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>将默认Action配置在默认命名空间里就可以让该Action处理所有用户请求，因为默认命名空间的Action可以处理任何命名空间的请求。</p>
+<h3 id="Struts2内建的支持结果类型">Struts2内建的支持结果类型</h3><ul>
+<li>chain: Action链式处理的结果类型</li>
+<li>dispatcher: 用于指定使用JSP作为视图的结果类型，默认值</li>
+<li>freemarker: 用于指定使用FreeMarker模板作为视图的结果类型</li>
+<li>httpheader: 用于控制特殊的HTTP行为的结果类型</li>
+<li>redirect: 用于直接跳转到其他URL的结果类型</li>
+<li>redirectAction: 用于直接跳转到其他Action的结果类型</li>
+<li>stream: 用于向浏览器返回一个InputStream</li>
+<li>velocity: 用于指定使用Velocity模板作为视图的结果类型</li>
+<li>xslt: 用于与XML/XSLT整合的结果类型</li>
+<li>plainText: 用于显示某个页面的原始代码的结果类型</li>
+</ul>
+<p><strong><em>Notes</em></strong></p>
+<ol>
+<li>dispatcher结果类型是将请求forward（转发）到指定的JSP资源；而redirect结果类型，是将请求redirect（重定向）到指定的视图资源，重定向会丢失所有的请求参数、请求属性——当然也丢失了Action的处理结果。</li>
+<li>使用redirect类型的结果时，不能重定向到<code>/WEB-INF/</code>路径下任何资源，因为重定向相当于重新发送请求，而Web应用的<code>/WEB-INF/</code>路径下资源是受保护资源。</li>
+<li>使用redirectAction结果类型时，系统将重新生成一个新请求，只是该请求的URL是一个Action，因此前一个Action处理结果、请求参数、请求属性都会丢失。</li>
+</ol>
+<h3 id="Struts2异常处理">Struts2异常处理</h3><h4 id="Struts2开启异常映射">Struts2开启异常映射</h4><p>默认的在struts-default.xml中已经开启了异常映射，代码如下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">interceptors</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--配置异常处理的拦截器--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">interceptor</span> <span class="attribute">name</span>=<span class="value">"exception"</span> <span class="attribute">class</span>=<span class="value">"com.opensymphony.xwork.interceptor.ExceptionMapping.Interceptor"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">interceptor-stakc</span> <span class="attribute">name</span>=<span class="value">"defaultStack"</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">        <span class="comment">&lt;!--加入默认的拦截器栈--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">interceptor-ref</span> <span class="attribute">name</span>=<span class="value">"exception"</span>/&gt;</span></span><br><span class="line">        ...</span><br><span class="line">    <span class="tag">&lt;/<span class="title">interceptor-stakc</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">interceptors</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="Struts2输出异常信息">Struts2输出异常信息</h4><p><code>&lt;s:property value=&quot;exception&quot;/&gt;</code>: 输出异常对象本身<br><code>&lt;s:property value=&quot;exceptionStck&quot;/&gt;</code>: 输出异常堆栈信息<br><code>&lt;s:property value=&quot;exception.message&quot;/&gt;</code>: 输出异常的message消息</p>
+<h4 id="Convention插件与“约定”支持">Convention插件与“约定”支持</h4><p>有Ruby on Rails开发经验的朋友知道Rails有一条重要原则：约定优于配置。Rails开发者只需要按约定开发ActiveRecord/ActiveController即可，无需进行配置。Struts2的Convention插件借鉴了Rails的创意。</p>
+<h5 id="Action的搜索和映射约定">Action的搜索和映射约定</h5><p>使用Convention插件，将Struts2项目下的struts2-convention-plugin-2.3.16.3.jar复制到项目的WEB-INF/lib下即可。<br>对于Convention插件而言，它会自动搜索位于action、actions、struts、struts2包下的所有Java类，Convention插件会把如下两种Java类当成Action处理。</p>
+<ul>
+<li>所有实现了com.opensymphony.xwork2.Action的Java类</li>
+<li>所有类名以Action结尾的Java类</li>
+</ul>
+<p>Struts2的Convention插件还允许设置如下三个常量</p>
+<ul>
+<li>struts.convention.exclude.packages: 指定不扫描哪些包下的Java类，位于这些包结构下的Java类将不会被自动映射成Action</li>
+<li>struts.convention.package.locators: Convention插件使用该常量指定的包作为搜寻Action的根包。例如actions.base.LoginAction类，按约定原本映射到/base/login；如果将该常量设置为base，则该Action将会映射到/login</li>
+<li>struts.convention.action.packages: Convention插件以该常量指定包作为根包来搜索Action类，Convention插件除了扫描action、actions、struts、struts2四个包的类之外，还会扫描该常量指定的一个或多个包，Convention会视图从中发现Action类</li>
+</ul>
+<p>部署Action时，action、actions、struts、struts2包会映射成根（/）命名空间，而这些包下的子包则被映射成对应的命名空间。<br>例如：edu.shu.action.base.LoginAction 映射到/base/命名空间</p>
+<p>Action的那么属性（即该Action处理的URL）根据Action的类名映射，需遵循如下两步规则：</p>
+<ul>
+<li>如果该Action类名包含Action后缀，将该Acting类名的Action后缀去掉，否则不做任何处理</li>
+<li>将Action类名的驼峰写法转成中划线写法，所有字母小写</li>
+</ul>
+<p>例如edu.shu.action.base.UserLoginAction映射的URL是/base/user-login.action</p>
+<h5 id="按约定映射Result">按约定映射Result</h5><p>Convention默认也为作为逻辑视图和物理视图之间的映射提供了约定，默认情况下，Convention总会到Web应用的WEB-INF/content路径下定位物理资源，定位资源的约定是actionName+resultcode+suffix。当某个逻辑视图找不到对应的视图资源时，Convention会自动视图使用actionName+sufix作为物理视图资源。</p>
+<table>
+<thead>
+<tr>
+<th>Action的URL</th>
+<th style="text-align:right">返回的逻辑视图名</th>
+<th style="text-align:center">结果类型</th>
+<th>对应的物理视图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/login</td>
+<td style="text-align:right">success</td>
+<td style="text-align:center">Dispatcher</td>
+<td>\WEB-INF\content\login-success.jsp</td>
+</tr>
+<tr>
+<td>/login</td>
+<td style="text-align:right">success</td>
+<td style="text-align:center">Dispatcher</td>
+<td>\WEB-INF\content\login-success.html</td>
+</tr>
+<tr>
+<td>/login</td>
+<td style="text-align:right">success</td>
+<td style="text-align:center">Dispatcher</td>
+<td>\WEB-INF\content\login.jsp</td>
+</tr>
+<tr>
+<td>/login</td>
+<td style="text-align:right">success</td>
+<td style="text-align:center">Dispatcher</td>
+<td>\WEB-INF\content\login.html</td>
+</tr>
+<tr>
+<td>/shu/get-book</td>
+<td style="text-align:right">error</td>
+<td style="text-align:center">FreeMarker</td>
+<td>\WEB-INF\content\shu\get-book-error.ftl</td>
+</tr>
+<tr>
+<td>/shu/get-book</td>
+<td style="text-align:right">error</td>
+<td style="text-align:center">FreeMarker</td>
+<td>\WEB-INF\content\shu\get-book.ftl</td>
+</tr>
+<tr>
+<td>/shu/get-book</td>
+<td style="text-align:right">input</td>
+<td style="text-align:center">Velocity</td>
+<td>\WEB-INF\content\shu\get-book-input.vm</td>
+</tr>
+<tr>
+<td>/shu/get</td>
+<td style="text-align:right">input</td>
+<td style="text-align:center">Velocity</td>
+<td>\WEB-INF\content\shu\get-input.vm</td>
+</tr>
+</tbody>
+</table>
+<h5 id="Action链的约定">Action链的约定</h5><p>如果希望一个Action处理结束后不是进入视图页面，而是进入另一个Action形成的Action链，则通过Convention插件只需遵守如下三个约定</p>
+<ul>
+<li>第一个Action返回的逻辑视图字符串没有对应的视图资源</li>
+<li>第二个Action与第一个Action处于同一个包下</li>
+<li>第二个Action映射的URL为: firstactionName+resultcode</li>
+</ul>
+<h5 id="自动重加载映射">自动重加载映射</h5><p>在struts.xml中配置如下两个常量即可使Convention插件重加载映射<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">constant</span> <span class="attribute">name</span>=<span class="value">"struts.devMode"</span> <span class="attribute">value</span>=<span class="value">"true"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">constant</span> <span class="attribute">name</span>=<span class="value">"struts.convention.classes.reload"</span> <span class="attribute">value</span>=<span class="value">"true"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Struts2标签库">Struts2标签库</h3><h4 id="Struts2标签库概述">Struts2标签库概述</h4><p>从最大的范围来分，Struts2可以将所有标签分成如下三类</p>
+<ol>
+<li>UI标签: 主要用于生成HTML元素的标签<br>1.1. 表单标签: 主要用于生成HTML页面的form元素，以及普通表单元素的标签<br>1.2. 非表单元素: 主要用于生成页面的树、Tab页等标签</li>
+<li>非UI标签: 主要用于数据访问、逻辑控制等的标签<br>2.1 流程控制标签: 主要包含用于实现分支、循环等流程控制的标签<br>2.2 数据访问标签: 主要包含用于输出ValueStack中的值、完成国际化等功能的标签</li>
+<li>Ajax标签: 用于Ajax支持的标签</li>
+</ol>
+<h4 id="OGNL表达式语言">OGNL表达式语言</h4><p>OGNL的顶级对象是Stack Context，Stack Context对象就是一个Map类型的实例，其根对象就是Value Stack。OGNL的Stack Context里除了包括ValueStack这个根之外，还包括parameters、request、session、application、attr等命名对象，但这些命名对象都不是根。Stack Context“根”对象和普通命名对象的区别在于</p>
+<ul>
+<li>访问Stack Context里的命名对象需要在对象名之前添加#前缀</li>
+<li>访问OGNL的Stack Context里“根”对象的属性时，可以省略对象名</li>
+</ul>
+<h3 id="Struts2拦截器">Struts2拦截器</h3><h4 id="配置默认拦截器">配置默认拦截器</h4><p>当配置一个包时，可以为其指定默认拦截器。一旦为某个包指定了默认的拦截器，如果该包中的Action没有显式指定拦截器，则默认的拦截器将会起作用。如果一旦为该包中的Action显式应用了某个拦截器，则默认的拦截器不会起作用，如果该Action还需要使用默认拦截器，则必须手动配置该拦截器的引用。</p>
+<h4 id="拦截器的执行顺序">拦截器的执行顺序</h4><p>在Action的控制方法执行之前，位于拦截器链前面的拦截器将先发生作用；在Action的控制方法执行之后，位于拦截器链前面的拦截器将后发生作用。</p>
+<p>参考资料<br>【1】轻量级JavaEE企业应用实战-Struts2+Spring4+Hibernate整合开发</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Programming-Notes/">Programming Notes</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Struts2/">Struts2</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=2067139" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2067139" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/06/19/Basic-knowledge-summary-of-Hibernate/" title="Hibernate基础知识汇总">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Hibernate基础知识汇总</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/06/17/Basic-knowledge-summary-of-JSP-Servlet/"  title="JSP/Servlet基础知识汇总">
+ <strong>下一篇：</strong><br/> 
+ <span>JSP/Servlet基础知识汇总
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/06/18/Basic-knowledge-summary-of-Struts2/" data-title="Struts2基础知识汇总" data-url="http://www.codepub.cn/2015/06/18/Basic-knowledge-summary-of-Struts2/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Struts2简介"><span class="toc-number">1.</span> <span class="toc-text">Struts2简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现Action"><span class="toc-number">2.</span> <span class="toc-text">实现Action</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Action访问Servlet_API"><span class="toc-number">2.1.</span> <span class="toc-text">Action访问Servlet API</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Action直接访问Servlet_API"><span class="toc-number">2.2.</span> <span class="toc-text">Action直接访问Servlet API</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用ServletActionContext访问Servlet_API"><span class="toc-number">2.3.</span> <span class="toc-text">使用ServletActionContext访问Servlet API</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Action包和命名空间"><span class="toc-number">3.</span> <span class="toc-text">Action包和命名空间</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置默认Action"><span class="toc-number">3.1.</span> <span class="toc-text">配置默认Action</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Struts2内建的支持结果类型"><span class="toc-number">4.</span> <span class="toc-text">Struts2内建的支持结果类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Struts2异常处理"><span class="toc-number">5.</span> <span class="toc-text">Struts2异常处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Struts2开启异常映射"><span class="toc-number">5.1.</span> <span class="toc-text">Struts2开启异常映射</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Struts2输出异常信息"><span class="toc-number">5.2.</span> <span class="toc-text">Struts2输出异常信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Convention插件与“约定”支持"><span class="toc-number">5.3.</span> <span class="toc-text">Convention插件与“约定”支持</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Action的搜索和映射约定"><span class="toc-number">5.3.1.</span> <span class="toc-text">Action的搜索和映射约定</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#按约定映射Result"><span class="toc-number">5.3.2.</span> <span class="toc-text">按约定映射Result</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Action链的约定"><span class="toc-number">5.3.3.</span> <span class="toc-text">Action链的约定</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#自动重加载映射"><span class="toc-number">5.3.4.</span> <span class="toc-text">自动重加载映射</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Struts2标签库"><span class="toc-number">6.</span> <span class="toc-text">Struts2标签库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Struts2标签库概述"><span class="toc-number">6.1.</span> <span class="toc-text">Struts2标签库概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OGNL表达式语言"><span class="toc-number">6.2.</span> <span class="toc-text">OGNL表达式语言</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Struts2拦截器"><span class="toc-number">7.</span> <span class="toc-text">Struts2拦截器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置默认拦截器"><span class="toc-number">7.1.</span> <span class="toc-text">配置默认拦截器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#拦截器的执行顺序"><span class="toc-number">7.2.</span> <span class="toc-text">拦截器的执行顺序</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Algorithms/" title="Algorithms">Algorithms<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Database/" title="Database">Database<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git-GitHub/" title="Git/GitHub">Git/GitHub<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life-Talk/" title="Life-Talk">Life-Talk<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Operating-System/" title="Operating System">Operating System<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Programming-Notes/" title="Programming Notes">Programming Notes<sup>22</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python3/" title="Python3">Python3<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/LTP/" title="LTP">LTP<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/IT/" title="IT">IT<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elite/" title="Elite">Elite<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tools/" title="Tools">Tools<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySql/" title="MySql">MySql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Lombok/" title="Lombok">Lombok<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Selenium/" title="Selenium">Selenium<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DLL/" title="DLL">DLL<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tomcat/" title="Tomcat">Tomcat<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Guava/" title="Guava">Guava<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Github/" title="Github">Github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Octopress/" title="Octopress">Octopress<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Eclipse/" title="Eclipse">Eclipse<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <p class="asidetitle">最新评论</p>
+<div>
+	<ul class="ds-recent-comments" data-num-items="10" data-show-avatars="1" data-show-time="1" data-show-admin="1" data-excerpt-length="70"></ul>
+	<!--多说js加载开始，一个页面只需要加载一次 -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!--多说js加载结束，一个页面只需要加载一次 -->
+</div>
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/DLL/" style="font-size: 10px;">DLL</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Elite/" style="font-size: 10px;">Elite</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/IntelliJ/" style="font-size: 10px;">IntelliJ</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/LTP/" style="font-size: 13.33px;">LTP</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/Python3/" style="font-size: 16.67px;">Python3</a> <a href="/tags/Selenium/" style="font-size: 10px;">Selenium</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Struts2/" style="font-size: 10px;">Struts2</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a>
+    </div>
+  </div>
+
+
+  <br/>
+<p class="asidetitle">热评文章</p>
+<!-- 多说热评文章 start -->
+<div>
+<div class="ds-top-threads" data-range="monthly" data-num-items="8"></div>
+<!-- 多说热评文章 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+<br/>
+
+  <p class="asidetitle">打赏他</p>
+<div>
+<form action="https://shenghuo.alipay.com/send/payment/fill.htm" method="POST" target="_blank" accept-charset="GBK">
+    <br/>
+    <input name="optEmail" type="hidden" value="18302118258" />
+    <input name="payAmount" type="hidden" value="10" />
+    <input id="title" name="title" type="hidden" value="博主，打赏你的！" />
+    <input name="memo" type="hidden" value="你Y加油，继续写博客！" />
+    <input name="pay" type="image" value="转账" src="http://7xig3q.com1.z0.glb.clouddn.com/alipay-donate-website.png" />
+</form>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello , I&#39;m Wang Xu in SHU. <br/>
+			志不强者智不达，言不信者行不果。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1779238484" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/shijiebei2009" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/4204922" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		
+		
+		<a href="https://www.linkedin.com/in/codepub" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		<a href="https://www.douban.com/people/shijiebei2009" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		<a href="https://www.zhihu.com/people/codepub.cn" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:wangx89@126.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="http://www.codepub.cn/about" target="_blank" title="Wang Xu">Wang Xu</a>
+		
+		<a href="http://tongji.baidu.com/web/welcome/ico?s=2c61418f187553bcc869b755930233ab" target="_blank">百度统计</a><br/>
+		本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+		</p>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','CEs2u-bRR6iHSt4ynbFA','2.0.0');
+</script>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"codepub"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F2c61418f187553bcc869b755930233ab' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+
+<a href="https://github.com/shijiebei2009"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>

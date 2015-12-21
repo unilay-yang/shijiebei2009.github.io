@@ -1,0 +1,636 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  
+  <meta charset="UTF-8">
+  
+    <title>MySql dump导入导出数据库命令汇总 | IT草根</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Wang Xu">
+    
+
+    
+    <meta name="description" content="导出所有的数据库
+mysqldump -uuserName -ppassword —all-database &amp;gt; D:/all.sql
+
+需要注意的是，该命令需要在MySql的安装目录的bin目录下使用，例如在bin下输入mysqldump，会给出提示信息12345C:\Program Files\MySQL\MySQL Server 5.6\bin &amp;gt; mysqldumpUsage:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySql dump导入导出数据库命令汇总">
+<meta property="og:url" content="http://www.codepub.cn/2015/06/03/MySql-dump-Import-Export-Database-Command-Summary/index.html">
+<meta property="og:site_name" content="IT草根">
+<meta property="og:description" content="导出所有的数据库
+mysqldump -uuserName -ppassword —all-database &amp;gt; D:/all.sql
+
+需要注意的是，该命令需要在MySql的安装目录的bin目录下使用，例如在bin下输入mysqldump，会给出提示信息12345C:\Program Files\MySQL\MySQL Server 5.6\bin &amp;gt; mysqldumpUsage:">
+<meta property="og:updated_time" content="2015-06-04T02:40:30.302Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySql dump导入导出数据库命令汇总">
+<meta name="twitter:description" content="导出所有的数据库
+mysqldump -uuserName -ppassword —all-database &amp;gt; D:/all.sql
+
+需要注意的是，该命令需要在MySql的安装目录的bin目录下使用，例如在bin下输入mysqldump，会给出提示信息12345C:\Program Files\MySQL\MySQL Server 5.6\bin &amp;gt; mysqldumpUsage:">
+
+    
+    <link rel="alternative" href="/atom.xml" title="IT草根" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.gif">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.gif">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.gif" alt="IT草根" title="IT草根"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="IT草根">IT草根</a></h1>
+				<h2 class="blog-motto">WangXu&#39;s 代码馆 BLOG</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/resume">Resume</a></li>
+					
+						<li><a href="/links">Links</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+						<form class="search">
+							<label>Search</label>
+						<input type="text" class="st-default-search-input" id="ts-search-input" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/06/03/MySql-dump-Import-Export-Database-Command-Summary/" title="MySql dump导入导出数据库命令汇总" itemprop="url">MySql dump导入导出数据库命令汇总</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.codepub.cn/about" title="Wang Xu" target="_blank" itemprop="author">Wang Xu</a>
+		
+  <p class="article-time">
+    <time datetime="2015-06-03T10:26:46.000Z" itemprop="datePublished"> 发表于 2015-06-03</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#导出所有的数据库"><span class="toc-number">1.</span> <span class="toc-text">导出所有的数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#导入所有的数据库"><span class="toc-number">2.</span> <span class="toc-text">导入所有的数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#导出某个数据库"><span class="toc-number">3.</span> <span class="toc-text">导出某个数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#导入某个数据库"><span class="toc-number">4.</span> <span class="toc-text">导入某个数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#导出某些数据表"><span class="toc-number">5.</span> <span class="toc-text">导出某些数据表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#导入某些数据表"><span class="toc-number">6.</span> <span class="toc-text">导入某些数据表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mysqldump字符集设置"><span class="toc-number">7.</span> <span class="toc-text">mysqldump字符集设置</span></a></li></ol>
+		
+		</div>
+		
+		<h4 id="导出所有的数据库">导出所有的数据库</h4><blockquote>
+<p>mysqldump -uuserName -ppassword —all-database &gt; D:/all.sql</p>
+</blockquote>
+<p>需要注意的是，该命令需要在MySql的安装目录的bin目录下使用，例如在bin下输入mysqldump，会给出提示信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\MySQL\MySQL Server <span class="number">5.6</span>\bin &gt; mysqldump</span><br><span class="line">Usage: mysqldump [OPTIONS] database [tables]</span><br><span class="line">OR     mysqldump [OPTIONS] --databases [OPTIONS] DB1 [DB2 DB3...]</span><br><span class="line">OR     mysqldump [OPTIONS] --all-databases [OPTIONS]</span><br><span class="line">For more options, use mysqldump --help</span><br></pre></td></tr></table></figure></p>
+<h4 id="导入所有的数据库">导入所有的数据库</h4><blockquote>
+<p>source D:/all.sql</p>
+</blockquote>
+<p>需要注意的是，该命令需要在MySql的命令行窗口中使用（<strong>MySql commond line client</strong>），例如在命令行中输入source，给出提示信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; <span class="built_in">source</span></span><br><span class="line">ERROR:</span><br><span class="line">Usage: \. &lt;filename&gt; | <span class="built_in">source</span> &lt;filename&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="导出某个数据库">导出某个数据库</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\MySQL\MySQL Server <span class="number">5.6</span>\bin&gt;mysqldump -uroot -padmin --databases</span><br><span class="line"> mysql mywebsite &gt; D:/mysqlmywebsite.sql</span><br><span class="line">Warning: Using a password on the <span class="built_in">command</span> line interface can be insecure.</span><br></pre></td></tr></table></figure>
+<p>这种方式会将<strong>mysql和mywebsite</strong>两个数据库导入到一个sql文件中，文件名称为<strong>mysqlmywebsite</strong></p>
+<h4 id="导入某个数据库">导入某个数据库</h4><blockquote>
+<p>mysql&gt;source D:/mysqlmywebsite.sql<br>或者在cmd的命令行中指定导入的数据库<br>C:\Program Files\MySQL\MySQL Server 5.6\bin&gt;mysql -uroot -padmin db1 &lt; D:/db1.sql</p>
+</blockquote>
+<h4 id="导出某些数据表">导出某些数据表</h4><blockquote>
+<p>C:\Program Files\MySQL\MySQL Server 5.6\bin&gt; mysqldump -uusername -ppassword db1 table1 table2 &gt; tb1tb2.sql</p>
+</blockquote>
+<h4 id="导入某些数据表">导入某些数据表</h4><blockquote>
+<p>在系统命令行<br> mysql -uusername -ppassword db1 &lt; tb1tb2.sql<br> 或MySql命令行<br> mysql&gt; use db1;<br> mysql&gt; source tb1tb2.sql;</p>
+</blockquote>
+<h4 id="mysqldump字符集设置">mysqldump字符集设置</h4><blockquote>
+<p> mysqldump -uusername -ppassword —default-character-set=UTF8 db1 table1 &gt; tb1.sql</p>
+</blockquote>
+<p>注意在MySql中，用UTF8表示UTF-8编码，比如在MySql命令行中输入<strong>show charset;</strong>可以查看到MySql所支持的所有字符集</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&#62; show charset;&#10;+----------+-----------------------------+---------------------+--------+&#10;| Charset  | Description                 | Default collation   | Maxlen |&#10;+----------+-----------------------------+---------------------+--------+&#10;| big5     | Big5 Traditional Chinese    | big5_chinese_ci     |      2 |&#10;| dec8     | DEC West European           | dec8_swedish_ci     |      1 |&#10;| cp850    | DOS West European           | cp850_general_ci    |      1 |&#10;| hp8      | HP West European            | hp8_english_ci      |      1 |&#10;| koi8r    | KOI8-R Relcom Russian       | koi8r_general_ci    |      1 |&#10;| latin1   | cp1252 West European        | latin1_swedish_ci   |      1 |&#10;| latin2   | ISO 8859-2 Central European | latin2_general_ci   |      1 |&#10;| swe7     | 7bit Swedish                | swe7_swedish_ci     |      1 |&#10;| ascii    | US ASCII                    | ascii_general_ci    |      1 |&#10;| ujis     | EUC-JP Japanese             | ujis_japanese_ci    |      3 |&#10;| sjis     | Shift-JIS Japanese          | sjis_japanese_ci    |      2 |&#10;| hebrew   | ISO 8859-8 Hebrew           | hebrew_general_ci   |      1 |&#10;| tis620   | TIS620 Thai                 | tis620_thai_ci      |      1 |&#10;| euckr    | EUC-KR Korean               | euckr_korean_ci     |      2 |&#10;| koi8u    | KOI8-U Ukrainian            | koi8u_general_ci    |      1 |&#10;| gb2312   | GB2312 Simplified Chinese   | gb2312_chinese_ci   |      2 |&#10;| greek    | ISO 8859-7 Greek            | greek_general_ci    |      1 |&#10;| cp1250   | Windows Central European    | cp1250_general_ci   |      1 |&#10;| gbk      | GBK Simplified Chinese      | gbk_chinese_ci      |      2 |&#10;| latin5   | ISO 8859-9 Turkish          | latin5_turkish_ci   |      1 |&#10;| armscii8 | ARMSCII-8 Armenian          | armscii8_general_ci |      1 |&#10;| utf8     | UTF-8 Unicode               | utf8_general_ci     |      3 |&#10;| ucs2     | UCS-2 Unicode               | ucs2_general_ci     |      2 |&#10;| cp866    | DOS Russian                 | cp866_general_ci    |      1 |&#10;| keybcs2  | DOS Kamenicky Czech-Slovak  | keybcs2_general_ci  |      1 |&#10;| macce    | Mac Central European        | macce_general_ci    |      1 |&#10;| macroman | Mac West European           | macroman_general_ci |      1 |&#10;| cp852    | DOS Central European        | cp852_general_ci    |      1 |&#10;| latin7   | ISO 8859-13 Baltic          | latin7_general_ci   |      1 |&#10;| utf8mb4  | UTF-8 Unicode               | utf8mb4_general_ci  |      4 |&#10;| cp1251   | Windows Cyrillic            | cp1251_general_ci   |      1 |&#10;| utf16    | UTF-16 Unicode              | utf16_general_ci    |      4 |&#10;| utf16le  | UTF-16LE Unicode            | utf16le_general_ci  |      4 |&#10;| cp1256   | Windows Arabic              | cp1256_general_ci   |      1 |&#10;| cp1257   | Windows Baltic              | cp1257_general_ci   |      1 |&#10;| utf32    | UTF-32 Unicode              | utf32_general_ci    |      4 |&#10;| binary   | Binary pseudo charset       | binary              |      1 |&#10;| geostd8  | GEOSTD8 Georgian            | geostd8_general_ci  |      1 |&#10;| cp932    | SJIS for Windows Japanese   | cp932_japanese_ci   |      2 |&#10;| eucjpms  | UJIS for Windows Japanese   | eucjpms_japanese_ci |      3 |&#10;+----------+-----------------------------+---------------------+--------+&#10;40 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Database/">Database</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/MySql/">MySql</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=2067139" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2067139" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/06/17/Basic-knowledge-summary-of-JSP-Servlet/" title="JSP/Servlet基础知识汇总">
+  <strong>上一篇：</strong><br/>
+  <span>
+  JSP/Servlet基础知识汇总</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/06/02/Faceted-Project-Problem-Java-Version-Mismatch-Error-Message/"  title="Faceted Project Problem (Java Version Mismatch) Error Message">
+ <strong>下一篇：</strong><br/> 
+ <span>Faceted Project Problem (Java Version Mismatch) Error Message
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/06/03/MySql-dump-Import-Export-Database-Command-Summary/" data-title="MySql dump导入导出数据库命令汇总" data-url="http://www.codepub.cn/2015/06/03/MySql-dump-Import-Export-Database-Command-Summary/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#导出所有的数据库"><span class="toc-number">1.</span> <span class="toc-text">导出所有的数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#导入所有的数据库"><span class="toc-number">2.</span> <span class="toc-text">导入所有的数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#导出某个数据库"><span class="toc-number">3.</span> <span class="toc-text">导出某个数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#导入某个数据库"><span class="toc-number">4.</span> <span class="toc-text">导入某个数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#导出某些数据表"><span class="toc-number">5.</span> <span class="toc-text">导出某些数据表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#导入某些数据表"><span class="toc-number">6.</span> <span class="toc-text">导入某些数据表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mysqldump字符集设置"><span class="toc-number">7.</span> <span class="toc-text">mysqldump字符集设置</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Algorithms/" title="Algorithms">Algorithms<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Database/" title="Database">Database<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git-GitHub/" title="Git/GitHub">Git/GitHub<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life-Talk/" title="Life-Talk">Life-Talk<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Operating-System/" title="Operating System">Operating System<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Programming-Notes/" title="Programming Notes">Programming Notes<sup>22</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python3/" title="Python3">Python3<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/LTP/" title="LTP">LTP<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/IT/" title="IT">IT<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elite/" title="Elite">Elite<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tools/" title="Tools">Tools<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySql/" title="MySql">MySql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Lombok/" title="Lombok">Lombok<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Selenium/" title="Selenium">Selenium<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DLL/" title="DLL">DLL<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tomcat/" title="Tomcat">Tomcat<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Guava/" title="Guava">Guava<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Github/" title="Github">Github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Octopress/" title="Octopress">Octopress<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Eclipse/" title="Eclipse">Eclipse<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <p class="asidetitle">最新评论</p>
+<div>
+	<ul class="ds-recent-comments" data-num-items="10" data-show-avatars="1" data-show-time="1" data-show-admin="1" data-excerpt-length="70"></ul>
+	<!--多说js加载开始，一个页面只需要加载一次 -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!--多说js加载结束，一个页面只需要加载一次 -->
+</div>
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/DLL/" style="font-size: 10px;">DLL</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Elite/" style="font-size: 10px;">Elite</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/IntelliJ/" style="font-size: 10px;">IntelliJ</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/LTP/" style="font-size: 13.33px;">LTP</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/Python3/" style="font-size: 16.67px;">Python3</a> <a href="/tags/Selenium/" style="font-size: 10px;">Selenium</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Struts2/" style="font-size: 10px;">Struts2</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a>
+    </div>
+  </div>
+
+
+  <br/>
+<p class="asidetitle">热评文章</p>
+<!-- 多说热评文章 start -->
+<div>
+<div class="ds-top-threads" data-range="monthly" data-num-items="8"></div>
+<!-- 多说热评文章 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+<br/>
+
+  <p class="asidetitle">打赏他</p>
+<div>
+<form action="https://shenghuo.alipay.com/send/payment/fill.htm" method="POST" target="_blank" accept-charset="GBK">
+    <br/>
+    <input name="optEmail" type="hidden" value="18302118258" />
+    <input name="payAmount" type="hidden" value="10" />
+    <input id="title" name="title" type="hidden" value="博主，打赏你的！" />
+    <input name="memo" type="hidden" value="你Y加油，继续写博客！" />
+    <input name="pay" type="image" value="转账" src="http://7xig3q.com1.z0.glb.clouddn.com/alipay-donate-website.png" />
+</form>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello , I&#39;m Wang Xu in SHU. <br/>
+			志不强者智不达，言不信者行不果。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1779238484" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/shijiebei2009" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/4204922" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		
+		
+		<a href="https://www.linkedin.com/in/codepub" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		<a href="https://www.douban.com/people/shijiebei2009" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		<a href="https://www.zhihu.com/people/codepub.cn" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:wangx89@126.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="http://www.codepub.cn/about" target="_blank" title="Wang Xu">Wang Xu</a>
+		
+		<a href="http://tongji.baidu.com/web/welcome/ico?s=2c61418f187553bcc869b755930233ab" target="_blank">百度统计</a><br/>
+		本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+		</p>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','CEs2u-bRR6iHSt4ynbFA','2.0.0');
+</script>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"codepub"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F2c61418f187553bcc869b755930233ab' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+
+<a href="https://github.com/shijiebei2009"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>

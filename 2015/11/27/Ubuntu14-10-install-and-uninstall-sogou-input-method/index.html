@@ -1,0 +1,652 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  
+  <meta charset="UTF-8">
+  
+    <title>Ubuntu 14.10安装和卸载搜狗拼音输入法 | IT草根</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Wang Xu">
+    
+
+    
+    <meta name="description" content="安装搜狗输入法
+参考了其他一些资料都说添加fcitx的PPA，但是我不确定有木有用
+
+12345678910111213eric@eric-VirtualBox:/etc/apt$ sudo add-apt-repository ppa:fcitx-team/nightly Experimental releases of Fcitx, use with caution. More info: h">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu 14.10安装和卸载搜狗拼音输入法">
+<meta property="og:url" content="http://www.codepub.cn/2015/11/27/Ubuntu14-10-install-and-uninstall-sogou-input-method/index.html">
+<meta property="og:site_name" content="IT草根">
+<meta property="og:description" content="安装搜狗输入法
+参考了其他一些资料都说添加fcitx的PPA，但是我不确定有木有用
+
+12345678910111213eric@eric-VirtualBox:/etc/apt$ sudo add-apt-repository ppa:fcitx-team/nightly Experimental releases of Fcitx, use with caution. More info: h">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/ubuntu-sogou-input-method-success.jpg">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/ubuntu-uninstall-sogou-input-method1.jpg">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/ubuntu-uninstall-sogou-input-method2.jpg">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/ubuntu-uninstall-sogou-input-method3.jpg">
+<meta property="og:updated_time" content="2015-11-27T15:12:07.973Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ubuntu 14.10安装和卸载搜狗拼音输入法">
+<meta name="twitter:description" content="安装搜狗输入法
+参考了其他一些资料都说添加fcitx的PPA，但是我不确定有木有用
+
+12345678910111213eric@eric-VirtualBox:/etc/apt$ sudo add-apt-repository ppa:fcitx-team/nightly Experimental releases of Fcitx, use with caution. More info: h">
+
+    
+    <link rel="alternative" href="/atom.xml" title="IT草根" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.gif">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.gif">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.gif" alt="IT草根" title="IT草根"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="IT草根">IT草根</a></h1>
+				<h2 class="blog-motto">WangXu&#39;s 代码馆 BLOG</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/resume">Resume</a></li>
+					
+						<li><a href="/links">Links</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+						<form class="search">
+							<label>Search</label>
+						<input type="text" class="st-default-search-input" id="ts-search-input" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/27/Ubuntu14-10-install-and-uninstall-sogou-input-method/" title="Ubuntu 14.10安装和卸载搜狗拼音输入法" itemprop="url">Ubuntu 14.10安装和卸载搜狗拼音输入法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.codepub.cn/about" title="Wang Xu" target="_blank" itemprop="author">Wang Xu</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-27T14:58:34.000Z" itemprop="datePublished"> 发表于 2015-11-27</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装搜狗输入法"><span class="toc-number">1.</span> <span class="toc-text">安装搜狗输入法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#卸载搜狗输入法"><span class="toc-number">2.</span> <span class="toc-text">卸载搜狗输入法</span></a></li></ol>
+		
+		</div>
+		
+		<h3 id="安装搜狗输入法">安装搜狗输入法</h3><ul>
+<li>参考了其他一些资料都说添加<code>fcitx</code>的<code>PPA</code>，但是我不确定有木有用</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">eric@eric-VirtualBox:/etc/apt$ sudo add-apt-repository ppa:fcitx-team/nightly</span><br><span class="line"> Experimental releases of Fcitx, use with caution.</span><br><span class="line"> More info: https://launchpad.net/~fcitx-team/+archive/ubuntu/nightly</span><br><span class="line">Press [ENTER] to <span class="built_in">continue</span> or ctrl-c to cancel adding it</span><br><span class="line"></span><br><span class="line">gpg: keyring `/tmp/tmp_2dkioxm/secring.gpg<span class="string">' created</span><br><span class="line">gpg: keyring `/tmp/tmp_2dkioxm/pubring.gpg'</span> created</span><br><span class="line">gpg: requesting key <span class="number">7</span>E5FA1EE from hkp server keyserver.ubuntu.com</span><br><span class="line">gpg: /tmp/tmp_2dkioxm/trustdb.gpg: trustdb created</span><br><span class="line">gpg: key <span class="number">7</span>E5FA1EE: public key <span class="string">"Launchpad PPA for Fcitx Team PPA"</span> imported</span><br><span class="line">gpg: Total number processed: <span class="number">1</span></span><br><span class="line">gpg:               imported: <span class="number">1</span>  (RSA: <span class="number">1</span>)</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+<ul>
+<li>然后刷新软件源，安装一些依赖软件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+<p>刷新完成之后，安装<code>im-config</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install im-config</span><br></pre></td></tr></table></figure></p>
+<p>继续安装搜狗输入法依赖的<code>fcitx</code>一系列文件，输入命令：<code>sudo apt-get -f install</code>，遇到有<code>Y/N</code>的地方直接输<code>Y</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line">eric@eric-VirtualBox:~/Desktop$ sudo apt-get <span class="operator">-f</span> install</span><br><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree</span><br><span class="line">Reading state information... Done</span><br><span class="line">Correcting dependencies... Done</span><br><span class="line">The following extra packages will be installed:</span><br><span class="line">  fcitx fcitx-bin fcitx-config-common fcitx-config-gtk fcitx-data</span><br><span class="line">  fcitx-frontend-all fcitx-frontend-gtk2 fcitx-frontend-gtk3</span><br><span class="line">  fcitx-frontend-qt4 fcitx-libs fcitx-libs-gclient fcitx-libs-qt</span><br><span class="line">  fcitx-module-dbus fcitx-module-kimpanel fcitx-module-lua fcitx-module-x11</span><br><span class="line">  fcitx-modules fcitx-ui-classic</span><br><span class="line">Suggested packages:</span><br><span class="line">  fcitx-tools fcitx-m17n kdebase-bin plasma-widgets-kimpanel</span><br><span class="line">Recommended packages:</span><br><span class="line">  fcitx-frontend-qt5</span><br><span class="line">The following NEW packages will be installed:</span><br><span class="line">  fcitx fcitx-bin fcitx-config-common fcitx-config-gtk fcitx-data</span><br><span class="line">  fcitx-frontend-all fcitx-frontend-gtk2 fcitx-frontend-gtk3</span><br><span class="line">  fcitx-frontend-qt4 fcitx-libs fcitx-libs-gclient fcitx-libs-qt</span><br><span class="line">  fcitx-module-dbus fcitx-module-kimpanel fcitx-module-lua fcitx-module-x11</span><br><span class="line">  fcitx-modules fcitx-ui-classic</span><br><span class="line"><span class="number">0</span> upgraded, <span class="number">18</span> newly installed, <span class="number">0</span> to remove and <span class="number">7</span> not upgraded.</span><br><span class="line"><span class="number">1</span> not fully installed or removed.</span><br><span class="line">Need to get <span class="number">35.6</span> kB/<span class="number">2</span>,<span class="number">315</span> kB of archives.</span><br><span class="line">After this operation, <span class="number">8</span>,<span class="number">956</span> kB of additional disk space will be used.</span><br><span class="line">Do you want to <span class="built_in">continue</span>? [Y/n] y</span><br><span class="line">WARNING: The following packages cannot be authenticated!</span><br><span class="line">  fcitx-config-common fcitx-config-gtk</span><br><span class="line">Install these packages without verification? [y/N] y</span><br><span class="line">Get:<span class="number">1</span> http://mirrors.aliyun.com/ubuntu/ precise/universe fcitx-config-common all <span class="number">0.4</span>.<span class="number">0</span>-<span class="number">2</span> [<span class="number">3</span>,<span class="number">548</span> B]</span><br><span class="line">Get:<span class="number">2</span> http://mirrors.aliyun.com/ubuntu/ precise/universe fcitx-config-gtk amd64 <span class="number">0.4</span>.<span class="number">0</span>-<span class="number">2</span> [<span class="number">32.1</span> kB]</span><br><span class="line">Fetched <span class="number">35.6</span> kB <span class="keyword">in</span> <span class="number">0</span>s (<span class="number">247</span> kB/s)</span><br><span class="line">Selecting previously unselected package fcitx-libs:amd64.</span><br><span class="line">(Reading database ... <span class="number">168557</span> files and directories currently installed.)</span><br><span class="line">Preparing to unpack .../fcitx-libs_1%<span class="number">3</span>a4.<span class="number">2.8</span>.<span class="number">5</span>-<span class="number">2</span>~utopic1_amd64.deb ...</span><br><span class="line">Unpacking fcitx-libs:amd64 (<span class="number">1</span>:<span class="number">4.2</span>.<span class="number">8.5</span>-<span class="number">2</span>~utopic1) ...</span><br><span class="line">Selecting previously unselected package fcitx-bin.</span><br><span class="line">Preparing to unpack .../fcitx-bin_1%<span class="number">3</span>a4.<span class="number">2.8</span>.<span class="number">5</span>-<span class="number">2</span>~utopic1_amd64.deb ...</span><br><span class="line">Unpacking fcitx-bin (<span class="number">1</span>:<span class="number">4.2</span>.<span class="number">8.5</span>-<span class="number">2</span>~utopic1) ...</span><br><span class="line">Selecting previously unselected package fcitx-data.</span><br><span class="line">Preparing to unpack .../fcitx-data_1%<span class="number">3</span>a4.<span class="number">2.8</span>.<span class="number">5</span>-<span class="number">2</span>~utopic1_all.deb ...</span><br><span class="line">Unpacking fcitx-data (<span class="number">1</span>:<span class="number">4.2</span>.<span class="number">8.5</span>-<span class="number">2</span>~utopic1) ...</span><br><span class="line">Selecting previously unselected package fcitx-modules.</span><br><span class="line">Preparing to unpack .../fcitx-modules_1%<span class="number">3</span>a4.<span class="number">2.8</span>.<span class="number">5</span>-<span class="number">2</span>~utopic1_amd64.deb ...</span><br><span class="line">Unpacking fcitx-modules (<span class="number">1</span>:<span class="number">4.2</span>.<span class="number">8.5</span>-<span class="number">2</span>~utopic1) ...</span><br><span class="line">Selecting previously unselected package fcitx.</span><br><span class="line">Preparing to unpack .../fcitx_1%<span class="number">3</span>a4.<span class="number">2.8</span>.<span class="number">5</span>-<span class="number">2</span>~utopic1_all.deb ...</span><br><span class="line">Unpacking fcitx (<span class="number">1</span>:<span class="number">4.2</span>.<span class="number">8.5</span>-<span class="number">2</span>~utopic1) ...</span><br><span class="line">Selecting previously unselected package fcitx-libs-gclient:amd64.</span><br><span class="line">Preparing to unpack .../fcitx-libs-gclient_1%<span class="number">3</span>a4.<span class="number">2.8</span>.<span class="number">5</span>-<span class="number">2</span>~utopic1_amd64.deb ...</span><br><span class="line">Unpacking fcitx-libs-gclient:amd64 (<span class="number">1</span>:<span class="number">4.2</span>.<span class="number">8.5</span>-<span class="number">2</span>~utopic1) ...</span><br><span class="line">Selecting previously unselected package fcitx-module-dbus.</span><br><span class="line">Preparing to unpack .../fcitx-module-dbus_1%<span class="number">3</span>a4.<span class="number">2.8</span>.<span class="number">5</span>-<span class="number">2</span>~utopic1_amd64.deb ...</span><br><span class="line">Unpacking fcitx-module-dbus (<span class="number">1</span>:<span class="number">4.2</span>.<span class="number">8.5</span>-<span class="number">2</span>~utopic1) ...</span><br><span class="line">Selecting previously unselected package fcitx-frontend-gtk2:amd64.</span><br><span class="line">Preparing to unpack .../fcitx-frontend-gtk2_1%<span class="number">3</span>a4.<span class="number">2.8</span>.<span class="number">5</span>-<span class="number">2</span>~utopic1_amd64.deb ...</span><br><span class="line">Unpacking fcitx-frontend-gtk2:amd64 (<span class="number">1</span>:<span class="number">4.2</span>.<span class="number">8.5</span>-<span class="number">2</span>~utopic1) ...</span><br><span class="line">Selecting previously unselected package fcitx-frontend-gtk3:amd64.</span><br><span class="line">Preparing to unpack .../fcitx-frontend-gtk3_1%<span class="number">3</span>a4.<span class="number">2.8</span>.<span class="number">5</span>-<span class="number">2</span>~utopic1_amd64.deb ...</span><br><span class="line">Unpacking fcitx-frontend-gtk3:amd64 (<span class="number">1</span>:<span class="number">4.2</span>.<span class="number">8.5</span>-<span class="number">2</span>~utopic1) ...</span><br><span class="line">Selecting previously unselected package fcitx-libs-qt:amd64.</span><br><span class="line">Preparing to unpack .../fcitx-libs-qt_1%<span class="number">3</span>a4.<span class="number">2.8</span>.<span class="number">5</span>-<span class="number">2</span>~utopic1_amd64.deb ...</span><br><span class="line">Unpacking fcitx-libs-qt:amd64 (<span class="number">1</span>:<span class="number">4.2</span>.<span class="number">8.5</span>-<span class="number">2</span>~utopic1) ...</span><br><span class="line">Selecting previously unselected package fcitx-frontend-qt4:amd64.</span><br><span class="line">Preparing to unpack .../fcitx-frontend-qt4_1%<span class="number">3</span>a4.<span class="number">2.8</span>.<span class="number">5</span>-<span class="number">2</span>~utopic1_amd64.deb ...</span><br><span class="line">Unpacking fcitx-frontend-qt4:amd64 (<span class="number">1</span>:<span class="number">4.2</span>.<span class="number">8.5</span>-<span class="number">2</span>~utopic1) ...</span><br><span class="line">Selecting previously unselected package fcitx-module-kimpanel.</span><br><span class="line">Preparing to unpack .../fcitx-module-kimpanel_1%<span class="number">3</span>a4.<span class="number">2.8</span>.<span class="number">5</span>-<span class="number">2</span>~utopic1_amd64.deb ...</span><br><span class="line">Unpacking fcitx-module-kimpanel (<span class="number">1</span>:<span class="number">4.2</span>.<span class="number">8.5</span>-<span class="number">2</span>~utopic1) ...</span><br><span class="line">Selecting previously unselected package fcitx-config-common.</span><br><span class="line">Preparing to unpack .../fcitx-config-common_0.<span class="number">4.0</span>-<span class="number">2</span>_all.deb ...</span><br><span class="line">Unpacking fcitx-config-common (<span class="number">0.4</span>.<span class="number">0</span>-<span class="number">2</span>) ...</span><br><span class="line">Selecting previously unselected package fcitx-config-gtk.</span><br><span class="line">Preparing to unpack .../fcitx-config-gtk_0.<span class="number">4.0</span>-<span class="number">2</span>_amd64.deb ...</span><br><span class="line">Unpacking fcitx-config-gtk (<span class="number">0.4</span>.<span class="number">0</span>-<span class="number">2</span>) ...</span><br><span class="line">Selecting previously unselected package fcitx-frontend-all.</span><br><span class="line">Preparing to unpack .../fcitx-frontend-all_1%<span class="number">3</span>a4.<span class="number">2.8</span>.<span class="number">5</span>-<span class="number">2</span>~utopic1_all.deb ...</span><br><span class="line">Unpacking fcitx-frontend-all (<span class="number">1</span>:<span class="number">4.2</span>.<span class="number">8.5</span>-<span class="number">2</span>~utopic1) ...</span><br><span class="line">Selecting previously unselected package fcitx-module-lua.</span><br><span class="line">Preparing to unpack .../fcitx-module-lua_1%<span class="number">3</span>a4.<span class="number">2.8</span>.<span class="number">5</span>-<span class="number">2</span>~utopic1_amd64.deb ...</span><br><span class="line">Unpacking fcitx-module-lua (<span class="number">1</span>:<span class="number">4.2</span>.<span class="number">8.5</span>-<span class="number">2</span>~utopic1) ...</span><br><span class="line">Selecting previously unselected package fcitx-module-x11.</span><br><span class="line">Preparing to unpack .../fcitx-module-x11_1%<span class="number">3</span>a4.<span class="number">2.8</span>.<span class="number">5</span>-<span class="number">2</span>~utopic1_amd64.deb ...</span><br><span class="line">Unpacking fcitx-module-x11 (<span class="number">1</span>:<span class="number">4.2</span>.<span class="number">8.5</span>-<span class="number">2</span>~utopic1) ...</span><br><span class="line">Selecting previously unselected package fcitx-ui-classic.</span><br><span class="line">Preparing to unpack .../fcitx-ui-classic_1%<span class="number">3</span>a4.<span class="number">2.8</span>.<span class="number">5</span>-<span class="number">2</span>~utopic1_amd64.deb ...</span><br><span class="line">Unpacking fcitx-ui-classic (<span class="number">1</span>:<span class="number">4.2</span>.<span class="number">8.5</span>-<span class="number">2</span>~utopic1) ...</span><br><span class="line">Processing triggers <span class="keyword">for</span> man-db (<span class="number">2.7</span>.<span class="number">0.2</span>-<span class="number">2</span>) ...</span><br><span class="line">Processing triggers <span class="keyword">for</span> shared-mime-info (<span class="number">1.2</span>-<span class="number">0</span>ubuntu3) ...</span><br><span class="line">Processing triggers <span class="keyword">for</span> gnome-menus (<span class="number">3.10</span>.<span class="number">1</span>-<span class="number">0</span>ubuntu2) ...</span><br><span class="line">Processing triggers <span class="keyword">for</span> desktop-file-utils (<span class="number">0.22</span>-<span class="number">1</span>ubuntu2) ...</span><br><span class="line">Processing triggers <span class="keyword">for</span> bamfdaemon (<span class="number">0.5</span>.<span class="number">1</span>+<span class="number">14.10</span>.<span class="number">20140925</span>-<span class="number">0</span>ubuntu1) ...</span><br><span class="line">Rebuilding /usr/share/applications/bamf-<span class="number">2</span>.index...</span><br><span class="line">Processing triggers <span class="keyword">for</span> mime-support (<span class="number">3.55</span>ubuntu1) ...</span><br><span class="line">Processing triggers <span class="keyword">for</span> hicolor-icon-theme (<span class="number">0.13</span>-<span class="number">1</span>) ...</span><br><span class="line">Processing triggers <span class="keyword">for</span> libgtk2.<span class="number">0</span>-<span class="number">0</span>:amd64 (<span class="number">2.24</span>.<span class="number">25</span>-<span class="number">0</span>ubuntu1) ...</span><br><span class="line">Processing triggers <span class="keyword">for</span> libgtk-<span class="number">3</span>-<span class="number">0</span>:amd64 (<span class="number">3.12</span>.<span class="number">2</span>-<span class="number">0</span>ubuntu15) ...</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>到搜狗官网下载搜狗拼音输入法，选择你系统对应的软件包，我系统是64位的，所以我选择了amd64的</li>
+</ul>
+<p>下载地址<a href="http://pinyin.sogou.com/linux/?r=pinyin" target="_blank" rel="external">点我</a>，另外搜狗也提供了安装说明帮助页面，<a href="http://pinyin.sogou.com/linux/help.php" target="_blank" rel="external">点我</a>查看帮助。</p>
+<ul>
+<li>下载完成之后，可以直接将文件放在桌面上进行安装</li>
+</ul>
+<p>先看看下载的<code>deb</code>文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">eric@eric-VirtualBox:~/Desktop$ ll</span><br><span class="line">total <span class="number">18304</span></span><br><span class="line">drwxr-xr-x  <span class="number">2</span> eric eric     <span class="number">4096</span> <span class="number">11</span>月 <span class="number">27</span> <span class="number">22</span>:<span class="number">06</span> ./</span><br><span class="line">drwxr-xr-x <span class="number">18</span> eric eric     <span class="number">4096</span> <span class="number">11</span>月 <span class="number">27</span> <span class="number">21</span>:<span class="number">34</span> ../</span><br><span class="line">-rw-rw-r--  <span class="number">1</span> eric eric      <span class="number">627</span> <span class="number">11</span>月 <span class="number">27</span> <span class="number">22</span>:<span class="number">06</span> cache.txt</span><br><span class="line">-rwxr-x---  <span class="number">1</span> root root <span class="number">18730988</span> <span class="number">11</span>月 <span class="number">27</span> <span class="number">00</span>:<span class="number">01</span> sogoupinyin_2.<span class="number">0.0</span>.<span class="number">0068</span>_amd64.deb*</span><br><span class="line">eric@eric-VirtualBox:~/Desktop$</span><br></pre></td></tr></table></figure></p>
+<p>输入<code>sudo dpkg -i sogoupinyin_2.0.0.0068_amd64.deb</code>命令开始安装输入法，可使用<code>tab</code>键自动补全命令，安装完成之后使用如下命令启用<code>sudo im-config -s fcitx -z default</code>，完成之后别忘记重启系统。重启之后点击右上角的那个软件盘即可看到搜狗输入法安装成功，点击即可输入汉字了。<br><img src="http://7xig3q.com1.z0.glb.clouddn.com/ubuntu-sogou-input-method-success.jpg" alt=""></p>
+<h3 id="卸载搜狗输入法">卸载搜狗输入法</h3><ul>
+<li>首先使用命令查看下安装的搜狗拼音输入法<code>sudo dpkg -l so*</code>，然后先卸载搜狗拼音<code>sudo apt-get purge sogoupinyin</code></li>
+</ul>
+<p><img src="http://7xig3q.com1.z0.glb.clouddn.com/ubuntu-uninstall-sogou-input-method1.jpg" alt=""></p>
+<ul>
+<li>卸载fcitx，<code>sudo apt-get purge fcitx</code></li>
+</ul>
+<p><img src="http://7xig3q.com1.z0.glb.clouddn.com/ubuntu-uninstall-sogou-input-method2.jpg" alt=""></p>
+<ul>
+<li>彻底卸载fcitx及相关配置，<code>sudo apt-get autoremove</code></li>
+</ul>
+<p><img src="http://7xig3q.com1.z0.glb.clouddn.com/ubuntu-uninstall-sogou-input-method3.jpg" alt=""></p>
+<ul>
+<li>最后别忘注销或者重启系统，如果注销按钮不能使用，可以使用命令<code>sudo pkill Xorg</code>，当再次登录系统之后，可以看到搜狗输入法已经完全被卸载干净了。</li>
+</ul>
+<p><strong><em>转载请注明出处：<a href="http://codepub.cn/2015/11/27/Ubuntu14-10-install-and-uninstall-sogou-input-method/" target="_blank" rel="external">http://codepub.cn/2015/11/27/Ubuntu14-10-install-and-uninstall-sogou-input-method/</a></em></strong></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Operating-System/">Operating System</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Ubuntu/">Ubuntu</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=2067139" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2067139" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/11/29/Google-Guava-use-guide/" title="Google Guava使用指南">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Google Guava使用指南</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/10/24/2016-campus-recruitment-of-sougou-programming-problem-resolution-big-data-development/"  title="搜狗2016校园招聘之编程题解析-大数据开发">
+ <strong>下一篇：</strong><br/> 
+ <span>搜狗2016校园招聘之编程题解析-大数据开发
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/11/27/Ubuntu14-10-install-and-uninstall-sogou-input-method/" data-title="Ubuntu 14.10安装和卸载搜狗拼音输入法" data-url="http://www.codepub.cn/2015/11/27/Ubuntu14-10-install-and-uninstall-sogou-input-method/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装搜狗输入法"><span class="toc-number">1.</span> <span class="toc-text">安装搜狗输入法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#卸载搜狗输入法"><span class="toc-number">2.</span> <span class="toc-text">卸载搜狗输入法</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Algorithms/" title="Algorithms">Algorithms<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Database/" title="Database">Database<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git-GitHub/" title="Git/GitHub">Git/GitHub<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life-Talk/" title="Life-Talk">Life-Talk<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Operating-System/" title="Operating System">Operating System<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Programming-Notes/" title="Programming Notes">Programming Notes<sup>22</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python3/" title="Python3">Python3<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/LTP/" title="LTP">LTP<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/IT/" title="IT">IT<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elite/" title="Elite">Elite<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tools/" title="Tools">Tools<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySql/" title="MySql">MySql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Lombok/" title="Lombok">Lombok<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Selenium/" title="Selenium">Selenium<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DLL/" title="DLL">DLL<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tomcat/" title="Tomcat">Tomcat<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Guava/" title="Guava">Guava<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Github/" title="Github">Github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Octopress/" title="Octopress">Octopress<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Eclipse/" title="Eclipse">Eclipse<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <p class="asidetitle">最新评论</p>
+<div>
+	<ul class="ds-recent-comments" data-num-items="10" data-show-avatars="1" data-show-time="1" data-show-admin="1" data-excerpt-length="70"></ul>
+	<!--多说js加载开始，一个页面只需要加载一次 -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!--多说js加载结束，一个页面只需要加载一次 -->
+</div>
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/DLL/" style="font-size: 10px;">DLL</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Elite/" style="font-size: 10px;">Elite</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/IntelliJ/" style="font-size: 10px;">IntelliJ</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/LTP/" style="font-size: 13.33px;">LTP</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/Python3/" style="font-size: 16.67px;">Python3</a> <a href="/tags/Selenium/" style="font-size: 10px;">Selenium</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Struts2/" style="font-size: 10px;">Struts2</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a>
+    </div>
+  </div>
+
+
+  <br/>
+<p class="asidetitle">热评文章</p>
+<!-- 多说热评文章 start -->
+<div>
+<div class="ds-top-threads" data-range="monthly" data-num-items="8"></div>
+<!-- 多说热评文章 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+<br/>
+
+  <p class="asidetitle">打赏他</p>
+<div>
+<form action="https://shenghuo.alipay.com/send/payment/fill.htm" method="POST" target="_blank" accept-charset="GBK">
+    <br/>
+    <input name="optEmail" type="hidden" value="18302118258" />
+    <input name="payAmount" type="hidden" value="10" />
+    <input id="title" name="title" type="hidden" value="博主，打赏你的！" />
+    <input name="memo" type="hidden" value="你Y加油，继续写博客！" />
+    <input name="pay" type="image" value="转账" src="http://7xig3q.com1.z0.glb.clouddn.com/alipay-donate-website.png" />
+</form>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello , I&#39;m Wang Xu in SHU. <br/>
+			志不强者智不达，言不信者行不果。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1779238484" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/shijiebei2009" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/4204922" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		
+		
+		<a href="https://www.linkedin.com/in/codepub" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		<a href="https://www.douban.com/people/shijiebei2009" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		<a href="https://www.zhihu.com/people/codepub.cn" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:wangx89@126.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="http://www.codepub.cn/about" target="_blank" title="Wang Xu">Wang Xu</a>
+		
+		<a href="http://tongji.baidu.com/web/welcome/ico?s=2c61418f187553bcc869b755930233ab" target="_blank">百度统计</a><br/>
+		本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+		</p>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','CEs2u-bRR6iHSt4ynbFA','2.0.0');
+</script>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"codepub"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F2c61418f187553bcc869b755930233ab' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+
+<a href="https://github.com/shijiebei2009"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>

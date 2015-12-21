@@ -1,0 +1,688 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  
+  <meta charset="UTF-8">
+  
+    <title>百度2016校园招聘之编程题解析-软件研发 | IT草根</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Wang Xu">
+    
+
+    
+    <meta name="description" content="比大小
+解题思路：解此题需要使用到康托展开，康托展开的公式如下
+$$X=a_n*(n-1)!+a_{n-1}*(n-2)!+\cdot\cdot\cdot+a_i*(i-1)!+\cdot\cdot\cdot+a_2*(2-1)!+a_1*(1-1)!$$
+公式看不懂没关系，下面以一个例子来讲解公式的使用！
+例如：有一个数组S=[&amp;quot;a&amp;quot;,&amp;quot;b&amp;quot;,&amp;quot;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="百度2016校园招聘之编程题解析-软件研发">
+<meta property="og:url" content="http://www.codepub.cn/2015/09/29/2016-campus-recruitment-of-baidu-programming-problem-resolution-software-development/index.html">
+<meta property="og:site_name" content="IT草根">
+<meta property="og:description" content="比大小
+解题思路：解此题需要使用到康托展开，康托展开的公式如下
+$$X=a_n*(n-1)!+a_{n-1}*(n-2)!+\cdot\cdot\cdot+a_i*(i-1)!+\cdot\cdot\cdot+a_2*(2-1)!+a_1*(1-1)!$$
+公式看不懂没关系，下面以一个例子来讲解公式的使用！
+例如：有一个数组S=[&amp;quot;a&amp;quot;,&amp;quot;b&amp;quot;,&amp;quot;">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/compare_sizes_baidu_examination_1.png">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/compare_sizes_baidu_examination_1_expand.png">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/character_appear_or_not_baidu_examination_2.png">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/combinative_probability_baidu_examination_3.png">
+<meta property="og:updated_time" content="2015-10-07T15:38:23.922Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="百度2016校园招聘之编程题解析-软件研发">
+<meta name="twitter:description" content="比大小
+解题思路：解此题需要使用到康托展开，康托展开的公式如下
+$$X=a_n*(n-1)!+a_{n-1}*(n-2)!+\cdot\cdot\cdot+a_i*(i-1)!+\cdot\cdot\cdot+a_2*(2-1)!+a_1*(1-1)!$$
+公式看不懂没关系，下面以一个例子来讲解公式的使用！
+例如：有一个数组S=[&amp;quot;a&amp;quot;,&amp;quot;b&amp;quot;,&amp;quot;">
+
+    
+    <link rel="alternative" href="/atom.xml" title="IT草根" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.gif">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.gif">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.gif" alt="IT草根" title="IT草根"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="IT草根">IT草根</a></h1>
+				<h2 class="blog-motto">WangXu&#39;s 代码馆 BLOG</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/resume">Resume</a></li>
+					
+						<li><a href="/links">Links</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+						<form class="search">
+							<label>Search</label>
+						<input type="text" class="st-default-search-input" id="ts-search-input" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/09/29/2016-campus-recruitment-of-baidu-programming-problem-resolution-software-development/" title="百度2016校园招聘之编程题解析-软件研发" itemprop="url">百度2016校园招聘之编程题解析-软件研发</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.codepub.cn/about" title="Wang Xu" target="_blank" itemprop="author">Wang Xu</a>
+		
+  <p class="article-time">
+    <time datetime="2015-09-29T11:20:41.000Z" itemprop="datePublished"> 发表于 2015-09-29</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#比大小"><span class="toc-number">1.</span> <span class="toc-text">比大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拓展一下-求其逆过程"><span class="toc-number">2.</span> <span class="toc-text">拓展一下-求其逆过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#判断字符串是否出现"><span class="toc-number">3.</span> <span class="toc-text">判断字符串是否出现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组合概率"><span class="toc-number">4.</span> <span class="toc-text">组合概率</span></a></li></ol>
+		
+		</div>
+		
+		<h3 id="比大小">比大小</h3><p><img src="http://7xig3q.com1.z0.glb.clouddn.com/compare_sizes_baidu_examination_1.png" alt=""></p>
+<p><strong>解题思路</strong>：解此题需要使用到<strong><a href="http://baike.baidu.com/link?url=Xx0gZYn3QJ1ykJdRvLp9HxOUBLs-J57DqebWUtjSNnoWj78xEhZeWKnCfXkhYgGMEdJ5Xz7QEwwUrIqLE7KX6a" target="_blank" rel="external">康托展开</a></strong>，康托展开的公式如下</p>
+<p>$$X=a_n*(n-1)!+a_{n-1}*(n-2)!+\cdot\cdot\cdot+a_i*(i-1)!+\cdot\cdot\cdot+a_2*(2-1)!+a_1*(1-1)!$$</p>
+<p>公式看不懂没关系，下面以一个例子来讲解公式的使用！</p>
+<p>例如：有一个数组<code>S=[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;]</code>，它的其中之一个排列是<code>S1=[&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;a&quot;]</code>，现在欲把<code>S1</code>映射成<code>X</code>，需要怎么做呢？按如下步骤走起</p>
+<p>$$X=a_4*3!+a_3*2!+a_2*1!+a_1*0!$$</p>
+<ol>
+<li>首先计算n，n等于数组S的长度，n=4</li>
+<li>再来计算a4=”b”这个元素在数组<code>[&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;a&quot;]</code>中是第几大的元素。”a”是第0大的元素，”b”是第1大的元素，”c”是第2大的元素，”d”是第3大的元素，所以a4=1</li>
+<li>同样a3=”c”这个元素在数组<code>[&quot;c&quot;,&quot;d&quot;,&quot;a&quot;]</code>中是第几大的元素。”a”是第0大的元素，”c”是第1大的元素，”d”是第2大的元素，所以a3=1</li>
+<li>a2=”d”这个元素在数组<code>[&quot;d&quot;,&quot;a&quot;]</code>中是第几大的元素。”a”是第0大的元素，”d”是第1大的元素，所以a2=1</li>
+<li>a1=”a”这个元素在数组<code>[&quot;a&quot;]</code>中是第几大的元素。”a”是第0大的元素，所以a1=0</li>
+<li>所以<code>X(S1)=1\*3!+1\*2!+1\*1!+0\*0!=9</code></li>
+<li>注意所有的计算都是按照从0开始的，如果[“a”,”b”,”c”,”d”]算为第1个的话，那么将<code>X(S1)+1</code>即为最后的结果</li>
+</ol>
+<p><strong>Java算法实现</strong>：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"><span class="keyword">import</span> java.util.TreeSet;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * Created with IntelliJ IDEA. 2015/9/29 16:16</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * ClassName:Main</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * Description:本题需要用到康托展开，其公式为 X=an*(n-1)!+an-1*(n-2)!+...+ai*(i-1)!+...+a2*1!+a1*0!</span><br><span class="line"> * &lt;/P&gt;</span><br><span class="line"> *</span><br><span class="line"> * <span class="doctag">@author</span> Wang Xu</span><br><span class="line"> * <span class="doctag">@version</span> V1.0.0</span><br><span class="line"> * <span class="doctag">@since</span> V1.0.0</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="comment">//    3</span></span><br><span class="line">    <span class="comment">//    abcdefghijkl</span></span><br><span class="line">    <span class="comment">//    hgebkflacdji</span></span><br><span class="line">    <span class="comment">//    gfkedhjblcia</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> charLength = <span class="number">12</span>;<span class="comment">//定义字符序列的长度</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">while</span> (scanner.hasNextInt()) &#123;</span><br><span class="line">            <span class="keyword">int</span> n = scanner.nextInt();</span><br><span class="line">            String lines[] = <span class="keyword">new</span> String[n];</span><br><span class="line">            <span class="keyword">int</span> res[] = <span class="keyword">new</span> <span class="keyword">int</span>[n];<span class="comment">//存储结果的数组</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">                lines[i] = scanner.next();</span><br><span class="line">                res[i] = calculate(lines[i]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> s : res) &#123;</span><br><span class="line">                System.out.println(s);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//计算某个字符序列的位次</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">calculate</span><span class="params">(String line)</span> </span>&#123;</span><br><span class="line">        Set&lt;Character&gt; s = <span class="keyword">new</span> TreeSet&lt;Character&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> c : line.toCharArray()) &#123;</span><br><span class="line">            s.add(c);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//存储每一个字符在该序列中是第几大的元素，然后将其值存储到counts数组中</span></span><br><span class="line">        <span class="keyword">int</span> counts[] = <span class="keyword">new</span> <span class="keyword">int</span>[s.size()];</span><br><span class="line">        <span class="keyword">char</span>[] chars = line.toCharArray();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chars.length; i++) &#123;</span><br><span class="line">            Iterator&lt;Character&gt; iterator = s.iterator();</span><br><span class="line">            <span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line">            Character next;</span><br><span class="line">            <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">                next = iterator.next();</span><br><span class="line">                <span class="keyword">if</span> (next == chars[i]) &#123;</span><br><span class="line">                    counts[i] = temp;</span><br><span class="line">                    s.remove(next);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    temp++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; counts.length; i++) &#123;</span><br><span class="line">            sum = sum + counts[i] * factorial(charLength - i - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//计算阶乘的函数</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">factorial</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n &gt; <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> n * factorial(n - <span class="number">1</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="拓展一下-求其逆过程">拓展一下-求其逆过程</h3><p><img src="http://7xig3q.com1.z0.glb.clouddn.com/compare_sizes_baidu_examination_1_expand.png" alt=""></p>
+<p><strong>解题思路</strong>：使用康托逆展开，辗转相除得到的值为这个字符是第几大，这样取出对应位置的字符，然后利用后面的字符覆盖该字符即可，防止取到重复的字符。取模得到余数之后，重复上述过程。<br>例如：已知<code>S=[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;]</code>，那么当输入10的时候，或者说X(S1)=9的时候能否推出<code>S1=[&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;a&quot;]</code>呢？</p>
+<p>由</p>
+<p>$$X(S1)=a_4*3!+a_3*2!+a_2*1!+a_1*0!=9$$</p>
+<p>所以问题变成由9能否唯一地映射出一组a4、a3、a2、a1？首先如果不考虑ai的范围，那么有如下：</p>
+<p>$$1*3!+1*2!+1*1!+0*0!=9$$</p>
+<p>$$0*3!+4*2!+1*1!+0*0!=9$$</p>
+<p>$$0*3!+3*2!+3*1!+0*0!=9$$</p>
+<p>$$0*3!+2*2!+5*1!+0*0!=9$$</p>
+<p>……，但是每一个ai其实是有取值范围的，首先要知道ai表示的含义，其代表在当前剩余的序列中ai是处于第几大的位置，那么满足<code>0&lt;=ai&lt;=i</code>，同时a1必然为0，因为最后始终剩余一个元素。所以上式中只有第一个满足条件，那么a4=1，a3=1，a2=1，a1=1。推导出<code>S1=[&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;a&quot;]</code>。</p>
+<p><strong>Java算法实现</strong>：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * Created with IntelliJ IDEA. 2015/9/29 16:16</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * ClassName:Main</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * Description:本题需要用到康托展开，其公式为 X=an*(n-1)!+an-1*(n-2)!+...+ai*(i-1)!+...+a2*1!+a1*0!</span><br><span class="line"> * &lt;/P&gt;</span><br><span class="line"> *</span><br><span class="line"> * <span class="doctag">@author</span> Wang Xu</span><br><span class="line"> * <span class="doctag">@version</span> V1.0.0</span><br><span class="line"> * <span class="doctag">@since</span> V1.0.0</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainExpand</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> charLength = <span class="number">12</span>;<span class="comment">//定义字符序列的长度</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">while</span> (scanner.hasNextInt()) &#123;</span><br><span class="line">            <span class="keyword">int</span> n = scanner.nextInt();</span><br><span class="line">            <span class="keyword">int</span> lines[] = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">            String res[] = <span class="keyword">new</span> String[n];<span class="comment">//存储结果的数组</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">                lines[i] = scanner.nextInt();</span><br><span class="line">                res[i] = calculate(lines[i] - <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (String s : res) &#123;</span><br><span class="line">                System.out.println(s);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//计算某个字符序列的位次</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">calculate</span><span class="params">(<span class="keyword">int</span> line)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span> alpha[] = &#123;<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>, <span class="string">'f'</span>, <span class="string">'g'</span>, <span class="string">'h'</span>, <span class="string">'i'</span>, <span class="string">'j'</span>, <span class="string">'k'</span>, <span class="string">'l'</span>&#125;;</span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = charLength - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">int</span> temp = line / factorial(i);</span><br><span class="line">            line = line % factorial(i);</span><br><span class="line">            sb.append(String.valueOf(alpha[temp]));</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = temp; j &lt; alpha.length - <span class="number">1</span>; j++) &#123;</span><br><span class="line">                alpha[j] = alpha[j + <span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//计算阶乘的函数</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">factorial</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n &gt; <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> n * factorial(n - <span class="number">1</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="判断字符串是否出现">判断字符串是否出现</h3><p><img src="http://7xig3q.com1.z0.glb.clouddn.com/character_appear_or_not_baidu_examination_2.png" alt=""><br><strong>解题思路</strong>：</p>
+<ol>
+<li>将字符串a存储在一个map集合中，以每个字符的ASCII码作为key，以其出现的次数作为value，记为aMap</li>
+<li>遍历字符串b，对于b中的每一个字符，如果aMap的key中含有该字符的ASCII码，如果该key对应的value&gt;1，那么将value值减1</li>
+<li>否则value=1的话，那么将该键值对从aMap中移除</li>
+<li>在判断aMap的key是否包含b中的某个字符的时候，只要有一次不包含，那么就说明没有都出现</li>
+<li>否则的话，表示b中的字符在a中都出现过</li>
+</ol>
+<p><strong>Java算法实现</strong>：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * Created with IntelliJ IDEA. 2015/9/28 20:05</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * ClassName:test</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * Description:<span class="doctag"><span class="keyword">TODO</span></span></span><br><span class="line"> * &lt;/P&gt;</span><br><span class="line"> *</span><br><span class="line"> * <span class="doctag">@author</span> Wang Xu</span><br><span class="line"> * <span class="doctag">@version</span> V1.0.0</span><br><span class="line"> * <span class="doctag">@since</span> V1.0.0</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//以某个字符的ASCII码作为key，以其出现的次数作为value</span></span><br><span class="line">        Map&lt;Integer, Integer&gt; aMap = <span class="keyword">new</span> HashMap&lt;Integer, Integer&gt;();</span><br><span class="line"></span><br><span class="line">        Scanner input = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">while</span> (input.hasNextLine()) &#123;</span><br><span class="line">            String a = input.nextLine();</span><br><span class="line">            String b = input.nextLine();</span><br><span class="line">            <span class="keyword">char</span>[] chars = a.toCharArray();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">char</span> c : chars) &#123;</span><br><span class="line">                <span class="keyword">if</span> (aMap.keySet().contains((<span class="keyword">int</span>) c)) &#123;</span><br><span class="line">                    <span class="keyword">int</span> temp = aMap.get((<span class="keyword">int</span>) c);</span><br><span class="line">                    aMap.put((<span class="keyword">int</span>) c, (temp + <span class="number">1</span>));</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    aMap.put((<span class="keyword">int</span>) c, <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">char</span>[] chars1 = b.toCharArray();</span><br><span class="line">            <span class="keyword">boolean</span> flag = <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">char</span> c : chars1) &#123;</span><br><span class="line">                <span class="keyword">if</span> (aMap.keySet().contains((<span class="keyword">int</span>) c)) &#123;</span><br><span class="line">                    <span class="keyword">int</span> temp = aMap.get((<span class="keyword">int</span>) c);</span><br><span class="line">                    <span class="keyword">if</span> (temp == <span class="number">1</span>) &#123;</span><br><span class="line">                        <span class="comment">//说明只有一个</span></span><br><span class="line">                        aMap.remove((<span class="keyword">int</span>) c);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="comment">//说明多过于一个</span></span><br><span class="line">                        aMap.put((<span class="keyword">int</span>) c, (temp - <span class="number">1</span>));</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    flag = <span class="keyword">false</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">                System.out.println(<span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.println(<span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            aMap.clear();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="组合概率">组合概率</h3><p><img src="http://7xig3q.com1.z0.glb.clouddn.com/combinative_probability_baidu_examination_3.png" alt=""><br><strong>解题思路</strong>：<br>需要递推公式，然后用动态规划求解。</p>
+<p><strong>Java算法实现</strong>：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.text.DecimalFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * Created with IntelliJ IDEA. 2015/9/28 20:30</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * ClassName:Test3</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * Description:动态规划求解</span><br><span class="line"> * &lt;/P&gt;</span><br><span class="line"> *</span><br><span class="line"> * <span class="doctag">@author</span> Wang Xu</span><br><span class="line"> * <span class="doctag">@version</span> V1.0.0</span><br><span class="line"> * <span class="doctag">@since</span> V1.0.0</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main3</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> DecimalFormat dec = <span class="keyword">new</span> DecimalFormat(<span class="string">"0.0000"</span>);</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">double</span> v[][];<span class="comment">//表示取i个数时和为j的概率</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner input = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">while</span> (input.hasNextInt()) &#123;</span><br><span class="line">            <span class="keyword">int</span> n = input.nextInt();</span><br><span class="line">            <span class="keyword">int</span> a = input.nextInt();</span><br><span class="line">            <span class="keyword">int</span> b = input.nextInt();</span><br><span class="line">            <span class="keyword">int</span> x = input.nextInt();</span><br><span class="line">            v = <span class="keyword">new</span> <span class="keyword">double</span>[n + <span class="number">1</span>][x + <span class="number">1</span>];</span><br><span class="line">            <span class="keyword">double</span> sum = b - a + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = a; i &lt;= b; i++) &#123;</span><br><span class="line">                v[<span class="number">1</span>][i] = <span class="number">1.0</span> / sum;<span class="comment">//取1个数和为i的概率</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;<span class="comment">//对n个数进行迭代</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = a; j &lt;= b; j++) &#123;<span class="comment">//</span></span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= x; k++) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (k &gt;= j) &#123;</span><br><span class="line"><span class="comment">//                            print(v);</span></span><br><span class="line"><span class="comment">//                            System.out.println();</span></span><br><span class="line">                            v[i][k] = v[i][k] + v[i - <span class="number">1</span>][k - j] / sum;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//输出取n个数和为x的概率</span></span><br><span class="line">            System.out.println(dec.format(v[n][x]));</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">double</span>[][] v)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v.length; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; v[i].length; j++) &#123;</span><br><span class="line">                System.out.print(v[i][j] + <span class="string">"\t"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>参考资料<br>【1】<a href="http://www.jeepshoe.org/416642954.htm" target="_blank" rel="external">http://www.jeepshoe.org/416642954.htm</a><br>【2】<a href="http://www.cnblogs.com/sunus/p/4536082.html" target="_blank" rel="external">http://www.cnblogs.com/sunus/p/4536082.html</a><br><strong><em>算法如有疏漏或不妥之处，还望不吝赐教！</em></strong><br><strong><em>转载请注明出处：<a href="http://codepub.cn/2015/09/29/2016-campus-recruitment-of-baidu-programming-problem-resolution-software-development/" target="_blank" rel="external">http://codepub.cn/2015/09/29/2016-campus-recruitment-of-baidu-programming-problem-resolution-software-development/</a></em></strong></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Algorithms/">Algorithms</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Java/">Java</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=2067139" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2067139" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/10/07/Private-Treasured-Toolkit/" title="私人珍藏工具箱">
+  <strong>上一篇：</strong><br/>
+  <span>
+  私人珍藏工具箱</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/09/26/An-Automatic-Annotation-Method-for-Emergency-Text-Corpus/"  title="一种面向突发事件的文本语料自动标注方法">
+ <strong>下一篇：</strong><br/> 
+ <span>一种面向突发事件的文本语料自动标注方法
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/09/29/2016-campus-recruitment-of-baidu-programming-problem-resolution-software-development/" data-title="百度2016校园招聘之编程题解析-软件研发" data-url="http://www.codepub.cn/2015/09/29/2016-campus-recruitment-of-baidu-programming-problem-resolution-software-development/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#比大小"><span class="toc-number">1.</span> <span class="toc-text">比大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拓展一下-求其逆过程"><span class="toc-number">2.</span> <span class="toc-text">拓展一下-求其逆过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#判断字符串是否出现"><span class="toc-number">3.</span> <span class="toc-text">判断字符串是否出现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组合概率"><span class="toc-number">4.</span> <span class="toc-text">组合概率</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Algorithms/" title="Algorithms">Algorithms<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Database/" title="Database">Database<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git-GitHub/" title="Git/GitHub">Git/GitHub<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life-Talk/" title="Life-Talk">Life-Talk<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Operating-System/" title="Operating System">Operating System<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Programming-Notes/" title="Programming Notes">Programming Notes<sup>22</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python3/" title="Python3">Python3<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/LTP/" title="LTP">LTP<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/IT/" title="IT">IT<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elite/" title="Elite">Elite<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tools/" title="Tools">Tools<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySql/" title="MySql">MySql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Lombok/" title="Lombok">Lombok<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Selenium/" title="Selenium">Selenium<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DLL/" title="DLL">DLL<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tomcat/" title="Tomcat">Tomcat<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Guava/" title="Guava">Guava<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Github/" title="Github">Github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Octopress/" title="Octopress">Octopress<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Eclipse/" title="Eclipse">Eclipse<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <p class="asidetitle">最新评论</p>
+<div>
+	<ul class="ds-recent-comments" data-num-items="10" data-show-avatars="1" data-show-time="1" data-show-admin="1" data-excerpt-length="70"></ul>
+	<!--多说js加载开始，一个页面只需要加载一次 -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!--多说js加载结束，一个页面只需要加载一次 -->
+</div>
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/DLL/" style="font-size: 10px;">DLL</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Elite/" style="font-size: 10px;">Elite</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/IntelliJ/" style="font-size: 10px;">IntelliJ</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/LTP/" style="font-size: 13.33px;">LTP</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/Python3/" style="font-size: 16.67px;">Python3</a> <a href="/tags/Selenium/" style="font-size: 10px;">Selenium</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Struts2/" style="font-size: 10px;">Struts2</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a>
+    </div>
+  </div>
+
+
+  <br/>
+<p class="asidetitle">热评文章</p>
+<!-- 多说热评文章 start -->
+<div>
+<div class="ds-top-threads" data-range="monthly" data-num-items="8"></div>
+<!-- 多说热评文章 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+<br/>
+
+  <p class="asidetitle">打赏他</p>
+<div>
+<form action="https://shenghuo.alipay.com/send/payment/fill.htm" method="POST" target="_blank" accept-charset="GBK">
+    <br/>
+    <input name="optEmail" type="hidden" value="18302118258" />
+    <input name="payAmount" type="hidden" value="10" />
+    <input id="title" name="title" type="hidden" value="博主，打赏你的！" />
+    <input name="memo" type="hidden" value="你Y加油，继续写博客！" />
+    <input name="pay" type="image" value="转账" src="http://7xig3q.com1.z0.glb.clouddn.com/alipay-donate-website.png" />
+</form>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello , I&#39;m Wang Xu in SHU. <br/>
+			志不强者智不达，言不信者行不果。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1779238484" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/shijiebei2009" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/4204922" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		
+		
+		<a href="https://www.linkedin.com/in/codepub" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		<a href="https://www.douban.com/people/shijiebei2009" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		<a href="https://www.zhihu.com/people/codepub.cn" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:wangx89@126.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="http://www.codepub.cn/about" target="_blank" title="Wang Xu">Wang Xu</a>
+		
+		<a href="http://tongji.baidu.com/web/welcome/ico?s=2c61418f187553bcc869b755930233ab" target="_blank">百度统计</a><br/>
+		本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+		</p>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','CEs2u-bRR6iHSt4ynbFA','2.0.0');
+</script>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"codepub"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F2c61418f187553bcc869b755930233ab' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+
+<a href="https://github.com/shijiebei2009"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>

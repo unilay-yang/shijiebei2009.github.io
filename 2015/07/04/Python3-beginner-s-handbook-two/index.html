@@ -1,0 +1,656 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  
+  <meta charset="UTF-8">
+  
+    <title>Python3入门手册之二 | IT草根</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Wang Xu">
+    
+
+    
+    <meta name="description" content="Version：Python 3.4.3 (v3.4.3:9b73f1c3e601, Feb 24 2015, 22:44:40) [MSC v.1600 64 bit (AMD64)] on win32
+数字日期和时间数字的四舍五入1234567891011121314151617181920212223#!/usr/bin/python# coding: UTF-8&quot;&quot;&quot;Created on">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python3入门手册之二">
+<meta property="og:url" content="http://www.codepub.cn/2015/07/04/Python3-beginner-s-handbook-two/index.html">
+<meta property="og:site_name" content="IT草根">
+<meta property="og:description" content="Version：Python 3.4.3 (v3.4.3:9b73f1c3e601, Feb 24 2015, 22:44:40) [MSC v.1600 64 bit (AMD64)] on win32
+数字日期和时间数字的四舍五入1234567891011121314151617181920212223#!/usr/bin/python# coding: UTF-8&quot;&quot;&quot;Created on">
+<meta property="og:updated_time" content="2015-07-04T13:20:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python3入门手册之二">
+<meta name="twitter:description" content="Version：Python 3.4.3 (v3.4.3:9b73f1c3e601, Feb 24 2015, 22:44:40) [MSC v.1600 64 bit (AMD64)] on win32
+数字日期和时间数字的四舍五入1234567891011121314151617181920212223#!/usr/bin/python# coding: UTF-8&quot;&quot;&quot;Created on">
+
+    
+    <link rel="alternative" href="/atom.xml" title="IT草根" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.gif">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.gif">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.gif" alt="IT草根" title="IT草根"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="IT草根">IT草根</a></h1>
+				<h2 class="blog-motto">WangXu&#39;s 代码馆 BLOG</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/resume">Resume</a></li>
+					
+						<li><a href="/links">Links</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+						<form class="search">
+							<label>Search</label>
+						<input type="text" class="st-default-search-input" id="ts-search-input" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/04/Python3-beginner-s-handbook-two/" title="Python3入门手册之二" itemprop="url">Python3入门手册之二</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.codepub.cn/about" title="Wang Xu" target="_blank" itemprop="author">Wang Xu</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-04T13:16:41.000Z" itemprop="datePublished"> 发表于 2015-07-04</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#数字日期和时间"><span class="toc-number">1.</span> <span class="toc-text">数字日期和时间</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数字的四舍五入"><span class="toc-number">1.1.</span> <span class="toc-text">数字的四舍五入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#执行精确的浮点数运算"><span class="toc-number">1.2.</span> <span class="toc-text">执行精确的浮点数运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#无穷大与NaN"><span class="toc-number">1.3.</span> <span class="toc-text">无穷大与NaN</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分数运算"><span class="toc-number">1.4.</span> <span class="toc-text">分数运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#大型数组运算"><span class="toc-number">1.5.</span> <span class="toc-text">大型数组运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基本的日期与时间转换"><span class="toc-number">1.6.</span> <span class="toc-text">基本的日期与时间转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符串转换为日期"><span class="toc-number">1.7.</span> <span class="toc-text">字符串转换为日期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#结合时区的日期操作"><span class="toc-number">1.8.</span> <span class="toc-text">结合时区的日期操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#迭代器与生成器"><span class="toc-number">2.</span> <span class="toc-text">迭代器与生成器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#代理迭代"><span class="toc-number">2.1.</span> <span class="toc-text">代理迭代</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反向迭代"><span class="toc-number">2.2.</span> <span class="toc-text">反向迭代</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#迭代器切片"><span class="toc-number">2.3.</span> <span class="toc-text">迭代器切片</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#跳过可迭代对象的开始部分"><span class="toc-number">2.4.</span> <span class="toc-text">跳过可迭代对象的开始部分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#排列组合的迭代"><span class="toc-number">2.5.</span> <span class="toc-text">排列组合的迭代</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#序列上索引值迭代"><span class="toc-number">2.6.</span> <span class="toc-text">序列上索引值迭代</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#同时迭代多个序列"><span class="toc-number">2.7.</span> <span class="toc-text">同时迭代多个序列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#不同集合上元素的迭代"><span class="toc-number">2.8.</span> <span class="toc-text">不同集合上元素的迭代</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#展开嵌套的序列"><span class="toc-number">2.9.</span> <span class="toc-text">展开嵌套的序列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#顺序迭代合并后的排序迭代对象"><span class="toc-number">2.10.</span> <span class="toc-text">顺序迭代合并后的排序迭代对象</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<p><em>Version：Python 3.4.3 (v3.4.3:9b73f1c3e601, Feb 24 2015, 22:44:40) [MSC v.1600 64 bit (AMD64)] on win32</em></p>
+<h3 id="数字日期和时间">数字日期和时间</h3><h4 id="数字的四舍五入">数字的四舍五入</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># coding: UTF-8</span></span><br><span class="line"><span class="string">"""</span><br><span class="line">Created on 2015/7/3  23:01</span><br><span class="line">@author: 'WX'</span><br><span class="line">"""</span></span><br><span class="line"></span><br><span class="line">print(round(<span class="number">1.23</span>, <span class="number">1</span>))  <span class="comment"># Prints 1.2</span></span><br><span class="line">print(round(<span class="number">1.27</span>, <span class="number">1</span>))  <span class="comment"># Prints 1.3</span></span><br><span class="line">print(round(-<span class="number">1.27</span>, <span class="number">1</span>))  <span class="comment"># Prints -1.3</span></span><br><span class="line">print(round(<span class="number">1.25361</span>, <span class="number">3</span>))  <span class="comment"># Prints 1.254</span></span><br><span class="line"><span class="comment"># 当一个值刚好在两个边界的中间的时候，round 函数返回离它最近的偶数</span></span><br><span class="line">print(round(<span class="number">1.25</span>, <span class="number">1</span>))  <span class="comment"># Prints 1.2</span></span><br><span class="line">print(round(<span class="number">1.35</span>, <span class="number">1</span>))  <span class="comment"># Prints 1.4</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 传给 round() 函数的 ndigits 参数可以是负数，这种情况下， 舍入运算会作用在十位、百位、千位等上面</span></span><br><span class="line">a = <span class="number">1627731</span></span><br><span class="line">print(round(a, -<span class="number">1</span>))</span><br><span class="line">print(round(a, -<span class="number">2</span>))</span><br><span class="line">print(round(a, -<span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 格式化浮点数，保留指定的小数点后保留位数</span></span><br><span class="line">print(format(<span class="number">1.23456</span>, <span class="string">'0.2f'</span>))</span><br></pre></td></tr></table></figure>
+<h4 id="执行精确的浮点数运算">执行精确的浮点数运算</h4><p>如果需要精确的浮点数计算，那么推荐使用<code>decimal</code>模块的<code>Decimal</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> decimal <span class="keyword">import</span> Decimal</span><br><span class="line"></span><br><span class="line">a = Decimal(<span class="string">'1.3'</span>)</span><br><span class="line">b = Decimal(<span class="string">'1.7'</span>)</span><br><span class="line">print(a / b)</span><br><span class="line"></span><br><span class="line">a = Decimal(<span class="string">'4.2'</span>)</span><br><span class="line">b = Decimal(<span class="string">'2.1'</span>)</span><br><span class="line">c = a.__add__(b)</span><br><span class="line">d = a + b</span><br><span class="line">print(c)  <span class="comment"># Prints 6.3</span></span><br><span class="line">print(d)  <span class="comment"># Prints 6.3</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="无穷大与NaN">无穷大与NaN</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">a = float(<span class="string">'inf'</span>)</span><br><span class="line">b = float(<span class="string">'-inf'</span>)</span><br><span class="line">c = float(<span class="string">'nan'</span>)</span><br><span class="line">print(a)  <span class="comment"># Prints inf</span></span><br><span class="line">print(b)  <span class="comment"># Prints -inf</span></span><br><span class="line">print(c)  <span class="comment"># Prints nan</span></span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="comment"># 可以使用如下方式测试这些值的存在，测试一个NaN值的唯一安全的方法就是使用math.isnan()</span></span><br><span class="line">print(math.isinf(a))  <span class="comment"># Prints True</span></span><br><span class="line">print(math.isnan(c))  <span class="comment"># Prints True</span></span><br></pre></td></tr></table></figure>
+<h4 id="分数运算">分数运算</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># fractions模块可以被用来执行包含分数的数学运算</span></span><br><span class="line"><span class="keyword">from</span> fractions <span class="keyword">import</span> Fraction</span><br><span class="line"></span><br><span class="line">a = Fraction(<span class="number">5</span>, <span class="number">4</span>)</span><br><span class="line">b = Fraction(<span class="number">7</span>, <span class="number">16</span>)</span><br><span class="line">print(a + b)  <span class="comment"># Prints 27/16</span></span><br><span class="line">c = a * b</span><br><span class="line">print(c)  <span class="comment"># Prints 35/64</span></span><br><span class="line">print(c.numerator)  <span class="comment"># 获取分子</span></span><br><span class="line">print(c.denominator)  <span class="comment"># 获取分母</span></span><br><span class="line">print(float(c))  <span class="comment"># 强转成float类型</span></span><br><span class="line">d = <span class="number">3.75</span></span><br><span class="line">e = Fraction(*d.as_integer_ratio())  <span class="comment"># 强转float类型到分数类型</span></span><br><span class="line">print(e)</span><br></pre></td></tr></table></figure>
+<h4 id="大型数组运算">大型数组运算</h4><p>涉及到数组的重量级运算操作，可以使用<code>NumPy</code>库。<code>NumPy</code>的一个主要特征是它会给Python提供一个数组对象，相比标准的Python列表而言更适合用来做数学运算<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Python lists</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>x = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>y = [<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>]</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>x * <span class="number">2</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>x + <span class="number">10</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">    File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">TypeError: can only concatenate list (<span class="keyword">not</span> <span class="string">"int"</span>) to list</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>x + y</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>]</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Numpy arrays</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>ax = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>ay = np.array([<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>])</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>ax * <span class="number">2</span></span><br><span class="line">array([<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>])</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>ax + <span class="number">10</span></span><br><span class="line">array([<span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>])</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>ax + ay</span><br><span class="line">array([ <span class="number">6</span>, <span class="number">8</span>, <span class="number">10</span>, <span class="number">12</span>])</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>ax * ay</span><br><span class="line">array([ <span class="number">5</span>, <span class="number">12</span>, <span class="number">21</span>, <span class="number">32</span>])</span><br></pre></td></tr></table></figure>
+<p><code>NumPy</code>还为数组操作提供了大量的通用函数，这些函数可以作为<code>math</code>模块中类似函数的替代<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span>np.sqrt(ax)</span><br><span class="line">array([ <span class="number">1.</span> , <span class="number">1.41421356</span>, <span class="number">1.73205081</span>, <span class="number">2.</span> ])</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>np.cos(ax)</span><br><span class="line">array([ <span class="number">0.54030231</span>, -<span class="number">0.41614684</span>, -<span class="number">0.9899925</span> , -<span class="number">0.65364362</span>])</span><br></pre></td></tr></table></figure></p>
+<p>使用<code>NumPy</code>构造一个二维数组的例子<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span>grid = np.zeros(shape=(<span class="number">10000</span>,<span class="number">10000</span>), dtype=float)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>grid</span><br><span class="line">    array([[ <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, ..., <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">    [ <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, ..., <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">    [ <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, ..., <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">    ...,</span><br><span class="line">    [ <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, ..., <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">    [ <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, ..., <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">    [ <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, ..., <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>]])</span><br></pre></td></tr></table></figure></p>
+<p>对于<code>NumPy</code>构造的数组，如何选择行和列呢？<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span>a = np.array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>], [<span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>]])</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>],</span><br><span class="line">[ <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>],</span><br><span class="line">[ <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>]])</span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Select row 1</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>a[<span class="number">1</span>]</span><br><span class="line">array([<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>])</span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Select column 1</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>a[:,<span class="number">1</span>]</span><br><span class="line">array([ <span class="number">2</span>, <span class="number">6</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Select a subregion and change it</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>a[<span class="number">1</span>:<span class="number">3</span>, <span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line">array([[ <span class="number">6</span>, <span class="number">7</span>],</span><br><span class="line">        [<span class="number">10</span>, <span class="number">11</span>]])</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>a[<span class="number">1</span>:<span class="number">3</span>, <span class="number">1</span>:<span class="number">3</span>] += <span class="number">10</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>],</span><br><span class="line">        [ <span class="number">5</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">8</span>],</span><br><span class="line">        [ <span class="number">9</span>, <span class="number">20</span>, <span class="number">21</span>, <span class="number">12</span>]])</span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Broadcast a row vector across an operation on all rows</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>a + [<span class="number">100</span>, <span class="number">101</span>, <span class="number">102</span>, <span class="number">103</span>]</span><br><span class="line">array([[<span class="number">101</span>, <span class="number">103</span>, <span class="number">105</span>, <span class="number">107</span>],</span><br><span class="line">        [<span class="number">105</span>, <span class="number">117</span>, <span class="number">119</span>, <span class="number">111</span>],</span><br><span class="line">        [<span class="number">109</span>, <span class="number">121</span>, <span class="number">123</span>, <span class="number">115</span>]])</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>],</span><br><span class="line">        [ <span class="number">5</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">8</span>],</span><br><span class="line">        [ <span class="number">9</span>, <span class="number">20</span>, <span class="number">21</span>, <span class="number">12</span>]])</span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Conditional assignment on an array</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>np.where(a &lt; <span class="number">10</span>, a, <span class="number">10</span>)</span><br><span class="line">array([[ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>],</span><br><span class="line">        [ <span class="number">5</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">8</span>],</span><br><span class="line">        [ <span class="number">9</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>]])</span><br></pre></td></tr></table></figure></p>
+<p>通常我们导入<code>NumPy</code>模块的时候会使用语句<code>import numpy as np</code>。这样的话你就不用再你的程序里面一遍遍的敲入<code>numpy</code>，只需要输入<code>np</code>就行了，节省了不少时间。</p>
+<h4 id="基本的日期与时间转换">基本的日期与时间转换</h4><p>为了执行不同时间单位的转换和计算，请使用<code>datetime</code>模块<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">from</span> datetime <span class="keyword">import</span> timedelta</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>a = timedelta(days=<span class="number">2</span>, hours=<span class="number">6</span>)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>b = timedelta(hours=<span class="number">4.5</span>)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>c = a + b</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>c.days</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>c.seconds</span><br><span class="line"><span class="number">37800</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>c.seconds / <span class="number">3600</span></span><br><span class="line"><span class="number">10.5</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>c.total_seconds() / <span class="number">3600</span></span><br><span class="line"><span class="number">58.5</span></span><br></pre></td></tr></table></figure></p>
+<p>如果你想表示指定的日期和时间，先创建一个<code>datetime</code>实例然后使用标准的数学运算来操作它们<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>a = datetime(<span class="number">2012</span>, <span class="number">9</span>, <span class="number">23</span>)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>print(a + timedelta(days=<span class="number">10</span>))</span><br><span class="line"><span class="number">2012</span>-<span class="number">10</span>-<span class="number">03</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span></span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>b = datetime(<span class="number">2012</span>, <span class="number">12</span>, <span class="number">21</span>)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>d = b - a</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>d.days</span><br><span class="line"><span class="number">89</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>now = datetime.today()</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>print(now)</span><br><span class="line"><span class="number">2012</span>-<span class="number">12</span>-<span class="number">21</span> <span class="number">14</span>:<span class="number">54</span>:<span class="number">43.094063</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>print(now + timedelta(minutes=<span class="number">10</span>))</span><br><span class="line"><span class="number">2012</span>-<span class="number">12</span>-<span class="number">21</span> <span class="number">15</span>:<span class="number">04</span>:<span class="number">43.094063</span></span><br></pre></td></tr></table></figure></p>
+<p>对大多数基本的日期和时间处理问题，<code>datetime</code>模块以及足够了。 如果你需要执行更加复杂的日期操作，比如处理时区，模糊时间范围，节假日计算等等， 可以考虑使用<code>dateutil</code>模块<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span>a = datetime(<span class="number">2012</span>, <span class="number">9</span>, <span class="number">23</span>)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>a + timedelta(months=<span class="number">1</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">TypeError: <span class="string">'months'</span> <span class="keyword">is</span> an invalid keyword argument <span class="keyword">for</span> this function</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">from</span> dateutil.relativedelta <span class="keyword">import</span> relativedelta</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>a + relativedelta(months=+<span class="number">1</span>)</span><br><span class="line">datetime.datetime(<span class="number">2012</span>, <span class="number">10</span>, <span class="number">23</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>a + relativedelta(months=+<span class="number">4</span>)</span><br><span class="line">datetime.datetime(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">23</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Time between two dates</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>b = datetime(<span class="number">2012</span>, <span class="number">12</span>, <span class="number">21</span>)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>d = b - a</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>d</span><br><span class="line">datetime.timedelta(<span class="number">89</span>)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>d = relativedelta(b, a)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>d</span><br><span class="line">relativedelta(months=+<span class="number">2</span>, days=+<span class="number">28</span>)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>d.months</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>d.days</span><br><span class="line"><span class="number">28</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="字符串转换为日期">字符串转换为日期</h4><p>使用Python的标准模块<code>datetime</code>可以很容易的解决这个问题<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line">text = <span class="string">'2012-09-20'</span></span><br><span class="line">y = datetime.strptime(text, <span class="string">'%Y-%m-%d'</span>)</span><br><span class="line">print(y)  <span class="comment"># Prints 2012-09-20 00:00:00</span></span><br><span class="line">z = datetime.now()</span><br><span class="line">print(z)  <span class="comment"># Prints 2015-07-04 15:49:17.419612</span></span><br><span class="line">diff = z - y</span><br><span class="line">print(diff)  <span class="comment"># Prints 1017 days, 15:49:17.419612</span></span><br></pre></td></tr></table></figure></p>
+<p><code>datetime.strptime()</code>方法支持很多的格式化代码，比如<code>%Y</code>代表4位数年份，<code>%m</code>代表两位数月份。还有一点值得注意的是这些格式化占位符也可以反过来使用，将日期输出为指定的格式字符串形式<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span>z</span><br><span class="line">datetime.datetime(<span class="number">2012</span>, <span class="number">9</span>, <span class="number">23</span>, <span class="number">21</span>, <span class="number">37</span>, <span class="number">4</span>, <span class="number">177393</span>)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>nice_z = datetime.strftime(z, <span class="string">'%A %B %d, %Y'</span>)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>nice_z</span><br><span class="line"><span class="string">'Sunday September 23, 2012'</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="结合时区的日期操作">结合时区的日期操作</h4><p>对几乎所有涉及到时区的问题，你都应该使用<code>pytz</code>模块。这个包提供了<code>Olson</code>时区数据库，它是时区信息的事实上的标准，在很多语言和操作系统里面都可以找到。<code>pytz</code>模块一个主要用途是将<code>datetime</code>库创建的简单日期对象本地化。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">from</span> pytz <span class="keyword">import</span> timezone</span><br><span class="line"></span><br><span class="line">d = datetime(<span class="number">2015</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">30</span>, <span class="number">0</span>)</span><br><span class="line">print(d)  <span class="comment"># Prints 2015-01-01 09:30:00</span></span><br><span class="line"><span class="comment"># central = timezone('Asia/Shanghai')</span></span><br><span class="line"><span class="comment"># Localize the date for Chicago</span></span><br><span class="line">central = timezone(<span class="string">'US/Central'</span>)</span><br><span class="line">loc_d = central.localize(d)</span><br><span class="line">print(loc_d)  <span class="comment"># Prints 2015-01-01 09:30:00-06:00</span></span><br></pre></td></tr></table></figure></p>
+<p>一旦日期被本地化了， 它就可以转换为其他时区的时间了。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bang_d = loc_d.astimezone(timezone(<span class="string">'Asia/Shanghai'</span>))</span><br><span class="line">print(bang_d)  <span class="comment"># Prints 2015-01-01 23:30:00+08:00</span></span><br></pre></td></tr></table></figure></p>
+<p>当涉及到时区操作的时候，有个问题就是我们如何得到时区的名称。比如，在这个例子中，我们如何知道<code>“Asia/Shanghai”</code>就是中国对应的时区名呢？为了查找，可以使用<code>ISO3166</code>国家代码作为关键字去查阅字典<code>pytz.country_timezones</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Urumqi  乌鲁木齐（新疆首府）</span></span><br><span class="line">print(pytz.country_timezones[<span class="string">'CN'</span>])  <span class="comment"># Prints ['Asia/Shanghai', 'Asia/Urumqi']</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="迭代器与生成器">迭代器与生成器</h3><h4 id="代理迭代">代理迭代</h4><p>Python的迭代器协议需要<code>__iter__()</code>方法返回一个实现了<code>__next__()</code>方法的迭代器对象。如果你只是迭代遍历其他容器的内容，你无须担心底层是怎样实现的。你所要做的只是传递迭代请求既可。这里的<code>iter()</code>函数的使用简化了代码，<code>iter(s)</code>只是简单的通过调用<code>s.__iter__()</code>方法来返回对应的迭代器对象，就跟<code>len(s)</code>会调用<code>s.__len__()</code>原理是一样的。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># coding: UTF-8</span></span><br><span class="line"><span class="string">"""</span><br><span class="line">Created on 2015/7/4  18:33</span><br><span class="line">@author: 'WX'</span><br><span class="line">"""</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        self._value = value</span><br><span class="line">        self._children = []</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Node(&#123;!r&#125;)'</span>.format(self._value)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add_child</span><span class="params">(self, node)</span>:</span></span><br><span class="line">        self._children.append(node)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> iter(self._children)</span><br><span class="line"><span class="comment">#Example</span></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>:</span><br><span class="line">    root = Node(<span class="number">0</span>)</span><br><span class="line">    child1 = Node(<span class="number">1</span>)</span><br><span class="line">    child2 = Node(<span class="number">2</span>)</span><br><span class="line">    root.add_child(child1)</span><br><span class="line">    root.add_child(child2)</span><br><span class="line">    <span class="keyword">for</span> ch <span class="keyword">in</span> root:</span><br><span class="line">        print(ch)</span><br></pre></td></tr></table></figure></p>
+<h4 id="反向迭代">反向迭代</h4><p>反向迭代仅仅当对象的大小可预先确定或者对象实现了<code>__reversed__()</code>的特殊方法时才能生效。如果两者都不符合，那你必须先将对象转换为一个列表才行<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> reversed(a):</span><br><span class="line">    print(x, end=<span class="string">' '</span>)</span><br><span class="line">print()</span><br><span class="line"><span class="comment"># Print a file backwards</span></span><br><span class="line">f = open(<span class="string">'test.csv'</span>, mode=<span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>)</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> reversed(list(f)):</span><br><span class="line">    print(line, end=<span class="string">''</span>)</span><br></pre></td></tr></table></figure></p>
+<p>要注意的是如果可迭代对象元素很多的话，将其预先转换为一个列表要消耗大量的内存。这时候需要在定义的类上实现<code>__reversed__()</code>方法来实现反向迭代<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Countdown</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, start)</span>:</span></span><br><span class="line">        self.start = start</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Forward iterator</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        n = self.start</span><br><span class="line">        <span class="keyword">while</span> n &gt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">yield</span> n</span><br><span class="line">            n -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Reverse iterator</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__reversed__</span><span class="params">(self)</span>:</span></span><br><span class="line">        n = <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> n &lt;= self.start:</span><br><span class="line">            <span class="keyword">yield</span> n</span><br><span class="line">            n += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> rr <span class="keyword">in</span> reversed(Countdown(<span class="number">30</span>)):</span><br><span class="line">    print(rr)</span><br><span class="line"><span class="keyword">for</span> rr <span class="keyword">in</span> Countdown(<span class="number">30</span>):</span><br><span class="line">    print(rr)</span><br></pre></td></tr></table></figure></p>
+<p>定义一个反向迭代器可以使得代码非常的高效，因为它不再需要将数据填充到一个列表中然后再去反向迭代这个列表。</p>
+<h4 id="迭代器切片">迭代器切片</h4><p>函数<code>itertools.islice()</code>正好适用于在迭代器和生成器上做切片操作<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">count</span><span class="params">(n)</span>:</span></span><br><span class="line"><span class="prompt">... </span>    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line"><span class="prompt">... </span>        <span class="keyword">yield</span> n</span><br><span class="line"><span class="prompt">... </span>        n += <span class="number">1</span></span><br><span class="line">...</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>c = count(<span class="number">0</span>)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>c[<span class="number">10</span>:<span class="number">20</span>]</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">    File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">TypeError: <span class="string">'generator'</span> object <span class="keyword">is</span> <span class="keyword">not</span> subscriptable</span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="comment"># Now using islice()</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">import</span> itertools</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> itertools.islice(c, <span class="number">10</span>, <span class="number">20</span>):</span><br><span class="line"><span class="prompt">... </span>    print(x)</span><br><span class="line">...</span><br><span class="line"><span class="number">10</span></span><br><span class="line"><span class="number">11</span></span><br><span class="line"><span class="number">12</span></span><br><span class="line"><span class="number">13</span></span><br><span class="line"><span class="number">14</span></span><br><span class="line"><span class="number">15</span></span><br><span class="line"><span class="number">16</span></span><br><span class="line"><span class="number">17</span></span><br><span class="line"><span class="number">18</span></span><br><span class="line"><span class="number">19</span></span><br></pre></td></tr></table></figure></p>
+<p>函数<code>islice()</code>返回一个可以生成指定元素的迭代器，它通过遍历并丢弃直到切片开始索引位置的所有元素。然后才开始一个个的返回元素，并直到切片结束索引位置。这里要着重强调的一点是<code>islice()</code>会消耗掉传入的迭代器中的数据。必须考虑到迭代器是不可逆的这个事实。所以如果你需要之后再次访问这个迭代器的话，那你就得先将它里面的数据放入一个列表中。</p>
+<h4 id="跳过可迭代对象的开始部分">跳过可迭代对象的开始部分</h4><p>为了演示，假定你在读取一个开始部分是几行注释的源文件<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">with</span> open(<span class="string">'/etc/passwd'</span>) <span class="keyword">as</span> f:</span><br><span class="line"><span class="prompt">... </span><span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line"><span class="prompt">... </span>    print(line, end=<span class="string">''</span>)</span><br><span class="line">...</span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="comment"># User Database</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Note that this file is consulted directly only when the system is running</span></span><br><span class="line"><span class="comment"># in single-user mode. At other times, this information is provided by</span></span><br><span class="line"><span class="comment"># Open Directory.</span></span><br><span class="line">...</span><br><span class="line"><span class="comment">##</span></span><br><span class="line">nobody:*:-<span class="number">2</span>:-<span class="number">2</span>:Unprivileged User:/var/empty:/usr/bin/false</span><br><span class="line">root:*:<span class="number">0</span>:<span class="number">0</span>:System Administrator:/var/root:/bin/sh</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>如果你想跳过开始部分的注释行的话，可以这样做<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">from</span> itertools <span class="keyword">import</span> dropwhile</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">with</span> open(<span class="string">'/etc/passwd'</span>) <span class="keyword">as</span> f:</span><br><span class="line"><span class="prompt">... </span>    <span class="keyword">for</span> line <span class="keyword">in</span> dropwhile(<span class="keyword">lambda</span> line: line.startswith(<span class="string">'#'</span>), f):</span><br><span class="line"><span class="prompt">... </span>        print(line, end=<span class="string">''</span>)</span><br><span class="line">...</span><br><span class="line">nobody:*:-<span class="number">2</span>:-<span class="number">2</span>:Unprivileged User:/var/empty:/usr/bin/false</span><br><span class="line">root:*:<span class="number">0</span>:<span class="number">0</span>:System Administrator:/var/root:/bin/sh</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<h4 id="排列组合的迭代">排列组合的迭代</h4><p><code>itertools</code>模块提供了三个函数来解决这类问题。其中一个是<code>itertools.permutations()</code>，它接受一个集合并产生一个元组序列，每个元组由集合中所有元素的一个可能排列组成。也就是说通过打乱集合中元素排列顺序生成一个元组<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span>items = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">from</span> itertools <span class="keyword">import</span> permutations</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">for</span> p <span class="keyword">in</span> permutations(items):</span><br><span class="line"><span class="prompt">... </span>    print(p)</span><br><span class="line">...</span><br><span class="line">(<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>)</span><br><span class="line">(<span class="string">'a'</span>, <span class="string">'c'</span>, <span class="string">'b'</span>)</span><br><span class="line">(<span class="string">'b'</span>, <span class="string">'a'</span>, <span class="string">'c'</span>)</span><br><span class="line">(<span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'a'</span>)</span><br><span class="line">(<span class="string">'c'</span>, <span class="string">'a'</span>, <span class="string">'b'</span>)</span><br><span class="line">(<span class="string">'c'</span>, <span class="string">'b'</span>, <span class="string">'a'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>如果你想得到指定长度的所有排列，你可以传递一个可选的长度参数<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">for</span> p <span class="keyword">in</span> permutations(items, <span class="number">2</span>):</span><br><span class="line"><span class="prompt">... </span>    print(p)</span><br><span class="line">...</span><br><span class="line">(<span class="string">'a'</span>, <span class="string">'b'</span>)</span><br><span class="line">(<span class="string">'a'</span>, <span class="string">'c'</span>)</span><br><span class="line">(<span class="string">'b'</span>, <span class="string">'a'</span>)</span><br><span class="line">(<span class="string">'b'</span>, <span class="string">'c'</span>)</span><br><span class="line">(<span class="string">'c'</span>, <span class="string">'a'</span>)</span><br><span class="line">(<span class="string">'c'</span>, <span class="string">'b'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>使用<code>itertools.combinations()</code>可得到输入集合中元素的所有的组合<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">from</span> itertools <span class="keyword">import</span> combinations</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">for</span> c <span class="keyword">in</span> combinations(items, <span class="number">3</span>):</span><br><span class="line"><span class="prompt">... </span>    print(c)</span><br><span class="line">...</span><br><span class="line">(<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>)</span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">for</span> c <span class="keyword">in</span> combinations(items, <span class="number">2</span>):</span><br><span class="line"><span class="prompt">... </span>    print(c)</span><br><span class="line">...</span><br><span class="line">(<span class="string">'a'</span>, <span class="string">'b'</span>)</span><br><span class="line">(<span class="string">'a'</span>, <span class="string">'c'</span>)</span><br><span class="line">(<span class="string">'b'</span>, <span class="string">'c'</span>)</span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">for</span> c <span class="keyword">in</span> combinations(items, <span class="number">1</span>):</span><br><span class="line"><span class="prompt">... </span>    print(c)</span><br><span class="line">...</span><br><span class="line">(<span class="string">'a'</span>,)</span><br><span class="line">(<span class="string">'b'</span>,)</span><br><span class="line">(<span class="string">'c'</span>,)</span><br></pre></td></tr></table></figure></p>
+<p>对于<code>combinations()</code>来讲，元素的顺序已经不重要了。也就是说，组合<code>(&#39;a&#39;, &#39;b&#39;)</code>跟<code>(&#39;b&#39;, &#39;a&#39;)</code>其实是一样的(最终只会输出其中一个)。</p>
+<p>在计算组合的时候，一旦元素被选取就会从候选中剔除掉(比如如果元素’a’已经被选取了，那么接下来就不会再考虑它了)。而函数<code>itertools.combinations_with_replacement()</code>允许同一个元素被选择多次<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">for</span> c <span class="keyword">in</span> combinations_with_replacement(items, <span class="number">3</span>):</span><br><span class="line"><span class="prompt">... </span>    print(c)</span><br><span class="line">...</span><br><span class="line">(<span class="string">'a'</span>, <span class="string">'a'</span>, <span class="string">'a'</span>)</span><br><span class="line">(<span class="string">'a'</span>, <span class="string">'a'</span>, <span class="string">'b'</span>)</span><br><span class="line">(<span class="string">'a'</span>, <span class="string">'a'</span>, <span class="string">'c'</span>)</span><br><span class="line">(<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'b'</span>)</span><br><span class="line">(<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>)</span><br><span class="line">(<span class="string">'a'</span>, <span class="string">'c'</span>, <span class="string">'c'</span>)</span><br><span class="line">(<span class="string">'b'</span>, <span class="string">'b'</span>, <span class="string">'b'</span>)</span><br><span class="line">(<span class="string">'b'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>)</span><br><span class="line">(<span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'c'</span>)</span><br><span class="line">(<span class="string">'c'</span>, <span class="string">'c'</span>, <span class="string">'c'</span>)</span><br></pre></td></tr></table></figure></p>
+<h4 id="序列上索引值迭代">序列上索引值迭代</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span>my_list = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">for</span> idx, val <span class="keyword">in</span> enumerate(my_list):</span><br><span class="line"><span class="prompt">... </span>    print(idx, val)</span><br><span class="line">...</span><br><span class="line"><span class="number">0</span> a</span><br><span class="line"><span class="number">1</span> b</span><br><span class="line"><span class="number">2</span> c</span><br></pre></td></tr></table></figure>
+<p>为了按传统行号输出(行号从1开始)，你可以传递一个开始参数：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span>my_list = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">for</span> idx, val <span class="keyword">in</span> enumerate(my_list, <span class="number">1</span>):</span><br><span class="line"><span class="prompt">... </span>    print(idx, val)</span><br><span class="line">...</span><br><span class="line"><span class="number">1</span> a</span><br><span class="line"><span class="number">2</span> b</span><br><span class="line"><span class="number">3</span> c</span><br></pre></td></tr></table></figure></p>
+<p><code>enumerate()</code>对于跟踪某些值在列表中出现的位置是很有用的。 所以，如果你想将一个文件中出现的单词映射到它出现的行号上去，可以很容易的利用<code>enumerate()</code>来完成<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">word_summary = defaultdict(list)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'myfile.txt'</span>, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    lines = f.readlines()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> idx, line <span class="keyword">in</span> enumerate(lines):</span><br><span class="line">    <span class="comment"># Create a list of words in current line</span></span><br><span class="line">    words = [w.strip().lower() <span class="keyword">for</span> w <span class="keyword">in</span> line.split()]</span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> words:</span><br><span class="line">        word_summary[word].append(idx)</span><br></pre></td></tr></table></figure></p>
+<p>如果你处理完文件后打印 <code>word_summary</code>，会发现它是一个字典(准确来讲是一个<code>defaultdict</code>)，对于每个单词有一个<code>key</code>，每个<code>key</code>对应的值是一个由这个单词出现的行号组成的列表。如果某个单词在一行中出现过两次，那么这个行号也会出现两次，同时也可以作为文本的一个简单统计。</p>
+<p><code>enumerate()</code>函数返回的是一个<code>enumerate</code>对象实例，它是一个迭代器，返回连续的包含一个计数和一个值的元组，元组中的值通过在传入序列上调用<code>next()</code>返回。</p>
+<p>还有一点可能并不很重要，但是也值得注意，有时候当你在一个已经解压后的元组序列上使用<code>enumerate()</code>函数时很容易调入陷阱。你得像下面正确的方式这样写：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">data = [ (<span class="number">1</span>, <span class="number">2</span>), (<span class="number">3</span>, <span class="number">4</span>), (<span class="number">5</span>, <span class="number">6</span>), (<span class="number">7</span>, <span class="number">8</span>) ]</span><br><span class="line"><span class="comment"># Correct!</span></span><br><span class="line"><span class="keyword">for</span> n, (x, y) <span class="keyword">in</span> enumerate(data):</span><br><span class="line">    ...</span><br><span class="line"><span class="comment"># Error!</span></span><br><span class="line"><span class="keyword">for</span> n, x, y <span class="keyword">in</span> enumerate(data):</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
+<h4 id="同时迭代多个序列">同时迭代多个序列</h4><p>为了同时迭代多个序列，使用<code>zip()</code>函数<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span>xpts = [<span class="number">1</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">7</span>]</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>ypts = [<span class="number">101</span>, <span class="number">78</span>, <span class="number">37</span>, <span class="number">15</span>, <span class="number">62</span>, <span class="number">99</span>]</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">for</span> x, y <span class="keyword">in</span> zip(xpts, ypts):</span><br><span class="line"><span class="prompt">... </span>    print(x,y)</span><br><span class="line">...</span><br><span class="line"><span class="number">1</span> <span class="number">101</span></span><br><span class="line"><span class="number">5</span> <span class="number">78</span></span><br><span class="line"><span class="number">4</span> <span class="number">37</span></span><br><span class="line"><span class="number">2</span> <span class="number">15</span></span><br><span class="line"><span class="number">10</span> <span class="number">62</span></span><br><span class="line"><span class="number">7</span> <span class="number">99</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure></p>
+<p><code>zip(a, b)</code>会生成一个可返回元组<code>(x, y)</code>的迭代器，其中<code>x</code>来自<code>a</code>，<code>y</code>来自<code>b</code>。一旦其中某个序列到底结尾，迭代宣告结束。因此迭代长度跟参数中最短序列长度一致。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span>a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>b = [<span class="string">'w'</span>, <span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'z'</span>]</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">for</span> i <span class="keyword">in</span> zip(a,b):</span><br><span class="line"><span class="prompt">... </span>    print(i)</span><br><span class="line">...</span><br><span class="line">(<span class="number">1</span>, <span class="string">'w'</span>)</span><br><span class="line">(<span class="number">2</span>, <span class="string">'x'</span>)</span><br><span class="line">(<span class="number">3</span>, <span class="string">'y'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>如果这个不是你想要的效果，那么还可以使用<code>itertools.zip_longest()</code>函数来代替。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">from</span> itertools <span class="keyword">import</span> zip_longest</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">for</span> i <span class="keyword">in</span> zip_longest(a,b):</span><br><span class="line"><span class="prompt">... </span>    print(i)</span><br><span class="line">...</span><br><span class="line">(<span class="number">1</span>, <span class="string">'w'</span>)</span><br><span class="line">(<span class="number">2</span>, <span class="string">'x'</span>)</span><br><span class="line">(<span class="number">3</span>, <span class="string">'y'</span>)</span><br><span class="line">(<span class="keyword">None</span>, <span class="string">'z'</span>)</span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">for</span> i <span class="keyword">in</span> zip_longest(a, b, fillvalue=<span class="number">0</span>):</span><br><span class="line"><span class="prompt">... </span>    print(i)</span><br><span class="line">...</span><br><span class="line">(<span class="number">1</span>, <span class="string">'w'</span>)</span><br><span class="line">(<span class="number">2</span>, <span class="string">'x'</span>)</span><br><span class="line">(<span class="number">3</span>, <span class="string">'y'</span>)</span><br><span class="line">(<span class="number">0</span>, <span class="string">'z'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>最后强调一点就是，<code>zip()</code>会创建一个迭代器来作为结果返回。如果你需要将结对的值存储在列表中，要使用<code>list()</code>函数。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span>zip(a, b)</span><br><span class="line">&lt;zip object at <span class="number">0x1007001b8</span>&gt;</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>list(zip(a, b))</span><br><span class="line">[(<span class="number">1</span>, <span class="number">10</span>), (<span class="number">2</span>, <span class="number">11</span>), (<span class="number">3</span>, <span class="number">12</span>)]</span><br></pre></td></tr></table></figure></p>
+<h4 id="不同集合上元素的迭代">不同集合上元素的迭代</h4><p>当可迭代对象类型不一样的时候<code>chain()</code>同样可以很好的工作，它接受一个可迭代对象列表作为输入，并返回一个迭代器，有效的屏蔽掉在多个容器中迭代细节。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">from</span> itertools <span class="keyword">import</span> chain</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>b = [<span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'z'</span>]</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> chain(a, b):</span><br><span class="line"><span class="prompt">... </span>print(x)</span><br><span class="line">...</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line">x</span><br><span class="line">y</span><br><span class="line">z</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="展开嵌套的序列">展开嵌套的序列</h4><p>可以写一个包含<code>yield from</code>语句的递归生成器来轻松解决这个问题<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Iterable</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">flatten</span><span class="params">(items, ignore_types=<span class="params">(str, bytes)</span>)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> items:</span><br><span class="line">        <span class="keyword">if</span> isinstance(x, Iterable) <span class="keyword">and</span> <span class="keyword">not</span> isinstance(x, ignore_types):</span><br><span class="line">            <span class="keyword">yield</span> <span class="keyword">from</span> flatten(x)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">yield</span> x</span><br><span class="line"></span><br><span class="line">items = [<span class="number">1</span>, <span class="number">2</span>, [<span class="number">3</span>, <span class="number">4</span>, [<span class="number">5</span>, <span class="number">6</span>], <span class="number">7</span>], <span class="number">8</span>]</span><br><span class="line"><span class="comment"># Produces 1 2 3 4 5 6 7 8</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> flatten(items):</span><br><span class="line">    print(x)</span><br></pre></td></tr></table></figure></p>
+<p>额外的参数<code>ignore_types</code>和检测语句<code>isinstance(x,ignore_types)</code>用来将字符串和字节排除在可迭代对象外，防止将它们再展开成单个的字符。这样的话字符串数组就能最终返回我们所期望的结果了。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span>items = [<span class="string">'Dave'</span>, <span class="string">'Paula'</span>, [<span class="string">'Thomas'</span>, <span class="string">'Lewis'</span>]]</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> flatten(items):</span><br><span class="line"><span class="prompt">... </span>    print(x)</span><br><span class="line">...</span><br><span class="line">Dave</span><br><span class="line">Paula</span><br><span class="line">Thomas</span><br><span class="line">Lewis</span><br></pre></td></tr></table></figure></p>
+<h4 id="顺序迭代合并后的排序迭代对象">顺序迭代合并后的排序迭代对象</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">import</span> heapq</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>a = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">10</span>]</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>b = [<span class="number">2</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">11</span>]</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">for</span> c <span class="keyword">in</span> heapq.merge(a, b):</span><br><span class="line"><span class="prompt">... </span>    print(c)</span><br><span class="line">...</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">10</span></span><br><span class="line"><span class="number">11</span></span><br></pre></td></tr></table></figure>
+<p><code>heapq.merge</code>可迭代特性意味着它不会立马读取所有序列。这就意味着你可以在非常长的序列中使用它，而不会有太大的开销。比如，下面是一个例子来演示如何合并两个排序文件<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'sorted_file_1'</span>, <span class="string">'rt'</span>) <span class="keyword">as</span> file1, \</span><br><span class="line">    open(<span class="string">'sorted_file_2'</span>, <span class="string">'rt'</span>) <span class="keyword">as</span> file2, \</span><br><span class="line">    open(<span class="string">'merged_file'</span>, <span class="string">'wt'</span>) <span class="keyword">as</span> outf:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> heapq.merge(file1, file2):</span><br><span class="line">        outf.write(line)</span><br></pre></td></tr></table></figure></p>
+<p>有一点要强调的是<code>heapq.merge()</code>需要所有输入序列必须是排过序的。特别的，它并不会预先读取所有数据到堆栈中或者预先排序，也不会对输入做任何的排序检测。它仅仅是检查所有序列的开始部分并返回最小的那个，这个过程一直会持续直到所有输入序列中的元素都被遍历完。</p>
+<p>参考资料<br>【1】<a href="http://code.google.com/p/proden/downloads/detail?name=A%20Byte%20of%20Python3(%E4%B8%AD%E6%96%87%E7%89%88).pdf" target="_blank" rel="external">A Byte of Python3</a><br>【2】<a href="http://python3-cookbook.readthedocs.org/zh_CN/latest/c01/p08_calculating_with_dict.html" target="_blank" rel="external">python3-cookbook</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Programming-Notes/">Programming Notes</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Python3/">Python3</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=2067139" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2067139" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/07/06/Python3-beginner-s-handbook-three/" title="Python3入门手册之三">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Python3入门手册之三</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/07/03/Python-implementation-of-the-longest-common-subsequences/"  title="Python实现最长公共子序列-Longest Common Subsequences">
+ <strong>下一篇：</strong><br/> 
+ <span>Python实现最长公共子序列-Longest Common Subsequences
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/07/04/Python3-beginner-s-handbook-two/" data-title="Python3入门手册之二" data-url="http://www.codepub.cn/2015/07/04/Python3-beginner-s-handbook-two/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#数字日期和时间"><span class="toc-number">1.</span> <span class="toc-text">数字日期和时间</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数字的四舍五入"><span class="toc-number">1.1.</span> <span class="toc-text">数字的四舍五入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#执行精确的浮点数运算"><span class="toc-number">1.2.</span> <span class="toc-text">执行精确的浮点数运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#无穷大与NaN"><span class="toc-number">1.3.</span> <span class="toc-text">无穷大与NaN</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分数运算"><span class="toc-number">1.4.</span> <span class="toc-text">分数运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#大型数组运算"><span class="toc-number">1.5.</span> <span class="toc-text">大型数组运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基本的日期与时间转换"><span class="toc-number">1.6.</span> <span class="toc-text">基本的日期与时间转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符串转换为日期"><span class="toc-number">1.7.</span> <span class="toc-text">字符串转换为日期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#结合时区的日期操作"><span class="toc-number">1.8.</span> <span class="toc-text">结合时区的日期操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#迭代器与生成器"><span class="toc-number">2.</span> <span class="toc-text">迭代器与生成器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#代理迭代"><span class="toc-number">2.1.</span> <span class="toc-text">代理迭代</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反向迭代"><span class="toc-number">2.2.</span> <span class="toc-text">反向迭代</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#迭代器切片"><span class="toc-number">2.3.</span> <span class="toc-text">迭代器切片</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#跳过可迭代对象的开始部分"><span class="toc-number">2.4.</span> <span class="toc-text">跳过可迭代对象的开始部分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#排列组合的迭代"><span class="toc-number">2.5.</span> <span class="toc-text">排列组合的迭代</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#序列上索引值迭代"><span class="toc-number">2.6.</span> <span class="toc-text">序列上索引值迭代</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#同时迭代多个序列"><span class="toc-number">2.7.</span> <span class="toc-text">同时迭代多个序列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#不同集合上元素的迭代"><span class="toc-number">2.8.</span> <span class="toc-text">不同集合上元素的迭代</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#展开嵌套的序列"><span class="toc-number">2.9.</span> <span class="toc-text">展开嵌套的序列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#顺序迭代合并后的排序迭代对象"><span class="toc-number">2.10.</span> <span class="toc-text">顺序迭代合并后的排序迭代对象</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Algorithms/" title="Algorithms">Algorithms<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Database/" title="Database">Database<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git-GitHub/" title="Git/GitHub">Git/GitHub<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life-Talk/" title="Life-Talk">Life-Talk<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Operating-System/" title="Operating System">Operating System<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Programming-Notes/" title="Programming Notes">Programming Notes<sup>22</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python3/" title="Python3">Python3<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/LTP/" title="LTP">LTP<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/IT/" title="IT">IT<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elite/" title="Elite">Elite<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tools/" title="Tools">Tools<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySql/" title="MySql">MySql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Lombok/" title="Lombok">Lombok<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Selenium/" title="Selenium">Selenium<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DLL/" title="DLL">DLL<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tomcat/" title="Tomcat">Tomcat<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Guava/" title="Guava">Guava<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Github/" title="Github">Github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Octopress/" title="Octopress">Octopress<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Eclipse/" title="Eclipse">Eclipse<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <p class="asidetitle">最新评论</p>
+<div>
+	<ul class="ds-recent-comments" data-num-items="10" data-show-avatars="1" data-show-time="1" data-show-admin="1" data-excerpt-length="70"></ul>
+	<!--多说js加载开始，一个页面只需要加载一次 -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!--多说js加载结束，一个页面只需要加载一次 -->
+</div>
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/DLL/" style="font-size: 10px;">DLL</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Elite/" style="font-size: 10px;">Elite</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/IntelliJ/" style="font-size: 10px;">IntelliJ</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/LTP/" style="font-size: 13.33px;">LTP</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/Python3/" style="font-size: 16.67px;">Python3</a> <a href="/tags/Selenium/" style="font-size: 10px;">Selenium</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Struts2/" style="font-size: 10px;">Struts2</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a>
+    </div>
+  </div>
+
+
+  <br/>
+<p class="asidetitle">热评文章</p>
+<!-- 多说热评文章 start -->
+<div>
+<div class="ds-top-threads" data-range="monthly" data-num-items="8"></div>
+<!-- 多说热评文章 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+<br/>
+
+  <p class="asidetitle">打赏他</p>
+<div>
+<form action="https://shenghuo.alipay.com/send/payment/fill.htm" method="POST" target="_blank" accept-charset="GBK">
+    <br/>
+    <input name="optEmail" type="hidden" value="18302118258" />
+    <input name="payAmount" type="hidden" value="10" />
+    <input id="title" name="title" type="hidden" value="博主，打赏你的！" />
+    <input name="memo" type="hidden" value="你Y加油，继续写博客！" />
+    <input name="pay" type="image" value="转账" src="http://7xig3q.com1.z0.glb.clouddn.com/alipay-donate-website.png" />
+</form>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello , I&#39;m Wang Xu in SHU. <br/>
+			志不强者智不达，言不信者行不果。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1779238484" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/shijiebei2009" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/4204922" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		
+		
+		<a href="https://www.linkedin.com/in/codepub" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		<a href="https://www.douban.com/people/shijiebei2009" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		<a href="https://www.zhihu.com/people/codepub.cn" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:wangx89@126.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="http://www.codepub.cn/about" target="_blank" title="Wang Xu">Wang Xu</a>
+		
+		<a href="http://tongji.baidu.com/web/welcome/ico?s=2c61418f187553bcc869b755930233ab" target="_blank">百度统计</a><br/>
+		本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+		</p>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','CEs2u-bRR6iHSt4ynbFA','2.0.0');
+</script>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"codepub"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F2c61418f187553bcc869b755930233ab' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+
+<a href="https://github.com/shijiebei2009"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>

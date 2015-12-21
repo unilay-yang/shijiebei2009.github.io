@@ -1,0 +1,621 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  
+  <meta charset="UTF-8">
+  
+    <title>使用Python的CSV模块读写CSV文件 | IT草根</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Wang Xu">
+    
+
+    
+    <meta name="description" content="开发环境：Python 3.4.3 (v3.4.3:9b73f1c3e601, Feb 24 2015, 22:44:40) [MSC v.1600 64 bit (AMD64)] on win32
+自序也许你会说，我为什么要学习使用CSV模块呢？没有CSV模块我一样可以解析操作CSV文件，比如下面这种代码：12345with open(&apos;stocks.csv&apos;) as f:for line in">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Python的CSV模块读写CSV文件">
+<meta property="og:url" content="http://www.codepub.cn/2015/10/08/Using-the-Python-CSV-module-to-read-and-write-CSV-file/index.html">
+<meta property="og:site_name" content="IT草根">
+<meta property="og:description" content="开发环境：Python 3.4.3 (v3.4.3:9b73f1c3e601, Feb 24 2015, 22:44:40) [MSC v.1600 64 bit (AMD64)] on win32
+自序也许你会说，我为什么要学习使用CSV模块呢？没有CSV模块我一样可以解析操作CSV文件，比如下面这种代码：12345with open(&apos;stocks.csv&apos;) as f:for line in">
+<meta property="og:updated_time" content="2015-10-08T06:51:57.576Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Python的CSV模块读写CSV文件">
+<meta name="twitter:description" content="开发环境：Python 3.4.3 (v3.4.3:9b73f1c3e601, Feb 24 2015, 22:44:40) [MSC v.1600 64 bit (AMD64)] on win32
+自序也许你会说，我为什么要学习使用CSV模块呢？没有CSV模块我一样可以解析操作CSV文件，比如下面这种代码：12345with open(&apos;stocks.csv&apos;) as f:for line in">
+
+    
+    <link rel="alternative" href="/atom.xml" title="IT草根" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.gif">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.gif">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.gif" alt="IT草根" title="IT草根"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="IT草根">IT草根</a></h1>
+				<h2 class="blog-motto">WangXu&#39;s 代码馆 BLOG</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/resume">Resume</a></li>
+					
+						<li><a href="/links">Links</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+						<form class="search">
+							<label>Search</label>
+						<input type="text" class="st-default-search-input" id="ts-search-input" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/10/08/Using-the-Python-CSV-module-to-read-and-write-CSV-file/" title="使用Python的CSV模块读写CSV文件" itemprop="url">使用Python的CSV模块读写CSV文件</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.codepub.cn/about" title="Wang Xu" target="_blank" itemprop="author">Wang Xu</a>
+		
+  <p class="article-time">
+    <time datetime="2015-10-08T04:01:00.000Z" itemprop="datePublished"> 发表于 2015-10-08</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#自序"><span class="toc-number">1.</span> <span class="toc-text">自序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CSV格式简介"><span class="toc-number">2.</span> <span class="toc-text">CSV格式简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CSV文件注意点"><span class="toc-number">3.</span> <span class="toc-text">CSV文件注意点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CSV模块操作示例"><span class="toc-number">4.</span> <span class="toc-text">CSV模块操作示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分析和统计"><span class="toc-number">5.</span> <span class="toc-text">分析和统计</span></a></li></ol>
+		
+		</div>
+		
+		<p><strong>开发环境：Python 3.4.3 (v3.4.3:9b73f1c3e601, Feb 24 2015, 22:44:40) [MSC v.1600 64 bit (AMD64)] on win32</strong></p>
+<h4 id="自序">自序</h4><p>也许你会说，我为什么要学习使用CSV模块呢？没有CSV模块我一样可以解析操作CSV文件，比如下面这种代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'stocks.csv'</span>) <span class="keyword">as</span> f:</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">    row = line.split(<span class="string">','</span>)</span><br><span class="line">    <span class="comment"># process row</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
+<p>使用这种方式的一个缺点就是你仍然需要去处理一些棘手的细节问题。比如，如果某些字段值被引号包围，你不得不去除这些引号。另外，如果一个被引号包围的字段碰巧含有一个逗号，那么程序就会因为产生一个错误而停止。</p>
+<p>默认情况下，<code>CSV</code>库可识别<code>Microsoft Excel</code>所使用的<code>CSV</code>编码规则。这或许也是最常见的形式，并且也会给你带来最好的兼容性。然而，如果你查看<code>CSV</code>的文档，就会发现有很多种方法将它应用到其他编码格式上（如修改分隔字符等，用Tab分隔）。所以你应该总是优先选择<code>CSV</code>模块分割或解析<code>CSV</code>数据。</p>
+<h4 id="CSV格式简介">CSV格式简介</h4><p>逗号分隔值（<code>Comma-Separated Values</code>，<code>CSV</code>，有时也称为字符分隔值，因为分隔字符也可以不是逗号），其文件以纯文本形式存储表格数据（数字和文本）。纯文本意味着该文件是一个字符序列，不含必须像二进制数字那样被解读的数据。<code>CSV</code>文件由任意数目的记录组成，记录间以某种换行符分隔；每条记录由字段组成，字段间的分隔符是其它字符或字符串，最常见的是逗号或制表符。通常，所有记录都有完全相同的字段序列。</p>
+<h4 id="CSV文件注意点">CSV文件注意点</h4><p>如果你正在读取<code>CSV</code>数据并将它们转换为命名元组，需要注意对列名进行合法性认证。一个<code>CSV</code>格式文件有一个包含非法标识符的列头行，这样最终会导致在创建一个命名元组时产生一个<code>ValueError</code>异常而失败。为了解决这问题，你可能不得不先去修正列标题。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'stock.csv'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f_csv = csv.reader(f)</span><br><span class="line">    headers = [ re.sub(<span class="string">'[^a-zA-Z_]'</span>, <span class="string">'_'</span>, h) <span class="keyword">for</span> h <span class="keyword">in</span> next(f_csv) ]</span><br><span class="line">    Row = namedtuple(<span class="string">'Row'</span>, headers)</span><br><span class="line">    <span class="keyword">for</span> r <span class="keyword">in</span> f_csv:</span><br><span class="line">        row = Row(*r)</span><br><span class="line">        <span class="comment"># Process row</span></span><br><span class="line">        ...</span><br></pre></td></tr></table></figure></p>
+<p>还有重要的一点需要强调的是，<code>CSV</code>产生的数据都是字符串类型的，它不会做任何其他类型的转换。如果你需要做这样的类型转换，你必须自己手动去实现。</p>
+<h4 id="CSV模块操作示例">CSV模块操作示例</h4><p>输入文件：stocks.csv<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Symbol,Price,Date,Time,Change,Volume</span><br><span class="line">"AA",39.48,"6/11/2007","9:36am",-0.18,181800</span><br><span class="line">"AIG",71.38,"6/11/2007","9:36am",-0.15,195500</span><br><span class="line">"AXP",62.58,"6/11/2007","9:36am",-0.46,935000</span><br><span class="line">"BA",98.31,"6/11/2007","9:36am",+0.12,104800</span><br><span class="line">"C",53.08,"6/11/2007","9:36am",-0.25,360900</span><br><span class="line">"CAT",78.29,"6/11/2007","9:36am",-0.23,225400</span><br></pre></td></tr></table></figure></p>
+<p>输出文件：dest.csv<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Symbol,Price,Date,Time,Change,Volume</span><br><span class="line">AA,39.48,6/11/2007,9:36am,-0.18,181800</span><br><span class="line">AIG,71.38,6/11/2007,9:36am,-0.15,195500</span><br><span class="line">AXP,62.58,6/11/2007,9:36am,-0.46,935000</span><br></pre></td></tr></table></figure></p>
+<p>代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># coding: UTF-8</span></span><br><span class="line"><span class="string">"""</span><br><span class="line">Created on 2015/9/30  14:55</span><br><span class="line">@author: 'WX'</span><br><span class="line">"""</span></span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> namedtuple</span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    fileName = <span class="string">'stocks.csv'</span></span><br><span class="line">    writeFileName = <span class="string">'dest.csv'</span></span><br><span class="line">    <span class="keyword">with</span> open(fileName) <span class="keyword">as</span> f:</span><br><span class="line">        reader = csv.reader(f)</span><br><span class="line">        headers = next(reader)</span><br><span class="line">        print(<span class="string">"使用下标进行访问"</span>)</span><br><span class="line">        <span class="keyword">for</span> row <span class="keyword">in</span> reader:</span><br><span class="line">            <span class="comment"># 可以使用下标进行访问，row是一个元组</span></span><br><span class="line">            length = len(row)</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(length):</span><br><span class="line">                print(row[i], end=<span class="string">'\t'</span>)</span><br><span class="line">            print()</span><br><span class="line"></span><br><span class="line">        print(<span class="string">'------------------------------------------------'</span>)</span><br><span class="line">    <span class="keyword">with</span> open(fileName) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="comment"># 使用命名元组访问</span></span><br><span class="line">        reader = csv.reader(f)</span><br><span class="line">        headers = next(reader)</span><br><span class="line">        Row = namedtuple(<span class="string">'Row'</span>, headers)</span><br><span class="line">        print(<span class="string">"使用命名元组进行访问"</span>)</span><br><span class="line">        <span class="keyword">for</span> r <span class="keyword">in</span> reader:</span><br><span class="line">            row = Row(*r)</span><br><span class="line">            <span class="comment"># 这时候就可以使用首行的列名来进行访问了</span></span><br><span class="line">            line = <span class="string">'%s\t%s\t%s\t%s\t%s\t%s'</span> % (row.Symbol, row.Price, row.Date, row.Time, row.Change, row.Volume)</span><br><span class="line">            print(line)</span><br><span class="line">        print(<span class="string">'------------------------------------------------'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> open(fileName) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="comment"># 将内容读取到字典序列中，然后用key去读取</span></span><br><span class="line">        dict_reader = csv.DictReader(f)</span><br><span class="line">        print(<span class="string">"使用字典序列进行访问"</span>)</span><br><span class="line">        <span class="keyword">for</span> row <span class="keyword">in</span> dict_reader:</span><br><span class="line">            line = <span class="string">'%s\t%s\t%s\t%s\t%s\t%s'</span> % (</span><br><span class="line">                row[<span class="string">'Symbol'</span>], row[<span class="string">'Price'</span>], row[<span class="string">'Date'</span>], row[<span class="string">'Time'</span>], row[<span class="string">'Change'</span>], row[<span class="string">'Volume'</span>])</span><br><span class="line">            print(line)</span><br><span class="line">    print(<span class="string">'------------------------------------------------'</span>)</span><br><span class="line"></span><br><span class="line">    print(<span class="string">"使用元组方式写入，SUCCESS！"</span>)</span><br><span class="line">    <span class="keyword">with</span> open(writeFileName, mode=<span class="string">'w'</span>, newline=<span class="string">''</span>) <span class="keyword">as</span> wf:</span><br><span class="line">        headers = [<span class="string">'Symbol'</span>, <span class="string">'Price'</span>, <span class="string">'Date'</span>, <span class="string">'Time'</span>, <span class="string">'Change'</span>, <span class="string">'Volume'</span>]</span><br><span class="line">        rows = [(<span class="string">'AA'</span>, <span class="number">39.48</span>, <span class="string">'6/11/2007'</span>, <span class="string">'9:36am'</span>, -<span class="number">0.18</span>, <span class="number">181800</span>),</span><br><span class="line">                (<span class="string">'AIG'</span>, <span class="number">71.38</span>, <span class="string">'6/11/2007'</span>, <span class="string">'9:36am'</span>, -<span class="number">0.15</span>, <span class="number">195500</span>),</span><br><span class="line">                (<span class="string">'AXP'</span>, <span class="number">62.58</span>, <span class="string">'6/11/2007'</span>, <span class="string">'9:36am'</span>, -<span class="number">0.46</span>, <span class="number">935000</span>),</span><br><span class="line">                ]</span><br><span class="line">        writer = csv.writer(wf)</span><br><span class="line">        writer.writerow(headers)</span><br><span class="line">        writer.writerows(rows)</span><br><span class="line">    print(<span class="string">"使用字典方式写入，SUCCESS！"</span>)</span><br><span class="line">    <span class="comment"># 在Windows平台需要指定newline=''，否则在两行内容之间会多出一行空行</span></span><br><span class="line">    <span class="keyword">with</span> open(writeFileName, mode=<span class="string">'w'</span>, newline=<span class="string">''</span>) <span class="keyword">as</span> wf:</span><br><span class="line">        headers = [<span class="string">'Symbol'</span>, <span class="string">'Price'</span>, <span class="string">'Date'</span>, <span class="string">'Time'</span>, <span class="string">'Change'</span>, <span class="string">'Volume'</span>]</span><br><span class="line">        rows = [&#123;<span class="string">'Symbol'</span>: <span class="string">'AA'</span>, <span class="string">'Price'</span>: <span class="number">39.48</span>, <span class="string">'Date'</span>: <span class="string">'6/11/2007'</span>,</span><br><span class="line">                 <span class="string">'Time'</span>: <span class="string">'9:36am'</span>, <span class="string">'Change'</span>: -<span class="number">0.18</span>, <span class="string">'Volume'</span>: <span class="number">181800</span>&#125;,</span><br><span class="line">                &#123;<span class="string">'Symbol'</span>: <span class="string">'AIG'</span>, <span class="string">'Price'</span>: <span class="number">71.38</span>, <span class="string">'Date'</span>: <span class="string">'6/11/2007'</span>,</span><br><span class="line">                 <span class="string">'Time'</span>: <span class="string">'9:36am'</span>, <span class="string">'Change'</span>: -<span class="number">0.15</span>, <span class="string">'Volume'</span>: <span class="number">195500</span>&#125;,</span><br><span class="line">                &#123;<span class="string">'Symbol'</span>: <span class="string">'AXP'</span>, <span class="string">'Price'</span>: <span class="number">62.58</span>, <span class="string">'Date'</span>: <span class="string">'6/11/2007'</span>,</span><br><span class="line">                 <span class="string">'Time'</span>: <span class="string">'9:36am'</span>, <span class="string">'Change'</span>: -<span class="number">0.46</span>, <span class="string">'Volume'</span>: <span class="number">935000</span>&#125;, ]</span><br><span class="line">        writer = csv.DictWriter(wf, headers)</span><br><span class="line">        writer.writeheader()</span><br><span class="line">        writer.writerows(rows)</span><br><span class="line">    <span class="comment"># 更换一种分隔符写入文件</span></span><br><span class="line">    <span class="keyword">with</span> open(writeFileName, mode=<span class="string">'w'</span>, newline=<span class="string">''</span>) <span class="keyword">as</span> wf:</span><br><span class="line">        headers = [<span class="string">'Symbol'</span>, <span class="string">'Price'</span>, <span class="string">'Date'</span>, <span class="string">'Time'</span>, <span class="string">'Change'</span>, <span class="string">'Volume'</span>]</span><br><span class="line">        rows = [(<span class="string">'AA'</span>, <span class="number">39.48</span>, <span class="string">'6/11/2007'</span>, <span class="string">'9:36am'</span>, -<span class="number">0.18</span>, <span class="number">181800</span>),</span><br><span class="line">                (<span class="string">'AIG'</span>, <span class="number">71.38</span>, <span class="string">'6/11/2007'</span>, <span class="string">'9:36am'</span>, -<span class="number">0.15</span>, <span class="number">195500</span>),</span><br><span class="line">                (<span class="string">'AXP'</span>, <span class="number">62.58</span>, <span class="string">'6/11/2007'</span>, <span class="string">'9:36am'</span>, -<span class="number">0.46</span>, <span class="number">935000</span>),</span><br><span class="line">                ]</span><br><span class="line">        writer = csv.writer(wf, delimiter=<span class="string">';'</span>)</span><br><span class="line">        writer.writerow(headers)</span><br><span class="line">        writer.writerows(rows)</span><br><span class="line">    print(<span class="string">"使用分好作为分隔符写入，SUCCESS！"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>控制台输出<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">C:\Python34\python.exe E:/workspaces/Python3/edu/shu/python/shumo/CsvUtil.py</span><br><span class="line">使用下标进行访问</span><br><span class="line">AA    39.48    6/11/2007    9:36am    -0.18    181800</span><br><span class="line">AIG    71.38    6/11/2007    9:36am    -0.15    195500</span><br><span class="line">AXP    62.58    6/11/2007    9:36am    -0.46    935000</span><br><span class="line">BA    98.31    6/11/2007    9:36am    +0.12    104800</span><br><span class="line">C    53.08    6/11/2007    9:36am    -0.25    360900</span><br><span class="line">CAT    78.29    6/11/2007    9:36am    -0.23    225400</span><br><span class="line">------------------------------------------------</span><br><span class="line">使用命名元组进行访问</span><br><span class="line">AA    39.48    6/11/2007    9:36am    -0.18    181800</span><br><span class="line">AIG    71.38    6/11/2007    9:36am    -0.15    195500</span><br><span class="line">AXP    62.58    6/11/2007    9:36am    -0.46    935000</span><br><span class="line">BA    98.31    6/11/2007    9:36am    +0.12    104800</span><br><span class="line">C    53.08    6/11/2007    9:36am    -0.25    360900</span><br><span class="line">CAT    78.29    6/11/2007    9:36am    -0.23    225400</span><br><span class="line">------------------------------------------------</span><br><span class="line">使用字典序列进行访问</span><br><span class="line">AA    39.48    6/11/2007    9:36am    -0.18    181800</span><br><span class="line">AIG    71.38    6/11/2007    9:36am    -0.15    195500</span><br><span class="line">AXP    62.58    6/11/2007    9:36am    -0.46    935000</span><br><span class="line">BA    98.31    6/11/2007    9:36am    +0.12    104800</span><br><span class="line">C    53.08    6/11/2007    9:36am    -0.25    360900</span><br><span class="line">CAT    78.29    6/11/2007    9:36am    -0.23    225400</span><br><span class="line">------------------------------------------------</span><br><span class="line">使用元组方式写入，SUCCESS！</span><br><span class="line">使用字典方式写入，SUCCESS！</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br></pre></td></tr></table></figure></p>
+<h4 id="分析和统计">分析和统计</h4><p>最后，如果你读取<code>CSV</code>数据的目的是做数据分析和统计的话，你可能需要看一看<code>Pandas</code>包。<code>Pandas</code>包含了一个非常方便的函数叫<code>pandas.read_csv()</code>，它可以加载<code>CSV</code>数据到一个<code>DataFrame</code>对象中去。然后利用这个对象你就可以生成各种形式的统计、过滤数据以及执行其他高级操作了。</p>
+<p>参考资料<br>【1】<a href="http://baike.baidu.com/subview/468993/5926031.htm" target="_blank" rel="external">http://baike.baidu.com/subview/468993/5926031.htm</a><br>【2】<a href="http://python3-cookbook.readthedocs.org/zh_CN/latest/c06/p01_read_write_csv_data.html?highlight=csv" target="_blank" rel="external">http://python3-cookbook.readthedocs.org/zh_CN/latest/c06/p01_read_write_csv_data.html?highlight=csv</a></p>
+<p><strong><em>转载请注明出处：<a href="http://codepub.cn/2015/10/08/Using-the-Python-CSV-module-to-read-and-write-CSV-file/" target="_blank" rel="external">http://codepub.cn/2015/10/08/Using-the-Python-CSV-module-to-read-and-write-CSV-file/</a></em></strong></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Programming-Notes/">Programming Notes</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Python3/">Python3</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=2067139" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2067139" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/10/24/2016-campus-recruitment-of-sougou-programming-problem-resolution-big-data-development/" title="搜狗2016校园招聘之编程题解析-大数据开发">
+  <strong>上一篇：</strong><br/>
+  <span>
+  搜狗2016校园招聘之编程题解析-大数据开发</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/10/07/Private-Treasured-Toolkit/"  title="私人珍藏工具箱">
+ <strong>下一篇：</strong><br/> 
+ <span>私人珍藏工具箱
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/10/08/Using-the-Python-CSV-module-to-read-and-write-CSV-file/" data-title="使用Python的CSV模块读写CSV文件" data-url="http://www.codepub.cn/2015/10/08/Using-the-Python-CSV-module-to-read-and-write-CSV-file/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#自序"><span class="toc-number">1.</span> <span class="toc-text">自序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CSV格式简介"><span class="toc-number">2.</span> <span class="toc-text">CSV格式简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CSV文件注意点"><span class="toc-number">3.</span> <span class="toc-text">CSV文件注意点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CSV模块操作示例"><span class="toc-number">4.</span> <span class="toc-text">CSV模块操作示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分析和统计"><span class="toc-number">5.</span> <span class="toc-text">分析和统计</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Algorithms/" title="Algorithms">Algorithms<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Database/" title="Database">Database<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git-GitHub/" title="Git/GitHub">Git/GitHub<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life-Talk/" title="Life-Talk">Life-Talk<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Operating-System/" title="Operating System">Operating System<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Programming-Notes/" title="Programming Notes">Programming Notes<sup>22</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python3/" title="Python3">Python3<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/LTP/" title="LTP">LTP<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/IT/" title="IT">IT<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elite/" title="Elite">Elite<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tools/" title="Tools">Tools<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySql/" title="MySql">MySql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Lombok/" title="Lombok">Lombok<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Selenium/" title="Selenium">Selenium<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DLL/" title="DLL">DLL<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tomcat/" title="Tomcat">Tomcat<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Guava/" title="Guava">Guava<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Github/" title="Github">Github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Octopress/" title="Octopress">Octopress<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Eclipse/" title="Eclipse">Eclipse<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <p class="asidetitle">最新评论</p>
+<div>
+	<ul class="ds-recent-comments" data-num-items="10" data-show-avatars="1" data-show-time="1" data-show-admin="1" data-excerpt-length="70"></ul>
+	<!--多说js加载开始，一个页面只需要加载一次 -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!--多说js加载结束，一个页面只需要加载一次 -->
+</div>
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/DLL/" style="font-size: 10px;">DLL</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Elite/" style="font-size: 10px;">Elite</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/IntelliJ/" style="font-size: 10px;">IntelliJ</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/LTP/" style="font-size: 13.33px;">LTP</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/Python3/" style="font-size: 16.67px;">Python3</a> <a href="/tags/Selenium/" style="font-size: 10px;">Selenium</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Struts2/" style="font-size: 10px;">Struts2</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a>
+    </div>
+  </div>
+
+
+  <br/>
+<p class="asidetitle">热评文章</p>
+<!-- 多说热评文章 start -->
+<div>
+<div class="ds-top-threads" data-range="monthly" data-num-items="8"></div>
+<!-- 多说热评文章 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+<br/>
+
+  <p class="asidetitle">打赏他</p>
+<div>
+<form action="https://shenghuo.alipay.com/send/payment/fill.htm" method="POST" target="_blank" accept-charset="GBK">
+    <br/>
+    <input name="optEmail" type="hidden" value="18302118258" />
+    <input name="payAmount" type="hidden" value="10" />
+    <input id="title" name="title" type="hidden" value="博主，打赏你的！" />
+    <input name="memo" type="hidden" value="你Y加油，继续写博客！" />
+    <input name="pay" type="image" value="转账" src="http://7xig3q.com1.z0.glb.clouddn.com/alipay-donate-website.png" />
+</form>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello , I&#39;m Wang Xu in SHU. <br/>
+			志不强者智不达，言不信者行不果。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1779238484" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/shijiebei2009" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/4204922" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		
+		
+		<a href="https://www.linkedin.com/in/codepub" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		<a href="https://www.douban.com/people/shijiebei2009" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		<a href="https://www.zhihu.com/people/codepub.cn" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:wangx89@126.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="http://www.codepub.cn/about" target="_blank" title="Wang Xu">Wang Xu</a>
+		
+		<a href="http://tongji.baidu.com/web/welcome/ico?s=2c61418f187553bcc869b755930233ab" target="_blank">百度统计</a><br/>
+		本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+		</p>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','CEs2u-bRR6iHSt4ynbFA','2.0.0');
+</script>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"codepub"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F2c61418f187553bcc869b755930233ab' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+
+<a href="https://github.com/shijiebei2009"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>

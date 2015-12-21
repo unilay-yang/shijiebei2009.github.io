@@ -1,0 +1,751 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  
+  <meta charset="UTF-8">
+  
+    <title>Spring基础知识汇总 | IT草根</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Wang Xu">
+    
+
+    
+    <meta name="description" content="力求用最简洁的文字表述最全面的知识，本Blog不适合零基础人员
+Spring简介Spring框架由Rod Johnson开发，Rod Johnson’s twitter，Rod Johnson’s 百度百科，2004年发布了Spring框架的第一版。Spring是一个从实际开发中抽取出来的框架，因此它完成了大量开发中的通用步骤，留给开发者的仅仅是与特定应用相关的部分，从而大大提高了企业应用的开发效">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring基础知识汇总">
+<meta property="og:url" content="http://www.codepub.cn/2015/06/21/Basic-knowledge-summary-of-Spring/index.html">
+<meta property="og:site_name" content="IT草根">
+<meta property="og:description" content="力求用最简洁的文字表述最全面的知识，本Blog不适合零基础人员
+Spring简介Spring框架由Rod Johnson开发，Rod Johnson’s twitter，Rod Johnson’s 百度百科，2004年发布了Spring框架的第一版。Spring是一个从实际开发中抽取出来的框架，因此它完成了大量开发中的通用步骤，留给开发者的仅仅是与特定应用相关的部分，从而大大提高了企业应用的开发效">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/spring-logo.png">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/spring-overview-architecture.png">
+<meta property="og:image" content="http://7xig3q.com1.z0.glb.clouddn.com/spring-bean-post-process.jpg">
+<meta property="og:updated_time" content="2015-07-04T13:20:13.996Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring基础知识汇总">
+<meta name="twitter:description" content="力求用最简洁的文字表述最全面的知识，本Blog不适合零基础人员
+Spring简介Spring框架由Rod Johnson开发，Rod Johnson’s twitter，Rod Johnson’s 百度百科，2004年发布了Spring框架的第一版。Spring是一个从实际开发中抽取出来的框架，因此它完成了大量开发中的通用步骤，留给开发者的仅仅是与特定应用相关的部分，从而大大提高了企业应用的开发效">
+
+    
+    <link rel="alternative" href="/atom.xml" title="IT草根" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.gif">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.gif">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.gif" alt="IT草根" title="IT草根"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="IT草根">IT草根</a></h1>
+				<h2 class="blog-motto">WangXu&#39;s 代码馆 BLOG</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/resume">Resume</a></li>
+					
+						<li><a href="/links">Links</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+						<form class="search">
+							<label>Search</label>
+						<input type="text" class="st-default-search-input" id="ts-search-input" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/06/21/Basic-knowledge-summary-of-Spring/" title="Spring基础知识汇总" itemprop="url">Spring基础知识汇总</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.codepub.cn/about" title="Wang Xu" target="_blank" itemprop="author">Wang Xu</a>
+		
+  <p class="article-time">
+    <time datetime="2015-06-21T03:57:22.000Z" itemprop="datePublished"> 发表于 2015-06-21</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring简介"><span class="toc-number">1.</span> <span class="toc-text">Spring简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring的核心机制"><span class="toc-number">2.</span> <span class="toc-text">Spring的核心机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#管理Bean"><span class="toc-number">2.1.</span> <span class="toc-text">管理Bean</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Eclipse使用Spring"><span class="toc-number">2.2.</span> <span class="toc-text">Eclipse使用Spring</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#依赖注入"><span class="toc-number">2.3.</span> <span class="toc-text">依赖注入</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#理解依赖注入"><span class="toc-number">2.3.1.</span> <span class="toc-text">理解依赖注入</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#设值注入"><span class="toc-number">2.3.2.</span> <span class="toc-text">设值注入</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#构造注入"><span class="toc-number">2.3.3.</span> <span class="toc-text">构造注入</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#两种注入方式的对比"><span class="toc-number">2.3.4.</span> <span class="toc-text">两种注入方式的对比</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spring容器中的Bean"><span class="toc-number">2.4.</span> <span class="toc-text">Spring容器中的Bean</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#容器中Bean的作用域"><span class="toc-number">2.4.1.</span> <span class="toc-text">容器中Bean的作用域</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用自动装配注入合作者Bean"><span class="toc-number">2.5.</span> <span class="toc-text">使用自动装配注入合作者Bean</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建Bean的3种方式"><span class="toc-number">3.</span> <span class="toc-text">创建Bean的3种方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用构造器创建Bean实例"><span class="toc-number">3.1.</span> <span class="toc-text">使用构造器创建Bean实例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用静态工厂方法创建Bean"><span class="toc-number">3.2.</span> <span class="toc-text">使用静态工厂方法创建Bean</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#调用实例工厂方法创建Bean"><span class="toc-number">3.3.</span> <span class="toc-text">调用实例工厂方法创建Bean</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#协调作用域不同步的Bean"><span class="toc-number">4.</span> <span class="toc-text">协调作用域不同步的Bean</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#两种后处理器"><span class="toc-number">5.</span> <span class="toc-text">两种后处理器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Bean后处理器"><span class="toc-number">5.1.</span> <span class="toc-text">Bean后处理器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#容器后处理器"><span class="toc-number">5.2.</span> <span class="toc-text">容器后处理器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring的“零配置”支持"><span class="toc-number">6.</span> <span class="toc-text">Spring的“零配置”支持</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#搜索Bean类"><span class="toc-number">6.1.</span> <span class="toc-text">搜索Bean类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用@Resource配置依赖"><span class="toc-number">6.2.</span> <span class="toc-text">使用@Resource配置依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用@PostConstruct和@PreDestroy定制生命周期行为"><span class="toc-number">6.3.</span> <span class="toc-text">使用@PostConstruct和@PreDestroy定制生命周期行为</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spring4-0增强的自动装配和精确装配"><span class="toc-number">6.4.</span> <span class="toc-text">Spring4.0增强的自动装配和精确装配</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring的AOP"><span class="toc-number">7.</span> <span class="toc-text">Spring的AOP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么需要AOP"><span class="toc-number">7.1.</span> <span class="toc-text">为什么需要AOP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用AspectJ实现AOP"><span class="toc-number">7.2.</span> <span class="toc-text">使用AspectJ实现AOP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AOP的基本概念"><span class="toc-number">7.3.</span> <span class="toc-text">AOP的基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spring的AOP支持"><span class="toc-number">7.4.</span> <span class="toc-text">Spring的AOP支持</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<p><strong><em>力求用最简洁的文字表述最全面的知识，本Blog不适合零基础人员</em></strong><br><img src="http://7xig3q.com1.z0.glb.clouddn.com/spring-logo.png" alt="logo"></p>
+<h3 id="Spring简介">Spring简介</h3><p>Spring框架由Rod Johnson开发，<a href="https://twitter.com/springrod" target="_blank" rel="external">Rod Johnson’s twitter</a>，<a href="http://baike.baidu.com/view/2192255.htm" target="_blank" rel="external">Rod Johnson’s 百度百科</a>，2004年发布了Spring框架的第一版。Spring是一个从实际开发中抽取出来的框架，因此它完成了大量开发中的通用步骤，留给开发者的仅仅是与特定应用相关的部分，从而大大提高了企业应用的开发效率。</p>
+<p>Spring总结起来优点如下</p>
+<ul>
+<li>低侵入式设计，代码的污染极低</li>
+<li>独立于各种应用服务器，基于Spring框架的应用，可以真正实现Write Once，Run Anywhere的承诺</li>
+<li>Spring的IoC容器降低了业务对象替换的复杂性，提高了组件之间的解耦</li>
+<li>Spring的AOP支持允许将一些通用任务如安全、事务、日志等进行集中式管理，从而提供了更好的复用</li>
+<li>Spring的ORM和DAO提供了与第三方持久层框架的良好整合，并简化了底层的数据库访问</li>
+<li>Spring的高度开放性，并不强制应用完全依赖于Spring，开发者可自由选用Spring框架的部分或全部</li>
+</ul>
+<p>Spring框架的组成结构图如下所示<br><img src="http://7xig3q.com1.z0.glb.clouddn.com/spring-overview-architecture.png" alt="spring-overview"></p>
+<h3 id="Spring的核心机制">Spring的核心机制</h3><h4 id="管理Bean">管理Bean</h4><p>程序主要是通过Spring容器来访问容器中的Bean，ApplicationContext是Spring容器最常用的接口，该接口有如下两个实现类</p>
+<ul>
+<li>ClassPathXmlApplicationContext: 从类加载路径下搜索配置文件，并根据配置文件来创建Spring容器</li>
+<li>FileSystemXmlApplicationContext: 从文件系统的相对路径或绝对路径下去搜索配置文件，并根据配置文件来创建Spring容器</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanTest</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        ApplicationContext ctx = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"beans.xml"</span>);</span><br><span class="line">        Person p = ctx.getBean(<span class="string">"person"</span>, Person.class);</span><br><span class="line">        p.say();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Eclipse使用Spring">Eclipse使用Spring</h4><p>在Eclipse等IDE工具中，用户可以自建<code>User Library</code>，然后把Spring的Jar包都放入其中，当然也可以将Jar包直接放在项目的<code>/WEB-INF/lib</code>目录下，但是如果使用<code>User Library</code>，在项目发布时，需要将用户库所引用的Jar文件随应用一起发布，就是将User Library所使用的Jar复制到<code>/WEB-INF/lib</code>目录下，这是因为对于一个Web应用，Eclipse部署Web应用时不会将用户库的Jar文件复制到<code>/WEB-INF/lib</code>下，需要手动复制。</p>
+<h4 id="依赖注入">依赖注入</h4><p>Spring框架的核心功能有两个</p>
+<ul>
+<li>Spring容器作为超级大工厂，负责创建、管理所有的Java对象，这些Java对象被称为Bean</li>
+<li>Spring容器管理容器中Bean之间的依赖关系，Spring使用一种被称为“依赖注入”的方式来管理Bean之间的依赖关系</li>
+</ul>
+<p>使用依赖注入，不仅可以为Bean注入普通的属性值，还可以注入其他Bean的引用。依赖注入是一种优秀的解耦方式，其可以让Bean以配置文件组织在一起，而不是以硬编码的方式耦合在一起。</p>
+<h5 id="理解依赖注入">理解依赖注入</h5><p>Rod Johnson是第一个高度重视以配置文件来管理Java实例的协作关系的人，他给这种方式起了一个名字：控制反转（Inverse of Control，IoC）。后来Martine Fowler为这种方式起了另一个名称：依赖注入（Dependency Injection），因此不管是依赖注入，还是控制反转，其含义完全相同。当某个Java对象（调用者）需要调用另一个Java对象（被依赖对象）的方法时，在传统模式下通常有两种做法</p>
+<ol>
+<li>原始做法: 调用者<strong>主动</strong>创建被依赖对象，然后再调用被依赖对象的方法</li>
+<li>简单工厂模式: 调用者先找到被依赖对象的工厂，然后<strong>主动</strong>通过工厂去获取被依赖对象，最后再调用被依赖对象的方法</li>
+</ol>
+<p>注意上面的<strong>主动</strong>二字，这必然会导致调用者与被依赖对象实现类的硬编码耦合，非常不利于项目升级的维护。使用Spring框架之后，调用者无需<strong>主动</strong>获取被依赖对象，调用者只要<strong>被动</strong>接受Spring容器为调用者的成员变量赋值即可，由此可见，使用Spring后，调用者获取被依赖对象的方式由原来的主动获取，变成了被动接受——所以Rod Johnson称之为控制反转。</p>
+<p>另外从Spring容器的角度来看，Spring容器负责将被依赖对象赋值给调用者的成员变量——相当于为调用者注入它依赖的实例，因此Martine Fowler称之为依赖注入。</p>
+<h5 id="设值注入">设值注入</h5><p>设值注入是指IoC容器通过成员变量的setter方法来注入被依赖对象。这种注入方式简单、直观，因而在Spring的依赖注入里大量使用。</p>
+<h5 id="构造注入">构造注入</h5><p>利用构造器来设置依赖关系的方式，被称为构造注入。通俗来说，就是驱动Spring在底层以反射方式执行带指定参数的构造器，当执行带参数的构造器时，就可利用构造器参数对成员变量执行初始化——这就是构造注入的本质。</p>
+<h5 id="两种注入方式的对比">两种注入方式的对比</h5><p>设值注入有如下优点</p>
+<ul>
+<li>与传统的JavaBean的写法更相似，程序开发人员更容易理解、接受。通过setter方法设定依赖关系显得更加直观、自然</li>
+<li>对于复杂的依赖关系，如果采用构造注入，会导致构造器过于臃肿，难以阅读。Spring在创建Bean实例时，需要同时实例化其依赖的全部实例，因而导致性能下降。而使用设值注入，则能避免这些问题。</li>
+<li>尤其在某些成员变量可选的情况下，多参数的构造器更加笨重</li>
+</ul>
+<p>构造注入优势如下</p>
+<ul>
+<li>构造注入可以在构造器中决定依赖关系的注入顺序，优先依赖的优先注入</li>
+<li>对于依赖关系无需变化的Bean，构造注入更有用处。因为没有setter方法，所有的依赖关系全部在构造器内设定，无须担心后续的代码对依赖关系产生破坏</li>
+<li>依赖关系只能在构造器中设定，则只有组件的创建者才能改变组件的依赖关系，对组件的调用者而言，组件内部的依赖关系完全透明，更符合高内聚的原则</li>
+</ul>
+<p><strong><em>Notes</em></strong><br>建议采用设值注入为主，构造注入为辅的注入策略。对于依赖关系无须变化的注入，尽量采用构造注入；而其他依赖关系的注入，则考虑采用设值注入。</p>
+<h4 id="Spring容器中的Bean">Spring容器中的Bean</h4><p>对于开发者来说，开发者使用Spring框架主要是做两件事：①开发Bean；②配置Bean。对于Spring框架来说，它要做的就是根据配置文件来创建Bean实例，并调用Bean实例的方法完成“依赖注入”——这就是所谓IoC的本质。</p>
+<h5 id="容器中Bean的作用域">容器中Bean的作用域</h5><p>当通过Spring容器创建一个Bean实例时，不仅可以完成Bean实例的实例化，还可以为Bean指定特定的作用域。Spring支持如下五种作用域</p>
+<ol>
+<li>singleton: 单例模式，在整个Spring IoC容器中，singleton作用域的Bean将只生成一个实例</li>
+<li>prototype: 每次通过容器的getBean()方法获取prototype作用域的Bean时，都将产生一个新的Bean实例</li>
+<li>request: 对于一次HTTP请求，request作用域的Bean将只生成一个实例，这意味着，在同一次HTTP请求内，程序每次请求该Bean，得到的总是同一个实例。只有在Web应用中使用Spring时，该作用域才真正有效</li>
+<li>对于一次HTTP会话，session作用域的Bean将只生成一个实例，这意味着，在同一次HTTP会话内，程序每次请求该Bean，得到的总是同一个实例。只有在Web应用中使用Spring时，该作用域才真正有效</li>
+<li>global session: 每个全局的HTTP Session对应一个Bean实例。在典型的情况下，仅在使用portlet context的时候有效，同样只在Web应用中有效</li>
+</ol>
+<p>如果不指定Bean的作用域，Spring默认使用singleton作用域。prototype作用域的Bean的创建、销毁代价比较大。而singleton作用域的Bean实例一旦创建成果，就可以重复使用。因此，应该尽量避免将Bean设置成prototype作用域。</p>
+<h4 id="使用自动装配注入合作者Bean">使用自动装配注入合作者Bean</h4><p>Spring能自动装配Bean与Bean之间的依赖关系，即无须使用ref显式指定依赖Bean，而是由Spring容器检查XML配置文件内容，根据某种规则，为调用者Bean注入被依赖的Bean。<br>Spring自动装配可通过<code>&lt;beans/&gt;</code>元素的<code>default-autowire</code>属性指定，该属性对配置文件中所有的Bean起作用；也可通过对<code>&lt;bean/&gt;</code>元素的<code>autowire</code>属性指定，该属性只对该Bean起作用。</p>
+<p><code>autowire</code>和<code>default-autowire</code>可以接受如下值</p>
+<ul>
+<li><code>no</code>: 不使用自动装配。Bean依赖必须通过ref元素定义。这是默认配置，在较大的部署环境中不鼓励改变这个配置，显式配置合作者能够得到更清晰的依赖关系</li>
+<li><code>byName</code>: 根据setter方法名进行自动装配。Spring容器查找容器中全部Bean，找出其id与setter方法名去掉set前缀，并小写首字母后同名的Bean来完成注入。如果没有找到匹配的Bean实例，则Spring不会进行任何注入</li>
+<li><code>byType</code>: 根据setter方法的形参类型来自动装配。Spring容器查找容器中的全部Bean，如果正好有一个Bean类型与setter方法的形参类型匹配，就自动注入这个Bean；如果找到多个这样的Bean，就抛出一个异常；如果没有找到这样的Bean，则什么都不会发生，setter方法不会被调用</li>
+<li><code>constructor</code>: 与byType类似，区别是用于自动匹配构造器的参数。如果容器不能恰好找到一个与构造器参数类型匹配的Bean，则会抛出一个异常</li>
+<li><code>autodetect</code>: Spring容器根据Bean内部结构，自行决定使用constructor或byType策略。如果找到一个默认的构造函数，那么就会应用byType策略</li>
+</ul>
+<p><strong><em>当一个Bean既使用自动装配依赖，又使用ref显式指定依赖时，则显式指定的依赖覆盖自动装配依赖；对于大型的应用，不鼓励使用自动装配。虽然使用自动装配可减少配置文件的工作量，但大大将死了依赖关系的清晰性和透明性。依赖关系的装配依赖于源文件的属性名和属性类型，导致Bean与Bean之间的耦合降低到代码层次，不利于高层次解耦</em></strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--通过设置可以将Bean排除在自动装配之外--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">""</span> <span class="attribute">autowire-candidate</span>=<span class="value">"false"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--除此之外，还可以在beans元素中指定，支持模式字符串，如下所有以abc结尾的Bean都被排除在自动装配之外--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">beans</span> <span class="attribute">default-autowire-candidates</span>=<span class="value">"*abc"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="创建Bean的3种方式">创建Bean的3种方式</h3><h4 id="使用构造器创建Bean实例">使用构造器创建Bean实例</h4><p>使用构造器来创建Bean实例是最常见的情况，如果不采用构造注入，Spring底层会调用Bean类的无参数构造器来创建实例，因此要求该Bean类提供无参数的构造器。</p>
+<p>采用默认的构造器创建Bean实例，Spring对Bean实例的所有属性执行默认初始化，即所有的基本类型的值初始化为0或false；所有的引用类型的值初始化为null。</p>
+<h4 id="使用静态工厂方法创建Bean">使用静态工厂方法创建Bean</h4><p>使用静态工厂方法创建Bean实例时，class属性也必须指定，但此时class属性并不是指定Bean实例的实现类，而是静态工厂类，Spring通过该属性知道由哪个工厂类来创建Bean实例。</p>
+<p>除此之外，还需要使用factory-method属性来指定静态工厂方法，Spring将调用静态工厂方法返回一个Bean实例，一旦获得了指定Bean实例，Spring后面的处理步骤与采用普通方法创建Bean实例完全一样。如果静态工厂方法需要参数，则使用<code>&lt;constructor-arg.../&gt;</code>元素指定静态工厂方法的参数。</p>
+<h4 id="调用实例工厂方法创建Bean">调用实例工厂方法创建Bean</h4><p>实例工厂方法与静态工厂方法只有一个不同：调用静态工厂方法只需使用工厂类即可，而调用实例工厂方法则需要工厂实例。使用实例工厂方法时，配置Bean实例的<code>&lt;bean.../&gt;</code>元素无须class属性，配置实例工厂方法使用<code>factory-bean</code>指定工厂实例。<br>采用实例工厂方法创建Bean的<code>&lt;bean.../&gt;</code>元素时需要指定如下两个属性</p>
+<ul>
+<li>factory-bean: 该属性的值为工厂Bean的id</li>
+<li>factory-method: 该属性指定实例工厂的工厂方法</li>
+</ul>
+<p>若调用实例工厂方法时需要传入参数，则使用<code>&lt;constructor-arg.../&gt;</code>元素确定参数值。</p>
+<h3 id="协调作用域不同步的Bean">协调作用域不同步的Bean</h3><p>当singleton作用域的Bean依赖于prototype作用域的Bean时，会产生不同步的现象，原因是因为当Spring容器初始化时，容器会预初始化容器中所有的<code>singleton Bean</code>，由于<code>singleton Bean</code>依赖于<code>prototype Bean</code>，因此Spring在初始化<code>singleton Bean</code>之前，会先创建<code>prototypeBean</code>——然后才创建<code>singleton Bean</code>，接下里将<code>prototype Bean</code>注入<code>singleton Bean</code>。<br>解决不同步的方法有两种</p>
+<ul>
+<li>放弃依赖注入: singleton作用域的Bean每次需要prototype作用域的Bean时，主动向容器请求新的Bean实例，即可保证每次注入的<code>prototype Bean</code>实例都是最新的实例</li>
+<li>利用方法注入: 方法注入通常使用lookup方法注入，使用lookup方法注入可以让Spring容器重写容器中Bean的抽象或具体方法，返回查找容器中其他Bean的结果，被查找的Bean通常是一个<code>non-singleton Bean</code>。Spring通过使用JDK动态代理或cglib库修改客户端的二进制码，从而实现上述要求</li>
+</ul>
+<p>建议采用第二种方法，使用方法注入。为了使用lookup方法注入，大致需要如下两步</p>
+<ol>
+<li>将调用者Bean的实现类定义为抽象类，并定义一个抽象方法来获取被依赖的Bean</li>
+<li>在<code>&lt;bean.../&gt;</code>元素中添加<code>&lt;lookup-method.../&gt;</code>子元素让Spring为调用者Bean的实现类实现指定的抽象方法</li>
+</ol>
+<p><strong><em>Notes</em></strong></p>
+<blockquote>
+<p>Spring会采用运行时动态增强的方式来实现<code>&lt;lookup-method.../&gt;</code>元素所指定的抽象方法，如果目标抽象类实现过接口，Spring会采用JDK动态代理来实现该抽象类，并为之实现抽象方法；如果目标抽象类没有实现过接口，Spring会采用cglib实现该抽象类，并为之实现抽象方法。Spring4.0的spring-core-xxx.jar包中已经集成了cglib类库。</p>
+</blockquote>
+<h3 id="两种后处理器">两种后处理器</h3><p>Spring提供了两种常用的后处理器</p>
+<ul>
+<li>Bean后处理器: 这种后处理器会对容器中Bean进行后处理，对Bean进行额外加强</li>
+<li>容器后处理器: 这种后处理器会对IoC容器进行后处理，用于增强容器功能</li>
+</ul>
+<h4 id="Bean后处理器">Bean后处理器</h4><p>Bean后处理器是一种特殊的Bean，这种特殊的Bean并不对外提供服务，它甚至可以无须id属性，它主要负责对容器中的其他Bean执行后处理，例如为容器中的目标Bean生成代理等，这种Bean称为Bean后处理器。Bean后处理器会在Bean实例创建成功之后，对Bean实例进行进一步的增强处理。Bean后处理器必须实现<code>BeanPostProcessor</code>接口，同时必须实现该接口的两个方法。</p>
+<ol>
+<li><code>Object postProcessBeforeInitialization(Object bean, String name) throws BeansException</code>: 该方法的第一个参数是系统即将进行后处理的Bean实例，第二个参数是该Bean的配置id</li>
+<li><code>Object postProcessAfterinitialization(Object bean, String name) throws BeansException</code>: 该方法的第一个参数是系统即将进行后处理的Bean实例，第二个参数是该Bean的配置id</li>
+</ol>
+<p>容器中一旦注册了Bean后处理器，Bean后处理器就会自动启动，在容器中每个Bean创建时自动工作，Bean后处理器两个方法的回调时机如下图<br><img src="http://7xig3q.com1.z0.glb.clouddn.com/spring-bean-post-process.jpg" alt="bean-post-process"></p>
+<p>注意一点，如果使用<code>BeanFactory</code>作为Spring容器，则必须手动注册Bean后处理器，程序必须获取Bean后处理器实例，然后手动注册。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BeanPostProcessor bp = (BeanPostProcessor)beanFactory.getBean(<span class="string">"bp"</span>);</span><br><span class="line">beanFactory.addBeanPostProcessor(bp);</span><br><span class="line">Person p = (Person)beanFactory.getBean(<span class="string">"person"</span>);</span><br></pre></td></tr></table></figure></p>
+<h4 id="容器后处理器">容器后处理器</h4><p>Bean后处理器负责处理容器中的所有Bean实例，而容器后处理器则负责处理容器本身。容器后处理器必须实现<code>BeanFactoryPostProcessor</code>接口，并实现该接口的一个方法<code>postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)</code>实现该方法的方法体就是对Spring容器进行的处理，这种处理可以对Spring容器进行自定义扩展，当然也可以对Spring容器不进行任何处理。</p>
+<p>类似于<code>BeanPostProcessor</code>，<code>ApplicationContext</code>可自动检测到容器中的容器后处理器，并且自动注册容器后处理器。但若使用<code>BeanFactory</code>作为Spring容器，则必须手动调用该容器后处理器来处理<code>BeanFactory</code>容器。</p>
+<h3 id="Spring的“零配置”支持">Spring的“零配置”支持</h3><h4 id="搜索Bean类">搜索Bean类</h4><p>Spring提供如下几个Annotation来标注Spring Bean</p>
+<ul>
+<li><code>@Component</code>: 标注一个普通的Spring Bean类</li>
+<li><code>@Controller</code>: 标注一个控制器组件类</li>
+<li><code>@Service</code>: 标注一个业务逻辑组件类</li>
+<li><code>@Repository</code>: 标注一个DAO组件类</li>
+</ul>
+<p>在Spring配置文件中做如下配置，指定自动扫描的包<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">context:component-scan</span> <span class="attribute">base-package</span>=<span class="value">"edu.shu.spring.domain"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="使用@Resource配置依赖">使用@Resource配置依赖</h4><p><code>@Resource</code>位于<code>javax.annotation</code>包下，是来自JavaEE规范的一个<code>Annotation</code>，Spring直接借鉴了该<code>Annotation</code>，通过使用该<code>Annotation</code>为目标Bean指定协作者Bean。使用<code>@Resource</code>与<code>&lt;property.../&gt;</code>元素的ref属性有相同的效果。<br><code>@Resource</code>不仅可以修饰setter方法，也可以直接修饰实例变量，如果使用<code>@Resource</code>修饰实例变量将会更加简单，此时Spring将会直接使用JavaEE规范的Field注入，此时连setter方法都可以不要。</p>
+<h4 id="使用@PostConstruct和@PreDestroy定制生命周期行为">使用@PostConstruct和@PreDestroy定制生命周期行为</h4><p><code>@PostConstruct</code>和<code>@PreDestroy</code>同样位于javax.annotation包下，也是来自JavaEE规范的两个Annotation，Spring直接借鉴了它们，用于定制Spring容器中Bean的生命周期行为。它们都用于修饰方法，无须任何属性。其中前者修饰的方法时Bean的初始化方法；而后者修饰的方法时Bean销毁之前的方法。</p>
+<h4 id="Spring4-0增强的自动装配和精确装配">Spring4.0增强的自动装配和精确装配</h4><p>Spring提供了<code>@Autowired</code>注解来指定自动装配，<code>@Autowired</code>可以修饰setter方法、普通方法、实例变量和构造器等。当使用<code>@Autowired</code>标注setter方法时，默认采用byType自动装配策略。在这种策略下，符合自动装配类型的候选Bean实例常常有多个，这个时候就可能引起异常，为了实现精确的自动装配，Spring提供了<code>@Qualifier</code>注解，通过使用<code>@Qualifier</code>，允许根据Bean的id来执行自动装配。</p>
+<h3 id="Spring的AOP">Spring的AOP</h3><h4 id="为什么需要AOP">为什么需要AOP</h4><p>AOP（Aspect Orient Programming）也就是面向切面编程，作为面向对象编程的一种补充，已经成为一种比较成熟的编程方式。其实AOP问世的时间并不太长，AOP和OOP互为补充，面向切面编程将程序运行过程分解成各个切面。</p>
+<p>AOP专门用于处理系统中分布于各个模块（不同方法）中的交叉关注点的问题，在JavaEE应用中，常常通过AOP来处理一些具有横切性质的系统级服务，如事务管理、安全检查、缓存、对象池管理等，AOP已经成为一种非常常用的解决方案。</p>
+<h4 id="使用AspectJ实现AOP">使用AspectJ实现AOP</h4><p>AspectJ是一个基于Java语言的AOP框架，提供了强大的AOP功能，其他很多AOP框架都借鉴或采纳其中的一些思想。其主要包括两个部分：一个部分定义了如何表达、定义AOP编程中的语法规范，通过这套语法规范，可以方便地用AOP来解决Java语言中存在的交叉关注点的问题；另一个部分是工具部分，包括编译、调试工具等。</p>
+<p>AOP实现可分为两类</p>
+<ol>
+<li>静态AOP实现: AOP框架在编译阶段对程序进行修改，即实现对目标类的增强，生成静态的AOP代理类，以AspectJ为代表</li>
+<li>动态AOP实现: AOP框架在运行阶段动态生成AOP代理，以实现对目标对象的增强，以Spring AOP为代表</li>
+</ol>
+<p>一般来说，静态AOP实现具有较好的性能，但需要使用特殊的编译器。动态AOP实现是纯Java实现，因此无须特殊的编译器，但是通常性能略差。</p>
+<h4 id="AOP的基本概念">AOP的基本概念</h4><p>关于面向切面编程的一些术语</p>
+<ul>
+<li>切面（Aspect）: 切面用于组织多个Advice，Advice放在切面中定义</li>
+<li>连接点（Joinpoint）: 程序执行过程中明确的点，如方法的调用，或者异常的抛出。在Spring AOP中，连接点总是方法的调用</li>
+<li>增强处理（Advice）: AOP框架在特定的切入点执行的增强处理。处理有“around”、“before”和“after”等类型</li>
+<li>切入点（Pointcut）: 可以插入增强处理的连接点。简而言之，当某个连接点满足指定要求时，该连接点将被添加增强处理，该连接点也就变成了切入点</li>
+</ul>
+<h4 id="Spring的AOP支持">Spring的AOP支持</h4><p>Spring中的AOP代理由Spring的IoC容器负责生成、管理，其依赖关系也由IoC容器负责管理。<br>为了在应用中使用<code>@AspectJ</code>支持，Spring需要添加三个库</p>
+<ul>
+<li><code>aspectjweaver.jar</code></li>
+<li><code>aspectjrt.jar</code></li>
+<li><code>aopalliance.jar</code></li>
+</ul>
+<p>并在Spring配置文件中做如下配置<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--启动@AspectJ支持--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">aop:aspectj-autoproxy</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--指定自动搜索Bean组件、自动搜索切面类--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">context:component-scan</span> <span class="attribute">base-package</span>=<span class="value">"edu.shu.sprint.service"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">context:include-filter</span> <span class="attribute">type</span>=<span class="value">"annotation"</span> <span class="attribute">expression</span>=<span class="value">"org.aspectj.lang.annotation.Aspect"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">context:component-scan</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>参考资料<br>【1】轻量级JavaEE企业应用实战-Struts2+Spring4+Hibernate整合开发</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Programming-Notes/">Programming Notes</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Spring/">Spring</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=2067139" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2067139" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/06/22/CentOS-7-1-switch-in-command-line-mode-and-desktop-mode/" title="CentOS 7.1 切换命令行模式与桌面模式">
+  <strong>上一篇：</strong><br/>
+  <span>
+  CentOS 7.1 切换命令行模式与桌面模式</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/06/19/Basic-knowledge-summary-of-Hibernate/"  title="Hibernate基础知识汇总">
+ <strong>下一篇：</strong><br/> 
+ <span>Hibernate基础知识汇总
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/06/21/Basic-knowledge-summary-of-Spring/" data-title="Spring基础知识汇总" data-url="http://www.codepub.cn/2015/06/21/Basic-knowledge-summary-of-Spring/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring简介"><span class="toc-number">1.</span> <span class="toc-text">Spring简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring的核心机制"><span class="toc-number">2.</span> <span class="toc-text">Spring的核心机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#管理Bean"><span class="toc-number">2.1.</span> <span class="toc-text">管理Bean</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Eclipse使用Spring"><span class="toc-number">2.2.</span> <span class="toc-text">Eclipse使用Spring</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#依赖注入"><span class="toc-number">2.3.</span> <span class="toc-text">依赖注入</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#理解依赖注入"><span class="toc-number">2.3.1.</span> <span class="toc-text">理解依赖注入</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#设值注入"><span class="toc-number">2.3.2.</span> <span class="toc-text">设值注入</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#构造注入"><span class="toc-number">2.3.3.</span> <span class="toc-text">构造注入</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#两种注入方式的对比"><span class="toc-number">2.3.4.</span> <span class="toc-text">两种注入方式的对比</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spring容器中的Bean"><span class="toc-number">2.4.</span> <span class="toc-text">Spring容器中的Bean</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#容器中Bean的作用域"><span class="toc-number">2.4.1.</span> <span class="toc-text">容器中Bean的作用域</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用自动装配注入合作者Bean"><span class="toc-number">2.5.</span> <span class="toc-text">使用自动装配注入合作者Bean</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建Bean的3种方式"><span class="toc-number">3.</span> <span class="toc-text">创建Bean的3种方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用构造器创建Bean实例"><span class="toc-number">3.1.</span> <span class="toc-text">使用构造器创建Bean实例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用静态工厂方法创建Bean"><span class="toc-number">3.2.</span> <span class="toc-text">使用静态工厂方法创建Bean</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#调用实例工厂方法创建Bean"><span class="toc-number">3.3.</span> <span class="toc-text">调用实例工厂方法创建Bean</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#协调作用域不同步的Bean"><span class="toc-number">4.</span> <span class="toc-text">协调作用域不同步的Bean</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#两种后处理器"><span class="toc-number">5.</span> <span class="toc-text">两种后处理器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Bean后处理器"><span class="toc-number">5.1.</span> <span class="toc-text">Bean后处理器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#容器后处理器"><span class="toc-number">5.2.</span> <span class="toc-text">容器后处理器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring的“零配置”支持"><span class="toc-number">6.</span> <span class="toc-text">Spring的“零配置”支持</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#搜索Bean类"><span class="toc-number">6.1.</span> <span class="toc-text">搜索Bean类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用@Resource配置依赖"><span class="toc-number">6.2.</span> <span class="toc-text">使用@Resource配置依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用@PostConstruct和@PreDestroy定制生命周期行为"><span class="toc-number">6.3.</span> <span class="toc-text">使用@PostConstruct和@PreDestroy定制生命周期行为</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spring4-0增强的自动装配和精确装配"><span class="toc-number">6.4.</span> <span class="toc-text">Spring4.0增强的自动装配和精确装配</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring的AOP"><span class="toc-number">7.</span> <span class="toc-text">Spring的AOP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么需要AOP"><span class="toc-number">7.1.</span> <span class="toc-text">为什么需要AOP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用AspectJ实现AOP"><span class="toc-number">7.2.</span> <span class="toc-text">使用AspectJ实现AOP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AOP的基本概念"><span class="toc-number">7.3.</span> <span class="toc-text">AOP的基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spring的AOP支持"><span class="toc-number">7.4.</span> <span class="toc-text">Spring的AOP支持</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Algorithms/" title="Algorithms">Algorithms<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Database/" title="Database">Database<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git-GitHub/" title="Git/GitHub">Git/GitHub<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life-Talk/" title="Life-Talk">Life-Talk<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Operating-System/" title="Operating System">Operating System<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Programming-Notes/" title="Programming Notes">Programming Notes<sup>22</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python3/" title="Python3">Python3<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/LTP/" title="LTP">LTP<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/IT/" title="IT">IT<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elite/" title="Elite">Elite<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tools/" title="Tools">Tools<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySql/" title="MySql">MySql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Lombok/" title="Lombok">Lombok<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Selenium/" title="Selenium">Selenium<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DLL/" title="DLL">DLL<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tomcat/" title="Tomcat">Tomcat<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Guava/" title="Guava">Guava<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Github/" title="Github">Github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Octopress/" title="Octopress">Octopress<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Eclipse/" title="Eclipse">Eclipse<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <p class="asidetitle">最新评论</p>
+<div>
+	<ul class="ds-recent-comments" data-num-items="10" data-show-avatars="1" data-show-time="1" data-show-admin="1" data-excerpt-length="70"></ul>
+	<!--多说js加载开始，一个页面只需要加载一次 -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!--多说js加载结束，一个页面只需要加载一次 -->
+</div>
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/DLL/" style="font-size: 10px;">DLL</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Elite/" style="font-size: 10px;">Elite</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/IntelliJ/" style="font-size: 10px;">IntelliJ</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/LTP/" style="font-size: 13.33px;">LTP</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/Python3/" style="font-size: 16.67px;">Python3</a> <a href="/tags/Selenium/" style="font-size: 10px;">Selenium</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Struts2/" style="font-size: 10px;">Struts2</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a>
+    </div>
+  </div>
+
+
+  <br/>
+<p class="asidetitle">热评文章</p>
+<!-- 多说热评文章 start -->
+<div>
+<div class="ds-top-threads" data-range="monthly" data-num-items="8"></div>
+<!-- 多说热评文章 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+<br/>
+
+  <p class="asidetitle">打赏他</p>
+<div>
+<form action="https://shenghuo.alipay.com/send/payment/fill.htm" method="POST" target="_blank" accept-charset="GBK">
+    <br/>
+    <input name="optEmail" type="hidden" value="18302118258" />
+    <input name="payAmount" type="hidden" value="10" />
+    <input id="title" name="title" type="hidden" value="博主，打赏你的！" />
+    <input name="memo" type="hidden" value="你Y加油，继续写博客！" />
+    <input name="pay" type="image" value="转账" src="http://7xig3q.com1.z0.glb.clouddn.com/alipay-donate-website.png" />
+</form>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello , I&#39;m Wang Xu in SHU. <br/>
+			志不强者智不达，言不信者行不果。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1779238484" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/shijiebei2009" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/4204922" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		
+		
+		<a href="https://www.linkedin.com/in/codepub" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		<a href="https://www.douban.com/people/shijiebei2009" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		<a href="https://www.zhihu.com/people/codepub.cn" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:wangx89@126.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="http://www.codepub.cn/about" target="_blank" title="Wang Xu">Wang Xu</a>
+		
+		<a href="http://tongji.baidu.com/web/welcome/ico?s=2c61418f187553bcc869b755930233ab" target="_blank">百度统计</a><br/>
+		本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+		</p>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','CEs2u-bRR6iHSt4ynbFA','2.0.0');
+</script>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"codepub"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F2c61418f187553bcc869b755930233ab' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+
+<a href="https://github.com/shijiebei2009"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>

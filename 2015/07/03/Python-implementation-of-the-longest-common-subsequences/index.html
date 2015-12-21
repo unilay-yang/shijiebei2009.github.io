@@ -1,0 +1,653 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  
+  <meta charset="UTF-8">
+  
+    <title>Python实现最长公共子序列-Longest Common Subsequences | IT草根</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Wang Xu">
+    
+
+    
+    <meta name="description" content="定义一个数列S，如果分别是两个或多个已知数列的子序列，且是所有符合此条件序列中最长的，则S称为已知序列的最长公共子序列。例如序列X=ABCBDAB，Y=BDCABA。序列BCA是X和Y的一个公共子序列，但是不是X和Y的最长公共子序列，子序列BCBA是X和Y的一个LCS。
+复杂度对于一般性的LCS问题（即任意数量的序列）是属于NP-hard。但当序列的数量确定时，问题可以使用动态规划（Dynamic">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python实现最长公共子序列-Longest Common Subsequences">
+<meta property="og:url" content="http://www.codepub.cn/2015/07/03/Python-implementation-of-the-longest-common-subsequences/index.html">
+<meta property="og:site_name" content="IT草根">
+<meta property="og:description" content="定义一个数列S，如果分别是两个或多个已知数列的子序列，且是所有符合此条件序列中最长的，则S称为已知序列的最长公共子序列。例如序列X=ABCBDAB，Y=BDCABA。序列BCA是X和Y的一个公共子序列，但是不是X和Y的最长公共子序列，子序列BCBA是X和Y的一个LCS。
+复杂度对于一般性的LCS问题（即任意数量的序列）是属于NP-hard。但当序列的数量确定时，问题可以使用动态规划（Dynamic">
+<meta property="og:updated_time" content="2015-10-19T11:10:10.629Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python实现最长公共子序列-Longest Common Subsequences">
+<meta name="twitter:description" content="定义一个数列S，如果分别是两个或多个已知数列的子序列，且是所有符合此条件序列中最长的，则S称为已知序列的最长公共子序列。例如序列X=ABCBDAB，Y=BDCABA。序列BCA是X和Y的一个公共子序列，但是不是X和Y的最长公共子序列，子序列BCBA是X和Y的一个LCS。
+复杂度对于一般性的LCS问题（即任意数量的序列）是属于NP-hard。但当序列的数量确定时，问题可以使用动态规划（Dynamic">
+
+    
+    <link rel="alternative" href="/atom.xml" title="IT草根" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.gif">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.gif">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.gif" alt="IT草根" title="IT草根"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="IT草根">IT草根</a></h1>
+				<h2 class="blog-motto">WangXu&#39;s 代码馆 BLOG</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/resume">Resume</a></li>
+					
+						<li><a href="/links">Links</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+						<form class="search">
+							<label>Search</label>
+						<input type="text" class="st-default-search-input" id="ts-search-input" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/03/Python-implementation-of-the-longest-common-subsequences/" title="Python实现最长公共子序列-Longest Common Subsequences" itemprop="url">Python实现最长公共子序列-Longest Common Subsequences</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.codepub.cn/about" title="Wang Xu" target="_blank" itemprop="author">Wang Xu</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-03T14:34:40.000Z" itemprop="datePublished"> 发表于 2015-07-03</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复杂度"><span class="toc-number">2.</span> <span class="toc-text">复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解法"><span class="toc-number">3.</span> <span class="toc-text">解法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Python实现LCS"><span class="toc-number">4.</span> <span class="toc-text">Python实现LCS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LCS变体-最长公共子串"><span class="toc-number">5.</span> <span class="toc-text">LCS变体-最长公共子串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基本算法"><span class="toc-number">5.1.</span> <span class="toc-text">基本算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DP算法"><span class="toc-number">5.2.</span> <span class="toc-text">DP算法</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h3 id="定义">定义</h3><p>一个数列<strong>S</strong>，如果分别是两个或多个已知数列的子序列，且是所有符合此条件序列中最长的，则<strong>S</strong>称为已知序列的最长公共子序列。例如序列<code>X=ABCBDAB</code>，<code>Y=BDCABA</code>。序列<code>BCA</code>是X和Y的一个公共子序列，但是不是X和Y的最长公共子序列，子序列<code>BCBA</code>是X和Y的一个LCS。</p>
+<h3 id="复杂度">复杂度</h3><p>对于一般性的LCS问题（即任意数量的序列）是属于<code>NP-hard</code>。但当序列的数量确定时，问题可以使用动态规划（Dynamic Programming）在多项式时间解决。</p>
+<h3 id="解法">解法</h3><p>动态规划的一个计算最长公共子序列的方法如下，以两个序列$X=\langle x_1,x_2,…,x_m \rangle$、$Y=\langle y_1,y_2,…,y_n \rangle$为例子，LCS(X,Y)表示X和Y的一个最长公共子序列：<br>如果$ x_m = y_n $，则$ LCS(X,Y) = x_m + LCS(x_{m-1},y_{n-1}) $<br>如果$ x_m != y_n $，则$ LCS(X,Y) = max \lbrace LCS(x_{m-1},Y)，LCS(X,y_{n-1}) \rbrace $</p>
+<p>为了找到最长的LCS，我们定义<code>dp[i][j]</code>记录LCS的长度，如果X的长度为0或者Y的长度为0，那么LCS=0，即<code>dp[i][j]=0</code>，用i和j分别表示到序列X和序列Y的长度，状态转移方程如下:</p>
+<p>$$i=0||j=0，dp[i][j] = 0$$</p>
+<p>$$X[i] = Y[j]，dp[i][j] = dp[i-1][j-1] + 1$$</p>
+<p>$$X[i] != Y[j]，dp[i][j] = max \lbrace dp[i-1][j]，dp[i][j-1] \rbrace$$</p>
+<h3 id="Python实现LCS">Python实现LCS</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span><br><span class="line">Longest Common Subsequences</span><br><span class="line">Created on 2015/7/2  15:11</span><br><span class="line">@author: Wang Xu</span><br><span class="line"></span><br><span class="line">"""</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LCS</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lcs_base</span><span class="params">(self, input_x, input_y)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> len(input_x) == <span class="number">0</span> <span class="keyword">or</span> len(input_y) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">""</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            a = input_x[<span class="number">0</span>]</span><br><span class="line">            b = input_y[<span class="number">0</span>]</span><br><span class="line">            <span class="keyword">if</span> a == b:</span><br><span class="line">                <span class="keyword">return</span> self.lcs_base(input_x[<span class="number">1</span>:], input_y[<span class="number">1</span>:]) + a</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># get the max one</span></span><br><span class="line">                <span class="keyword">return</span> self.getMax(self.lcs_base(input_x[<span class="number">1</span>:], input_y), self.lcs_base(input_x, input_y[<span class="number">1</span>:]))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># construct a list by the input string</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getList</span><span class="params">(self, inputStr)</span>:</span></span><br><span class="line">        listRes = list()</span><br><span class="line">        <span class="keyword">if</span> len(inputStr) != <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(inputStr)):</span><br><span class="line">                listRes.append(inputStr[i])</span><br><span class="line">        <span class="keyword">return</span> listRes</span><br><span class="line"></span><br><span class="line">    <span class="comment"># return the max one between a and b, equivalently return the longest one</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getMax</span><span class="params">(self, a, b)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> len(a) &gt;= len(b):</span><br><span class="line">            <span class="keyword">return</span> a</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> b</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    lcs = LCS()</span><br><span class="line">    l1 = lcs.getList(<span class="string">'我的大中国'</span>)</span><br><span class="line">    l2 = lcs.getList(<span class="string">'大中国我的'</span>)</span><br><span class="line"></span><br><span class="line">    l3 = lcs.lcs_base(l1, l2)</span><br><span class="line">    print(l3[::-<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    l3 = lcs.lcs_base(l2, l1)</span><br><span class="line">    print(l3[::-<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    l1 = <span class="string">'1233433236676'</span></span><br><span class="line">    l2 = <span class="string">'98723765655423'</span></span><br><span class="line">    l3 = lcs.lcs_base(l1, l2)</span><br><span class="line">    print(l3[::-<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    l1 = <span class="string">'123s212346我的大中国啊33z'</span></span><br><span class="line">    l2 = <span class="string">'33z的大中国'</span></span><br><span class="line">    l3 = lcs.lcs_base(l1, l2)</span><br><span class="line">    print(l3[::-<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<p>该算法的空间、时间复杂度均为$O(n^{2})$，经过优化后，空间复杂度可为$O(n)$。</p>
+<h3 id="LCS变体-最长公共子串">LCS变体-最长公共子串</h3><p>最长公共子串与最长公共子序列稍有区别，不过也算是<code>LCS</code>的一个变体，在<code>LCS</code>中，子序列是不必要求连续的，而子串则是“连续”的。<br>题：给定两个字符串<code>X</code>，<code>Y</code>，求二者最长的公共子串，例如<code>X=[aaaba]</code>，<code>Y=[ababaa]</code>。二者的最长公共子串为<code>[aba]</code>，长度为3。</p>
+<h4 id="基本算法">基本算法</h4><p>将X的每个子串与Y的每个子串做对比，求出最长公共子串<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span><br><span class="line">Created on 2015/7/2  16:13</span><br><span class="line">@author: Wang Xu</span><br><span class="line">"""</span></span><br><span class="line"><span class="comment"># 使用基本算法获取最长公共子串（连续），最长公共子序列可以是非连续的</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getcomlen</span><span class="params">(firststr, secondstr)</span>:</span></span><br><span class="line">    comlen = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> firststr <span class="keyword">and</span> secondstr:</span><br><span class="line">        <span class="keyword">if</span> firststr[<span class="number">0</span>] == secondstr[<span class="number">0</span>]:</span><br><span class="line">            comlen += <span class="number">1</span></span><br><span class="line">            firststr = firststr[<span class="number">1</span>:]</span><br><span class="line">            secondstr = secondstr[<span class="number">1</span>:]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">return</span> comlen</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lcs_base</span><span class="params">(input_x, input_y)</span>:</span></span><br><span class="line">    max_common_len = <span class="number">0</span></span><br><span class="line">    common_index = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> xtemp <span class="keyword">in</span> range(<span class="number">0</span>, len(input_x)):</span><br><span class="line">        <span class="keyword">for</span> ytemp <span class="keyword">in</span> range(<span class="number">0</span>, len(input_y)):</span><br><span class="line">            com_temp = getcomlen(input_x[xtemp: len(input_x)], input_y[ytemp: len(input_y)])</span><br><span class="line">            <span class="keyword">if</span> com_temp &gt; max_common_len:</span><br><span class="line">                max_common_len = com_temp</span><br><span class="line">                common_index = xtemp</span><br><span class="line"></span><br><span class="line">    print(<span class="string">'公共子串的长度是：%s'</span> % max_common_len)</span><br><span class="line">    print(<span class="string">'最长公共子串是：%s'</span> % input_x[common_index:common_index + max_common_len])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    lcs_base(<span class="string">'d11zabcdeabdcdbbcd'</span>, <span class="string">'bbcd11yabcdefaaa'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">'''</span><br><span class="line">OutPut:</span><br><span class="line">公共子串的长度是：5</span><br><span class="line">最长公共子串是：abcde</span><br><span class="line">'''</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="DP算法">DP算法</h4><p>使用动态规划来解最长公共子串问题，可以考虑如何将<code>arr[0,...,i]</code>的问题转化为求解<code>arr[0,...,i-1]</code>的问题，此处考虑使用<code>dp[i][j]</code>表示以<code>X[i]</code>和<code>Y[j]</code>结尾的最长公共子串的长度，因为要求子串连续，所以对于<code>X[i]</code>和<code>Y[j]</code>来讲，它们要么与之前的公共子串构成新的公共子串；要么就是不构成公共子串；状态转移方程为</p>
+<p>$$X[i] = Y[j]，dp[i][j] = dp[i-1][j-1] + 1$$</p>
+<p>$$X[i] != Y[j]，dp[i][j] = 0$$</p>
+<p>对于初始化，<code>i=0</code>或者<code>j=0</code>，如果<code>X[i] == Y[j]</code>，<code>dp[i][j] = 1</code>；否则<code>dp[i][j] = 0</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LCS3</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lcs_dp</span><span class="params">(self, input_x, input_y)</span>:</span></span><br><span class="line">        <span class="comment"># input_y as column, input_x as row</span></span><br><span class="line">        dp = [([<span class="number">0</span>] * len(input_y)) <span class="keyword">for</span> i <span class="keyword">in</span> range(len(input_x))]</span><br><span class="line">        maxlen = maxindex = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(input_x)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>, len(input_y)):</span><br><span class="line">                <span class="keyword">if</span> input_x[i] == input_y[j]:</span><br><span class="line">                    <span class="keyword">if</span> i!=<span class="number">0</span> <span class="keyword">and</span> j!=<span class="number">0</span>:</span><br><span class="line">                        dp[i][j] = dp[i - <span class="number">1</span>][j - <span class="number">1</span>] + <span class="number">1</span></span><br><span class="line">                    <span class="keyword">if</span> i == <span class="number">0</span> <span class="keyword">or</span> j == <span class="number">0</span>:</span><br><span class="line">                        dp[i][j] = <span class="number">1</span></span><br><span class="line">                    <span class="keyword">if</span> dp[i][j] &gt; maxlen:</span><br><span class="line">                        maxlen = dp[i][j]</span><br><span class="line">                        maxindex = i + <span class="number">1</span> - maxlen</span><br><span class="line">                        <span class="comment"># print('最长公共子串的长度是:%s' % maxlen)</span></span><br><span class="line">                        <span class="comment"># print('最长公共子串是:%s' % input_x[maxindex:maxindex + maxlen])</span></span><br><span class="line">        <span class="keyword">return</span> input_x[maxindex:maxindex + maxlen]</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    lcs3 = LCS3()</span><br><span class="line">    print(lcs3.lcs_dp(<span class="string">'我是美abc国中defg国中间人'</span>, <span class="string">'abdde我是美中国中国中国人'</span>))</span><br><span class="line">    print(lcs3.lcs_dp(<span class="string">'cabdec'</span>,<span class="string">'cbdec'</span>))</span><br></pre></td></tr></table></figure>
+<p>参考资料<br>【1】<a href="http://www.ahathinking.com/archives/115.html" target="_blank" rel="external">http://www.ahathinking.com/archives/115.html</a><br>【2】<a href="http://dsqiu.iteye.com/blog/1701541" target="_blank" rel="external">http://dsqiu.iteye.com/blog/1701541</a><br>【3】<a href="http://www.ahathinking.com/archives/122.html" target="_blank" rel="external">http://www.ahathinking.com/archives/122.html</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Algorithms/">Algorithms</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Python3/">Python3</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=2067139" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2067139" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/07/04/Python3-beginner-s-handbook-two/" title="Python3入门手册之二">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Python3入门手册之二</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/07/02/Python3-beginner-s-handbook-one/"  title="Python3入门手册之一">
+ <strong>下一篇：</strong><br/> 
+ <span>Python3入门手册之一
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/07/03/Python-implementation-of-the-longest-common-subsequences/" data-title="Python实现最长公共子序列-Longest Common Subsequences" data-url="http://www.codepub.cn/2015/07/03/Python-implementation-of-the-longest-common-subsequences/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复杂度"><span class="toc-number">2.</span> <span class="toc-text">复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解法"><span class="toc-number">3.</span> <span class="toc-text">解法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Python实现LCS"><span class="toc-number">4.</span> <span class="toc-text">Python实现LCS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LCS变体-最长公共子串"><span class="toc-number">5.</span> <span class="toc-text">LCS变体-最长公共子串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基本算法"><span class="toc-number">5.1.</span> <span class="toc-text">基本算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DP算法"><span class="toc-number">5.2.</span> <span class="toc-text">DP算法</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Algorithms/" title="Algorithms">Algorithms<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Database/" title="Database">Database<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git-GitHub/" title="Git/GitHub">Git/GitHub<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life-Talk/" title="Life-Talk">Life-Talk<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Operating-System/" title="Operating System">Operating System<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Programming-Notes/" title="Programming Notes">Programming Notes<sup>22</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python3/" title="Python3">Python3<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/LTP/" title="LTP">LTP<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/IT/" title="IT">IT<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elite/" title="Elite">Elite<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tools/" title="Tools">Tools<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySql/" title="MySql">MySql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Lombok/" title="Lombok">Lombok<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Selenium/" title="Selenium">Selenium<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DLL/" title="DLL">DLL<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tomcat/" title="Tomcat">Tomcat<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Guava/" title="Guava">Guava<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Github/" title="Github">Github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Octopress/" title="Octopress">Octopress<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Eclipse/" title="Eclipse">Eclipse<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <p class="asidetitle">最新评论</p>
+<div>
+	<ul class="ds-recent-comments" data-num-items="10" data-show-avatars="1" data-show-time="1" data-show-admin="1" data-excerpt-length="70"></ul>
+	<!--多说js加载开始，一个页面只需要加载一次 -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!--多说js加载结束，一个页面只需要加载一次 -->
+</div>
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/DLL/" style="font-size: 10px;">DLL</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Elite/" style="font-size: 10px;">Elite</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/IntelliJ/" style="font-size: 10px;">IntelliJ</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/LTP/" style="font-size: 13.33px;">LTP</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/Python3/" style="font-size: 16.67px;">Python3</a> <a href="/tags/Selenium/" style="font-size: 10px;">Selenium</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Struts2/" style="font-size: 10px;">Struts2</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a>
+    </div>
+  </div>
+
+
+  <br/>
+<p class="asidetitle">热评文章</p>
+<!-- 多说热评文章 start -->
+<div>
+<div class="ds-top-threads" data-range="monthly" data-num-items="8"></div>
+<!-- 多说热评文章 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+<br/>
+
+  <p class="asidetitle">打赏他</p>
+<div>
+<form action="https://shenghuo.alipay.com/send/payment/fill.htm" method="POST" target="_blank" accept-charset="GBK">
+    <br/>
+    <input name="optEmail" type="hidden" value="18302118258" />
+    <input name="payAmount" type="hidden" value="10" />
+    <input id="title" name="title" type="hidden" value="博主，打赏你的！" />
+    <input name="memo" type="hidden" value="你Y加油，继续写博客！" />
+    <input name="pay" type="image" value="转账" src="http://7xig3q.com1.z0.glb.clouddn.com/alipay-donate-website.png" />
+</form>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello , I&#39;m Wang Xu in SHU. <br/>
+			志不强者智不达，言不信者行不果。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1779238484" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/shijiebei2009" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/4204922" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		
+		
+		<a href="https://www.linkedin.com/in/codepub" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		<a href="https://www.douban.com/people/shijiebei2009" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		<a href="https://www.zhihu.com/people/codepub.cn" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:wangx89@126.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="http://www.codepub.cn/about" target="_blank" title="Wang Xu">Wang Xu</a>
+		
+		<a href="http://tongji.baidu.com/web/welcome/ico?s=2c61418f187553bcc869b755930233ab" target="_blank">百度统计</a><br/>
+		本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+		</p>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','CEs2u-bRR6iHSt4ynbFA','2.0.0');
+</script>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"codepub"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F2c61418f187553bcc869b755930233ab' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+
+<a href="https://github.com/shijiebei2009"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
