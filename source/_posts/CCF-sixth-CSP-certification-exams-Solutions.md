@@ -1,14 +1,13 @@
-title: "CCF sixth CSP certification exams programming problems"
-date: 2015-12-21 23:05:06
+title: CCF第六次CSP认证考试题解
 tags: [CCF]
-categories: Algorithms
+date: 2015-12-21 23:27:52
+categories: Algorithms
 
 ---
-
 ####CCF计算机职业资格认证
-**CCF（China Computer Federation）**是计算机领域内一个权威的学术组织，具有高端定位、崇高的价值追求、先进的治理架构和制度规范，拥有众多资深的学者和企业家为骨干会员。CCF开展的该认证工作，具有客观公正及很强的专业性，将解决企业及高校界普遍关心的软件开发人才评价问题，便于有关单位了解求职或求学者的实际开发能力，可有助甄别及吸纳具有真才实学的技术人才，有效地减轻企业与高校在人才选择过程中组织大量上机考核的成本投入。为了更加贴近用人单位的需要，使得该认证有更强的针对性，CCF会同处于行业领先地位的高校与知名企业的专家，共同制定认证标准，审查考题内容。更多详情[点我](http://cspro.ccf.org.cn/lead/info.do?__action=info_view&catalog=notice&id=hrvnsypp-1gg&__forward=true)。
+CCF**（China Computer Federation）**是计算机领域内一个权威的学术组织，具有高端定位、崇高的价值追求、先进的治理架构和制度规范，拥有众多资深的学者和企业家为骨干会员。CCF开展的该认证工作，具有客观公正及很强的专业性，将解决企业及高校界普遍关心的软件开发人才评价问题，便于有关单位了解求职或求学者的实际开发能力，可有助甄别及吸纳具有真才实学的技术人才，有效地减轻企业与高校在人才选择过程中组织大量上机考核的成本投入。为了更加贴近用人单位的需要，使得该认证有更强的针对性，CCF会同处于行业领先地位的高校与知名企业的专家，共同制定认证标准，审查考题内容。更多详情[点我](http://cspro.ccf.org.cn/lead/info.do?__action=info_view&catalog=notice&id=hrvnsypp-1gg&__forward=true)。
 
-####CCF CSP认证第六次考试
+####CSP认证第六次考试
 本次考试时间四小时，共五道题。分别是：
 - 数位之和（难度-易）
 - 消除类游戏（难度-中）
@@ -16,7 +15,7 @@ categories: Algorithms
 - 送货（难度-难）
 - 矩阵（难度-难）
 
-####CCF 数位之和
+####数位之和
 **题目说明**：输入任意一个整数，输出各位数位之和。输入的整数不会超过整型的最大表示范围。
 **解答**：
 ```java
@@ -43,7 +42,7 @@ public class Main {
 }
 ```
 
-####CCF 消除类游戏
+####消除类游戏
 **题目说明**：
 ![](http://7xig3q.com1.z0.glb.clouddn.com/CCF_CSP_Elimination_Game.png)
 **解答**：
@@ -161,7 +160,7 @@ public class Main {
 
 ```
 
-####CCF 画图
+####画图
 **题目说明**：
 ![](http://7xig3q.com1.z0.glb.clouddn.com/CCF_CSP_Paint_1.png)
 ![](http://7xig3q.com1.z0.glb.clouddn.com/CCF_CSP_Paint_2.png)
@@ -308,6 +307,6 @@ public class Main {
 }
 ```
 
-啥？还有两题？对的，还有俩，不过第四道不会，第五道没写完就自动交卷了。不提也罢，码字速度还要跟上，虽然说机房键盘差劲，也没我喜爱的IntelliJ，但是要从自身找原因。
+啥？还有两题？对的，还有俩，不过第四道不会，第五道没写完就自动交卷了。不提也罢，码字速度还要跟上，虽然说机房键盘差劲，也没有我喜爱的IntelliJ，但是要从自身找原因。
 
-***转载请注明出处：***
+***转载请注明出处： http://codepub.cn/2015/12/21/CCF-sixth-CSP-certification-exams-Solutions/***
