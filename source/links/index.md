@@ -15,6 +15,7 @@ date: 2015-06-14 18:41:08
 [中科大李博杰，偏底层研究](http://ring0.me/)
 [赵劼，侧重.NET，多年微软MVP](http://blog.zhaojie.me/)
 [王垠的博客，文章少而精](http://www.yinwang.org/)
+[赖明星，就职网易杭州研究院](http://mingxinglai.com/cn/)
 
 ###推荐站点
 [开源自由的汉语言处理包](http://hanlp.linrunsoft.com/)
@@ -36,4 +37,4 @@ date: 2015-06-14 18:41:08
 国内网址：http://suidao.wuseyi.com/invi/m5VBYH
 时空隧道邀请码 m5VBYH
 如果地址打不开的话，可以试试：http://www.jeepshoe.org/412418412.htm
-百度云下载隧道插件的链接：http://pan.baidu.com/s/1hq2ABJY
+百度云下载隧道插件的链接：http://pan.baidu.com/s/1eQEyMum
