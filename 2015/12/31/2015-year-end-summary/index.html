@@ -5,29 +5,23 @@
   
   <meta charset="UTF-8">
   
-    <title>Windows客户端配置GitHub的SSH公钥 | IT草根</title>
+    <title>2015年终总结 | IT草根</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Wang Xu">
     
 
     
-    <meta name="description" content="检查SSH keys的设置1$ cd ~/.ssh/
-如果显示”No such file or directory”，跳到第三步，否则继续。
-备份和移除原来的SSH key设置如果已经存在key文件，需要备份该数据并删除之12345$ lsid_rsa  id_rsa.pub  known_hosts$ mkdir key_backup$ cp id_rsa* key_backup/$ rm id">
+    <meta name="description" content="公元2015年就这么过去了，我们都是不知不觉也极不情愿地又向坟墓迈进了一步。也许多年以后，当2015年已成为历史长河中的一粒沙，偶有后人回望历史，我想他们也会觉得这一年注定是多事之秋吧。这一年掀起了规模庞大的O2O公司创业潮，同时到了年终又有大量O2O公司掀起了倒闭潮，这也真的验证了雷军的那句话，站在风口上，猪都能飞起来。但是飞起来又怎样？猪就是猪，它不会在空中长出翅膀，所以它终归是要落地的，只不">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Windows客户端配置GitHub的SSH公钥">
-<meta property="og:url" content="http://www.codepub.cn/2015/06/02/Windows-client-configuration-of-SSH-public-key-on-GitHub/index.html">
+<meta property="og:title" content="2015年终总结">
+<meta property="og:url" content="http://www.codepub.cn/2015/12/31/2015-year-end-summary/index.html">
 <meta property="og:site_name" content="IT草根">
-<meta property="og:description" content="检查SSH keys的设置1$ cd ~/.ssh/
-如果显示”No such file or directory”，跳到第三步，否则继续。
-备份和移除原来的SSH key设置如果已经存在key文件，需要备份该数据并删除之12345$ lsid_rsa  id_rsa.pub  known_hosts$ mkdir key_backup$ cp id_rsa* key_backup/$ rm id">
-<meta property="og:updated_time" content="2015-06-02T07:52:30.876Z">
+<meta property="og:description" content="公元2015年就这么过去了，我们都是不知不觉也极不情愿地又向坟墓迈进了一步。也许多年以后，当2015年已成为历史长河中的一粒沙，偶有后人回望历史，我想他们也会觉得这一年注定是多事之秋吧。这一年掀起了规模庞大的O2O公司创业潮，同时到了年终又有大量O2O公司掀起了倒闭潮，这也真的验证了雷军的那句话，站在风口上，猪都能飞起来。但是飞起来又怎样？猪就是猪，它不会在空中长出翅膀，所以它终归是要落地的，只不">
+<meta property="og:updated_time" content="2016-01-01T12:42:45.862Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Windows客户端配置GitHub的SSH公钥">
-<meta name="twitter:description" content="检查SSH keys的设置1$ cd ~/.ssh/
-如果显示”No such file or directory”，跳到第三步，否则继续。
-备份和移除原来的SSH key设置如果已经存在key文件，需要备份该数据并删除之12345$ lsid_rsa  id_rsa.pub  known_hosts$ mkdir key_backup$ cp id_rsa* key_backup/$ rm id">
+<meta name="twitter:title" content="2015年终总结">
+<meta name="twitter:description" content="公元2015年就这么过去了，我们都是不知不觉也极不情愿地又向坟墓迈进了一步。也许多年以后，当2015年已成为历史长河中的一粒沙，偶有后人回望历史，我想他们也会觉得这一年注定是多事之秋吧。这一年掀起了规模庞大的O2O公司创业潮，同时到了年终又有大量O2O公司掀起了倒闭潮，这也真的验证了雷军的那句话，站在风口上，猪都能飞起来。但是飞起来又怎样？猪就是猪，它不会在空中长出翅膀，所以它终归是要落地的，只不">
 
     
     <link rel="alternative" href="/atom.xml" title="IT草根" type="application/atom+xml">
@@ -89,44 +83,36 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/06/02/Windows-client-configuration-of-SSH-public-key-on-GitHub/" title="Windows客户端配置GitHub的SSH公钥" itemprop="url">Windows客户端配置GitHub的SSH公钥</a>
+      <a href="/2015/12/31/2015-year-end-summary/" title="2015年终总结" itemprop="url">2015年终总结</a>
   </h1>
   <p class="article-author">By
        
 		<a href="http://www.codepub.cn/about" title="Wang Xu" target="_blank" itemprop="author">Wang Xu</a>
 		
   <p class="article-time">
-    <time datetime="2015-06-02T07:44:10.000Z" itemprop="datePublished"> 发表于 2015-06-02</time>
+    <time datetime="2015-12-31T12:36:42.000Z" itemprop="datePublished"> 发表于 2015-12-31</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#检查SSH_keys的设置"><span class="toc-number">1.</span> <span class="toc-text">检查SSH keys的设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#备份和移除原来的SSH_key设置"><span class="toc-number">2.</span> <span class="toc-text">备份和移除原来的SSH key设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成新的SSH_key"><span class="toc-number">3.</span> <span class="toc-text">生成新的SSH key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加SSH_key到GitHub"><span class="toc-number">4.</span> <span class="toc-text">添加SSH key到GitHub</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试一下"><span class="toc-number">5.</span> <span class="toc-text">测试一下</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置你的账号信息"><span class="toc-number">6.</span> <span class="toc-text">设置你的账号信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决本地多个SSH_key问题"><span class="toc-number">7.</span> <span class="toc-text">解决本地多个SSH key问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#依然需要配置git用户名和邮箱"><span class="toc-number">7.1.</span> <span class="toc-text">依然需要配置git用户名和邮箱</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生成ssh_key时同时指定保存的文件名"><span class="toc-number">7.2.</span> <span class="toc-text">生成ssh key时同时指定保存的文件名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#新增并配置config文件"><span class="toc-number">7.3.</span> <span class="toc-text">新增并配置config文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#上传key到云平台后台并测试"><span class="toc-number">7.4.</span> <span class="toc-text">上传key到云平台后台并测试</span></a></li></ol></li></ol>
-		
-		</div>
-		
-		<h3 id="检查SSH_keys的设置">检查SSH keys的设置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/.ssh/</span><br></pre></td></tr></table></figure>
-<p>如果显示”No such file or directory”，跳到第三步，否则继续。</p>
-<h3 id="备份和移除原来的SSH_key设置">备份和移除原来的SSH key设置</h3><p>如果已经存在key文件，需要备份该数据并删除之<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ls</span><br><span class="line">id_rsa  id_rsa.pub  known_hosts</span><br><span class="line">$ mkdir key_backup</span><br><span class="line">$ cp id_rsa* key_backup/</span><br><span class="line">$ rm id_rsa*</span><br></pre></td></tr></table></figure></p>
-<h3 id="生成新的SSH_key">生成新的SSH key</h3><p>输入下面的代码，可以生成新的key文件，只需要使用默认的设置即可，当需要输入文件名的时候，回车即可</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"你的邮箱@qq.com"</span></span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/c/Users/WX/.ssh/id_rsa):</span><br><span class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved <span class="keyword">in</span> /c/Users/WX/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved <span class="keyword">in</span> /c/Users/WX/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line"><span class="number">1</span>d:cc:<span class="number">7</span>e:b3:<span class="number">7</span>e:<span class="number">92</span>:f7:ab:c6:<span class="number">75</span>:<span class="number">56</span>:<span class="number">73</span>:<span class="number">62</span>:<span class="number">30</span>:bc:<span class="number">8</span>c 你的邮箱@qq.com</span><br><span class="line">The key<span class="string">'s randomart image is:</span><br><span class="line">+--[ RSA 2048]----+</span><br><span class="line">|           .     |</span><br><span class="line">|         o  +    |</span><br><span class="line">|          +o +   |</span><br><span class="line">|         oE.o o.o|</span><br><span class="line">|        S o o. .+|</span><br><span class="line">|           . o .o|</span><br><span class="line">|            o....|</span><br><span class="line">|           .ooo  |</span><br><span class="line">|            o=.oo|</span><br><span class="line">+-----------------+</span></span><br></pre></td></tr></table></figure>
-<h3 id="添加SSH_key到GitHub">添加SSH key到GitHub</h3><p>用文本编辑工具打开id_rsa.pub文件，如果看不到这个文件，你需要设置显示隐藏文件。准确的复制这个文件的内容，才能保证设置的成功。<br>在GitHub的主页上点击设置按钮，选择SSH Keys项，把复制的内容粘贴进去，然后点击Add Key按钮即可，Title任意选择。</p>
-<h3 id="测试一下">测试一下</h3><p>输入下面命令，测试是否设置成功<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -T git@github.com</span><br><span class="line">Hi shijiebei2009! You<span class="string">'ve successfully authenticated, but GitHub does not provide shell access.</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="设置你的账号信息">设置你的账号信息</h3><p>现在你已经可以通过SSH链接到GitHub了，还有一些个人信息需要完善的。</p>
-<p>Git会根据用户的名字和邮箱来记录提交。GitHub也是用这些信息来做权限的处理，输入下面的代码进行个人信息的设置，把名称和邮箱替换成你自己的，名字必须是你的真名，而不是GitHub的昵称。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">"你的名字"</span></span><br><span class="line">$ git config --global user.email <span class="string">"your_email@youremail.com"</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="解决本地多个SSH_key问题">解决本地多个SSH key问题</h3><p>如果在eclipse或者其它云平台，可能也需要使用SSH key来认证，如果每次都覆盖原来的is_rsa文件，那么之前的认证就失效了，这个问题可以通过在~/.ssh目录下增加config文件来解决。</p>
-<h4 id="依然需要配置git用户名和邮箱">依然需要配置git用户名和邮箱</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config user.name <span class="string">"用户名"</span></span><br><span class="line">git config user.email <span class="string">"邮箱"</span></span><br></pre></td></tr></table></figure>
-<h4 id="生成ssh_key时同时指定保存的文件名">生成ssh key时同时指定保存的文件名</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa <span class="operator">-f</span> ~/.ssh/id_rsa.codepub -C <span class="string">"email"</span></span><br></pre></td></tr></table></figure>
-<p>上面的id_rsa.codepub就是我们指定的文件名，这时~/.ssh目录下会多出id_rsa.codepub和id_rsa.codepub.pub两个文件，id_rsa.codepub.pub里保存的就是我们要使用的key。</p>
-<h4 id="新增并配置config文件">新增并配置config文件</h4><p>如果config文件不存在，先添加；存在则直接修改<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch ~/.ssh/config</span><br></pre></td></tr></table></figure></p>
-<p>在config文件里添加如下内容(User表示你的用户名)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Host *.codepub.cn</span><br><span class="line">IdentityFile ~/.ssh/id_rsa.codepub</span><br><span class="line">User admin</span><br></pre></td></tr></table></figure></p>
-<h4 id="上传key到云平台后台并测试">上传key到云平台后台并测试</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -T git@git.codepub.cn</span><br></pre></td></tr></table></figure>
-<p>成功的话，会输出welcome欢迎信息！<br>日后如需添加，则按照上述配置生成key，并修改config文件即可。</p>
-<p>参考资料<br>【1】<a href="http://beiyuu.com/github-pages/" target="_blank" rel="external">http://beiyuu.com/github-pages/</a><br>【2】<a href="http://riny.net/2014/git-ssh-key/" target="_blank" rel="external">http://riny.net/2014/git-ssh-key/</a></p>
+		<p>公元<strong>2015</strong>年就这么过去了，我们都是不知不觉也极不情愿地又向坟墓迈进了一步。也许多年以后，当2015年已成为历史长河中的一粒沙，偶有后人回望历史，我想他们也会觉得这一年注定是多事之秋吧。这一年掀起了规模庞大的O2O公司创业潮，同时到了年终又有大量O2O公司掀起了倒闭潮，这也真的验证了雷军的那句话，站在风口上，猪都能飞起来。但是飞起来又怎样？猪就是猪，它不会在空中长出翅膀，所以它终归是要落地的，只不过飞的越高跌的越疼而已。伴随着年初VC们满世界的投资，他们早晚也有勒紧裤腰带，安心过日子的那一天，可不，这一天其实并不远，就在2015年，58赶集合并了、滴滴快滴合并了、美团点评合并了、携程去哪儿也合并了。大量的烧钱亏损终归不是长久之计，在资本的左右下，该合并的合并，该收的收，做起来丝毫没有半点含糊。</p>
+<hr>
+<p>好吧，扯远了，既然是我的年终总结，当然要说说我的事才对。这一年我也算是一枚屌丝驾驶员了，为啥哩，因为我也拿到驾照了，算下来，前后不到一个月驾照到手，四门科目全部一次性通过，而且还有满分哦。考驾照这事说起来不难，难的是根本没上车机会，因为十多个人一辆车，一人跑个几圈就没时间了。当然你说我们车咋没那么多人嘞，因为你是土豪呀，我报的驾校是在小地方，才三千块，当然不如大上海一万多，每次就三四个人练车啦。</p>
+<hr>
+<p>这一年，我也有了个人博客了，之所以建立个人博客，原因很简单，主要是为了个人的积累，以及个人品牌的打造，之前写博客常驻CSDN，但是在上面发表的文章杂而多，广而浅，这不是我想要的。所以在四月份就打造一个独立域名的博客，并且使用Markdown进行写作，而Markdown的最大的优势就是像写代码那样写博客，这个才是我所喜欢的方式。</p>
+<hr>
+<p>这一年，感情生活依然不多，在大多数的日子里，还是单身汪一枚，当然这也符合程序猿的风格，虽然不是所有的码猿都是屌丝，但是屌丝确实挺多，这是我的切身体会。本来在这一年开始的时候，我还算一个有点小幸运的码猿，因为我有个女朋友，而且她也是我喜欢的类型，我也希望我们能一直走下去，直到步入婚姻的殿堂，可是天不遂人愿，在交往没多久之后我就被女票果断的甩掉了，重新回归单身汪。虽然后来我们和好了，但是没多久我又被第二次甩了，是的，就是这么狗血，本以为电视剧中才有的SB剧情，竟然神奇的就发生在我的身上。可是爱情是诡异的，没人能够左右自己的心，偏偏我就喜欢她，如今她又有了想要和好的迹象，对于这一次，我不确定结局若何，但是我一直坚信感情的世界里，两个人一定是平等的，即便现在男多女少，作为一个爷们，我也不会丢弃我的尊严去赢得一个女人的芳心。希望各位单身的屌丝们，即使你现在还没有女票，但是也一定不要做一些放下人格、放下尊严、恬不知耻去求女生同意做你女票之类的事，毕竟在你们父母的眼里，你就是个土皇帝，你有这些心思去孝敬你们的女票，倒不如拿来好好孝敬父母。古人有云，百善孝为先，这是永远不会错的话。</p>
+<hr>
+<p>这一年，趁着五一黄金周，我也算走出了大上海，因为我去了趟杭州，潇洒的玩了四五天。在这几天里，天天都是在外奔波，丝毫不留喘息的机会，因为机会难得啊，要逛的地方实在太多了。马不停蹄也好，快马加鞭也罢，总之这几天彻底把杭州逛了个遍，虽然并没有深入到每一个角落，但是该逛的都逛了，该玩的都玩了。在此给想要去杭州玩的朋友强烈推荐宋城，以及宋城千古情的表演，另外还有河坊街，吃的东西是真特么多啊，而且尽是各种特色小吃，记得最重要一点哦，去之前别吃饭别吃饭别吃饭，重三完毕。最不推荐的就是西溪湿地国家公园，太大太大，上午从正门进，晚上从偏门出，这一天就完了。</p>
+<hr>
+<p>这一年，暑假后我就研三了，所以自然而然的我开始实习了，记得是六月靠底吧，进入大众点评，做的是POI相关的业务开发。以前的我还有点小小的代码洁癖，可是进了公司才知道，尤其是做业务，那遗留的历史代码真的是一坨坨烂的可以。因为做业务的话，完全没人去管什么软件工程、设计模式之类的，至于重构那就算了，想想还是可以的，真的重构的话，并没有那么多精力，而且就在你重构的过程中，你会发现为什么我重构出来的代码也是烂的可以，如果你洁癖严重的话，那么在重构的过程中你就会想着再次重构。所以业务开发的重点是解决业务需求，对于公司来说，最终的评价标准其实就一个，解决问题否？没解决，那你水平不够啊。解决了，代码很烂吗？没关系，能用即可，所以只要解决问题，不管你的代码是烂的一坨翔还是貌美如花，他们根本不关心。虽然我最终离开了点评，但是还是在点评有所收获，那就是千万不要知无不言，言无不尽，你以为你所知道的问题，领导不知道，你以为你所想到的解决方法，领导没想到，那你就错了。其实你的领导都知道，否则他怎么会是你的领导呢？所以不要妄图期望你说了一大通对公司有好处的话之后，领导目光如炬如获至宝一般。其实并没有多少人在乎哪些对公司好，哪些对公司不好，以及公司是否能做大做强或是迅速衰落，这些都是真的。</p>
+<hr>
+<p>这一年，在导师的带领下，我也完成了两篇小论文，达到了学校毕业的硬性要求，一篇中文一篇英文，中文投到了《中文信息学报》并录用，英文的投的是Frontier Computing 2015，会议地点锁定在曼谷。所以在会议的那几天，我也办了护照，去了趟曼谷，并做了报告。剩下的你都知道了，做完报告，顺便把曼谷玩了一遍，其实曼谷并没有多好玩，也并不像有些人吹嘘的到处都是中国人。原因很简单，我是自己玩的，并没有跟团，所以当然不是到处都是中国人了，如果你是跟团的话，那么这些旅游团的地点都是固定的，有你一个团，必然还有好多其他几个团，所以让你觉得到处都是中国人。玩过的都觉得不好玩，听说清迈不错，芭提雅也好玩，可是并没有去，希望下次有机会能再去这些地方欣赏一番。</p>
+<hr>
+<p>这一年，我也面临着校招季，虽说这一年的校招有点冷，但是我觉得还算不上寒冬。在我的眼里，计算机专业的同学，尤其是做软件的，那真的是满大街都是钱啊。难道你看不到吗？从前端到中间件到服务端、从安卓到IOS、从运维到DBA，从大数据到机器学习等。真的是到处都是钱，主要的就看你有没有本事而已。在十月初的时候，从点评离职了，正式开始我的校招生涯，虽然好多公司这时候校招结束了，但是毕竟还留下不少。从此开启了一段很长的面试之旅，前后面了有十几家公司，多数都是互联网公司，拿了七八个OFFER，薪资全都集中在13万到21万区间。最后的结果就是，如果你看了我的<a href="http://codepub.cn/resume/" target="_blank" rel="external">Resume</a>的话那么你就知道了，我去了腾讯文学，在腾讯文学收购盛大文学之后就变得一家独大了，并且改名为阅文集团。和百度文学、阿里文学完全不在一个量级了，基本上网络文学这块市场都是属于阅文集团的天下了。遗憾的一点就是我并没有拿到最核心的BAT的OFFER吧（百度两面被拒，阿里笔试未过，腾讯没投，因为腾讯上海主要是游戏部门招C++，而我主攻Java），虽然阅文也是腾讯系，但毕竟感觉是全资子公司，还不是真正的BAT核心。最后说一下为什么没留在点评，原因很多，不能一一赘述，我自身也有原因。虽然我也走了点评的校招流程，但是面了一面之后就没消息了，因为美团收了点评之后，掌握了完全的话语权，所以到后期点评的校招和社招都冻结了，这是点评HR告诉我的，这和滴滴收购快滴之后情形一样，这一年快滴并没有校招名额。在点评还是属于业务开发，做业务真的挺苦逼，在阅文现在是平台架构中心，和业务没半毛钱关系，可以慢慢折腾属于我自己的一块代码自留地，完全不受业务上线等日程的催促，谁说留下了就一定幸福呢？最后面了这么多公司，收获还是很多的，发现了自己知识掌握的不扎实不牢靠不深入不细致，以及算法的薄弱，所以就有了我的Github上的<a href="https://github.com/shijiebei2009/Algorithms" target="_blank" rel="external">Algorithms</a>项目了，虽然目前还不是很全，但是有时间的话，我还是会去更新的，如果大家发现存有BUG的话，请积极提出哦。另外的一个收获就是多数公司的HR并不靠谱，一般我有时候会在面试之前打听打听年薪，少的话就不去面了，居然有的HR大摇大摆的说，同学，我们一定不会让你因为年薪而拒绝我们，不好意思，面完了，拿到OFFER了，我最后就是因为年薪而拒绝了他们。</p>
+<hr>
+<p>最近也正在看《删除-大数据取舍之道》，诸多的记忆如果没有存储下来，终究会变成一段模糊的存在或者不存在，因为我们自己也无法判断是否有过该段记忆所承载的历史事件，希望我这篇文章不是记流水账，此非我所欲也。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -134,14 +120,9 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Git-GitHub/">Git/GitHub</a>
+  <a class="article-category-link" href="/categories/Life-Talk/">Life-Talk</a>
 </div>
 
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Git/">Git</a>
-  </div>
 
 </div>
 
@@ -179,19 +160,11 @@ var jiathis_config = {data_track_clickback:'true'};
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/06/02/Faceted-Project-Problem-Java-Version-Mismatch-Error-Message/" title="Faceted Project Problem (Java Version Mismatch) Error Message">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Faceted Project Problem (Java Version Mismatch) Error Message</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/05/19/How-to-load-dll-file-in-Java-Web-Project/"  title="Java中Web Project如何加载dll/DLL文件">
+<a href="/2015/12/21/CCF-sixth-CSP-certification-exams-Solutions/"  title="CCF第六次CSP认证考试题解">
  <strong>下一篇：</strong><br/> 
- <span>Java中Web Project如何加载dll/DLL文件
+ <span>CCF第六次CSP认证考试题解
 </span>
 </a>
 </div>
@@ -200,19 +173,12 @@ var jiathis_config = {data_track_clickback:'true'};
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/06/02/Windows-client-configuration-of-SSH-public-key-on-GitHub/" data-title="Windows客户端配置GitHub的SSH公钥" data-url="http://www.codepub.cn/2015/06/02/Windows-client-configuration-of-SSH-public-key-on-GitHub/"></div>
+	<div class="ds-thread" data-thread-key="2015/12/31/2015-year-end-summary/" data-title="2015年终总结" data-url="http://www.codepub.cn/2015/12/31/2015-year-end-summary/"></div>
 </section>
 
 
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
- 
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#检查SSH_keys的设置"><span class="toc-number">1.</span> <span class="toc-text">检查SSH keys的设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#备份和移除原来的SSH_key设置"><span class="toc-number">2.</span> <span class="toc-text">备份和移除原来的SSH key设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成新的SSH_key"><span class="toc-number">3.</span> <span class="toc-text">生成新的SSH key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加SSH_key到GitHub"><span class="toc-number">4.</span> <span class="toc-text">添加SSH key到GitHub</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试一下"><span class="toc-number">5.</span> <span class="toc-text">测试一下</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置你的账号信息"><span class="toc-number">6.</span> <span class="toc-text">设置你的账号信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决本地多个SSH_key问题"><span class="toc-number">7.</span> <span class="toc-text">解决本地多个SSH key问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#依然需要配置git用户名和邮箱"><span class="toc-number">7.1.</span> <span class="toc-text">依然需要配置git用户名和邮箱</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生成ssh_key时同时指定保存的文件名"><span class="toc-number">7.2.</span> <span class="toc-text">生成ssh key时同时指定保存的文件名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#新增并配置config文件"><span class="toc-number">7.3.</span> <span class="toc-text">新增并配置config文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#上传key到云平台后台并测试"><span class="toc-number">7.4.</span> <span class="toc-text">上传key到云平台后台并测试</span></a></li></ol></li></ol>
- 
-  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
@@ -512,8 +478,6 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
         
     }
   });
