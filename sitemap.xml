@@ -3,8 +3,50 @@
 
     
   <url>
+    <loc>http://www.codepub.cn/2015/08/04/Based-on-the-extended-version-of-synonyms-Cilin-word-similarity-computing/</loc>
+    <lastmod>2016-01-04T13:20:16.282Z</lastmod>
+    <data>
+        <display>
+        <title>基于同义词词林扩展版的词语相似度计算</title>
+        <pubTime>2015-08-04T14:06:36.000Z</pubTime>
+        
+        <tag>Java </tag>
+         
+         
+           
+             
+              <breadCrumb title="Algorithms" url="http://www.codepub.cn/categories/Algorithms/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.codepub.cn/2015/04/22/How-to-load-resource-file-in-a-Jar-package-correctly/</loc>
+    <lastmod>2016-01-04T13:19:57.948Z</lastmod>
+    <data>
+        <display>
+        <title>Jar包中如何正确地加载资源文件</title>
+        <pubTime>2015-04-22T13:07:22.000Z</pubTime>
+        
+        <tag>Java </tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
+  <url>
     <loc>http://www.codepub.cn/2015/12/31/2015-year-end-summary/</loc>
-    <lastmod>2016-01-03T08:36:52.952Z</lastmod>
+    <lastmod>2016-01-03T08:38:07.440Z</lastmod>
     <data>
         <display>
         <title>2015年终总结</title>
@@ -22,37 +64,15 @@
     </url>
 
     
-    
-    
   <url>
     <loc>http://www.codepub.cn/2015/12/21/CCF-sixth-CSP-certification-exams-Solutions/</loc>
-    <lastmod>2015-12-23T14:04:57.970Z</lastmod>
+    <lastmod>2016-01-03T08:38:07.440Z</lastmod>
     <data>
         <display>
         <title>CCF第六次CSP认证考试题解</title>
         <pubTime>2015-12-21T15:27:52.000Z</pubTime>
         
         <tag>CCF </tag>
-         
-         
-           
-             
-              <breadCrumb title="Algorithms" url="http://www.codepub.cn/categories/Algorithms/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.codepub.cn/2015/08/04/Based-on-the-extended-version-of-synonyms-Cilin-word-similarity-computing/</loc>
-    <lastmod>2015-12-09T14:32:52.470Z</lastmod>
-    <data>
-        <display>
-        <title>基于同义词词林扩展版的词语相似度计算</title>
-        <pubTime>2015-08-04T14:06:36.000Z</pubTime>
-        
-        <tag>Java </tag>
          
          
            
@@ -460,26 +480,6 @@
         <display>
         <title>Java之volatile boolean，AutomaticBoolean分析</title>
         <pubTime>2015-04-10T09:42:13.000Z</pubTime>
-        
-        <tag>Java </tag>
-         
-         
-           
-             
-              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.codepub.cn/2015/04/22/How-to-load-resource-file-in-a-Jar-package-correctly/</loc>
-    <lastmod>2015-07-08T15:17:23.783Z</lastmod>
-    <data>
-        <display>
-        <title>Jar包中如何正确地加载资源文件</title>
-        <pubTime>2015-04-22T13:07:22.000Z</pubTime>
         
         <tag>Java </tag>
          
