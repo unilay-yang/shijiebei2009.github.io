@@ -18,6 +18,7 @@ date: 2015-06-14 18:41:08
 [赖明星，就职网易杭州研究院](http://mingxinglai.com/cn/)
 [代码家，北师大研究生](http://blog.daimajia.com/)
 [贾吉鑫，点评Android工程师](http://www.jiajixin.cn/)
+[许晓斌，Maven实战作者](http://www.juvenxu.com/)
 
 ###推荐站点
 [开源自由的汉语言处理包](http://hanlp.linrunsoft.com/)
