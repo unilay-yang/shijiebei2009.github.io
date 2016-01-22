@@ -9,39 +9,44 @@ categories: Life-Talk
 好用趁手的工具可以极大的提高工作效率，这也是我强推用Mac取代Windows的原因，在Mac平台能让你点两下完成的操作绝对不会让你点三下，而且Mac先天适合程序员，想想在Mac上开一个Terminal可以完成诸多事情，而在Windows上你要开Cmd/Git/Cygwin/SecureCRT等诸多窗口来实现同样的功能。工具虽多，莫要贪杯哦，否则就是舍本逐末了。一定要善于利用工具，而不要贪大贪全！所以本文仅列出我在平常的工作学习中使用的频率最高的一些软件。
 
 ###平台工具箱
-+ Everything：是速度最快的文件名搜索软件。其速度之快令人震惊，百G硬盘几十万个文件，可以在几秒钟之内完成索引；文件名搜索瞬间呈现结果，简直是秒杀Windows搜索功能
-+ SecureCRT：是VanDyke Software的一个商业SSH、Telnet客户端和虚拟终端软件
-+ 文本编辑器：Sublime Text3，好用、漂亮、强大、极客
-+ 知识管理工具：为知笔记
-+ 鼠标手势工具：StrokesPlus，前进后退翻页放大缩小关闭全部鼠标手势搞定，再也不用一个个点了，极大解放你的鼠标手
-+ Ad Muncher：俗称大奶牛，富有盛名的广告拦截软件。历史悠久，口碑极好。现已成为免费软件，[下载地址](https://www.admuncher.com/download)
-+ ManicTime：分秒不漏的记录你在用电脑的时候到底在干什么，可以自动分类各种操作，形成统计报表。督促自己干正事的利器，[下载地址](http://www.manictime.com/)，[破解版点这里](http://www.ttrar.com/html/ManicTime-Professional.html)
-+ 远程控制软件：TeamViewer是一个能在任何防火墙和NAT代理的后台用于远程控制，桌面共享和文件传输的简单且快速的解决方案
-+ FastStone Capture：话不多说，简单好用小巧的截图工具，推荐
-+ 邮箱客户端：WPS Mail，做的很不错，登录邮箱之后会自动进行配置
-+ 虚拟机软件：Oracle VM VirtualBox，远比VMware好用
-+ 视频播放器：PotPlayer，韩国人开发的绿色播放器，强大、小巧、免费，最棒的是其视频加速播放功能，在我与国内的常用视频播放软件的对比实验中，视频加速播放依然保留语音画面流畅度的没有超过它的，在我观看学习视频的过程中，为我节约了大量时间，我通常是2-2.5倍加速播放
-+ Python的IDE：JetBrains PyCharm，专业强大
-+ Java的IDE：IntelliJ IDEA，一句话，用了IDEA之后再也不愿用Eclipse了
-+ 浏览器：Chrome，不需要理由，不理解的请绕道吧
++ **Everything**：是速度最快的文件名搜索软件。其速度之快令人震惊，百G硬盘几十万个文件，可以在几秒钟之内完成索引；文件名搜索瞬间呈现结果，简直是秒杀Windows搜索功能
++ **SecureCRT**：是VanDyke Software的一个商业SSH、Telnet客户端和虚拟终端软件
++ **文本编辑器**：Sublime Text3，好用、漂亮、强大、极客
++ **知识管理工具**：为知笔记
++ **鼠标手势工具**：StrokesPlus，前进后退翻页放大缩小关闭全部鼠标手势搞定，再也不用一个个点了，极大解放你的鼠标手
++ **Ad Muncher**：俗称大奶牛，富有盛名的广告拦截软件。历史悠久，口碑极好。现已成为免费软件，[下载地址](https://www.admuncher.com/download)
++ **ManicTime**：分秒不漏的记录你在用电脑的时候到底在干什么，可以自动分类各种操作，形成统计报表。督促自己干正事的利器，[下载地址](http://www.manictime.com/)，[破解版点这里](http://www.ttrar.com/html/ManicTime-Professional.html)
++ **远程控制软件**：TeamViewer是一个能在任何防火墙和NAT代理的后台用于远程控制，桌面共享和文件传输的简单且快速的解决方案
++ **FastStone Capture**：话不多说，简单好用小巧的截图工具，推荐
++ **邮箱客户端**：Yomail，做的很不错，登录邮箱之后会自动进行配置
++ **虚拟机软件**：Oracle VM VirtualBox，远比VMware好用
++ **视频播放器**：PotPlayer，韩国人开发的绿色播放器，强大、小巧、免费，最棒的是其视频加速播放功能，在我与国内的常用视频播放软件的对比实验中，视频加速播放依然保留语音画面流畅度的没有超过它的，在我观看学习视频的过程中，为我节约了大量时间，我通常是2-2.5倍加速播放
++ **Python的IDE**：JetBrains PyCharm，专业强大
++ **Java的IDE**：IntelliJ IDEA，一句话，用了IDEA之后再也不愿用Eclipse了
++ **PHP的IDE**：PhpStorm，同样是Jetbrains出品
++ **JavaScript的IDE**：WebStorm
++ **浏览器**：Chrome，不需要理由，不理解的请绕道吧
 + 超级牛逼的两台电脑用网线直连进行文件传输工具：飞秋，只需要设置IP为同一网段即可，在我从公司离职，将文件资料转移到我的笔记本上的时候超级有用
-+ Gif录屏工具：GifCam，非常棒的屏幕录像工具，可生成Gif格式图片
++ **Gif录屏工具**：GifCam，非常棒的屏幕录像工具，可生成Gif格式图片
 
 
 ###Chrome Plugins
-- AdBlock：最受欢迎的Chrome扩展，拥有超过4000万用户！屏蔽整个互联网上的广告
-- Adkill and Media Download：去视频广告、视频音频下载、正常显示反盗链图片三合一
-- Firebug Lite for Google Chrome™：前端调试必备，不多说
-- JSONView：验证和查看JSON格式数据
-- Octotree：是不是受够了Github上面一层一层点击目录？那么用我吧，帮你在左侧自动生成目录树
-- Page load time：显示页面加载时间
-- Proxy SwitchyOmega：轻松快捷地管理和切换多个代理设置
-- SimpleUndoClose：这个简单的弹出可让您轻而易举的撤销关闭的标签！特别是我不小心关闭了页面，这个工具太有用了
-- Xpath Finder：帮助你在chrome devtools里查找Xpath匹配元素
-- 超级拖曳：超级拖曳，附带6个最常用鼠标手势
-- 穿越：专门为科研、外贸、开发人员服务的上网加速工具，chrome内核浏览器专用，请勿滥用
-- 时空隧道：时空隧道是一款速度最快的海外网站加速插件，可轻松访问google、gmail、facebook、twitter、youtube等网站，永久免费，每天累积2小时，另外推出高级VIP服务
-- Markdown Reader：Read markdown file in Chrome
+- **AdBlock**：最受欢迎的Chrome扩展，拥有超过4000万用户！屏蔽整个互联网上的广告
+- **Adkill and Media Download**：去视频广告、视频音频下载、正常显示反盗链图片三合一
+- **Firebug Lite for Google Chrome™**：前端调试必备，不多说
+- **JSONView**：验证和查看JSON格式数据
+- **Octotree**：是不是受够了Github上面一层一层点击目录？那么用我吧，帮你在左侧自动生成目录树
+- **Page load time**：显示页面加载时间
+- **Proxy SwitchyOmega**：轻松快捷地管理和切换多个代理设置
+- **SimpleUndoClose**：这个简单的弹出可让您轻而易举的撤销关闭的标签！特别是我不小心关闭了页面，这个工具太有用了
+- **Xpath Finder**：帮助你在chrome devtools里查找Xpath匹配元素
+- **超级拖曳**：超级拖曳，附带6个最常用鼠标手势
+- **穿越**：专门为科研、外贸、开发人员服务的上网加速工具，chrome内核浏览器专用，请勿滥用
+- **One Tab**：强烈推荐，使用场景是这样的，我们使用Chrome经常会一次打开好多tab，很多是会用到的，又不舍得关，内存又耗着，这个时候点击下OneTab，直接把所有tab回收，然后每天的历史都给你记录着，接着你可以一键还原某一天的tab，真乃为Chrome而生
+- **Alexa Traffic Rank**：Alexa排名是指网站的世界排名，非常有权威。直接主流网站或博客绝对是有Alexa排名的
+- **Isometric Contributions**：一个小玩意，可以让你在GitHub上的commit像盖楼一样的展示，很有趣
+- **时空隧道**：时空隧道是一款速度最快的海外网站加速插件，可轻松访问google、gmail、facebook、twitter、youtube等网站，永久免费，每天累积2小时，另外推出高级VIP服务
+- **Markdown Reader**：Read markdown file in Chrome
 
 
 ###翻墙工具
@@ -80,5 +85,8 @@ categories: Life-Talk
 9. 右下角的弹窗战争，在Mac上，完全没遇到过右下角弹窗的事情。就连Mac通知中心的事情也是我可以方便的自己控制的
 
 关于为啥Mac好，推荐看[为什么Mac适合编程？](http://www.zhihu.com/question/27617980)
+
+最后附上Mac OS X常用快捷键一览
+![](http://7xig3q.com1.z0.glb.clouddn.com/Mac_OSX_hot_key.jpg)
 
 ***转载请注明出处：http://codepub.cn/2015/10/07/Private-Treasured-Toolkit/***
