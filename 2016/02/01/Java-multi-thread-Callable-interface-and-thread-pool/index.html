@@ -14,32 +14,20 @@
     
     <meta name="description" content="Java实现多线程的三种方式
 继承Thread类
-实现Runnable接口，并覆写run方法
-实现Callable接口，并覆写call方法
-
-前两种方式应该很熟悉了，不予介绍，本文主要介绍第三种方式。
-Executor框架Executor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的的解决方案，因为可以限制线程">
+1234567891011public class Test extends Thread &amp;#123;    public static void main(String[] args) &amp;#123;        Thread t = new Test();        t.start();    &amp;#125;    @Override">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java多线程之Callable接口及线程池">
 <meta property="og:url" content="http://www.codepub.cn/2016/02/01/Java-multi-thread-Callable-interface-and-thread-pool/index.html">
 <meta property="og:site_name" content="IT草根">
 <meta property="og:description" content="Java实现多线程的三种方式
 继承Thread类
-实现Runnable接口，并覆写run方法
-实现Callable接口，并覆写call方法
-
-前两种方式应该很熟悉了，不予介绍，本文主要介绍第三种方式。
-Executor框架Executor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的的解决方案，因为可以限制线程">
-<meta property="og:updated_time" content="2016-02-01T14:18:59.818Z">
+1234567891011public class Test extends Thread &amp;#123;    public static void main(String[] args) &amp;#123;        Thread t = new Test();        t.start();    &amp;#125;    @Override">
+<meta property="og:updated_time" content="2016-02-01T14:29:20.801Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java多线程之Callable接口及线程池">
 <meta name="twitter:description" content="Java实现多线程的三种方式
 继承Thread类
-实现Runnable接口，并覆写run方法
-实现Callable接口，并覆写call方法
-
-前两种方式应该很熟悉了，不予介绍，本文主要介绍第三种方式。
-Executor框架Executor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的的解决方案，因为可以限制线程">
+1234567891011public class Test extends Thread &amp;#123;    public static void main(String[] args) &amp;#123;        Thread t = new Test();        t.start();    &amp;#125;    @Override">
 
     
     <link rel="alternative" href="/atom.xml" title="IT草根" type="application/atom+xml">
@@ -122,11 +110,17 @@ Executor框架Executor框架是一个根据一组执行策略调用，调度，�
 		</div>
 		
 		<h4 id="Java实现多线程的三种方式">Java实现多线程的三种方式</h4><ul>
-<li>继承<code>Thread</code>类</li>
-<li>实现<code>Runnable</code>接口，并覆写<code>run</code>方法</li>
-<li>实现<code>Callable</code>接口，并覆写<code>call</code>方法</li>
+<li><p>继承<code>Thread</code>类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Thread t = <span class="keyword">new</span> Test();</span><br><span class="line">        t.start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Override run() ..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现<code>Runnable</code>接口，并覆写<code>run</code>方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Thread t = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Test());</span><br><span class="line">        t.start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Override run() ..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现<code>Callable</code>接口，并覆写<code>call</code>方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> <span class="keyword">implements</span> <span class="title">Callable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        FutureTask futureTask = <span class="keyword">new</span> FutureTask(<span class="keyword">new</span> Test());</span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread(futureTask);</span><br><span class="line">        thread.start();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Object o = futureTask.get();</span><br><span class="line">            System.out.println(o);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Override call() ..."</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<p>前两种方式应该很熟悉了，不予介绍，本文主要介绍第三种方式。</p>
+<p>前两种方式应该很熟悉了，不再赘述，本文主要介绍第三种方式。</p>
 <h4 id="Executor框架">Executor框架</h4><p><code>Executor</code>框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。<code>Executor</code>框架包括：线程池，<code>Executor</code>，<code>Executors</code>，<code>ExecutorService</code>，<code>CompletionService</code>，<code>Future</code>，<code>Callable</code>等。</p>
 <h5 id="什么是Executor">什么是Executor</h5><p><code>Executor</code>仅仅是一个接口，只有一个方法<code>execute(Runnable command)</code>，是在<code>JDK1.5</code>中引入的，主要是用来运行提交的可运行的任务。一般我们并不直接使用该接口，而是使用其不同的子接口，主要是<code>ExecutorService</code>，而通常情况，与<code>ExecutorService</code>一起使用的是<code>Executors</code>类，该类由著名的并发编程大师<code>Doug Lea</code>实现。<code>Executor</code>框架可以用来控制线程的启动、执行和关闭，可以简化并发编程的操作。</p>
 <h5 id="什么是Callable和Future">什么是Callable和Future</h5><p><code>Callable</code>接口使用泛型去定义它的返回类型。<code>Executors</code>类提供了一些有用的方法去在线程池中执行<code>Callable</code>内的任务。由于<code>Callable</code>任务是并行的，我们必须等待它返回的结果。<code>java.util.concurrent.Future</code>对象为我们解决了这个问题。在线程池提交<code>Callable</code>任务后返回了一个<code>Future</code>对象，使用它我们可以知道<code>Callable</code>任务的状态和得到<code>Callable</code>返回的执行结果。<code>Future</code>提供了<code>get()</code>方法让我们可以等待<code>Callable</code>结束并获取它的执行结果。</p>
