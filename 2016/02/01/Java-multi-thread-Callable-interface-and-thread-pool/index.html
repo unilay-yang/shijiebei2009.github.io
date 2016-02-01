@@ -1,0 +1,658 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  
+  <meta charset="UTF-8">
+  
+    <title>Java多线程之Callable接口及线程池 | IT草根</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Wang Xu">
+    
+
+    
+    <meta name="description" content="Java实现多线程的三种方式
+继承Thread类
+实现Runnable接口，并覆写run方法
+实现Callable接口，并覆写call方法
+
+前两种方式应该很熟悉了，不予介绍，本文主要介绍第三种方式。
+Executor框架Executor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的的解决方案，因为可以限制线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java多线程之Callable接口及线程池">
+<meta property="og:url" content="http://www.codepub.cn/2016/02/01/Java-multi-thread-Callable-interface-and-thread-pool/index.html">
+<meta property="og:site_name" content="IT草根">
+<meta property="og:description" content="Java实现多线程的三种方式
+继承Thread类
+实现Runnable接口，并覆写run方法
+实现Callable接口，并覆写call方法
+
+前两种方式应该很熟悉了，不予介绍，本文主要介绍第三种方式。
+Executor框架Executor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的的解决方案，因为可以限制线程">
+<meta property="og:updated_time" content="2016-02-01T14:18:59.818Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java多线程之Callable接口及线程池">
+<meta name="twitter:description" content="Java实现多线程的三种方式
+继承Thread类
+实现Runnable接口，并覆写run方法
+实现Callable接口，并覆写call方法
+
+前两种方式应该很熟悉了，不予介绍，本文主要介绍第三种方式。
+Executor框架Executor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的的解决方案，因为可以限制线程">
+
+    
+    <link rel="alternative" href="/atom.xml" title="IT草根" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.gif">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.gif">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.gif" alt="IT草根" title="IT草根"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="IT草根">IT草根</a></h1>
+				<h2 class="blog-motto">WangXu&#39;s 代码馆 BLOG</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/resume">Resume</a></li>
+					
+						<li><a href="/links">Links</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+						<form class="search">
+							<label>Search</label>
+						<input type="text" class="st-default-search-input" id="ts-search-input" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/02/01/Java-multi-thread-Callable-interface-and-thread-pool/" title="Java多线程之Callable接口及线程池" itemprop="url">Java多线程之Callable接口及线程池</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.codepub.cn/about" title="Wang Xu" target="_blank" itemprop="author">Wang Xu</a>
+		
+  <p class="article-time">
+    <time datetime="2016-02-01T14:16:59.000Z" itemprop="datePublished"> 发表于 2016-02-01</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Java实现多线程的三种方式"><span class="toc-number">1.</span> <span class="toc-text">Java实现多线程的三种方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Executor框架"><span class="toc-number">2.</span> <span class="toc-text">Executor框架</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#什么是Executor"><span class="toc-number">2.1.</span> <span class="toc-text">什么是Executor</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#什么是Callable和Future"><span class="toc-number">2.2.</span> <span class="toc-text">什么是Callable和Future</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#什么是FutureTask"><span class="toc-number">2.3.</span> <span class="toc-text">什么是FutureTask</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#什么是Executors"><span class="toc-number">2.4.</span> <span class="toc-text">什么是Executors</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#什么是ExecutorService"><span class="toc-number">2.5.</span> <span class="toc-text">什么是ExecutorService</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用示例"><span class="toc-number">3.</span> <span class="toc-text">使用示例</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#获取线程的返回值"><span class="toc-number">3.1.</span> <span class="toc-text">获取线程的返回值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#通过ExecutorService执行线程"><span class="toc-number">3.2.</span> <span class="toc-text">通过ExecutorService执行线程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#批量提交任务"><span class="toc-number">3.3.</span> <span class="toc-text">批量提交任务</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#通过CompletionService提交多组任务并获取返回值"><span class="toc-number">3.4.</span> <span class="toc-text">通过CompletionService提交多组任务并获取返回值</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通过自维护列表管理多组任务并获取返回值"><span class="toc-number">4.</span> <span class="toc-text">通过自维护列表管理多组任务并获取返回值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ScheduledExecutor任务调度"><span class="toc-number">5.</span> <span class="toc-text">ScheduledExecutor任务调度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#取消向线程池提交的某个任务"><span class="toc-number">6.</span> <span class="toc-text">取消向线程池提交的某个任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关闭线程池"><span class="toc-number">7.</span> <span class="toc-text">关闭线程池</span></a></li></ol>
+		
+		</div>
+		
+		<h4 id="Java实现多线程的三种方式">Java实现多线程的三种方式</h4><ul>
+<li>继承<code>Thread</code>类</li>
+<li>实现<code>Runnable</code>接口，并覆写<code>run</code>方法</li>
+<li>实现<code>Callable</code>接口，并覆写<code>call</code>方法</li>
+</ul>
+<p>前两种方式应该很熟悉了，不予介绍，本文主要介绍第三种方式。</p>
+<h4 id="Executor框架">Executor框架</h4><p><code>Executor</code>框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。<code>Executor</code>框架包括：线程池，<code>Executor</code>，<code>Executors</code>，<code>ExecutorService</code>，<code>CompletionService</code>，<code>Future</code>，<code>Callable</code>等。</p>
+<h5 id="什么是Executor">什么是Executor</h5><p><code>Executor</code>仅仅是一个接口，只有一个方法<code>execute(Runnable command)</code>，是在<code>JDK1.5</code>中引入的，主要是用来运行提交的可运行的任务。一般我们并不直接使用该接口，而是使用其不同的子接口，主要是<code>ExecutorService</code>，而通常情况，与<code>ExecutorService</code>一起使用的是<code>Executors</code>类，该类由著名的并发编程大师<code>Doug Lea</code>实现。<code>Executor</code>框架可以用来控制线程的启动、执行和关闭，可以简化并发编程的操作。</p>
+<h5 id="什么是Callable和Future">什么是Callable和Future</h5><p><code>Callable</code>接口使用泛型去定义它的返回类型。<code>Executors</code>类提供了一些有用的方法去在线程池中执行<code>Callable</code>内的任务。由于<code>Callable</code>任务是并行的，我们必须等待它返回的结果。<code>java.util.concurrent.Future</code>对象为我们解决了这个问题。在线程池提交<code>Callable</code>任务后返回了一个<code>Future</code>对象，使用它我们可以知道<code>Callable</code>任务的状态和得到<code>Callable</code>返回的执行结果。<code>Future</code>提供了<code>get()</code>方法让我们可以等待<code>Callable</code>结束并获取它的执行结果。</p>
+<h5 id="什么是FutureTask">什么是FutureTask</h5><p><code>FutureTask</code>是<code>Future</code>的一个基础实现，我们可以将它同<code>Executors</code>一起使用处理异步任务。通常我们不需要使用<code>FutureTask</code>类，单当我们打算重写<code>Future</code>接口的一些方法并保持原来基础的实现时，它就变得非常有用。我们可以仅仅继承于它并重写我们需要的方法。</p>
+<h5 id="什么是Executors">什么是Executors</h5><p><code>Executors</code>提供了一系列工厂方法用于创建线程池，返回的线程池都实现了<code>ExecutorService</code>接口：</p>
+<ul>
+<li><code>newCachedThreadPool</code>可缓存线程池，对于每个线程，如果有空闲线程可用，立即让它执行，如果没有，则创建一个新线程</li>
+<li><code>newFixedThreadPool</code>具有固定大小的线程池，如果任务数大于空闲的线程数，则把它们放进队列中等待</li>
+<li><code>newSingleThreadPool</code>大小为1的线程池，任务一个接着一个完成</li>
+<li><code>newScheduledThreadPool</code>调度型线程池，可控制线程最大并发数，支持定时及周期性任务执行，用来代替<code>Timer</code></li>
+</ul>
+<h5 id="什么是ExecutorService">什么是ExecutorService</h5><p>在<code>ExecutorService</code>中提供了重载的<code>submit()</code>方法，该方法既可以接收<code>Runnable</code>实例又能接收<code>Callable</code>实例。对于实现<code>Callable</code>接口的类，需要覆写<code>call()</code>方法，并且只能通过<code>ExecutorService</code>的<code>submit()</code>方法来启动<code>call()</code>方法。那么既然存在<code>Runnable</code>接口，为什么还要添加<code>Callable</code>接口呢？这是因为<code>Runnable</code>不会返回结果，并且无法抛出经过检查的异常而<code>Callable</code>会返回结果，而且当获取返回结果时可能会抛出异常。<code>Callable</code>中的<code>call()</code>方法类似<code>Runnable</code>的<code>run()</code>方法，区别同样前者有返回值，而后者没有。</p>
+<h4 id="使用示例">使用示例</h4><h5 id="获取线程的返回值">获取线程的返回值</h5><p>通过<code>FutureTask</code>包装一个<code>Callable</code>的实例，再通过<code>Thread</code>包装<code>FutureTask</code>的实例，然后调用<code>Thread</code>的<code>start()</code>方法，且看示例如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.Callable;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutionException;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.FutureTask;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.atomic.AtomicInteger;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadTest</span> <span class="keyword">implements</span> <span class="title">Callable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> AtomicInteger atomicInteger = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">100</span>; i++) &#123;</span><br><span class="line">            <span class="comment">//Do something what U want</span></span><br><span class="line">            atomicInteger.set(atomicInteger.get() + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> atomicInteger.get();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@org</span>.junit.<span class="function">Test</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> <span class="keyword">throws</span> ExecutionException, InterruptedException </span>&#123;</span><br><span class="line">        FutureTask future = <span class="keyword">new</span> FutureTask(<span class="keyword">new</span> ThreadTest());</span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread(future);</span><br><span class="line">        thread.start();</span><br><span class="line">        <span class="keyword">if</span> (future.isDone()) &#123;</span><br><span class="line">            future.cancel(<span class="keyword">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(future.get());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="通过ExecutorService执行线程">通过ExecutorService执行线程</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.*;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.atomic.AtomicInteger;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadTest</span> <span class="keyword">implements</span> <span class="title">Callable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> AtomicInteger atomicInteger = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">100</span>; i++) &#123;</span><br><span class="line">            <span class="comment">//Do something what U want</span></span><br><span class="line">            atomicInteger.set(atomicInteger.get() + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> atomicInteger.get();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@org</span>.junit.<span class="function">Test</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> <span class="keyword">throws</span> ExecutionException, InterruptedException </span>&#123;</span><br><span class="line">        ExecutorService executorService = Executors.newSingleThreadExecutor();</span><br><span class="line">        Future submit = executorService.submit(<span class="keyword">new</span> ThreadTest());</span><br><span class="line">        System.out.println(submit.get());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="批量提交任务">批量提交任务</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.*;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.atomic.AtomicInteger;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadTest</span>&lt;<span class="title">T</span>&gt; <span class="keyword">implements</span> <span class="title">Callable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> AtomicInteger atomicInteger = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">100</span>; i++) &#123;</span><br><span class="line">                <span class="comment">//Do something what U want</span></span><br><span class="line">                atomicInteger.set(atomicInteger.get() + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> atomicInteger.get();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="annotation">@org</span>.junit.<span class="function">Test</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> <span class="keyword">throws</span> ExecutionException, InterruptedException </span>&#123;</span><br><span class="line">        ExecutorService executorService = Executors.newFixedThreadPool(<span class="number">5</span>);</span><br><span class="line">        List&lt;Callable&lt;T&gt;&gt; tasks = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        ThreadTest threadTest = <span class="keyword">new</span> ThreadTest();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            tasks.add(threadTest);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//改方法返回某个完成的任务</span></span><br><span class="line">        Object o = executorService.invokeAny(tasks);</span><br><span class="line">        System.out.println(o);</span><br><span class="line">        System.out.println(<span class="string">"One completed!"</span>);</span><br><span class="line">        <span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">        threadTest = <span class="keyword">new</span> ThreadTest();</span><br><span class="line">        tasks.clear();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            tasks.add(threadTest);</span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;Future&lt;T&gt;&gt; futures = executorService.invokeAll(tasks);</span><br><span class="line">        <span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">        System.out.println(end - start + <span class="string">" ms之后，返回运行结果！"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            System.out.println(futures.get(i).get());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果</p>
+<blockquote>
+<p>184<br>One completed!<br>5001 ms之后，返回运行结果！<br>101<br>505<br>404<br>404<br>202</p>
+</blockquote>
+<p><code>invokeAny</code>方法提交所有任务到一个<code>Callable</code>对象的集合中，并且返回某个已经完成了的任务的结果，返回的任务是不确定的。<code>invokeAll</code>方法则返回所有任务的结果，但是其一个弊端是，如果第一个任务花费了很长时间，则不得不等待，待所有任务都完成之后，才返回。在某些情况下，可能只需要一个任务出了结果就可以中止所有任务，这样就得不偿失。将结果按照可获得的顺序保存起来可能更好，这时可以使用<code>ExecutorCompletionService</code>，其中的<code>take()</code>方法会移除下一个已经完成的结果（Future），如果没有可用结果则阻塞。</p>
+<h5 id="通过CompletionService提交多组任务并获取返回值">通过CompletionService提交多组任务并获取返回值</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.*;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.atomic.AtomicInteger;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadTest</span> <span class="keyword">implements</span> <span class="title">Callable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> AtomicInteger atomicInteger = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">100</span>; i++) &#123;</span><br><span class="line">                <span class="comment">//Do something what U want</span></span><br><span class="line">                atomicInteger.set(atomicInteger.get() + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> atomicInteger.get();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="annotation">@org</span>.junit.<span class="function">Test</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException, ExecutionException </span>&#123;</span><br><span class="line">        ExecutorService executorService = Executors.newFixedThreadPool(<span class="number">5</span>);</span><br><span class="line">        CompletionService&lt;Integer&gt; completionService = <span class="keyword">new</span> ExecutorCompletionService(executorService);</span><br><span class="line">        ThreadTest threadTest = <span class="keyword">new</span> ThreadTest();</span><br><span class="line">        <span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i) &#123;</span><br><span class="line">            completionService.submit(threadTest);<span class="comment">//提交五组任务</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">        System.out.println(end - start + <span class="string">" ms之后，返回运行结果！"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i) &#123;</span><br><span class="line">            Integer res = completionService.take().get();<span class="comment">//通过take</span></span><br><span class="line">            System.out.println(res);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<blockquote>
+<p>1 ms之后，返回运行结果！<br>101<br>202<br>303<br>404<br>505</p>
+</blockquote>
+<p>由运行结果可知，<code>ExecutorCompletionService</code>并不会阻塞，在提交任务之后，继续向下运行，哪个任务完成即返回，并不受任务提交顺序的影响。</p>
+<h4 id="通过自维护列表管理多组任务并获取返回值">通过自维护列表管理多组任务并获取返回值</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.*;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.atomic.AtomicInteger;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadTest</span> <span class="keyword">implements</span> <span class="title">Callable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> AtomicInteger atomicInteger = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">100</span>; i++) &#123;</span><br><span class="line">            <span class="comment">//Do something what U want</span></span><br><span class="line">            atomicInteger.set(atomicInteger.get() + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> atomicInteger.get();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="annotation">@org</span>.junit.<span class="function">Test</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> <span class="keyword">throws</span> ExecutionException, InterruptedException </span>&#123;</span><br><span class="line">        ExecutorService executorService = Executors.newSingleThreadExecutor();</span><br><span class="line">        List&lt;Future&gt; futures = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        ThreadTest threadTest = <span class="keyword">new</span> ThreadTest();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i) &#123;</span><br><span class="line">            Future submit = executorService.submit(threadTest);</span><br><span class="line">            futures.add(submit);</span><br><span class="line">        &#125;</span><br><span class="line">        Iterator&lt;Future&gt; iterator = futures.iterator();</span><br><span class="line">        <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">            Future next = iterator.next();</span><br><span class="line">            System.out.println(next.get());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>采用自维护<code>Future</code>集合方法，<code>submit</code>的<code>task</code>不一定是按照加入自己维护的列表顺序完成的。从<code>list</code>中遍历的每个<code>Future</code>对象并不一定处于完成状态，这时调用<code>get()</code>方法就会被阻塞住，如果系统是设计成每个线程完成后就能根据其结果继续做后面的事，这样对于处于<code>list</code>后面的但是先完成的线程就会增加了额外的等待时间。</p>
+<p>而<code>CompletionService</code>的实现是维护一个保存<code>Future</code>对象的<code>BlockingQueue</code>。只有当这个<code>Future</code>对象状态是结束的时候，才会加入到这个<code>Queue</code>中，<code>take()</code>方法其实就是<code>Producer-Consumer</code>中的<code>Consumer</code>。它会从<code>Queue</code>中取出<code>Future</code>对象，如果<code>Queue</code>是空的，就会阻塞在那里，直到有完成的<code>Future</code>对象加入到<code>Queue</code>中。</p>
+<p>所以，先完成的必定先被取出。这样就减少了不必要的等待时间。</p>
+<h4 id="ScheduledExecutor任务调度">ScheduledExecutor任务调度</h4><p><code>ScheduledExecutor</code>提供了基于开始时间与重复间隔的任务调度，可以实现简单的任务调度需求。每一个被调度的任务都会由线程池中一个线程去执行，因此任务是并发执行的，相互之间不会受到干扰。需要注意的是，只有当任务的执行时间到来时，<code>ScheduedExecutor</code>才会真正启动一个线程，其余时间<code>ScheduledExecutor</code>都是在轮询任务的状态。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ScheduledExecutorService;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ScheduledExecutorTest</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String jobName = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ScheduledExecutorTest</span><span class="params">(String jobName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        <span class="keyword">this</span>.jobName = jobName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"execute "</span> + jobName);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ScheduledExecutorService service = Executors.newScheduledThreadPool(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">long</span> initialDelay1 = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">long</span> period1 = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 从现在开始1秒钟之后，每隔1秒钟执行一次job1</span></span><br><span class="line">        service.scheduleAtFixedRate(</span><br><span class="line">                <span class="keyword">new</span> ScheduledExecutorTest(<span class="string">"job"</span> + period1), initialDelay1,</span><br><span class="line">                period1, TimeUnit.SECONDS);</span><br><span class="line">        <span class="keyword">long</span> initialDelay2 = <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">long</span> period2 = <span class="number">2</span>;</span><br><span class="line">        <span class="comment">// 从现在开始2秒钟之后，每隔2秒钟执行一次job2</span></span><br><span class="line">        service.scheduleWithFixedDelay(</span><br><span class="line">                <span class="keyword">new</span> ScheduledExecutorTest(<span class="string">"job"</span> + period2), initialDelay2,</span><br><span class="line">                period2, TimeUnit.SECONDS);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果</p>
+<blockquote>
+<p>execute job1<br>execute job1<br>execute job2<br>execute job1<br>execute job1<br>execute job2<br>execute job1<br>execute job1<br>execute job2</p>
+</blockquote>
+<h4 id="取消向线程池提交的某个任务">取消向线程池提交的某个任务</h4><p>在<code>ExecutorService</code>中提供了<code>submit()</code>方法，用于向线程池提交任务，该方法返回一个包含结果集的<code>Future</code>实例。而<code>Future</code>提供了<code>cancel(boolean mayInterruptIfRunning)</code>方法用于取消提交的运行任务，如果向该函数传递<code>true</code>，那么不管该任务是否运行结束，立即停止，如果向该函数传递<code>false</code>，那么等待该任务运行完成再结束之。同样<code>Future</code>还提供了<code>isDone()</code>用于测试该任务是否结束，<code>isCancelled()</code>用于测试该任务是否在运行结束前已取消。</p>
+<h4 id="关闭线程池">关闭线程池</h4><p>在<code>ExecutorService</code>中提供了<code>shutdown()</code>和<code>List&lt;Runnable&gt; shutdownNow()</code>方法用来关闭线程池，前一个方法将启动一次顺序关闭，有任务在执行的话，则等待该任务运行结束，同时不再接受新任务运行。后一个方法将取消所有未开始的任务并且试图中断正在执行的任务，返回从未开始执行的任务列表，不保证能够停止正在执行的任务，但是会尽力尝试。例如，通过<code>Thread.interrupt()</code>来取消正在执行的任务，但是对于任何无法响应中断的任务，都可能永远无法终止。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Programming-Notes/">Programming Notes</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Java/">Java</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=2067139" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2067139" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/02/01/Java-NIO-development-Precautions/"  title="Java NIO开发注意点">
+ <strong>下一篇：</strong><br/> 
+ <span>Java NIO开发注意点
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/02/01/Java-multi-thread-Callable-interface-and-thread-pool/" data-title="Java多线程之Callable接口及线程池" data-url="http://www.codepub.cn/2016/02/01/Java-multi-thread-Callable-interface-and-thread-pool/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Java实现多线程的三种方式"><span class="toc-number">1.</span> <span class="toc-text">Java实现多线程的三种方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Executor框架"><span class="toc-number">2.</span> <span class="toc-text">Executor框架</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#什么是Executor"><span class="toc-number">2.1.</span> <span class="toc-text">什么是Executor</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#什么是Callable和Future"><span class="toc-number">2.2.</span> <span class="toc-text">什么是Callable和Future</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#什么是FutureTask"><span class="toc-number">2.3.</span> <span class="toc-text">什么是FutureTask</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#什么是Executors"><span class="toc-number">2.4.</span> <span class="toc-text">什么是Executors</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#什么是ExecutorService"><span class="toc-number">2.5.</span> <span class="toc-text">什么是ExecutorService</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用示例"><span class="toc-number">3.</span> <span class="toc-text">使用示例</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#获取线程的返回值"><span class="toc-number">3.1.</span> <span class="toc-text">获取线程的返回值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#通过ExecutorService执行线程"><span class="toc-number">3.2.</span> <span class="toc-text">通过ExecutorService执行线程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#批量提交任务"><span class="toc-number">3.3.</span> <span class="toc-text">批量提交任务</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#通过CompletionService提交多组任务并获取返回值"><span class="toc-number">3.4.</span> <span class="toc-text">通过CompletionService提交多组任务并获取返回值</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通过自维护列表管理多组任务并获取返回值"><span class="toc-number">4.</span> <span class="toc-text">通过自维护列表管理多组任务并获取返回值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ScheduledExecutor任务调度"><span class="toc-number">5.</span> <span class="toc-text">ScheduledExecutor任务调度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#取消向线程池提交的某个任务"><span class="toc-number">6.</span> <span class="toc-text">取消向线程池提交的某个任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关闭线程池"><span class="toc-number">7.</span> <span class="toc-text">关闭线程池</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Algorithms/" title="Algorithms">Algorithms<sup>8</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Database/" title="Database">Database<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git-GitHub/" title="Git/GitHub">Git/GitHub<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life-Talk/" title="Life-Talk">Life-Talk<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Operating-System/" title="Operating System">Operating System<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Programming-Notes/" title="Programming Notes">Programming Notes<sup>24</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>13</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python3/" title="Python3">Python3<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Thinking/" title="Thinking">Thinking<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/LTP/" title="LTP">LTP<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/IT/" title="IT">IT<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elite/" title="Elite">Elite<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tools/" title="Tools">Tools<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySql/" title="MySql">MySql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Lombok/" title="Lombok">Lombok<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Selenium/" title="Selenium">Selenium<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/IntelliJ/" title="IntelliJ">IntelliJ<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tomcat/" title="Tomcat">Tomcat<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Guava/" title="Guava">Guava<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Github/" title="Github">Github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Octopress/" title="Octopress">Octopress<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Eclipse/" title="Eclipse">Eclipse<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <p class="asidetitle">最新评论</p>
+<div>
+	<ul class="ds-recent-comments" data-num-items="10" data-show-avatars="1" data-show-time="1" data-show-admin="1" data-excerpt-length="70"></ul>
+	<!--多说js加载开始，一个页面只需要加载一次 -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!--多说js加载结束，一个页面只需要加载一次 -->
+</div>
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/CCF/" style="font-size: 10px;">CCF</a> <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/DLL/" style="font-size: 10px;">DLL</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Elite/" style="font-size: 10px;">Elite</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/IntelliJ/" style="font-size: 10px;">IntelliJ</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/LTP/" style="font-size: 13.33px;">LTP</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/Python3/" style="font-size: 16.67px;">Python3</a> <a href="/tags/Selenium/" style="font-size: 10px;">Selenium</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Struts2/" style="font-size: 10px;">Struts2</a> <a href="/tags/Thinking/" style="font-size: 13.33px;">Thinking</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a>
+    </div>
+  </div>
+
+
+  <br/>
+<p class="asidetitle">热评文章</p>
+<!-- 多说热评文章 start -->
+<div>
+<div class="ds-top-threads" data-range="monthly" data-num-items="8"></div>
+<!-- 多说热评文章 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"codepub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+<br/>
+
+  <p class="asidetitle">打赏他</p>
+<div>
+<form action="https://shenghuo.alipay.com/send/payment/fill.htm" method="POST" target="_blank" accept-charset="GBK">
+    <br/>
+    <input name="optEmail" type="hidden" value="18302118258" />
+    <input name="payAmount" type="hidden" value="10" />
+    <input id="title" name="title" type="hidden" value="博主，打赏你的！" />
+    <input name="memo" type="hidden" value="你Y加油，继续写博客！" />
+    <input name="pay" type="image" value="转账" src="http://7xig3q.com1.z0.glb.clouddn.com/alipay-donate-website.png" />
+</form>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello , I&#39;m Wang Xu in SHU. <br/>
+			志不强者智不达，言不信者行不果。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1779238484" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/shijiebei2009" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/4204922" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		
+		
+		<a href="https://www.linkedin.com/in/codepub" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		<a href="https://www.douban.com/people/shijiebei2009" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		<a href="https://www.zhihu.com/people/codepub.cn" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:wangx89@126.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="http://www.codepub.cn/about" target="_blank" title="Wang Xu">Wang Xu</a>
+		
+		<a href="http://tongji.baidu.com/web/welcome/ico?s=2c61418f187553bcc869b755930233ab" target="_blank">百度统计</a><br/>
+		本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+		</p>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','CEs2u-bRR6iHSt4ynbFA','2.0.0');
+</script>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"codepub"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F2c61418f187553bcc869b755930233ab' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+
+<a href="https://github.com/shijiebei2009"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>

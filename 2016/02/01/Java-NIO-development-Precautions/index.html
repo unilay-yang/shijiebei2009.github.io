@@ -5,29 +5,44 @@
   
   <meta charset="UTF-8">
   
-    <title>Windows客户端配置GitHub的SSH公钥 | IT草根</title>
+    <title>Java NIO开发注意点 | IT草根</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Wang Xu">
     
 
     
-    <meta name="description" content="检查SSH keys的设置1$ cd ~/.ssh/
-如果显示”No such file or directory”，跳到第三步，否则继续。
-备份和移除原来的SSH key设置如果已经存在key文件，需要备份该数据并删除之12345$ lsid_rsa  id_rsa.pub  known_hosts$ mkdir key_backup$ cp id_rsa* key_backup/$ rm id">
+    <meta name="description" content="Java NIO的介绍首先要搞清楚两个概念，一个是NIO，另一个是NIO 2。NIO = New I/O是在JDK1.4中引入，也就是同步非阻塞I/O，简称BIO；而NIO 2是NIO的升级版，在JDK1.7中引入，也就是异步非阻塞I/O，简称AIO；而最早最传统的I/O属于同步阻塞I/O，简称BIO。
+Java-NIO的优势
+事件驱动模型
+避免多线程
+单线程处理多任务
+
+
+非阻塞I/O，I/O读">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Windows客户端配置GitHub的SSH公钥">
-<meta property="og:url" content="http://www.codepub.cn/2015/06/02/Windows-client-configuration-of-SSH-public-key-on-GitHub/index.html">
+<meta property="og:title" content="Java NIO开发注意点">
+<meta property="og:url" content="http://www.codepub.cn/2016/02/01/Java-NIO-development-Precautions/index.html">
 <meta property="og:site_name" content="IT草根">
-<meta property="og:description" content="检查SSH keys的设置1$ cd ~/.ssh/
-如果显示”No such file or directory”，跳到第三步，否则继续。
-备份和移除原来的SSH key设置如果已经存在key文件，需要备份该数据并删除之12345$ lsid_rsa  id_rsa.pub  known_hosts$ mkdir key_backup$ cp id_rsa* key_backup/$ rm id">
-<meta property="og:updated_time" content="2015-06-02T07:52:30.876Z">
+<meta property="og:description" content="Java NIO的介绍首先要搞清楚两个概念，一个是NIO，另一个是NIO 2。NIO = New I/O是在JDK1.4中引入，也就是同步非阻塞I/O，简称BIO；而NIO 2是NIO的升级版，在JDK1.7中引入，也就是异步非阻塞I/O，简称AIO；而最早最传统的I/O属于同步阻塞I/O，简称BIO。
+Java-NIO的优势
+事件驱动模型
+避免多线程
+单线程处理多任务
+
+
+非阻塞I/O，I/O读">
+<meta property="og:updated_time" content="2016-02-01T14:19:05.812Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Windows客户端配置GitHub的SSH公钥">
-<meta name="twitter:description" content="检查SSH keys的设置1$ cd ~/.ssh/
-如果显示”No such file or directory”，跳到第三步，否则继续。
-备份和移除原来的SSH key设置如果已经存在key文件，需要备份该数据并删除之12345$ lsid_rsa  id_rsa.pub  known_hosts$ mkdir key_backup$ cp id_rsa* key_backup/$ rm id">
+<meta name="twitter:title" content="Java NIO开发注意点">
+<meta name="twitter:description" content="Java NIO的介绍首先要搞清楚两个概念，一个是NIO，另一个是NIO 2。NIO = New I/O是在JDK1.4中引入，也就是同步非阻塞I/O，简称BIO；而NIO 2是NIO的升级版，在JDK1.7中引入，也就是异步非阻塞I/O，简称AIO；而最早最传统的I/O属于同步阻塞I/O，简称BIO。
+Java-NIO的优势
+事件驱动模型
+避免多线程
+单线程处理多任务
+
+
+非阻塞I/O，I/O读">
 
     
     <link rel="alternative" href="/atom.xml" title="IT草根" type="application/atom+xml">
@@ -89,14 +104,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/06/02/Windows-client-configuration-of-SSH-public-key-on-GitHub/" title="Windows客户端配置GitHub的SSH公钥" itemprop="url">Windows客户端配置GitHub的SSH公钥</a>
+      <a href="/2016/02/01/Java-NIO-development-Precautions/" title="Java NIO开发注意点" itemprop="url">Java NIO开发注意点</a>
   </h1>
   <p class="article-author">By
        
 		<a href="http://www.codepub.cn/about" title="Wang Xu" target="_blank" itemprop="author">Wang Xu</a>
 		
   <p class="article-time">
-    <time datetime="2015-06-02T07:44:10.000Z" itemprop="datePublished"> 发表于 2015-06-02</time>
+    <time datetime="2016-02-01T14:16:14.000Z" itemprop="datePublished"> 发表于 2016-02-01</time>
     
   </p>
 </header>
@@ -105,28 +120,73 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#检查SSH_keys的设置"><span class="toc-number">1.</span> <span class="toc-text">检查SSH keys的设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#备份和移除原来的SSH_key设置"><span class="toc-number">2.</span> <span class="toc-text">备份和移除原来的SSH key设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成新的SSH_key"><span class="toc-number">3.</span> <span class="toc-text">生成新的SSH key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加SSH_key到GitHub"><span class="toc-number">4.</span> <span class="toc-text">添加SSH key到GitHub</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试一下"><span class="toc-number">5.</span> <span class="toc-text">测试一下</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置你的账号信息"><span class="toc-number">6.</span> <span class="toc-text">设置你的账号信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决本地多个SSH_key问题"><span class="toc-number">7.</span> <span class="toc-text">解决本地多个SSH key问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#依然需要配置git用户名和邮箱"><span class="toc-number">7.1.</span> <span class="toc-text">依然需要配置git用户名和邮箱</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生成ssh_key时同时指定保存的文件名"><span class="toc-number">7.2.</span> <span class="toc-text">生成ssh key时同时指定保存的文件名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#新增并配置config文件"><span class="toc-number">7.3.</span> <span class="toc-text">新增并配置config文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#上传key到云平台后台并测试"><span class="toc-number">7.4.</span> <span class="toc-text">上传key到云平台后台并测试</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Java_NIO的介绍"><span class="toc-number">1.</span> <span class="toc-text">Java NIO的介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Java-NIO的优势"><span class="toc-number">2.</span> <span class="toc-text">Java-NIO的优势</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NIO工作原理"><span class="toc-number">3.</span> <span class="toc-text">NIO工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NIO开发相关模糊知识点"><span class="toc-number">4.</span> <span class="toc-text">NIO开发相关模糊知识点</span></a></li></ol>
 		
 		</div>
 		
-		<h3 id="检查SSH_keys的设置">检查SSH keys的设置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/.ssh/</span><br></pre></td></tr></table></figure>
-<p>如果显示”No such file or directory”，跳到第三步，否则继续。</p>
-<h3 id="备份和移除原来的SSH_key设置">备份和移除原来的SSH key设置</h3><p>如果已经存在key文件，需要备份该数据并删除之<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ls</span><br><span class="line">id_rsa  id_rsa.pub  known_hosts</span><br><span class="line">$ mkdir key_backup</span><br><span class="line">$ cp id_rsa* key_backup/</span><br><span class="line">$ rm id_rsa*</span><br></pre></td></tr></table></figure></p>
-<h3 id="生成新的SSH_key">生成新的SSH key</h3><p>输入下面的代码，可以生成新的key文件，只需要使用默认的设置即可，当需要输入文件名的时候，回车即可</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"你的邮箱@qq.com"</span></span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/c/Users/WX/.ssh/id_rsa):</span><br><span class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved <span class="keyword">in</span> /c/Users/WX/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved <span class="keyword">in</span> /c/Users/WX/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line"><span class="number">1</span>d:cc:<span class="number">7</span>e:b3:<span class="number">7</span>e:<span class="number">92</span>:f7:ab:c6:<span class="number">75</span>:<span class="number">56</span>:<span class="number">73</span>:<span class="number">62</span>:<span class="number">30</span>:bc:<span class="number">8</span>c 你的邮箱@qq.com</span><br><span class="line">The key<span class="string">'s randomart image is:</span><br><span class="line">+--[ RSA 2048]----+</span><br><span class="line">|           .     |</span><br><span class="line">|         o  +    |</span><br><span class="line">|          +o +   |</span><br><span class="line">|         oE.o o.o|</span><br><span class="line">|        S o o. .+|</span><br><span class="line">|           . o .o|</span><br><span class="line">|            o....|</span><br><span class="line">|           .ooo  |</span><br><span class="line">|            o=.oo|</span><br><span class="line">+-----------------+</span></span><br></pre></td></tr></table></figure>
-<h3 id="添加SSH_key到GitHub">添加SSH key到GitHub</h3><p>用文本编辑工具打开id_rsa.pub文件，如果看不到这个文件，你需要设置显示隐藏文件。准确的复制这个文件的内容，才能保证设置的成功。<br>在GitHub的主页上点击设置按钮，选择SSH Keys项，把复制的内容粘贴进去，然后点击Add Key按钮即可，Title任意选择。</p>
-<h3 id="测试一下">测试一下</h3><p>输入下面命令，测试是否设置成功<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -T git@github.com</span><br><span class="line">Hi shijiebei2009! You<span class="string">'ve successfully authenticated, but GitHub does not provide shell access.</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="设置你的账号信息">设置你的账号信息</h3><p>现在你已经可以通过SSH链接到GitHub了，还有一些个人信息需要完善的。</p>
-<p>Git会根据用户的名字和邮箱来记录提交。GitHub也是用这些信息来做权限的处理，输入下面的代码进行个人信息的设置，把名称和邮箱替换成你自己的，名字必须是你的真名，而不是GitHub的昵称。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">"你的名字"</span></span><br><span class="line">$ git config --global user.email <span class="string">"your_email@youremail.com"</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="解决本地多个SSH_key问题">解决本地多个SSH key问题</h3><p>如果在eclipse或者其它云平台，可能也需要使用SSH key来认证，如果每次都覆盖原来的is_rsa文件，那么之前的认证就失效了，这个问题可以通过在~/.ssh目录下增加config文件来解决。</p>
-<h4 id="依然需要配置git用户名和邮箱">依然需要配置git用户名和邮箱</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config user.name <span class="string">"用户名"</span></span><br><span class="line">git config user.email <span class="string">"邮箱"</span></span><br></pre></td></tr></table></figure>
-<h4 id="生成ssh_key时同时指定保存的文件名">生成ssh key时同时指定保存的文件名</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa <span class="operator">-f</span> ~/.ssh/id_rsa.codepub -C <span class="string">"email"</span></span><br></pre></td></tr></table></figure>
-<p>上面的id_rsa.codepub就是我们指定的文件名，这时~/.ssh目录下会多出id_rsa.codepub和id_rsa.codepub.pub两个文件，id_rsa.codepub.pub里保存的就是我们要使用的key。</p>
-<h4 id="新增并配置config文件">新增并配置config文件</h4><p>如果config文件不存在，先添加；存在则直接修改<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch ~/.ssh/config</span><br></pre></td></tr></table></figure></p>
-<p>在config文件里添加如下内容(User表示你的用户名)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Host *.codepub.cn</span><br><span class="line">IdentityFile ~/.ssh/id_rsa.codepub</span><br><span class="line">User admin</span><br></pre></td></tr></table></figure></p>
-<h4 id="上传key到云平台后台并测试">上传key到云平台后台并测试</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -T git@git.codepub.cn</span><br></pre></td></tr></table></figure>
-<p>成功的话，会输出welcome欢迎信息！<br>日后如需添加，则按照上述配置生成key，并修改config文件即可。</p>
-<p>参考资料<br>【1】<a href="http://beiyuu.com/github-pages/" target="_blank" rel="external">http://beiyuu.com/github-pages/</a><br>【2】<a href="http://riny.net/2014/git-ssh-key/" target="_blank" rel="external">http://riny.net/2014/git-ssh-key/</a></p>
+		<h4 id="Java_NIO的介绍">Java NIO的介绍</h4><p>首先要搞清楚两个概念，一个是<code>NIO</code>，另一个是<code>NIO 2</code>。<code>NIO = New I/O</code>是在<code>JDK1.4</code>中引入，也就是同步非阻塞<code>I/O</code>，简称<code>BIO</code>；而<code>NIO 2</code>是<code>NIO</code>的升级版，在<code>JDK1.7</code>中引入，也就是异步非阻塞<code>I/O</code>，简称<code>AIO</code>；而最早最传统的<code>I/O</code>属于同步阻塞<code>I/O</code>，简称<code>BIO</code>。</p>
+<h4 id="Java-NIO的优势">Java-NIO的优势</h4><ul>
+<li>事件驱动模型<ul>
+<li>避免多线程</li>
+<li>单线程处理多任务</li>
+</ul>
+</li>
+<li>非阻塞<code>I/O</code>，<code>I/O</code>读写不再阻塞，而是返回0</li>
+<li>基于<code>block</code>的传输，通常比基于流的传输更高效</li>
+<li>更高级的<code>I/O</code>函数，<code>zero-copy</code></li>
+<li><code>I/O</code>多路复用大大提高了Java网络应用的可伸缩性和实用性</li>
+</ul>
+<h4 id="NIO工作原理">NIO工作原理</h4><ul>
+<li>由一个专门的线程来处理所有的<code>I/O</code>事件，并负责分发</li>
+<li>事件驱动机制：事件到的时候触发，而不是同步的去监视事件</li>
+<li>线程通讯：线程之间通过<code>wait</code>，<code>notify</code>等方式通讯。保证每次上下文切换都是有意义的，减少无谓的线程切换</li>
+</ul>
+<h4 id="NIO开发相关模糊知识点">NIO开发相关模糊知识点</h4><ol>
+<li><p>首先<code>Selector.open()</code>并不是单例模式，当你每次调用该静态方法时候，都返回一个全新的<code>Selector</code>实例</p>
+</li>
+<li><p><code>configureBlocking()</code>方法用来设置通道的阻塞模式，该方法会调用<code>implConfigureBlocking</code>方法，<code>implConfigureBlocking</code>方法会更改阻塞模式为新传入的值，如：默认为true，传入false，那么该通道将调整为非阻塞，可以通过调用<code>isBlocking()</code>方法来判断某个<code>socket</code>通道当前处于哪种模式</p>
+</li>
+<li><p>NIO的最大优势就是其是非阻塞模型，所以一般来说都需要设置<code>SocketChannel.configureBlocking(false);</code></p>
+</li>
+<li><p>传统的<code>Java IO</code>中通道是阻塞的，那么NIO提供了非阻塞的通道到底有什么作用呢？非阻塞<code>I/O</code>是许多复杂的、高性能的程序构建的基础</p>
+</li>
+<li><p><code>remove()</code>方法的作用 ① <code>Set selectedKeys = selector.selectedKeys(); Iterator iter = selectedKeys.iterator();</code> ② <code>SelectionKey key = iter.next();</code> ③ <code>iter.remove();</code> 注意每次迭代之后要移除当前迭代的对象，原因是<code>Selector</code>不会自己从已选择键集中移除<code>SelectionKey</code>实例。必须在处理完通道时自己移除。下次该通道变成就绪时，<code>Selector</code>会再次将其放入已选择键集中</p>
+</li>
+<li><p>服务端和客户端是否维护着同一份<code>Selector</code>，答案是否定的，服务端和客户端各自维护着一个<code>Selector</code>对象，并且注意在多线程并发的时候，不要让多个客户端共享<code>Selector</code></p>
+</li>
+<li><p><code>ByteBuffer byteBuffer = ByteBuffer.allocate(1);</code>在从通道往<code>buffer</code>中读入之后，使用<code>byteBuffer.get()</code>获取的时候，不可重复调用，因为<code>get()</code>方法会移动<code>position</code>，使得多次调用<code>get()</code>方法获取的内容是不同的</p>
+</li>
+<li><p>在<code>ByteBuffer</code>中，<code>put(int index, byte b)</code>方法不会移动<code>position</code>，但是<code>put(byte b)</code>会移动<code>position</code></p>
+</li>
+<li><p><code>channel.read()</code>函数会返回-1，那么什么时候会读到-1呢？针对服务器端而言，当客户端调用了<code>channel.close()</code>关闭连接时，这时候服务器端返回的读取数是-1，表示已经到了末尾。那么此时需要把对应的<code>SelectionKey</code>给<code>cancel</code>掉，表示<code>selector</code>不再监听这个<code>channel</code>上的读事件，并且关闭<code>channel</code></p>
+</li>
+<li><p><code>ByteBuffer.allocate(int capacity)</code>和<code>ByteBuffer.allocateDirect(int capacity)</code>的区别：使用<code>allocate</code>来创建缓冲区，并不是一下子就分配给缓冲区<code>capacity</code>大小的空间，而是根据缓冲区中存储数据的情况来动态分配缓冲区的大小（实际上，在底层Java采用了数据结构中的堆来管理缓冲区的大小），因此，这个<code>capacity</code>可以是一个很大的值，如<code>1024*1024（1M）</code>。使用<code>allocateDirect</code>方法可以一次性分配<code>capacity</code>大小的连续字节空间。通过<code>allocateDirect</code>方法来创建具有连续空间的<code>ByteBuffer</code>对象虽然可以在一定程度上提高效率，但这种方式并不是平台独立的。也就是说，在一些操作系统平台上使用<code>allocateDirect</code>方法来创建<code>ByteBuffer</code>对象会使效率大幅度提高，而在另一些操作系统平台上，性能会表现得非常差。而且<code>allocateDirect</code>方法需要较长的时间来分配内存空间，在释放空间时也较慢。因此，在使用<code>allocateDirect</code>方法时应谨慎</p>
+</li>
+<li><p>与缓冲区不同，通道不能被重复使用，一个打开的通道即代表与一个特定<code>I/O</code>服务的特定连接并封装该连接的状态。当通道关闭时，那个连接会丢失，然后通道将不再连接任何东西</p>
+</li>
+<li><p>通道的<code>read()</code>和<code>write()</code>方法的数据流向是怎么样的？<code>read()</code>表示该通道读就绪，可以从通道中读取内容到缓冲区，而<code>wirte()</code>表示该通道写就绪，可以将缓冲区中的内容写入通道</p>
+</li>
+<li><p>虽然说一个通道可以被注册到多个选择器上，但对每个选择器而言只能被注册一次</p>
+</li>
+<li><p>选择键封装了特定的通道与特定的选择器的注册关系。选择键对象被<code>SelectableChannel.register(Selector sel, int ops)</code>返回并提供一个表示这种注册关系的标记。选择键包含了两个比特集（以整数的形式进行编码），指示了该注册关系所关心的通道操作，以及通道已经准备好的操作</p>
+</li>
+<li><p>注意<code>select()</code>是一个阻塞操作，那么如何停止<code>select()</code>操作所在的线程呢？主要有三种方法 ①使用<code>volatile boolean</code>变量来标识线程是否停止 ②停止线程时，需要调用停止线程的<code>interrupt()</code>方法，因为线程有可能在<code>wait()</code>或<code>sleep()</code>，提高停止线程的及时性 ③处于<code>Blocking IO</code>的处理，尽量使用<code>InterruptibleChannel</code>来代替<code>Blocking IO</code>，对于NIO来说，如果线程处于<code>select()</code>阻塞状态，这时候无法及时的检测到条件变量的变化，那么需要人工调用<code>wakeup()</code>方法，唤醒线程，使得其可以检测到条件变量</p>
+</li>
+<li><p>当通道关闭时，所有相关的键会自动取消；当选择器关闭时，所有被注册到该选择器的通道都将被注销，并且相关的键将立即被无效化</p>
+</li>
+<li><p>注意<code>select()</code>操作返回值不是已经准备好的通道的总数，而是从上一个<code>select()</code>调用之后进入就绪状态的通道的数量。之前的调用中就绪的，并且在本次调用中仍然就绪的通道不会被计入，而那些在前一次调用中已经就绪但已经不再处于就绪状态的通道也不会计入。这些通道可能仍然在已选择的键的集合中，但不会被计入返回值中，返回值可能是0</p>
+</li>
+<li><p>推荐使用内部的已取消的键的集合来延迟注销，是一种防止线程在取消键时阻塞，并防止与正在进行的选择操作冲突的优化</p>
+</li>
+<li><p><code>Selector</code>选择器对象是线程安全的，但它们包含的键集合不是。通过<code>keys()</code>和<code>selectKeys()</code>返回的键的集合是<code>Selector</code>对象内部的私有的<code>Set</code>对象集合的直接引用。这些集合可能在任意时间被改变。已注册的键的集合是只读的</p>
+</li>
+<li><p>如果在多个线程并发地访问一个选择器的键的集合的时候存在任何问题，可以采用同步的方式进行访问，在执行选择操作时，选择器在<code>Selector</code>对象上进行同步，然后是已注册的键的集合，最后是已选择的键的集合</p>
+</li>
+<li><p>在并发量大的时候，使用同一个线程处理连接请求以及消息服务，可能会出现拒绝连接的情况，这是因为当该线程在处理消息服务的时候，可能会无法及时处理连接请求，从而导致超时；一个更好的策略是对所有的可选择通道使用一个选择器，并将对就绪通道的服务委托给其它线程。只需一个线程监控通道的就绪状态并使用一个协调好的的工作线程池来处理接收及发送数据</p>
+</li>
+<li><p><code>Selector.wakeup()</code>的主要作用：①解除阻塞在<code>Selector.select()/select(long)</code>上的线程，立即返回 ②两次成功的<code>select</code>之间多次调用<code>wakeup</code>等价于一次调用 ③如果当前没有阻塞在<code>select</code>上，则本次<code>wakeup</code>调用将作用于下一次<code>select</code>操作</p>
+</li>
+</ol>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -134,13 +194,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Git-GitHub/">Git/GitHub</a>
+  <a class="article-category-link" href="/categories/Programming-Notes/">Programming Notes</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Git/">Git</a>
+  <span></span> <a href="/tags/Java/">Java</a>
   </div>
 
 </div>
@@ -180,18 +240,18 @@ var jiathis_config = {data_track_clickback:'true'};
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/06/02/Faceted-Project-Problem-Java-Version-Mismatch-Error-Message/" title="Faceted Project Problem (Java Version Mismatch) Error Message">
+ <a href="/2016/02/01/Java-multi-thread-Callable-interface-and-thread-pool/" title="Java多线程之Callable接口及线程池">
   <strong>上一篇：</strong><br/>
   <span>
-  Faceted Project Problem (Java Version Mismatch) Error Message</span>
+  Java多线程之Callable接口及线程池</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/05/19/How-to-load-dll-file-in-Java-Web-Project/"  title="Java中Web Project如何加载dll/DLL文件">
+<a href="/2015/12/31/2015-year-end-summary/"  title="2015年终总结">
  <strong>下一篇：</strong><br/> 
- <span>Java中Web Project如何加载dll/DLL文件
+ <span>2015年终总结
 </span>
 </a>
 </div>
@@ -200,7 +260,7 @@ var jiathis_config = {data_track_clickback:'true'};
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/06/02/Windows-client-configuration-of-SSH-public-key-on-GitHub/" data-title="Windows客户端配置GitHub的SSH公钥" data-url="http://www.codepub.cn/2015/06/02/Windows-client-configuration-of-SSH-public-key-on-GitHub/"></div>
+	<div class="ds-thread" data-thread-key="2016/02/01/Java-NIO-development-Precautions/" data-title="Java NIO开发注意点" data-url="http://www.codepub.cn/2016/02/01/Java-NIO-development-Precautions/"></div>
 </section>
 
 
@@ -210,7 +270,7 @@ var jiathis_config = {data_track_clickback:'true'};
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#检查SSH_keys的设置"><span class="toc-number">1.</span> <span class="toc-text">检查SSH keys的设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#备份和移除原来的SSH_key设置"><span class="toc-number">2.</span> <span class="toc-text">备份和移除原来的SSH key设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成新的SSH_key"><span class="toc-number">3.</span> <span class="toc-text">生成新的SSH key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加SSH_key到GitHub"><span class="toc-number">4.</span> <span class="toc-text">添加SSH key到GitHub</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试一下"><span class="toc-number">5.</span> <span class="toc-text">测试一下</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置你的账号信息"><span class="toc-number">6.</span> <span class="toc-text">设置你的账号信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决本地多个SSH_key问题"><span class="toc-number">7.</span> <span class="toc-text">解决本地多个SSH key问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#依然需要配置git用户名和邮箱"><span class="toc-number">7.1.</span> <span class="toc-text">依然需要配置git用户名和邮箱</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生成ssh_key时同时指定保存的文件名"><span class="toc-number">7.2.</span> <span class="toc-text">生成ssh key时同时指定保存的文件名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#新增并配置config文件"><span class="toc-number">7.3.</span> <span class="toc-text">新增并配置config文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#上传key到云平台后台并测试"><span class="toc-number">7.4.</span> <span class="toc-text">上传key到云平台后台并测试</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Java_NIO的介绍"><span class="toc-number">1.</span> <span class="toc-text">Java NIO的介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Java-NIO的优势"><span class="toc-number">2.</span> <span class="toc-text">Java-NIO的优势</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NIO工作原理"><span class="toc-number">3.</span> <span class="toc-text">NIO工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NIO开发相关模糊知识点"><span class="toc-number">4.</span> <span class="toc-text">NIO开发相关模糊知识点</span></a></li></ol>
  
   </div>
 
