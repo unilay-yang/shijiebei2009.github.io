@@ -28,7 +28,7 @@
 尽量使用经过广泛实践的开源NIO框架Mina/Netty/xSocket
 尽量使用最新版稳定版JDK
 遇到问题">
-<meta property="og:updated_time" content="2016-02-26T14:14:09.588Z">
+<meta property="og:updated_time" content="2016-02-26T14:16:07.964Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于Java NIO2实现的异步非阻塞消息通信框架">
 <meta name="twitter:description" content="前奏因为NIO并不容易掌握，所以这注定会是一篇长文，而且即便篇幅很大，亦难以把很多细节解释清楚，只能侧重于从整体上进行把握，并实现一个简单的客户端服务端消息通信框架作为例子，以便有需要的开发人员参考之。借用淘宝伯岩给出的忠告就是
@@ -128,7 +128,15 @@
 <p><code>Asynchronous I/O</code>是在<code>JDK7</code>中提出的异步非阻塞<code>I/O</code>，习惯上称之为<code>NIO2</code>，也叫<code>AIO</code>，<code>AIO</code>是对<code>JDK1.4</code>中提出的同步非阻塞<code>I/O</code>的进一步增强，主要包括</p>
 <ul>
 <li>更新的<code>Path</code>类，该类在<code>NIO</code>里对文件系统进行了进一步的抽象，用来替换原来的<code>java.io.File</code>，可以通过<code>File.toPath()</code>和<code>Path.toFile()</code>将<code>File</code>和<code>Path</code>进行相互转换</li>
-<li><code>File Attributes</code>，<code>java.nio.file.attribute</code>针对文件属性提供了各种用户所需的元数据，不同操作系统使用的类不太一样，支持的属性分类有<code>BasicFileAttributeView</code>、<code>DosFileAttributeView</code>、<code>PosixFileAttributeView</code>、<code>FileOwnerAttributeView</code>、<code>AclFileAttributeView</code>、<code>UserDefinedFileAttributeView</code></li>
+<li><code>File Attributes</code>，<code>java.nio.file.attribute</code>针对文件属性提供了各种用户所需的元数据，不同操作系统使用的类不太一样，支持的属性分类有<ul>
+<li>BasicFileAttributeView</li>
+<li>DosFileAttributeView</li>
+<li>PosixFileAttributeView</li>
+<li>FileOwnerAttributeView</li>
+<li>AclFileAttributeView</li>
+<li>UserDefinedFileAttributeView</li>
+</ul>
+</li>
 <li><code>Symbolic and Hard Links</code>，相当于用<code>Java</code>程序实现<code>Linux</code>中的<code>ln</code>命令</li>
 <li><code>Watch Service API</code>，作为一个线程安全的服务用于监控对象的变化和事件，以前直接用<code>Java</code>监控文件系统的变化是不可能的，只能通过<code>JNI</code>的方式调用操作系统的<code>API</code>，而在<code>JDK7</code>中这部分被加入到了标准库里</li>
 <li><code>Random Access Files</code>主要提供了一个<code>SeekableByteChannel</code>接口，配合<code>ByteBuffer</code>使得随机访问文件更加方便</li>
