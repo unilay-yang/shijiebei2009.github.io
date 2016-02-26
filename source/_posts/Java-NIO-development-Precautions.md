@@ -6,7 +6,7 @@ categories: Programming Notes
 ---
 
 ####Java NIO的介绍
-首先要搞清楚两个概念，一个是`NIO`，另一个是`NIO 2`。`NIO = New I/O`是在`JDK1.4`中引入，也就是同步非阻塞`I/O`，简称`BIO`；而`NIO 2`是`NIO`的升级版，在`JDK1.7`中引入，也就是异步非阻塞`I/O`，简称`AIO`；而最早最传统的`I/O`属于同步阻塞`I/O`，简称`BIO`。
+首先要搞清楚两个概念，一个是`NIO`，另一个是`NIO 2`。`NIO = New I/O`是在`JDK1.4`中引入，也就是同步非阻塞`I/O`，简称`NIO`；而`NIO 2`是`NIO`的升级版，在`JDK1.7`中引入，也就是异步非阻塞`I/O`，简称`AIO`；而最早最传统的`I/O`属于同步阻塞`I/O`，简称`BIO`。
 
 ####Java-NIO的优势
 - 事件驱动模型

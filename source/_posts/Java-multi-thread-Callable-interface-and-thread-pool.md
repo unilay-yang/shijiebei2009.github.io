@@ -7,10 +7,58 @@ categories: Programming Notes
 
 ####Java实现多线程的三种方式
 - 继承`Thread`类
-- 实现`Runnable`接口，并覆写`run`方法
-- 实现`Callable`接口，并覆写`call`方法
+```java
+public class Test extends Thread {
+    public static void main(String[] args) {
+        Thread t = new Test();
+        t.start();
+    }
 
-前两种方式应该很熟悉了，不予介绍，本文主要介绍第三种方式。
+    @Override
+    public void run() {
+        System.out.println("Override run() ...");
+    }
+}
+```
+- 实现`Runnable`接口，并覆写`run`方法
+```java
+public class Test implements Runnable {
+    public static void main(String[] args) {
+        Thread t = new Thread(new Test());
+        t.start();
+    }
+
+    @Override
+    public void run() {
+        System.out.println("Override run() ...");
+    }
+}
+```
+- 实现`Callable`接口，并覆写`call`方法
+```java
+public class Test implements Callable {
+    public static void main(String[] args) {
+        FutureTask futureTask = new FutureTask(new Test());
+        Thread thread = new Thread(futureTask);
+        thread.start();
+        try {
+            Object o = futureTask.get();
+            System.out.println(o);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public Object call() throws Exception {
+        return "Override call() ...";
+    }
+}
+```
+
+前两种方式应该很熟悉了，不再赘述，本文主要介绍第三种方式。
 ####Executor框架
 `Executor`框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。`Executor`框架包括：线程池，`Executor`，`Executors`，`ExecutorService`，`CompletionService`，`Future`，`Callable`等。
 #####什么是Executor
@@ -199,7 +247,7 @@ public class ThreadTest implements Callable {
 
 由运行结果可知，`ExecutorCompletionService`并不会阻塞，在提交任务之后，继续向下运行，哪个任务完成即返回，并不受任务提交顺序的影响。
 
-####通过自维护列表管理多组任务并获取返回值
+#####通过自维护列表管理多组任务并获取返回值
 ```java
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -243,7 +291,7 @@ public class ThreadTest implements Callable {
 而`CompletionService`的实现是维护一个保存`Future`对象的`BlockingQueue`。只有当这个`Future`对象状态是结束的时候，才会加入到这个`Queue`中，`take()`方法其实就是`Producer-Consumer`中的`Consumer`。它会从`Queue`中取出`Future`对象，如果`Queue`是空的，就会阻塞在那里，直到有完成的`Future`对象加入到`Queue`中。
 
 所以，先完成的必定先被取出。这样就减少了不必要的等待时间。
-####ScheduledExecutor任务调度
+#####ScheduledExecutor任务调度
 `ScheduledExecutor`提供了基于开始时间与重复间隔的任务调度，可以实现简单的任务调度需求。每一个被调度的任务都会由线程池中一个线程去执行，因此任务是并发执行的，相互之间不会受到干扰。需要注意的是，只有当任务的执行时间到来时，`ScheduedExecutor`才会真正启动一个线程，其余时间`ScheduledExecutor`都是在轮询任务的状态。
 
 ```java
