@@ -1,4 +1,4 @@
-title: 蘑菇街2016校园招聘之编程题解析--技术类
+title: 蘑菇街2016校园招聘之编程题解析-技术类
 date: 2015-09-23 22:56:30
 tags: [Java]
 categories: Algorithms

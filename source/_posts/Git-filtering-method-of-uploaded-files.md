@@ -1,4 +1,4 @@
-title: "Git过滤上传的文件的方法"
+title: "Git过滤上传文件的方法"
 date: 2015-05-14 13:48:10
 tags: [Git]
 categories: Git/GitHub
