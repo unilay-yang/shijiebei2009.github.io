@@ -4,6 +4,7 @@
     
     
     
+    
   <url>
     <loc>http://www.codepub.cn/2015/08/04/Based-on-the-extended-version-of-synonyms-Cilin-word-similarity-computing/</loc>
     <lastmod>2016-03-11T15:56:36.439Z</lastmod>
@@ -166,26 +167,6 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2015/12/31/2015-year-end-summary/</loc>
-    <lastmod>2016-01-03T08:38:07.440Z</lastmod>
-    <data>
-        <display>
-        <title>2015年终总结</title>
-        <pubTime>2015-12-31T12:36:42.000Z</pubTime>
-        
-        <tag>Thinking </tag>
-         
-         
-           
-             
-              <breadCrumb title="Life-Talk" url="http://www.codepub.cn/categories/Life-Talk/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.codepub.cn/2015/12/21/CCF-sixth-CSP-certification-exams-Solutions/</loc>
     <lastmod>2016-01-03T08:38:07.440Z</lastmod>
     <data>
@@ -199,6 +180,26 @@
            
              
               <breadCrumb title="Algorithms" url="http://www.codepub.cn/categories/Algorithms/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.codepub.cn/2015/12/31/2015-year-end-summary/</loc>
+    <lastmod>2016-01-03T08:38:07.440Z</lastmod>
+    <data>
+        <display>
+        <title>2015年终总结</title>
+        <pubTime>2015-12-31T12:36:42.000Z</pubTime>
+        
+        <tag>Thinking </tag>
+         
+         
+           
+             
+              <breadCrumb title="Life-Talk" url="http://www.codepub.cn/categories/Life-Talk/"/>
           
         </display>
     </data>
