@@ -20,6 +20,8 @@ date: 2015-06-14 18:41:08
 [贾吉鑫，点评Android工程师](http://www.jiajixin.cn/)
 [许晓斌，Maven实战作者](http://www.juvenxu.com/)
 [码农场，太花哨，不够简洁](http://www.hankcs.com/)
+[七牛CEO许式伟，Go语言布道者](http://xushiwei.com/)
+[C++/Golang/Node.js/IOS结巴分词作者](http://yanyiwu.com/)
 
 ###推荐站点
 [开源自由的汉语言处理包](http://hanlp.linrunsoft.com/)
