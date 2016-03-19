@@ -6,10 +6,10 @@
 title: IT草根
 subtitle: WangXu's 代码馆 BLOG
 keywords: IT草根, 代码馆, http://codepub.cn/
-description: 代码馆, BLOG, http://codepub.cn, IT草根
+description: 志不强者智不达，言不信者行不果
 author: Wang Xu
 email: wangx89@126.com
-language: zh-CN
+language: zh-Hans
 timezone:
 
 # URL
@@ -68,8 +68,7 @@ Plugins:
 - hexo-generator-sitemap
 # http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-# theme: next
-theme: jacman
+theme: next
 stylus: 
   compress: true
 #Feed Atom
