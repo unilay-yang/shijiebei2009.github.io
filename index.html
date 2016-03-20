@@ -224,9 +224,26 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <form class="site-search-form" >
+  <input type="text" id="ts-search-input" class="menu-search-input">
+</form>
+
+
+
+    </div>
   
 </nav>
 
@@ -302,8 +319,7 @@
           
 		  
 		<!-- 在下面的位置加上如下代码 -->
-        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C
-        </span>    
+        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C</span>    
         <!-- 在上面的位置加上如上代码 -->  
 		  
           
@@ -338,7 +354,9 @@
           前奏因为NIO并不容易掌握，所以这注定会是一篇长文，而且即便篇幅很大，亦难以把很多细节解释清楚，只能侧重于从整体上进行把握，并实现一个简单的客户端服务端消息通信框架作为例子，以便有需要的开发人员参考之。借用淘宝伯岩给出的忠告就是
 
 尽量不要尝试实现自己的NIO框架，除非有经验丰富的工程师
-尽量使用经
+尽量使用经过广泛实践的开源NIO框架Mina/Netty/xSocket
+尽量使用最新版稳定版JDK
+遇到问题
           ...
 
           <div class="post-more-link text-center">
@@ -430,8 +448,7 @@
           
 		  
 		<!-- 在下面的位置加上如下代码 -->
-        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C
-        </span>    
+        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C</span>    
         <!-- 在上面的位置加上如上代码 -->  
 		  
           
@@ -465,7 +482,7 @@
           
           Java实现多线程的三种方式
 继承Thread类
-1234567891011public class Test extends Thread &#123;    public static void main(String[] args) &#123;        Thread t = new T
+1234567891011public class Test extends Thread &#123;    public static void main(String[] args) &#123;        Thread t = new Test();        t.start();    &#125;    @Override   
           ...
 
           <div class="post-more-link text-center">
@@ -557,8 +574,7 @@
           
 		  
 		<!-- 在下面的位置加上如下代码 -->
-        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C
-        </span>    
+        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C</span>    
         <!-- 在上面的位置加上如上代码 -->  
 		  
           
@@ -590,7 +606,14 @@
       
         
           
-          Java NIO的介绍首先要搞清楚两个概念，一个是NIO，另一个是NIO 2。NIO = New I/O是在JDK1.4中引入，也就是同步非阻塞I/O，简称NIO；而NIO 2是NIO的升级版，在JDK1.7中引入，也就是异步非阻塞I/O，简称AIO；而最早最传统的I/O属于同步阻塞I/O，简称BI
+          Java NIO的介绍首先要搞清楚两个概念，一个是NIO，另一个是NIO 2。NIO = New I/O是在JDK1.4中引入，也就是同步非阻塞I/O，简称NIO；而NIO 2是NIO的升级版，在JDK1.7中引入，也就是异步非阻塞I/O，简称AIO；而最早最传统的I/O属于同步阻塞I/O，简称BIO。
+Java-NIO的优势
+事件驱动模型
+避免多线程
+单线程处理多任务
+
+
+非阻塞I/O，I/O读
           ...
 
           <div class="post-more-link text-center">
@@ -682,8 +705,7 @@
           
 		  
 		<!-- 在下面的位置加上如下代码 -->
-        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C
-        </span>    
+        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C</span>    
         <!-- 在上面的位置加上如上代码 -->  
 		  
           
@@ -717,7 +739,7 @@
           
           公元2015年就这么过去了，我们都是不知不觉也极不情愿地又向坟墓迈进了一步。也许多年以后，当2015年已成为历史长河中的一粒沙，偶有后人回望历史，我想他们也会觉得这一年注定是多事之秋吧。
 
-这一年，掀起了规模庞大的O2O公司创业潮，同时到了年终又有大量O2O公司掀起了倒闭潮，这也真的验证了雷军的那句
+这一年，掀起了规模庞大的O2O公司创业潮，同时到了年终又有大量O2O公司掀起了倒闭潮，这也真的验证了雷军的那句话，站在风口上，猪都能飞起来。但是飞起来又怎样？猪就是猪，它不会在空中长出翅膀，所以它终归是要落地的
           ...
 
           <div class="post-more-link text-center">
@@ -809,8 +831,7 @@
           
 		  
 		<!-- 在下面的位置加上如下代码 -->
-        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C
-        </span>    
+        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C</span>    
         <!-- 在上面的位置加上如上代码 -->  
 		  
           
@@ -842,7 +863,7 @@
       
         
           
-          CCF计算机职业资格认证CCF（China Computer Federation）是计算机领域内一个权威的学术组织，具有高端定位、崇高的价值追求、先进的治理架构和制度规范，拥有众多资深的学者和企业家为骨干会员。CCF开展的该认证工作，具有客观公正及很强的专业性，将解决企业及高校界普遍关心的软件开发
+          CCF计算机职业资格认证CCF（China Computer Federation）是计算机领域内一个权威的学术组织，具有高端定位、崇高的价值追求、先进的治理架构和制度规范，拥有众多资深的学者和企业家为骨干会员。CCF开展的该认证工作，具有客观公正及很强的专业性，将解决企业及高校界普遍关心的软件开发人才评价问题，便于有关单位了解求职或求学者的实际开发能力，可有助甄别及吸纳具有真才实学的技术人才，有
           ...
 
           <div class="post-more-link text-center">
@@ -934,8 +955,7 @@
           
 		  
 		<!-- 在下面的位置加上如下代码 -->
-        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C
-        </span>    
+        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C</span>    
         <!-- 在上面的位置加上如上代码 -->  
 		  
           
@@ -968,7 +988,8 @@
         
           
           Maven的仓库、索引中央仓库：目前来说，http://repo1.maven.org/maven2/ 是真正的Maven中央仓库的地址，该地址内置在Maven的源码中，其它地址包括著名的ibiblio.org，都是镜像。
-索引：中央仓库带有索引文件以方便用户对其进行搜索，完整的索引文件至2015年
+索引：中央仓库带有索引文件以方便用户对其进行搜索，完整的索引文件至2015年12月8日大小约为1.11G，索引每周更新一次。
+本地仓库：是建立在本地机器上的Maven仓库，本地
           ...
 
           <div class="post-more-link text-center">
@@ -1060,8 +1081,7 @@
           
 		  
 		<!-- 在下面的位置加上如下代码 -->
-        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C
-        </span>    
+        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C</span>    
         <!-- 在上面的位置加上如上代码 -->  
 		  
           
@@ -1094,7 +1114,10 @@
         
           
           
-作者简介：纳西姆·尼古拉斯·塔勒布，证券交易员，目前担任马塞诸塞大学阿默斯特分校随机科学教授。他在“9·11”之前大量买入行权价格很低，看似毫无价值的认沽权证，用一种独特的方式做空美国股市，直到恐怖分子劫持飞机撞向纽约世贸大楼，他由此获利丰厚，一举成名。此次美国次贷危机爆发之前，他又先知先觉重仓做
+作者简介：纳西姆·尼古拉斯·塔勒布，证券交易员，目前担任马塞诸塞大学阿默斯特分校随机科学教授。他在“9·11”之前大量买入行权价格很低，看似毫无价值的认沽权证，用一种独特的方式做空美国股市，直到恐怖分子劫持飞机撞向纽约世贸大楼，他由此获利丰厚，一举成名。此次美国次贷危机爆发之前，他又先知先觉重仓做空，大赚一笔。
+
+
+我：我一直认为真正能看清社会走向及科学经济等发展趋势的人，才是真正的天才。然而我
           ...
 
           <div class="post-more-link text-center">
@@ -1186,8 +1209,7 @@
           
 		  
 		<!-- 在下面的位置加上如下代码 -->
-        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C
-        </span>    
+        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C</span>    
         <!-- 在上面的位置加上如上代码 -->  
 		  
           
@@ -1219,7 +1241,7 @@
       
         
           
-          Guava简介Google Guava很优秀，大有取代Apache Commons之势。闲话少叙，直接上Guava的终极目标，用原汁原味的英文来说就是“Our goal is for you to write less code and for the code you do write to be
+          Guava简介Google Guava很优秀，大有取代Apache Commons之势。闲话少叙，直接上Guava的终极目标，用原汁原味的英文来说就是“Our goal is for you to write less code and for the code you do write to be simpler, cleaner, and more readable”，Guava中主要包括Ba
           ...
 
           <div class="post-more-link text-center">
@@ -1311,8 +1333,7 @@
           
 		  
 		<!-- 在下面的位置加上如下代码 -->
-        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C
-        </span>    
+        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C</span>    
         <!-- 在上面的位置加上如上代码 -->  
 		  
           
@@ -1347,7 +1368,7 @@
           安装搜狗输入法
 参考了其他一些资料都说添加fcitx的PPA，但是我不确定有木有用
 
-12345678910111213eric@eric-VirtualBox:/etc/apt$ sudo add-apt-repository ppa:fcitx-team/nightly Experimental
+12345678910111213eric@eric-VirtualBox:/etc/apt$ sudo add-apt-repository ppa:fcitx-team/nightly Experimental releases of Fcitx, use with caution. More info: h
           ...
 
           <div class="post-more-link text-center">
@@ -1439,8 +1460,7 @@
           
 		  
 		<!-- 在下面的位置加上如下代码 -->
-        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C
-        </span>    
+        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C</span>    
         <!-- 在上面的位置加上如上代码 -->  
 		  
           
@@ -1478,7 +1498,8 @@
 使用JDK中的Point2D类，该类定义了坐标系空间中的一个点
 Point2D是一个抽象类，但是在该类内部定义了静态的Double类，并且Double继承自Point2D
 可以通过Double的构造方法来实例化空间中的某个点
-将所有的输入数据全部实例化并存放在一个Point2
+将所有的输入数据全部实例化并存放在一个Point2D.Double的数组中
+对该数组进行暴力破解，计算其中任意两个点之间的距离，时间复杂度为$O(n^
           ...
 
           <div class="post-more-link text-center">
@@ -1570,8 +1591,7 @@ Point2D是一个抽象类，但是在该类内部定义了静态的Double类，�
           
 		  
 		<!-- 在下面的位置加上如下代码 -->
-        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C
-        </span>    
+        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C</span>    
         <!-- 在上面的位置加上如上代码 -->  
 		  
           
@@ -1604,7 +1624,7 @@ Point2D是一个抽象类，但是在该类内部定义了静态的Double类，�
         
           
           开发环境：Python 3.4.3 (v3.4.3:9b73f1c3e601, Feb 24 2015, 22:44:40) [MSC v.1600 64 bit (AMD64)] on win32
-自序也许你会说，我为什么要学习使用CSV模块呢？没有CSV模块我一样可以解析操作CSV文件，比如下面
+自序也许你会说，我为什么要学习使用CSV模块呢？没有CSV模块我一样可以解析操作CSV文件，比如下面这种代码：12345with open('stocks.csv') as f:for line in
           ...
 
           <div class="post-more-link text-center">
@@ -1696,8 +1716,7 @@ Point2D是一个抽象类，但是在该类内部定义了静态的Double类，�
           
 		  
 		<!-- 在下面的位置加上如下代码 -->
-        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C
-        </span>    
+        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C</span>    
         <!-- 在上面的位置加上如上代码 -->  
 		  
           
@@ -1729,7 +1748,7 @@ Point2D是一个抽象类，但是在该类内部定义了静态的Double类，�
       
         
           
-          自序好用趁手的工具可以极大的提高工作效率，这也是我强推用Mac取代Windows的原因，在Mac平台能让你点两下完成的操作绝对不会让你点三下，而且Mac先天适合程序员，想想在Mac上开一个Terminal可以完成诸多事情，而在Windows上你要开Cmd/Git/Cygwin/SecureCRT等诸
+          自序好用趁手的工具可以极大的提高工作效率，这也是我强推用Mac取代Windows的原因，在Mac平台能让你点两下完成的操作绝对不会让你点三下，而且Mac先天适合程序员，想想在Mac上开一个Terminal可以完成诸多事情，而在Windows上你要开Cmd/Git/Cygwin/SecureCRT等诸多窗口来实现同样的功能。工具虽多，莫要贪杯哦，否则就是舍本逐末了。一定要善于利用工具，而不要贪大贪全
           ...
 
           <div class="post-more-link text-center">
@@ -1821,8 +1840,7 @@ Point2D是一个抽象类，但是在该类内部定义了静态的Double类，�
           
 		  
 		<!-- 在下面的位置加上如下代码 -->
-        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C
-        </span>    
+        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C</span>    
         <!-- 在上面的位置加上如上代码 -->  
 		  
           
@@ -1857,7 +1875,8 @@ Point2D是一个抽象类，但是在该类内部定义了静态的Double类，�
           比大小
 解题思路：解此题需要使用到康托展开，康托展开的公式如下
 $$X=a_n*(n-1)!+a_{n-1}*(n-2)!+\cdot\cdot\cdot+a_i*(i-1)!+\cdot\cdot\cdot+a_2*(2-1)!+a_1*(1-1)!$$
-公式看不懂没关系，下面以一个例子来讲解公式
+公式看不懂没关系，下面以一个例子来讲解公式的使用！
+例如：有一个数组S=[&quot;a&quot;,&quot;b&quot;,&quot;
           ...
 
           <div class="post-more-link text-center">
@@ -1949,8 +1968,7 @@ $$X=a_n*(n-1)!+a_{n-1}*(n-2)!+\cdot\cdot\cdot+a_i*(i-1)!+\cdot\cdot\cdot+a_2*(2-
           
 		  
 		<!-- 在下面的位置加上如下代码 -->
-        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C
-        </span>    
+        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C</span>    
         <!-- 在上面的位置加上如上代码 -->  
 		  
           
@@ -1983,7 +2001,7 @@ $$X=a_n*(n-1)!+a_{n-1}*(n-2)!+\cdot\cdot\cdot+a_i*(i-1)!+\cdot\cdot\cdot+a_2*(2-
         
           
           自序人生天地间，若白驹之过隙，忽然而已。无奈诸多俗务缠身，难得清闲。一直都是忙忙碌碌，然而碌碌无为，只顾埋头前行，偶有机会驻足回首，实乃吾之大幸。
-因为我的父母是地地道道、兀兀穷年的农民，我这一路摸爬滚打全靠自己不断摸索总结。在人生的道路上，我一直很感谢能给我人生上面指导的人，而技术上面的指导却不是
+因为我的父母是地地道道、兀兀穷年的农民，我这一路摸爬滚打全靠自己不断摸索总结。在人生的道路上，我一直很感谢能给我人生上面指导的人，而技术上面的指导却不是我迫切需要的，技术可以通过Google获得，然而人生的经验却只有过来人才能予以传授。不过我还是信奉我
           ...
 
           <div class="post-more-link text-center">
@@ -2075,8 +2093,7 @@ $$X=a_n*(n-1)!+a_{n-1}*(n-2)!+\cdot\cdot\cdot+a_i*(i-1)!+\cdot\cdot\cdot+a_2*(2-
           
 		  
 		<!-- 在下面的位置加上如下代码 -->
-        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C
-        </span>    
+        <span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C</span>    
         <!-- 在上面的位置加上如上代码 -->  
 		  
           
@@ -2114,7 +2131,7 @@ $$X=a_n*(n-1)!+a_{n-1}*(n-2)!+\cdot\cdot\cdot+a_i*(i-1)!+\cdot\cdot\cdot+a_2*(2-
 
 ‘abcb’在末尾添加’a’ —&gt; ‘abcba’为回文串‘abcb’删除与想要添加的字符’a’对应位置的字符 —&gt; ‘bcb’亦为回文串
 
-‘aabbaab’在头部
+‘aabbaab’在头部添加’b’ —&gt; ‘baabbaab’为回文串‘aabbaab’删除与想要添加的字符’b’对应
           ...
 
           <div class="post-more-link text-center">
