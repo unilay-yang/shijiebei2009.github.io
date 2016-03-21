@@ -2,6 +2,7 @@ title: IntelliJ IDEA中Maven插件无法更新索引之解决办法
 date: 2015-12-09 22:21:33
 tags: [IntelliJ]
 categories: Programming Notes
+
 ---
 
 ####Maven的仓库、索引
@@ -33,68 +34,68 @@ IntelliJ已经内置了对Maven插件的支持，当然你也可以配置自己�
 在使用14.1.X版本的IntelliJ时，更新Maven索引出现如下错误[Indexed Maven Repositories - type remore - Error - Idea 14.1.5](https://devnet.jetbrains.com/message/5560886;jsessionid=565FE35134A3F90A560B993435EAC7EF#5560886)，根据该链接内所述原因为：这是IntelliJ14.1.X版本中的一个BUG，并且会在下一个发布版本中进行修复，推荐将IntelliJ升级到版本15。
 
 ####使用国内Maven仓库的镜像
-鉴于伟大的防火墙，所以推荐使用国内的镜像资源作为Maven中央仓库。推荐使用[开源中国Maven库使用帮助](http://maven.oschina.net/help.html)，配置很简单就不详述了，直接上我本机配置好的`settings.xml`文件如下：
+鉴于伟大的防火墙，所以推荐使用国内的镜像资源作为Maven中央仓库。推荐使用[开源中国Maven库使用帮助](http://maven.oschina.net/help.html)，配置很简单就不详述了，有两种方式，其一打开**settings.xml**文件，加入
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
-    <localRepository>D:/apache-maven-3.3.1/repository</localRepository>
-    <pluginGroups>
-    </pluginGroups>
-    <proxies>
-    </proxies>
-    <servers>
-    </servers>
-    <mirrors>
-        <mirror>
-            <id>nexus-osc</id>
-            <mirrorOf>*</mirrorOf>
-            <name>Nexus osc</name>
+<mirrors>
+    <mirror>
+        <id>nexus-osc</id>
+        <mirrorOf>*</mirrorOf><!--用一个简单的*号会把所有的仓库地址屏蔽掉-->
+        <name>Nexus osc</name>
+        <url>http://maven.oschina.net/content/groups/public/</url>
+    </mirror>
+</mirrors>
+```
+当然还有第二种方式，就是屏蔽指定的中央仓库，并且还可以加入**OSChina**的第三方镜像仓库或者多个仓库，配置如下
+```xml
+<mirrors>
+    <mirror>
+        <id>nexus-osc</id>
+        <mirrorOf>central</mirrorOf><!--这里指定只屏蔽central仓库-->
+        <name>Nexus osc</name>
+        <url>http://maven.oschina.net/content/groups/public/</url>
+    </mirror>
+    <mirror>
+        <id>nexus-osc-thirdparty</id>
+        <mirrorOf>thirdparty</mirrorOf>
+        <name>Nexus osc thirdparty</name>
+        <url>http://maven.oschina.net/content/repositories/thirdparty/</url>
+    </mirror>
+</mirrors>
+```
+最后，在执行**Maven**命令的时候，**Maven**还需要安装一些插件包，这些插件包的下载地址也让其指向**OSChina**的**Maven**地址。修改如下所示
+```xml
+<profile>
+     <id>jdk-1.8</id>
+     <activation>
+         <jdk>1.8</jdk><!--指定JDK版本是1.8时自动激活-->
+     </activation>
+     <repositories>
+         <repository>
+            <id>nexus</id>
+            <name>local private nexus</name>
             <url>http://maven.oschina.net/content/groups/public/</url>
-        </mirror>
-        <mirror>
-            <id>nexus-osc-thirdparty</id>
-            <mirrorOf>thirdparty</mirrorOf>
-            <name>Nexus osc thirdparty</name>
-            <url>http://maven.oschina.net/content/repositories/thirdparty/</url>
-        </mirror>
-    </mirrors>
-    <profiles>
-        <profile>
-            <id>jdk-1.4</id>
-            <activation>
-                <jdk>1.4</jdk>
-            </activation>
-            <repositories>
-                <repository>
-                    <id>nexus</id>
-                    <name>local private nexus</name>
-                    <url>http://maven.oschina.net/content/groups/public/</url>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                </repository>
-            </repositories>
-            <pluginRepositories>
-                <pluginRepository>
-                    <id>nexus</id>
-                    <name>local private nexus</name>
-                    <url>http://maven.oschina.net/content/groups/public/</url>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                </pluginRepository>
-            </pluginRepositories>
-        </profile>
-    </profiles>
-</settings>
+            <releases>
+              <enabled>true</enabled>
+            </releases>
+            <snapshots>
+              <enabled>false</enabled>
+            </snapshots>
+         </repository>
+     </repositories>
+     <pluginRepositories>
+         <pluginRepository>
+            <id>nexus</id>
+            <name>local private nexus</name>
+            <url>http://maven.oschina.net/content/groups/public/</url>
+            <releases>
+              <enabled>true</enabled>
+            </releases>
+            <snapshots>
+              <enabled>false</enabled>
+            </snapshots>
+         </pluginRepository>
+     </pluginRepositories>
+</profile>
 ```
 另外你也可以下载开源中国提供的官方纯净版[settings.xml](http://maven.oschina.net/static/xml/settings.xml)文件。
 
@@ -150,4 +151,5 @@ http://repo1.maven.org/maven2/.index/nexus-maven-repository-index.gz
   </profiles>
 </settings>
 ```
+
 ***转载请注明出处：http://codepub.cn/2015/12/09/IntelliJ-IDEA-in-Maven-plugin-could-not-update-the-index-of-the-solution/***
