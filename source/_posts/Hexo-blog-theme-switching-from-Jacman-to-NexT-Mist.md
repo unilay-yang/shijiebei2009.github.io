@@ -24,17 +24,28 @@ categories: Git/GitHub
 - [NexT官方指南](http://theme-next.iissnan.com/)
 - 在博文标题下面添加文章热度方法参考[这里](http://prozhuchen.github.io/2015/10/01/Hexo%E5%8D%9A%E5%AE%A2%E7%AC%AC%E4%B8%89%E7%AB%99/)
 - 在站点概览中添加友链参考[这里](http://prozhuchen.github.io/2015/10/04/Hexo%E5%8D%9A%E5%AE%A2%E7%AC%AC%E4%B9%9D%E5%8F%88%E5%9B%9B%E5%88%86%E4%B9%8B%E4%B8%89%E7%AB%99/)
-- 修改侧边栏头像下面的字体及颜色参考[这里](http://fancyluo.com/2015/09/18/2015-09-18-hexo-next-update/)，修改的文件具体位置是在**D:\hexo\themes\next\source\css\_common\components\sidebar\sidebar-author.styl**中的**font-size**，将其调大即可。
+- 修改侧边栏头像下面的字体及颜色参考[这里](http://fancyluo.com/2015/09/18/2015-09-18-hexo-next-update/)，修改的文件具体位置是在`D:\hexo\themes\next\source\css\_common\components\sidebar\sidebar-author.styl`中的**font-size**，将其调大即可。
 ```css
 .site-description {
   margin-top: 5px;
   font-size: 16px;
-  color: $site-description-color;
+  color: $site-author-name-color;
   /*
   font-size: $site-description-font-size;
   color: $site-description-color;
   */
 }
+```
+- 修改代码块中字体大小，主题默认的代码块字体偏小，找到`D:\hexo\themes\next\source\css\_common\components\highlight\highlight.styl`，修改**font-size**属性即可
+```css
+$code-block
+  background: highlight-background
+  margin: 20px 0
+  padding: 15px
+  overflow: auto
+  font-size 15px
+  color: highlight-foreground
+  line-height:  $line-height-code-block
 ```
 - 为博客添加搜索框，进入[swiftype](https://swiftype.com/)，点击自己的**Engine**->**Install Search**->**Search Field**后的**edit**，选择**Element ID**，填**#st-search-input**之后选**Save**，继续跳转后点**Activate Swiftype**按钮即可完成**swiftype**的所有配置了。拷贝你的**Engine**的**Install Search**中得到的代码如下
 ```javascript
@@ -51,7 +62,7 @@ categories: Git/GitHub
 ```
 swiftype_key: 这里是KEY
 ```
-- 把侧边栏头像变成圆形，并且鼠标停留在上面发生旋转效果，参考[这里](http://fancyluo.com/2015/09/18/2015-09-18-hexo-next-update/)，具体修改文件的位置是**D:\hexo\themes\next\source\css\_common\components\sidebar\sidebar-author.styl**中的内容如下
+- 把侧边栏头像变成圆形，并且鼠标停留在上面发生旋转效果，参考[这里](http://fancyluo.com/2015/09/18/2015-09-18-hexo-next-update/)，具体修改文件的位置是`D:\hexo\themes\next\source\css\_common\components\sidebar\sidebar-author.styl`中的内容如下
 ```css
 .site-author-image {
   display: block;
@@ -80,7 +91,7 @@ swiftype_key: 这里是KEY
 /* end */
 ```
 - 设置社交链接，参考[这里](http://isnow.space/2016/01/29/Next%E4%B8%BB%E9%A2%98%E5%92%8CHexo%E6%9B%B4%E6%90%AD%E9%85%8D%E5%93%A6/)
-- 添加右上角**Fork me on GitHub**，将如下代码添加到**D:\hexo\themes\next\layout\_layout.swig**底部的**body**标签之内即可，注意修改href为你自己的链接
+- 添加右上角**Fork me on GitHub**，将如下代码添加到`D:\hexo\themes\next\layout\_layout.swig`底部的**body**标签之内即可，注意修改href为你自己的链接
 ```html
 <a href="https://github.com/shijiebei2009"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
 ```
