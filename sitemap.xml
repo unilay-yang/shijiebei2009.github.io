@@ -3,8 +3,48 @@
 
     
   <url>
+    <loc>http://www.codepub.cn/2016/03/21/Windows-build-Solr5-5-search-services/</loc>
+    <lastmod>2016-03-21T14:30:30.572Z</lastmod>
+    <data>
+        <display>
+        <title>Windows下搭建Solr5.5搜索服务</title>
+        <pubTime>2016-03-21T14:29:04.000Z</pubTime>
+        
+        <tag>Solr </tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.codepub.cn/2015/12/09/IntelliJ-IDEA-in-Maven-plugin-could-not-update-the-index-of-the-solution/</loc>
+    <lastmod>2016-03-21T14:25:49.336Z</lastmod>
+    <data>
+        <display>
+        <title>IntelliJ IDEA中Maven插件无法更新索引之解决办法</title>
+        <pubTime>2015-12-09T14:21:33.000Z</pubTime>
+        
+        <tag>IntelliJ </tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.codepub.cn/2016/03/20/Hexo-blog-theme-switching-from-Jacman-to-NexT-Mist/</loc>
-    <lastmod>2016-03-20T16:02:59.085Z</lastmod>
+    <lastmod>2016-03-21T14:25:13.451Z</lastmod>
     <data>
         <display>
         <title>Hexo博客主题从Jacman切换到NexT.Mist</title>
@@ -187,26 +227,6 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2015/12/21/CCF-sixth-CSP-certification-exams-Solutions/</loc>
-    <lastmod>2016-01-03T08:38:07.440Z</lastmod>
-    <data>
-        <display>
-        <title>CCF第六次CSP认证考试题解</title>
-        <pubTime>2015-12-21T15:27:52.000Z</pubTime>
-        
-        <tag>CCF </tag>
-         
-         
-           
-             
-              <breadCrumb title="Algorithms" url="http://www.codepub.cn/categories/Algorithms/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.codepub.cn/2015/12/31/2015-year-end-summary/</loc>
     <lastmod>2016-01-03T08:38:07.440Z</lastmod>
     <data>
@@ -226,26 +246,26 @@
     </url>
 
     
-    
   <url>
-    <loc>http://www.codepub.cn/2015/12/09/IntelliJ-IDEA-in-Maven-plugin-could-not-update-the-index-of-the-solution/</loc>
-    <lastmod>2015-12-09T14:30:08.197Z</lastmod>
+    <loc>http://www.codepub.cn/2015/12/21/CCF-sixth-CSP-certification-exams-Solutions/</loc>
+    <lastmod>2016-01-03T08:38:07.440Z</lastmod>
     <data>
         <display>
-        <title>IntelliJ IDEA中Maven插件无法更新索引之解决办法</title>
-        <pubTime>2015-12-09T14:21:33.000Z</pubTime>
+        <title>CCF第六次CSP认证考试题解</title>
+        <pubTime>2015-12-21T15:27:52.000Z</pubTime>
         
-        <tag>IntelliJ </tag>
+        <tag>CCF </tag>
          
          
            
              
-              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
+              <breadCrumb title="Algorithms" url="http://www.codepub.cn/categories/Algorithms/"/>
           
         </display>
     </data>
     </url>
 
+    
     
   <url>
     <loc>http://www.codepub.cn/2015/11/30/Read-the-black-swan/</loc>
@@ -434,12 +454,12 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2015/10/08/Using-the-Python-CSV-module-to-read-and-write-CSV-file/</loc>
+    <loc>http://www.codepub.cn/2015/07/13/Python3-beginner-s-handbook-four/</loc>
     <lastmod>2015-10-08T06:51:57.576Z</lastmod>
     <data>
         <display>
-        <title>使用Python的CSV模块读写CSV文件</title>
-        <pubTime>2015-10-08T04:01:00.000Z</pubTime>
+        <title>Python3入门手册之四</title>
+        <pubTime>2015-07-13T15:03:44.000Z</pubTime>
         
         <tag>Python3 </tag>
          
@@ -454,12 +474,12 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2015/07/13/Python3-beginner-s-handbook-four/</loc>
+    <loc>http://www.codepub.cn/2015/10/08/Using-the-Python-CSV-module-to-read-and-write-CSV-file/</loc>
     <lastmod>2015-10-08T06:51:57.576Z</lastmod>
     <data>
         <display>
-        <title>Python3入门手册之四</title>
-        <pubTime>2015-07-13T15:03:44.000Z</pubTime>
+        <title>使用Python的CSV模块读写CSV文件</title>
+        <pubTime>2015-10-08T04:01:00.000Z</pubTime>
         
         <tag>Python3 </tag>
          
