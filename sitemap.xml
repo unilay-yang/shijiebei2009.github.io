@@ -3,6 +3,26 @@
 
     
   <url>
+    <loc>http://www.codepub.cn/2016/03/20/Hexo-blog-theme-switching-from-Jacman-to-NexT-Mist/</loc>
+    <lastmod>2016-03-21T15:23:30.750Z</lastmod>
+    <data>
+        <display>
+        <title>Hexo博客主题从Jacman切换到NexT.Mist</title>
+        <pubTime>2016-03-20T15:53:34.000Z</pubTime>
+        
+        <tag>Hexo </tag>
+         
+         
+           
+             
+              <breadCrumb title="Git/GitHub" url="http://www.codepub.cn/categories/Git-GitHub/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.codepub.cn/2016/03/21/Windows-build-Solr5-5-search-services/</loc>
     <lastmod>2016-03-21T15:21:08.508Z</lastmod>
     <data>
@@ -36,26 +56,6 @@
            
              
               <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.codepub.cn/2016/03/20/Hexo-blog-theme-switching-from-Jacman-to-NexT-Mist/</loc>
-    <lastmod>2016-03-21T15:14:56.113Z</lastmod>
-    <data>
-        <display>
-        <title>Hexo博客主题从Jacman切换到NexT.Mist</title>
-        <pubTime>2016-03-20T15:53:34.000Z</pubTime>
-        
-        <tag>Hexo </tag>
-         
-         
-           
-             
-              <breadCrumb title="Git/GitHub" url="http://www.codepub.cn/categories/Git-GitHub/"/>
           
         </display>
     </data>
