@@ -41,7 +41,7 @@ Removing the service 'tomcat8' ...
 Using CATALINA_BASE:    "D:\apache-tomcat-8.0.32"
 The service 'tomcat8' has been removed
 
-#####配置tomcat管理员
+#####配置Tomcat管理员
 在**Tomcat**启动之后，可以在浏览器中输入http://localhost:8080/ 查看是否配置成功，如果出现**Tomcat**主界面，点击**Manager App**，提示权限不足，此时需要在`D:/apache-tomcat-8.0.32/conf/tomcat-users.xml`文件中添加如下内容
 ```xml
 <role rolename="manager-gui"/>
@@ -118,9 +118,16 @@ SolrCloud example running, please visit: http://localhost:8983/solr
 
 成功启动之后，打开浏览器，访问http://localhost:8983/solr 即可看到Solr的控制台界面。
 
-如果不想使用默认的端口**8983**，使用其他端口的命令为
-```java
-java -Djetty.port=8080 -jar start.jar
+如果不想使用默认的端口**8983**，那么使用如下命令通过`-p`参数指定端口号同样可以启动**Solr Server**，访问http://localhost:8080/solr/index.html#/ 就可以看到主控界面了
+```shell
+D:\solr-5.5.0\bin>solr.cmd start -cloud -p 8080 -s "D:\solr-5.5.0\example\cloud\
+node1\solr"
+Backing up D:\solr-5.5.0\example\cloud\node1\solr\..\logs\solr.log
+移动了         1 个文件。
+Backing up D:\solr-5.5.0\example\cloud\node1\solr\..\logs\solr_gc.log
+移动了         1 个文件。
+Waiting up to 30 to see Solr running on port 8080
+Started Solr server on port 8080. Happy searching!
 ```
 或者直接修改**jetty**的配置文件，修改`D:/solr-5.5.0/server/etc`目录下`jetty-http.xml`中的**8983**改为自己希望的端口号即可。
 
