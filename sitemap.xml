@@ -4,7 +4,7 @@
     
   <url>
     <loc>http://www.codepub.cn/2016/03/20/Hexo-blog-theme-switching-from-Jacman-to-NexT-Mist/</loc>
-    <lastmod>2016-03-24T11:57:48.597Z</lastmod>
+    <lastmod>2016-03-24T13:47:38.019Z</lastmod>
     <data>
         <display>
         <title>Hexo博客主题从Jacman切换到NexT.Mist</title>
@@ -23,8 +23,28 @@
 
     
   <url>
+    <loc>http://www.codepub.cn/2016/03/21/Windows-build-Solr5-5-search-services/</loc>
+    <lastmod>2016-03-24T13:46:30.885Z</lastmod>
+    <data>
+        <display>
+        <title>Windows下搭建Solr5.5搜索服务</title>
+        <pubTime>2016-03-21T14:29:04.000Z</pubTime>
+        
+        <tag>Solr </tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.codepub.cn/2016/03/23/Maven-project-integrating-Lucene-Chinese-Segmentation-tools-Jcseg-and-Ansj/</loc>
-    <lastmod>2016-03-23T14:29:45.149Z</lastmod>
+    <lastmod>2016-03-24T13:46:17.139Z</lastmod>
     <data>
         <display>
         <title>Maven项目中Lucene集成中文分词工具Jcseg和Ansj</title>
@@ -76,26 +96,6 @@
            
              
               <breadCrumb title="Algorithms" url="http://www.codepub.cn/categories/Algorithms/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.codepub.cn/2016/03/21/Windows-build-Solr5-5-search-services/</loc>
-    <lastmod>2016-03-22T15:24:09.604Z</lastmod>
-    <data>
-        <display>
-        <title>Windows下搭建Solr5.5搜索服务</title>
-        <pubTime>2016-03-21T14:29:04.000Z</pubTime>
-        
-        <tag>Solr </tag>
-         
-         
-           
-             
-              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
           
         </display>
     </data>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.codepub.cn/"/>
-  <updated>2016-03-23T14:29:45.149Z</updated>
+  <updated>2016-03-24T13:46:17.139Z</updated>
   <id>http://www.codepub.cn/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.codepub.cn/2016/03/23/Maven-project-integrating-Lucene-Chinese-Segmentation-tools-Jcseg-and-Ansj/"/>
     <id>http://www.codepub.cn/2016/03/23/Maven-project-integrating-Lucene-Chinese-Segmentation-tools-Jcseg-and-Ansj/</id>
     <published>2016-03-23T14:11:04.000Z</published>
-    <updated>2016-03-23T14:29:45.149Z</updated>
+    <updated>2016-03-24T13:46:17.139Z</updated>
     
     <content type="html">&lt;h4 id=&quot;开发环境&quot;&gt;开发环境&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;Windows&lt;/strong&gt;：Win7 64 bit&lt;br&gt;&lt;strong&gt;Java&lt;/strong&gt;：java version “1.8.0_45”；Java HotSpot(TM) 64-Bit Server VM&lt;br&gt;&lt;strong&gt;Lucene&lt;/strong&gt;：5.5&lt;br&gt;&lt;strong&gt;Jcseg&lt;/strong&gt;：1.9.7&lt;br&gt;&lt;strong&gt;Ansj_seg&lt;/strong&gt;：3.7.1&lt;br&gt;&lt;strong&gt;Ansj_lucene5_plug&lt;/strong&gt;：3.0&lt;br&gt;&lt;strong&gt;Maven&lt;/strong&gt;：3.3.3&lt;/p&gt;
 &lt;h4 id=&quot;Lucene集成Jcseg&quot;&gt;Lucene集成Jcseg&lt;/h4&gt;&lt;h5 id=&quot;Jcseg简介&quot;&gt;Jcseg简介&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;Jcseg&lt;/strong&gt;是使用&lt;strong&gt;Java&lt;/strong&gt;开发的一个开源中文分词器，使用流行的&lt;strong&gt;mmseg&lt;/strong&gt;算法实现，有兴趣的可以参考&lt;a href=&quot;http://technology.chtsai.org/mmseg/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;算法原文&lt;/a&gt;，并且提供了最高版本的&lt;strong&gt;lucene&lt;/strong&gt;、&lt;strong&gt;solr&lt;/strong&gt;、&lt;strong&gt;elasticsearch&lt;/strong&gt;的分词接口。&lt;/p&gt;
@@ -145,6 +145,7 @@
 &lt;h5 id=&quot;Lucene集成Ansj添加自定义词典&quot;&gt;Lucene集成Ansj添加自定义词典&lt;/h5&gt;&lt;p&gt;如果需要添加自己的自定义词典，参考&lt;strong&gt;default.dic&lt;/strong&gt;格式即可。用户自定义词典的格式是&lt;code&gt;word[tab]nature[tab]freq&lt;/code&gt;，&lt;strong&gt;example&lt;/strong&gt;: 小李子 nr 100&lt;/p&gt;
 &lt;h4 id=&quot;分布式分词组件Word&quot;&gt;分布式分词组件Word&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;Notes&lt;/em&gt;&lt;/strong&gt;：另外发现了一个分布式中文分词组件，希望以后有机会可以深入研究，地址：&lt;a href=&quot;https://github.com/ysc/word&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/ysc/word&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Word&lt;/strong&gt;分词是一个&lt;strong&gt;Java&lt;/strong&gt;实现的分布式的中文分词组件，提供了多种基于词典的分词算法，并利用&lt;strong&gt;ngram&lt;/strong&gt;模型来消除歧义。能准确识别英文、数字，以及日期、时间等数量词，能识别人名、地名、组织机构名等未登录词。能通过自定义配置文件来改变组件行为，能自定义用户词库、自动检测词库变化、支持大规模分布式环境，能灵活指定多种分词算法，能使用&lt;strong&gt;refine&lt;/strong&gt;功能灵活控制分词结果，还能使用词频统计、词性标注、同义标注、反义标注、拼音标注等功能。提供了10种分词算法，还提供了10种文本相似度算法，同时还无缝和&lt;strong&gt;Lucene&lt;/strong&gt;、&lt;strong&gt;Solr&lt;/strong&gt;、&lt;strong&gt;ElasticSearch&lt;/strong&gt;、&lt;strong&gt;Luke&lt;/strong&gt;集成。注意：&lt;strong&gt;word1.3&lt;/strong&gt;需要&lt;strong&gt;JDK1.8&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;转载请注明出处：&lt;a href=&quot;http://codepub.cn/2016/03/23/Maven-project-integrating-Lucene-Chinese-Segmentation-tools-Jcseg-and-Ansj/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://codepub.cn/2016/03/23/Maven-project-integrating-Lucene-Chinese-Segmentation-tools-Jcseg-and-Ansj/&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -165,7 +166,7 @@
     <link href="http://www.codepub.cn/2016/03/21/Windows-build-Solr5-5-search-services/"/>
     <id>http://www.codepub.cn/2016/03/21/Windows-build-Solr5-5-search-services/</id>
     <published>2016-03-21T14:29:04.000Z</published>
-    <updated>2016-03-22T15:24:09.604Z</updated>
+    <updated>2016-03-24T13:46:30.885Z</updated>
     
     <content type="html">&lt;h4 id=&quot;机器环境&quot;&gt;机器环境&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;Windows&lt;/strong&gt;：Win7 64 bit&lt;br&gt;&lt;strong&gt;Java&lt;/strong&gt;：java version “1.8.0_45”；Java HotSpot(TM) 64-Bit Server VM&lt;br&gt;&lt;strong&gt;Solr&lt;/strong&gt;：5.5&lt;br&gt;&lt;strong&gt;Lucene&lt;/strong&gt;：5.5&lt;br&gt;&lt;strong&gt;Tomcat&lt;/strong&gt;：8.0.32&lt;/p&gt;
 &lt;p&gt;Lucene和Solr下载地址：&lt;a href=&quot;http://lucene.apache.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://lucene.apache.org/&lt;/a&gt;&lt;br&gt;Windows选择下载zip压缩包，Linux选择下载tgz压缩包&lt;br&gt;Tomcat下载地址：&lt;a href=&quot;http://tomcat.apache.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://tomcat.apache.org/&lt;/a&gt; ，选择Binary Distributions下的Core中的64-bit Windows zip (pgp, md5, sha1)下载之后文件名称是：apache-tomcat-8.0.32-windows-x64&lt;/p&gt;
@@ -206,6 +207,7 @@
 &lt;p&gt;如果不想使用默认的端口&lt;strong&gt;8983&lt;/strong&gt;，那么使用如下命令通过&lt;code&gt;-p&lt;/code&gt;参数指定端口号同样可以启动&lt;strong&gt;Solr Server&lt;/strong&gt;，访问&lt;a href=&quot;http://localhost:8080/solr/index.html#/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost:8080/solr/index.html#/&lt;/a&gt; 就可以看到主控界面了&lt;br&gt;&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;D:\solr-5.5.0\bin&amp;#62;solr.cmd start -cloud -p 8080 -s &amp;#34;D:\solr-5.5.0\example\cloud\&amp;#10;node1\solr&amp;#34;&amp;#10;Backing up D:\solr-5.5.0\example\cloud\node1\solr\..\logs\solr.log&amp;#10;&amp;#31227;&amp;#21160;&amp;#20102;         1 &amp;#20010;&amp;#25991;&amp;#20214;&amp;#12290;&amp;#10;Backing up D:\solr-5.5.0\example\cloud\node1\solr\..\logs\solr_gc.log&amp;#10;&amp;#31227;&amp;#21160;&amp;#20102;         1 &amp;#20010;&amp;#25991;&amp;#20214;&amp;#12290;&amp;#10;Waiting up to 30 to see Solr running on port 8080&amp;#10;Started Solr server on port 8080. Happy searching!&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;或者直接修改&lt;strong&gt;jetty&lt;/strong&gt;的配置文件，修改&lt;code&gt;D:/solr-5.5.0/server/etc&lt;/code&gt;目录下&lt;code&gt;jetty-http.xml&lt;/code&gt;中的&lt;strong&gt;8983&lt;/strong&gt;改为自己希望的端口号即可。&lt;/p&gt;
 &lt;p&gt;参考文献&lt;br&gt;【1】&lt;a href=&quot;http://blog.csdn.net/luenxin/article/details/50838895&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/luenxin/article/details/50838895&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;转载请注明出处：&lt;a href=&quot;http://codepub.cn/2016/03/21/Windows-build-Solr5-5-search-services/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://codepub.cn/2016/03/21/Windows-build-Solr5-5-search-services/&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -226,7 +228,7 @@
     <link href="http://www.codepub.cn/2016/03/20/Hexo-blog-theme-switching-from-Jacman-to-NexT-Mist/"/>
     <id>http://www.codepub.cn/2016/03/20/Hexo-blog-theme-switching-from-Jacman-to-NexT-Mist/</id>
     <published>2016-03-20T15:53:34.000Z</published>
-    <updated>2016-03-24T11:57:48.597Z</updated>
+    <updated>2016-03-24T13:47:38.019Z</updated>
     
     <content type="html">&lt;h4 id=&quot;杂感&quot;&gt;杂感&lt;/h4&gt;&lt;p&gt;难得一个周末，经过五天的工作之后，本来是打算周六周日在睡觉中度过，因为最近工作确实挺累，倒不是工作有多繁忙，而是路途遥远，每天上下班路上花费三个小时，特别是早高峰挤地铁，那真是个体力活啊，每天都是七号线静安寺转二号线，换乘之前，并不能太深入地铁车厢内部，否则到了换乘站你可能根本就挤不下车去了。&lt;/p&gt;
 &lt;p&gt;最近博客流量有渐增趋势，可能是之前未被百度收录，而近期被百度收录的缘故吧，可见我天朝还是百度的天下，哎，万恶的墙啊（Great Firewall of China）！流量渐增，访客自然增加，所以也会有猎头加我微信，我也在考虑要不要把我的个人信息撤掉，貌似泄露的有点多了。同时也会有一些人因为博客的内容加我，请教谈不上，可能是一些同学在做相同的事情的过程中遇到了一些问题，而我可能刚好做过这方面的事情而已，希望有事的同学或朋友直接电联我即可，因为这是我认为最节约我们双方时间的沟通方式，确实没有太多时间去和你在微信上慢慢切磋。&lt;/p&gt;
@@ -265,6 +267,7 @@
 &lt;li&gt;利用git解决hexo博客多PC间同步问题，参考&lt;a href=&quot;http://rainnie.me/2016/03/13/%E5%88%A9%E7%94%A8git-%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2%E5%A4%9APC-%E9%97%B4%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;关于多说评论框的美化以及评论用户的操作系统和浏览器型号，参考&lt;a href=&quot;http://lovenight.github.io/2015/11/10/Hexo-3-1-1-%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;转载请注明出处：&lt;a href=&quot;http://codepub.cn/2016/03/20/Hexo-blog-theme-switching-from-Jacman-to-NexT-Mist/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://codepub.cn/2016/03/20/Hexo-blog-theme-switching-from-Jacman-to-NexT-Mist/&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
