@@ -36,6 +36,7 @@ categories: Git/GitHub
   */
 }
 ```
+
 - 修改代码块中字体大小，主题默认的代码块字体偏小，找到`D:\hexo\themes\next\source\css\_common\components\highlight\highlight.styl`，修改**font-size**属性即可
 ```css
 $code-block
@@ -47,21 +48,17 @@ $code-block
   color: highlight-foreground
   line-height:  $line-height-code-block
 ```
+
 - 为博客添加搜索框，进入[swiftype](https://swiftype.com/)，点击自己的**Engine**->**Install Search**->**Search Field**后的**edit**，选择**Element ID**，填**#st-search-input**之后选**Save**，继续跳转后点**Activate Swiftype**按钮即可完成**swiftype**的所有配置了。拷贝你的**Engine**的**Install Search**中得到的代码如下
 ```javascript
-< script type="text/javascript">
   (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
   (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
   e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
   })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
 
   _st('install','这里是KEY','2.0.0');
-</script>
 ```
-    然后在**Next.Mist**主题下的`_config.xml`中启用即可如下
-```
-swiftype_key: 这里是KEY
-```
+  然后在**Next.Mist**主题下的`_config.xml`中启用即可如下：`swiftype_key: 这里是KEY`
 - 把侧边栏头像变成圆形，并且鼠标停留在上面发生旋转效果，参考[这里](http://fancyluo.com/2015/09/18/2015-09-18-hexo-next-update/)，具体修改文件的位置是`D:\hexo\themes\next\source\css\_common\components\sidebar\sidebar-author.styl`中的内容如下
 ```css
 .site-author-image {
@@ -90,12 +87,19 @@ swiftype_key: 这里是KEY
 }
 /* end */
 ```
+
 - 设置社交链接，参考[这里](http://isnow.space/2016/01/29/Next%E4%B8%BB%E9%A2%98%E5%92%8CHexo%E6%9B%B4%E6%90%AD%E9%85%8D%E5%93%A6/)
 - 添加右上角**Fork me on GitHub**，将如下代码添加到`D:\hexo\themes\next\layout\_layout.swig`底部的**body**标签之内即可，注意修改href为你自己的链接
 ```html
-<a href="https://github.com/shijiebei2009"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+<a href="https://github.com/shijiebei2009">
+<img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67"
+alt="Fork me on GitHub" 
+data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
+</a>
 ```
-- 需要添加音乐播放器和**High一下**的参考[这里](http://jijiaxin89.com/2015/08/21/%E7%8E%A9%E8%BD%AChexo%E5%8D%9A%E5%AE%A2%E4%B9%8Bnext/)
+
+- 需要添加**音乐播放器**和**High一下**的参考[这里](http://jijiaxin89.com/2015/08/21/%E7%8E%A9%E8%BD%AChexo%E5%8D%9A%E5%AE%A2%E4%B9%8Bnext/)
 - 更详细的配置参考[这里](http://www.zerounix.com/2015/09/29/install-hexo-for-blog/)
 - Hexo更改默认Google字体库，参考[这里](http://rainnie.me/2016/03/11/Hexo-%E6%9B%B4%E6%94%B9%E9%BB%98%E8%AE%A4Google-%E5%AD%97%E4%BD%93%E5%BA%93/)
 - 利用git解决hexo博客多PC间同步问题，参考[这里](http://rainnie.me/2016/03/13/%E5%88%A9%E7%94%A8git-%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2%E5%A4%9APC-%E9%97%B4%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98/)
+- 关于多说评论框的美化以及评论用户的操作系统和浏览器型号，参考[这里](http://lovenight.github.io/2015/11/10/Hexo-3-1-1-%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/)
