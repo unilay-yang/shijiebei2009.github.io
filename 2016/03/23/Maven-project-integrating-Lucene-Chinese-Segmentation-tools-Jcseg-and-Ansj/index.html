@@ -67,7 +67,7 @@ Lucene集成JcsegJcseg简介Jcseg是使用Java开发的一个开源中文分词�
 <meta property="og:site_name" content="IT草根">
 <meta property="og:description" content="开发环境Windows：Win7 64 bitJava：java version “1.8.0_45”；Java HotSpot(TM) 64-Bit Server VMLucene：5.5Jcseg：1.9.7Ansj_seg：3.7.1Ansj_lucene5_plug：3.0Maven：3.3.3
 Lucene集成JcsegJcseg简介Jcseg是使用Java开发的一个开源中文分词器，使用">
-<meta property="og:updated_time" content="2016-03-24T13:46:17.139Z">
+<meta property="og:updated_time" content="2016-03-27T04:08:37.574Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Maven项目中Lucene集成中文分词工具Jcseg和Ansj">
 <meta name="twitter:description" content="开发环境Windows：Win7 64 bitJava：java version “1.8.0_45”；Java HotSpot(TM) 64-Bit Server VMLucene：5.5Jcseg：1.9.7Ansj_seg：3.7.1Ansj_lucene5_plug：3.0Maven：3.3.3
@@ -444,6 +444,7 @@ Lucene集成JcsegJcseg简介Jcseg是使用Java开发的一个开源中文分词�
 <blockquote>
 <p><strong>java.lang.AssertionError: TokenStream implementation classes or at least their incrementToken() implementation must be final</strong></p>
 </blockquote>
+<p><strong>Notes 2016/3/27</strong>：经反馈，作者已<strong>fix</strong>此<strong>Bug</strong>，但本文不再做更新。<strong>Issue</strong>编号：<a href="https://github.com/NLPchina/ansj_seg/issues/249" target="_blank" rel="external">#249</a>，反馈地址：<a href="https://github.com/NLPchina/ansj_seg/issues/249#event-604309598" target="_blank" rel="external">https://github.com/NLPchina/ansj_seg/issues/249#event-604309598</a></p>
 <p>说的很清楚啊，<strong>Ansj</strong>作者自己测试通过否？要么将类修饰为<strong>final</strong>，要么将<strong>incrementToken()</strong>方法修饰为<strong>final</strong>，这是为啥哩？</p>
 <p>查源码，从<strong>AnsjAnalyzer</strong>追踪到<strong>AnsjTokenizer</strong>，再追踪到<strong>Tokenizer</strong>，别停，继续追踪<strong>TokenStream</strong>，该类位于<code>org.apache.lucene.analysis</code>包下，在该类的<strong>Doc</strong>注释中，终于发现如下说明</p>
 <blockquote>

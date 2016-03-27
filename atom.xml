@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.codepub.cn/"/>
-  <updated>2016-03-24T13:46:17.139Z</updated>
+  <updated>2016-03-27T04:08:37.574Z</updated>
   <id>http://www.codepub.cn/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.codepub.cn/2016/03/23/Maven-project-integrating-Lucene-Chinese-Segmentation-tools-Jcseg-and-Ansj/"/>
     <id>http://www.codepub.cn/2016/03/23/Maven-project-integrating-Lucene-Chinese-Segmentation-tools-Jcseg-and-Ansj/</id>
     <published>2016-03-23T14:11:04.000Z</published>
-    <updated>2016-03-24T13:46:17.139Z</updated>
+    <updated>2016-03-27T04:08:37.574Z</updated>
     
     <content type="html">&lt;h4 id=&quot;开发环境&quot;&gt;开发环境&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;Windows&lt;/strong&gt;：Win7 64 bit&lt;br&gt;&lt;strong&gt;Java&lt;/strong&gt;：java version “1.8.0_45”；Java HotSpot(TM) 64-Bit Server VM&lt;br&gt;&lt;strong&gt;Lucene&lt;/strong&gt;：5.5&lt;br&gt;&lt;strong&gt;Jcseg&lt;/strong&gt;：1.9.7&lt;br&gt;&lt;strong&gt;Ansj_seg&lt;/strong&gt;：3.7.1&lt;br&gt;&lt;strong&gt;Ansj_lucene5_plug&lt;/strong&gt;：3.0&lt;br&gt;&lt;strong&gt;Maven&lt;/strong&gt;：3.3.3&lt;/p&gt;
 &lt;h4 id=&quot;Lucene集成Jcseg&quot;&gt;Lucene集成Jcseg&lt;/h4&gt;&lt;h5 id=&quot;Jcseg简介&quot;&gt;Jcseg简介&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;Jcseg&lt;/strong&gt;是使用&lt;strong&gt;Java&lt;/strong&gt;开发的一个开源中文分词器，使用流行的&lt;strong&gt;mmseg&lt;/strong&gt;算法实现，有兴趣的可以参考&lt;a href=&quot;http://technology.chtsai.org/mmseg/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;算法原文&lt;/a&gt;，并且提供了最高版本的&lt;strong&gt;lucene&lt;/strong&gt;、&lt;strong&gt;solr&lt;/strong&gt;、&lt;strong&gt;elasticsearch&lt;/strong&gt;的分词接口。&lt;/p&gt;
@@ -114,6 +114,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;java.lang.AssertionError: TokenStream implementation classes or at least their incrementToken() implementation must be final&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Notes 2016/3/27&lt;/strong&gt;：经反馈，作者已&lt;strong&gt;fix&lt;/strong&gt;此&lt;strong&gt;Bug&lt;/strong&gt;，但本文不再做更新。&lt;strong&gt;Issue&lt;/strong&gt;编号：&lt;a href=&quot;https://github.com/NLPchina/ansj_seg/issues/249&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;#249&lt;/a&gt;，反馈地址：&lt;a href=&quot;https://github.com/NLPchina/ansj_seg/issues/249#event-604309598&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/NLPchina/ansj_seg/issues/249#event-604309598&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;说的很清楚啊，&lt;strong&gt;Ansj&lt;/strong&gt;作者自己测试通过否？要么将类修饰为&lt;strong&gt;final&lt;/strong&gt;，要么将&lt;strong&gt;incrementToken()&lt;/strong&gt;方法修饰为&lt;strong&gt;final&lt;/strong&gt;，这是为啥哩？&lt;/p&gt;
 &lt;p&gt;查源码，从&lt;strong&gt;AnsjAnalyzer&lt;/strong&gt;追踪到&lt;strong&gt;AnsjTokenizer&lt;/strong&gt;，再追踪到&lt;strong&gt;Tokenizer&lt;/strong&gt;，别停，继续追踪&lt;strong&gt;TokenStream&lt;/strong&gt;，该类位于&lt;code&gt;org.apache.lucene.analysis&lt;/code&gt;包下，在该类的&lt;strong&gt;Doc&lt;/strong&gt;注释中，终于发现如下说明&lt;/p&gt;
 &lt;blockquote&gt;
