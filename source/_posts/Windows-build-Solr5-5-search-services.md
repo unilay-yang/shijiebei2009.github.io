@@ -134,3 +134,6 @@ Started Solr server on port 8080. Happy searching!
 
 参考文献
 【1】http://blog.csdn.net/luenxin/article/details/50838895
+
+
+***转载请注明出处：http://codepub.cn/2016/03/21/Windows-build-Solr5-5-search-services/***

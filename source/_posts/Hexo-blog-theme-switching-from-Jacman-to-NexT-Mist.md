@@ -103,3 +103,6 @@ data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0
 - Hexo更改默认Google字体库，参考[这里](http://rainnie.me/2016/03/11/Hexo-%E6%9B%B4%E6%94%B9%E9%BB%98%E8%AE%A4Google-%E5%AD%97%E4%BD%93%E5%BA%93/)
 - 利用git解决hexo博客多PC间同步问题，参考[这里](http://rainnie.me/2016/03/13/%E5%88%A9%E7%94%A8git-%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2%E5%A4%9APC-%E9%97%B4%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98/)
 - 关于多说评论框的美化以及评论用户的操作系统和浏览器型号，参考[这里](http://lovenight.github.io/2015/11/10/Hexo-3-1-1-%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/)
+
+
+***转载请注明出处：http://codepub.cn/2016/03/20/Hexo-blog-theme-switching-from-Jacman-to-NexT-Mist/***
