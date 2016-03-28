@@ -3,59 +3,19 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2016/03/23/Maven-project-integrating-Lucene-Chinese-Segmentation-tools-Jcseg-and-Ansj/</loc>
-    <lastmod>2016-03-27T04:08:37.574Z</lastmod>
+    <loc>http://www.codepub.cn/2016/03/27/Reading-the-programmer-you-can-not-afford-injuries/</loc>
+    <lastmod>2016-03-28T05:40:34.914Z</lastmod>
     <data>
         <display>
-        <title>Maven项目中Lucene集成中文分词工具Jcseg和Ansj</title>
-        <pubTime>2016-03-23T14:11:04.000Z</pubTime>
+        <title>读《程序员，你伤不起》</title>
+        <pubTime>2016-03-27T04:53:21.000Z</pubTime>
         
-        <tag>Lucene </tag>
+        <tag>Thinking </tag>
          
          
            
              
-              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.codepub.cn/2016/03/20/Hexo-blog-theme-switching-from-Jacman-to-NexT-Mist/</loc>
-    <lastmod>2016-03-24T13:47:38.019Z</lastmod>
-    <data>
-        <display>
-        <title>Hexo博客主题从Jacman切换到NexT.Mist</title>
-        <pubTime>2016-03-20T15:53:34.000Z</pubTime>
-        
-        <tag>Hexo </tag>
-         
-         
-           
-             
-              <breadCrumb title="Git/GitHub" url="http://www.codepub.cn/categories/Git-GitHub/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.codepub.cn/2016/03/21/Windows-build-Solr5-5-search-services/</loc>
-    <lastmod>2016-03-24T13:46:30.885Z</lastmod>
-    <data>
-        <display>
-        <title>Windows下搭建Solr5.5搜索服务</title>
-        <pubTime>2016-03-21T14:29:04.000Z</pubTime>
-        
-        <tag>Solr </tag>
-         
-         
-           
-             
-              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
+              <breadCrumb title="Life-Talk" url="http://www.codepub.cn/categories/Life-Talk/"/>
           
         </display>
     </data>
@@ -64,7 +24,7 @@
     
   <url>
     <loc>http://www.codepub.cn/2015/12/09/IntelliJ-IDEA-in-Maven-plugin-could-not-update-the-index-of-the-solution/</loc>
-    <lastmod>2016-03-22T15:24:25.240Z</lastmod>
+    <lastmod>2016-03-27T04:26:37.338Z</lastmod>
     <data>
         <display>
         <title>IntelliJ IDEA中Maven插件无法更新索引之解决办法</title>
@@ -84,7 +44,7 @@
     
   <url>
     <loc>http://www.codepub.cn/2015/08/04/Based-on-the-extended-version-of-synonyms-Cilin-word-similarity-computing/</loc>
-    <lastmod>2016-03-22T15:24:25.219Z</lastmod>
+    <lastmod>2016-03-27T04:26:37.317Z</lastmod>
     <data>
         <display>
         <title>基于同义词词林扩展版的词语相似度计算</title>
@@ -96,6 +56,66 @@
            
              
               <breadCrumb title="Algorithms" url="http://www.codepub.cn/categories/Algorithms/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.codepub.cn/2016/03/21/Windows-build-Solr5-5-search-services/</loc>
+    <lastmod>2016-03-27T04:25:59.108Z</lastmod>
+    <data>
+        <display>
+        <title>Windows下搭建Solr5.5搜索服务</title>
+        <pubTime>2016-03-21T14:29:04.000Z</pubTime>
+        
+        <tag>Solr </tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.codepub.cn/2016/03/23/Maven-project-integrating-Lucene-Chinese-Segmentation-tools-Jcseg-and-Ansj/</loc>
+    <lastmod>2016-03-27T04:25:59.107Z</lastmod>
+    <data>
+        <display>
+        <title>Maven项目中Lucene集成中文分词工具Jcseg和Ansj</title>
+        <pubTime>2016-03-23T14:11:04.000Z</pubTime>
+        
+        <tag>Lucene </tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.codepub.cn/2016/03/20/Hexo-blog-theme-switching-from-Jacman-to-NexT-Mist/</loc>
+    <lastmod>2016-03-27T04:25:59.106Z</lastmod>
+    <data>
+        <display>
+        <title>Hexo博客主题从Jacman切换到NexT.Mist</title>
+        <pubTime>2016-03-20T15:53:34.000Z</pubTime>
+        
+        <tag>Hexo </tag>
+         
+         
+           
+             
+              <breadCrumb title="Git/GitHub" url="http://www.codepub.cn/categories/Git-GitHub/"/>
           
         </display>
     </data>
@@ -247,26 +267,6 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2015/12/31/2015-year-end-summary/</loc>
-    <lastmod>2016-01-03T08:38:07.440Z</lastmod>
-    <data>
-        <display>
-        <title>2015年终总结</title>
-        <pubTime>2015-12-31T12:36:42.000Z</pubTime>
-        
-        <tag>Thinking </tag>
-         
-         
-           
-             
-              <breadCrumb title="Life-Talk" url="http://www.codepub.cn/categories/Life-Talk/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.codepub.cn/2015/12/21/CCF-sixth-CSP-certification-exams-Solutions/</loc>
     <lastmod>2016-01-03T08:38:07.440Z</lastmod>
     <data>
@@ -280,6 +280,26 @@
            
              
               <breadCrumb title="Algorithms" url="http://www.codepub.cn/categories/Algorithms/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.codepub.cn/2015/12/31/2015-year-end-summary/</loc>
+    <lastmod>2016-01-03T08:38:07.440Z</lastmod>
+    <data>
+        <display>
+        <title>2015年终总结</title>
+        <pubTime>2015-12-31T12:36:42.000Z</pubTime>
+        
+        <tag>Thinking </tag>
+         
+         
+           
+             
+              <breadCrumb title="Life-Talk" url="http://www.codepub.cn/categories/Life-Talk/"/>
           
         </display>
     </data>
