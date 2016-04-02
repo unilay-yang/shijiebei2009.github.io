@@ -23,28 +23,8 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2016/03/27/Reading-the-programmer-you-can-not-afford-injuries/</loc>
-    <lastmod>2016-03-28T05:40:34.914Z</lastmod>
-    <data>
-        <display>
-        <title>读《程序员，你伤不起》</title>
-        <pubTime>2016-03-27T04:53:21.000Z</pubTime>
-        
-        <tag>Thinking </tag>
-         
-         
-           
-             
-              <breadCrumb title="Life-Talk" url="http://www.codepub.cn/categories/Life-Talk/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.codepub.cn/2015/12/09/IntelliJ-IDEA-in-Maven-plugin-could-not-update-the-index-of-the-solution/</loc>
-    <lastmod>2016-03-27T04:26:37.338Z</lastmod>
+    <lastmod>2016-03-28T05:44:47.750Z</lastmod>
     <data>
         <display>
         <title>IntelliJ IDEA中Maven插件无法更新索引之解决办法</title>
@@ -64,7 +44,7 @@
     
   <url>
     <loc>http://www.codepub.cn/2015/08/04/Based-on-the-extended-version-of-synonyms-Cilin-word-similarity-computing/</loc>
-    <lastmod>2016-03-27T04:26:37.317Z</lastmod>
+    <lastmod>2016-03-28T05:44:47.739Z</lastmod>
     <data>
         <display>
         <title>基于同义词词林扩展版的词语相似度计算</title>
@@ -76,6 +56,26 @@
            
              
               <breadCrumb title="Algorithms" url="http://www.codepub.cn/categories/Algorithms/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.codepub.cn/2016/03/27/Reading-the-programmer-you-can-not-afford-injuries/</loc>
+    <lastmod>2016-03-28T05:44:33.314Z</lastmod>
+    <data>
+        <display>
+        <title>读《程序员，你伤不起》</title>
+        <pubTime>2016-03-27T04:53:21.000Z</pubTime>
+        
+        <tag>Thinking </tag>
+         
+         
+           
+             
+              <breadCrumb title="Life-Talk" url="http://www.codepub.cn/categories/Life-Talk/"/>
           
         </display>
     </data>
