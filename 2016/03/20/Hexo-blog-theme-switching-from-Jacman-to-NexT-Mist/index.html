@@ -67,7 +67,7 @@
 <meta property="og:site_name" content="IT草根">
 <meta property="og:description" content="杂感难得一个周末，经过五天的工作之后，本来是打算周六周日在睡觉中度过，因为最近工作确实挺累，倒不是工作有多繁忙，而是路途遥远，每天上下班路上花费三个小时，特别是早高峰挤地铁，那真是个体力活啊，每天都是七号线静安寺转二号线，换乘之前，并不能太深入地铁车厢内部，否则到了换乘站你可能根本就挤不下车去了。
 最近博客流量有渐增趋势，可能是之前未被百度收录，而近期被百度收录的缘故吧，可见我天朝还是百度的天下，">
-<meta property="og:updated_time" content="2016-04-02T02:46:49.705Z">
+<meta property="og:updated_time" content="2016-04-02T03:23:22.657Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo博客主题从Jacman切换到NexT.Mist">
 <meta name="twitter:description" content="杂感难得一个周末，经过五天的工作之后，本来是打算周六周日在睡觉中度过，因为最近工作确实挺累，倒不是工作有多繁忙，而是路途遥远，每天上下班路上花费三个小时，特别是早高峰挤地铁，那真是个体力活啊，每天都是七号线静安寺转二号线，换乘之前，并不能太深入地铁车厢内部，否则到了换乘站你可能根本就挤不下车去了。
@@ -83,7 +83,7 @@
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: 6264291807601886000,
       author: '博主'
     }
   };
@@ -372,6 +372,8 @@
 <li>关于多说评论框的美化以及评论用户的操作系统和浏览器型号，参考<a href="http://lovenight.github.io/2015/11/10/Hexo-3-1-1-%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/" target="_blank" rel="external">这里</a></li>
 <li>使用多说给博客添加最近访客功能，参考<a href="http://www.arao.me/2015/hexo-next-theme-optimize-duoshuo/" target="_blank" rel="external">这里</a></li>
 <li>给博客创建留言页面，参考<a href="http://www.arao.me/2015/hexo-next-theme-optimize-base/" target="_blank" rel="external">这里</a></li>
+<li>开启打赏功能，参考<a href="http://theme-next.iissnan.com/theme-settings.html#reward" target="_blank" rel="external">这里</a></li>
+<li>多说评论显示UA，即用户操作系统和浏览器版本参考<a href="http://theme-next.iissnan.com/theme-settings.html#duoshuo-ua" target="_blank" rel="external">这里</a></li>
 <li><p>修改侧边栏头像下面的字体及颜色参考<a href="http://fancyluo.com/2015/09/18/2015-09-18-hexo-next-update/" target="_blank" rel="external">这里</a>，修改的文件具体位置是在<code>D:\hexo\themes\next\source\css\_common\components\sidebar\sidebar-author.styl</code>中的<strong>font-size</strong>，将其调大即可。</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.site-description</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">margin-top</span>:<span class="value"> <span class="number">5px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">16px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> $site-author-name-color</span></span>;</span><br><span class="line">  <span class="comment">/*</span><br><span class="line">  font-size: $site-description-font-size;</span><br><span class="line">  color: $site-description-color;</span><br><span class="line">  */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -397,6 +399,27 @@
     <div>
       
         
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://7xig3q.com1.z0.glb.clouddn.com/weixin-donate.png" alt="Wang Xu WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>微信打赏</p>
+      </div>
+    
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://7xig3q.com1.z0.glb.clouddn.com/alipay-donate.png" alt="Wang Xu Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>支付宝打赏</p>
+      </div>
+    
+  </div>
+<div>
+
       
     </div>
 
@@ -914,6 +937,9 @@
   </script>
 
   
+    
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
     
   
 

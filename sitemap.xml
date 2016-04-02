@@ -4,7 +4,7 @@
     
   <url>
     <loc>http://www.codepub.cn/2016/03/20/Hexo-blog-theme-switching-from-Jacman-to-NexT-Mist/</loc>
-    <lastmod>2016-04-02T02:46:49.705Z</lastmod>
+    <lastmod>2016-04-02T03:23:22.657Z</lastmod>
     <data>
         <display>
         <title>Hexo博客主题从Jacman切换到NexT.Mist</title>
@@ -16,6 +16,26 @@
            
              
               <breadCrumb title="Git/GitHub" url="http://www.codepub.cn/categories/Git-GitHub/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.codepub.cn/2016/03/27/Reading-the-programmer-you-can-not-afford-injuries/</loc>
+    <lastmod>2016-04-02T03:11:17.727Z</lastmod>
+    <data>
+        <display>
+        <title>读《程序员，你伤不起》</title>
+        <pubTime>2016-03-27T04:53:21.000Z</pubTime>
+        
+        <tag>Thinking </tag>
+         
+         
+           
+             
+              <breadCrumb title="Life-Talk" url="http://www.codepub.cn/categories/Life-Talk/"/>
           
         </display>
     </data>
@@ -56,26 +76,6 @@
            
              
               <breadCrumb title="Algorithms" url="http://www.codepub.cn/categories/Algorithms/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.codepub.cn/2016/03/27/Reading-the-programmer-you-can-not-afford-injuries/</loc>
-    <lastmod>2016-03-28T05:44:33.314Z</lastmod>
-    <data>
-        <display>
-        <title>读《程序员，你伤不起》</title>
-        <pubTime>2016-03-27T04:53:21.000Z</pubTime>
-        
-        <tag>Thinking </tag>
-         
-         
-           
-             
-              <breadCrumb title="Life-Talk" url="http://www.codepub.cn/categories/Life-Talk/"/>
           
         </display>
     </data>
