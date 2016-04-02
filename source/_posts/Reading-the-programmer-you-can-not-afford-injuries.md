@@ -100,4 +100,5 @@ toc: false
  - 有时候钱借出去了，收不回来，还会损失一个朋友
  - 若是一般的朋友，当你借出去了，就要做好要不回来的打算
 
-- 作者博客：http://www.cnblogs.com/jirigala/
+
+**吉日嘎拉**博客园地址：http://www.cnblogs.com/jirigala/
