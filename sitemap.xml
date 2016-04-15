@@ -3,19 +3,19 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2016/03/20/Hexo-blog-theme-switching-from-Jacman-to-NexT-Mist/</loc>
-    <lastmod>2016-04-02T03:23:22.657Z</lastmod>
+    <loc>http://www.codepub.cn/2016/04/15/A-small-trap-of-JDBC-connection-to-MySql-in-java/</loc>
+    <lastmod>2016-04-15T15:55:01.928Z</lastmod>
     <data>
         <display>
-        <title>Hexo博客主题从Jacman切换到NexT.Mist</title>
-        <pubTime>2016-03-20T15:53:34.000Z</pubTime>
+        <title>Java之JDBC连接MySql的一点坑</title>
+        <pubTime>2016-04-15T15:51:11.000Z</pubTime>
         
-        <tag>Hexo </tag>
+        <tag>MySql </tag>
          
          
            
              
-              <breadCrumb title="Git/GitHub" url="http://www.codepub.cn/categories/Git-GitHub/"/>
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
           
         </display>
     </data>
@@ -23,28 +23,29 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2016/03/27/Reading-the-programmer-you-can-not-afford-injuries/</loc>
-    <lastmod>2016-04-02T03:11:17.727Z</lastmod>
+    <loc>http://www.codepub.cn/2016/04/15/Log4j-print-exception-stack-information-to-the-log/</loc>
+    <lastmod>2016-04-15T15:44:56.238Z</lastmod>
     <data>
         <display>
-        <title>读《程序员，你伤不起》</title>
-        <pubTime>2016-03-27T04:53:21.000Z</pubTime>
+        <title>Log4j打印异常堆栈信息到日志</title>
+        <pubTime>2016-04-15T15:38:41.000Z</pubTime>
         
-        <tag>Thinking </tag>
+        <tag>Log4j </tag>
          
          
            
              
-              <breadCrumb title="Life-Talk" url="http://www.codepub.cn/categories/Life-Talk/"/>
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
           
         </display>
     </data>
     </url>
 
+    
     
   <url>
     <loc>http://www.codepub.cn/2015/12/09/IntelliJ-IDEA-in-Maven-plugin-could-not-update-the-index-of-the-solution/</loc>
-    <lastmod>2016-03-28T05:44:47.750Z</lastmod>
+    <lastmod>2016-04-02T03:27:39.879Z</lastmod>
     <data>
         <display>
         <title>IntelliJ IDEA中Maven插件无法更新索引之解决办法</title>
@@ -64,7 +65,7 @@
     
   <url>
     <loc>http://www.codepub.cn/2015/08/04/Based-on-the-extended-version-of-synonyms-Cilin-word-similarity-computing/</loc>
-    <lastmod>2016-03-28T05:44:47.739Z</lastmod>
+    <lastmod>2016-04-02T03:27:39.868Z</lastmod>
     <data>
         <display>
         <title>基于同义词词林扩展版的词语相似度计算</title>
@@ -76,6 +77,46 @@
            
              
               <breadCrumb title="Algorithms" url="http://www.codepub.cn/categories/Algorithms/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.codepub.cn/2016/03/27/Reading-the-programmer-you-can-not-afford-injuries/</loc>
+    <lastmod>2016-04-02T03:27:27.141Z</lastmod>
+    <data>
+        <display>
+        <title>读《程序员，你伤不起》</title>
+        <pubTime>2016-03-27T04:53:21.000Z</pubTime>
+        
+        <tag>Thinking </tag>
+         
+         
+           
+             
+              <breadCrumb title="Life-Talk" url="http://www.codepub.cn/categories/Life-Talk/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.codepub.cn/2016/03/20/Hexo-blog-theme-switching-from-Jacman-to-NexT-Mist/</loc>
+    <lastmod>2016-04-02T03:27:27.139Z</lastmod>
+    <data>
+        <display>
+        <title>Hexo博客主题从Jacman切换到NexT.Mist</title>
+        <pubTime>2016-03-20T15:53:34.000Z</pubTime>
+        
+        <tag>Hexo </tag>
+         
+         
+           
+             
+              <breadCrumb title="Git/GitHub" url="http://www.codepub.cn/categories/Git-GitHub/"/>
           
         </display>
     </data>
@@ -121,7 +162,6 @@
     </data>
     </url>
 
-    
     
     
     
@@ -267,26 +307,6 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2015/12/21/CCF-sixth-CSP-certification-exams-Solutions/</loc>
-    <lastmod>2016-01-03T08:38:07.440Z</lastmod>
-    <data>
-        <display>
-        <title>CCF第六次CSP认证考试题解</title>
-        <pubTime>2015-12-21T15:27:52.000Z</pubTime>
-        
-        <tag>CCF </tag>
-         
-         
-           
-             
-              <breadCrumb title="Algorithms" url="http://www.codepub.cn/categories/Algorithms/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.codepub.cn/2015/12/31/2015-year-end-summary/</loc>
     <lastmod>2016-01-03T08:38:07.440Z</lastmod>
     <data>
@@ -300,6 +320,26 @@
            
              
               <breadCrumb title="Life-Talk" url="http://www.codepub.cn/categories/Life-Talk/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.codepub.cn/2015/12/21/CCF-sixth-CSP-certification-exams-Solutions/</loc>
+    <lastmod>2016-01-03T08:38:07.440Z</lastmod>
+    <data>
+        <display>
+        <title>CCF第六次CSP认证考试题解</title>
+        <pubTime>2015-12-21T15:27:52.000Z</pubTime>
+        
+        <tag>CCF </tag>
+         
+         
+           
+             
+              <breadCrumb title="Algorithms" url="http://www.codepub.cn/categories/Algorithms/"/>
           
         </display>
     </data>
@@ -494,12 +534,12 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2015/07/13/Python3-beginner-s-handbook-four/</loc>
+    <loc>http://www.codepub.cn/2015/10/08/Using-the-Python-CSV-module-to-read-and-write-CSV-file/</loc>
     <lastmod>2015-10-08T06:51:57.576Z</lastmod>
     <data>
         <display>
-        <title>Python3入门手册之四</title>
-        <pubTime>2015-07-13T15:03:44.000Z</pubTime>
+        <title>使用Python的CSV模块读写CSV文件</title>
+        <pubTime>2015-10-08T04:01:00.000Z</pubTime>
         
         <tag>Python3 </tag>
          
@@ -514,12 +554,12 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2015/10/08/Using-the-Python-CSV-module-to-read-and-write-CSV-file/</loc>
+    <loc>http://www.codepub.cn/2015/07/13/Python3-beginner-s-handbook-four/</loc>
     <lastmod>2015-10-08T06:51:57.576Z</lastmod>
     <data>
         <display>
-        <title>使用Python的CSV模块读写CSV文件</title>
-        <pubTime>2015-10-08T04:01:00.000Z</pubTime>
+        <title>Python3入门手册之四</title>
+        <pubTime>2015-07-13T15:03:44.000Z</pubTime>
         
         <tag>Python3 </tag>
          
