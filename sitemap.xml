@@ -3,49 +3,8 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2016/04/15/A-small-trap-of-JDBC-connection-to-MySql-in-java/</loc>
-    <lastmod>2016-04-15T15:55:01.928Z</lastmod>
-    <data>
-        <display>
-        <title>Java之JDBC连接MySql的一点坑</title>
-        <pubTime>2016-04-15T15:51:11.000Z</pubTime>
-        
-        <tag>MySql </tag>
-         
-         
-           
-             
-              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.codepub.cn/2016/04/15/Log4j-print-exception-stack-information-to-the-log/</loc>
-    <lastmod>2016-04-15T15:44:56.238Z</lastmod>
-    <data>
-        <display>
-        <title>Log4j打印异常堆栈信息到日志</title>
-        <pubTime>2016-04-15T15:38:41.000Z</pubTime>
-        
-        <tag>Log4j </tag>
-         
-         
-           
-             
-              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-    
-  <url>
     <loc>http://www.codepub.cn/2015/12/09/IntelliJ-IDEA-in-Maven-plugin-could-not-update-the-index-of-the-solution/</loc>
-    <lastmod>2016-04-02T03:27:39.879Z</lastmod>
+    <lastmod>2016-04-17T02:50:23.521Z</lastmod>
     <data>
         <display>
         <title>IntelliJ IDEA中Maven插件无法更新索引之解决办法</title>
@@ -65,7 +24,7 @@
     
   <url>
     <loc>http://www.codepub.cn/2015/08/04/Based-on-the-extended-version-of-synonyms-Cilin-word-similarity-computing/</loc>
-    <lastmod>2016-04-02T03:27:39.868Z</lastmod>
+    <lastmod>2016-04-17T02:50:23.510Z</lastmod>
     <data>
         <display>
         <title>基于同义词词林扩展版的词语相似度计算</title>
@@ -77,6 +36,47 @@
            
              
               <breadCrumb title="Algorithms" url="http://www.codepub.cn/categories/Algorithms/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://www.codepub.cn/2016/04/15/Log4j-print-exception-stack-information-to-the-log/</loc>
+    <lastmod>2016-04-15T15:57:44.829Z</lastmod>
+    <data>
+        <display>
+        <title>Log4j打印异常堆栈信息到日志</title>
+        <pubTime>2016-04-15T15:38:41.000Z</pubTime>
+        
+        <tag>Log4j </tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.codepub.cn/2016/04/15/A-small-trap-of-JDBC-connection-to-MySql-in-java/</loc>
+    <lastmod>2016-04-15T15:57:44.828Z</lastmod>
+    <data>
+        <display>
+        <title>Java之JDBC连接MySql的一点坑</title>
+        <pubTime>2016-04-15T15:51:11.000Z</pubTime>
+        
+        <tag>MySql </tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
           
         </display>
     </data>
