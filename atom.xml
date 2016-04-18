@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.codepub.cn/"/>
-  <updated>2016-04-15T15:57:44.828Z</updated>
+  <updated>2016-04-18T13:02:26.037Z</updated>
   <id>http://www.codepub.cn/</id>
   
   <author>
@@ -20,19 +20,121 @@
     <link href="http://www.codepub.cn/2016/04/15/A-small-trap-of-JDBC-connection-to-MySql-in-java/"/>
     <id>http://www.codepub.cn/2016/04/15/A-small-trap-of-JDBC-connection-to-MySql-in-java/</id>
     <published>2016-04-15T15:51:11.000Z</published>
-    <updated>2016-04-15T15:57:44.828Z</updated>
+    <updated>2016-04-18T13:02:26.037Z</updated>
     
     <content type="html">&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;&lt;strong&gt;对代码不满足，是任何真正有天才的程序员的根本特征。&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;
 
-&lt;h4 id=&quot;getTimestamp()报错can_not_be_represented&quot;&gt;getTimestamp()报错can not be represented&lt;/h4&gt;&lt;p&gt;在&lt;strong&gt;MySql&lt;/strong&gt;中对于&lt;strong&gt;timestamp&lt;/strong&gt;类型的列，如果设置&lt;strong&gt;not null&lt;/strong&gt;的话，其默认值是&lt;strong&gt;0000-00-00&lt;/strong&gt;；如果&lt;strong&gt;timestamp&lt;/strong&gt;的列默认值是&lt;strong&gt;null&lt;/strong&gt;的话，那么&lt;strong&gt;0000-00-00&lt;/strong&gt;和&lt;strong&gt;null&lt;/strong&gt;值在数据库中都是不显示，也就是说在数据库中不管其默认值是&lt;strong&gt;not null&lt;/strong&gt;还是&lt;strong&gt;null&lt;/strong&gt;，该列值显示的都是空，你无法根据值去判断其类型，并且当是&lt;strong&gt;not null&lt;/strong&gt;的时候，你取出来的值实际上是&lt;strong&gt;0000-00-00&lt;/strong&gt;，所以使用&lt;strong&gt;resultSet.getTimestamp()&lt;/strong&gt;方法会报错，&lt;strong&gt;java.sql.SQLException: Value ‘0000-00-00’ can not be represented as java.sql.Timestamp&lt;/strong&gt;。&lt;/p&gt;
+&lt;h4 id=&quot;can_not_be_represented_as_java-sql-Timestamp&quot;&gt;can not be represented as java.sql.Timestamp&lt;/h4&gt;&lt;p&gt;在查询&lt;strong&gt;MySql&lt;/strong&gt;数据库某表的&lt;strong&gt;timestamp&lt;/strong&gt;列的时候，发现此异常，问题来源表述如下&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;先创建一个测试表&lt;/p&gt;
+&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;operator&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;table&lt;/span&gt; test.mytest(&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;id &lt;span class=&quot;built_in&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;PRIMARY&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;KEY&lt;/span&gt; AUTO_INCREMENT ,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;createtime &lt;span class=&quot;keyword&quot;&gt;timestamp&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;current_timestamp&lt;/span&gt; , &lt;span class=&quot;comment&quot;&gt;--创建时间&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;updatetime &lt;span class=&quot;keyword&quot;&gt;timestamp&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt; , &lt;span class=&quot;comment&quot;&gt;--更新时间&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;testtime &lt;span class=&quot;keyword&quot;&gt;timestamp&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;--发布时间&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;);&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;插入两条数据，将此&lt;strong&gt;sql&lt;/strong&gt;执行两次即可&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;insert into test.mytest(createtime,testtime) values(sysdate(),null);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查询数据&lt;/p&gt;
+&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;operator&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;select&lt;/span&gt; * &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; mytest;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;在数据库客户端中使用SELECT查询结果如下：&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;id&lt;/th&gt;
+&lt;th&gt;createtime&lt;/th&gt;
+&lt;th&gt;updatetime&lt;/th&gt;
+&lt;th&gt;testtime&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;16/4/18 10:28:18&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;16/4/18 10:28:42&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;虽然说使用&lt;strong&gt;SELECT&lt;/strong&gt;语句查询到的&lt;strong&gt;updatetime&lt;/strong&gt;列和&lt;strong&gt;testtime&lt;/strong&gt;列都是空，但是可以通过查看表结构从而得到各个列的默认值，在&lt;strong&gt;Toad&lt;/strong&gt;工具中右击表选&lt;strong&gt;View Details&lt;/strong&gt;得到如下表结构，可以看到&lt;strong&gt;Default&lt;/strong&gt;列的默认值。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Column&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Collation&lt;/th&gt;
+&lt;th&gt;Null&lt;/th&gt;
+&lt;th&gt;Key&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;th&gt;Extra&lt;/th&gt;
+&lt;th&gt;Privileges&lt;/th&gt;
+&lt;th&gt;Comment&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;id&lt;/td&gt;
+&lt;td&gt;int(11)&lt;/td&gt;
+&lt;td&gt;{null}&lt;/td&gt;
+&lt;td&gt;NO&lt;/td&gt;
+&lt;td&gt;PRI&lt;/td&gt;
+&lt;td&gt;{null}&lt;/td&gt;
+&lt;td&gt;auto_increment&lt;/td&gt;
+&lt;td&gt;select,insert,update,references&lt;/td&gt;
+&lt;td&gt;ID，主键&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;createtime&lt;/td&gt;
+&lt;td&gt;timestamp&lt;/td&gt;
+&lt;td&gt;{null}&lt;/td&gt;
+&lt;td&gt;NO&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;CURRENT_TIMESTAMP&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;select,insert,update,references&lt;/td&gt;
+&lt;td&gt;创建时间&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;updatetime&lt;/td&gt;
+&lt;td&gt;timestamp&lt;/td&gt;
+&lt;td&gt;{null}&lt;/td&gt;
+&lt;td&gt;NO&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;0000-00-00 00:00:00&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;select,insert,update,references&lt;/td&gt;
+&lt;td&gt;更新时间&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;testtime&lt;/td&gt;
+&lt;td&gt;timestamp&lt;/td&gt;
+&lt;td&gt;{null}&lt;/td&gt;
+&lt;td&gt;YES&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;{null}&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;select,insert,update,references&lt;/td&gt;
+&lt;td&gt;发布时间&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;说明&lt;/em&gt;&lt;/strong&gt;：在&lt;strong&gt;MySql&lt;/strong&gt;中对于&lt;strong&gt;timestamp&lt;/strong&gt;类型的列，如果设置&lt;strong&gt;not null&lt;/strong&gt;的话（对应测试表的&lt;strong&gt;updatetime&lt;/strong&gt;列），在程序中查询得其默认值是&lt;strong&gt;0000-00-00 00:00:00&lt;/strong&gt;；如果&lt;strong&gt;timestamp&lt;/strong&gt;的列默认值是&lt;strong&gt;null&lt;/strong&gt;的话（对应测试表的&lt;strong&gt;testtime&lt;/strong&gt;列），那么&lt;strong&gt;0000-00-00 00:00:00&lt;/strong&gt;和&lt;strong&gt;null&lt;/strong&gt;值在数据库中都是不显示（由查询结果，可知&lt;strong&gt;updatetime&lt;/strong&gt;和&lt;strong&gt;testtime&lt;/strong&gt;显示的结果都是空），也就是说在数据库中不管其默认值是&lt;strong&gt;not null&lt;/strong&gt;还是&lt;strong&gt;null&lt;/strong&gt;，该列值显示的都是空，你无法根据值去判断其类型，并且当是&lt;strong&gt;not null&lt;/strong&gt;的时候，在程序中取出来的值实际上是&lt;strong&gt;0000-00-00 00:00:00&lt;/strong&gt;，所以使用&lt;strong&gt;resultSet.getString()&lt;/strong&gt;方法或其它方法都会报错，&lt;strong&gt;java.sql.SQLException: Value ‘0000-00-00’ can not be represented as java.sql.Timestamp&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;另外&lt;strong&gt;timestamp&lt;/strong&gt;类型要求第一个出现的&lt;strong&gt;timestamp&lt;/strong&gt;列必须是&lt;strong&gt;not null default current_timestamp&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;在&lt;strong&gt;Java&lt;/strong&gt;中如果取到这种&lt;strong&gt;0000-00-00&lt;/strong&gt;数据的话，转成&lt;strong&gt;timestamp&lt;/strong&gt;会报错，解决办法是修改&lt;strong&gt;jdbc url&lt;/strong&gt;为：&lt;/p&gt;
+&lt;p&gt;在&lt;strong&gt;Java&lt;/strong&gt;程序中如果取到这种&lt;strong&gt;0000-00-00 00:00:00&lt;/strong&gt;数据的话报错，解决办法是修改&lt;strong&gt;jdbc url&lt;/strong&gt;为：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;jdbc:mysql://yourserver:3306/yourdatabase?zeroDateTimeBehavior=convertToNull&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;p&gt;这样在程序中取出来的数据就是&lt;strong&gt;null&lt;/strong&gt;了。&lt;/p&gt;
 &lt;h4 id=&quot;resultSet-getRow()总是返回0&quot;&gt;resultSet.getRow()总是返回0&lt;/h4&gt;&lt;p&gt;在使用&lt;strong&gt;resultSet.getRow()&lt;/strong&gt;的时候，发现总是返回0，注意该方法返回的是数据库当前的行数，所以当你没调用&lt;strong&gt;resultSet.next()&lt;/strong&gt;的时候，该方法总是返回0。&lt;/p&gt;
 &lt;h4 id=&quot;resultSet-getFetchSize()总是返回0&quot;&gt;resultSet.getFetchSize()总是返回0&lt;/h4&gt;&lt;p&gt;另外使用&lt;strong&gt;resultSet.getFetchSize()&lt;/strong&gt;的时候也是每次都返回0，这是怎么回事呢？&lt;strong&gt;getFetchSize()&lt;/strong&gt;方法不是获得记录数，而是获得每次抓取的记录数，默认是0，也就是说不限制。可以用&lt;strong&gt;setFetchSize()&lt;/strong&gt;来设置，而&lt;strong&gt;getFetchSize()&lt;/strong&gt;是用来读出那个设置值。&lt;strong&gt;setFetchSize()&lt;/strong&gt;最主要是为了减少网络交互次数设计的，访问&lt;strong&gt;ResultSet&lt;/strong&gt;时，如果它每次只从服务器上取一行数据，则会产生大量的开销，&lt;strong&gt;setFetchSize()&lt;/strong&gt;的意思是当调用&lt;strong&gt;resultSet.next()&lt;/strong&gt;时，&lt;strong&gt;resultSet&lt;/strong&gt;会一次性从服务器上取多行数据回来，这样在下次&lt;strong&gt;resultSet.next()&lt;/strong&gt;时，它可以直接从内存中获得数据，而不需要网络交互，提高了效率。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;：有时候觉得英文确实表述更准确，请看原汁原味的解释&lt;br&gt;The fetch size is the number of rows that should be retrieved from the database in each roundtrip. It has nothing to do with the number of rows returned.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;：有时候觉得英文确实表述更准确，请看原汁原味的解释&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The fetch size is the number of rows that should be retrieved from the database in each roundtrip. It has nothing to do with the number of rows returned.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h4 id=&quot;获取查询的数据集的行数&quot;&gt;获取查询的数据集的行数&lt;/h4&gt;&lt;p&gt;如果你是想获得符合条件的记录数目，最少有三种方法&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;自己维护计数器&lt;/p&gt;
@@ -42,8 +144,7 @@
 &lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;resultSet.last();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rowCount = resultSet.getRow();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;resultSet.beforeFirst();&lt;span class=&quot;comment&quot;&gt;//将数据集重新归位，这样就获取到行数了&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;利用SQL查询&lt;/p&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;String sql = &lt;span class=&quot;string&quot;&gt;&quot;select count(*) totalCount from table&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rowCount = resultSet.getInt(&lt;span class=&quot;string&quot;&gt;&quot;totalCount&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;String sql = &lt;span class=&quot;string&quot;&gt;&quot;select count(*) totalCount from table&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rowCount = resultSet.getInt(&lt;span class=&quot;string&quot;&gt;&quot;totalCount&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </content>
     
@@ -51,7 +152,7 @@
     
       &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;&lt;strong&gt;对代码不满足，是任何真正有天才的程序员的根本特征。&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;
 
-&lt;h4 id=&quot;getTimestamp()报错can_not_be_re
+&lt;h4 id=&quot;can_not_be_represented_as_jav
     
     </summary>
     
@@ -859,7 +960,7 @@
     <link href="http://www.codepub.cn/2015/12/09/IntelliJ-IDEA-in-Maven-plugin-could-not-update-the-index-of-the-solution/"/>
     <id>http://www.codepub.cn/2015/12/09/IntelliJ-IDEA-in-Maven-plugin-could-not-update-the-index-of-the-solution/</id>
     <published>2015-12-09T14:21:33.000Z</published>
-    <updated>2016-04-17T02:50:23.521Z</updated>
+    <updated>2016-04-17T03:18:49.820Z</updated>
     
     <content type="html">&lt;h4 id=&quot;Maven的仓库、索引&quot;&gt;Maven的仓库、索引&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;中央仓库&lt;/strong&gt;：目前来说，&lt;a href=&quot;http://repo1.maven.org/maven2/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://repo1.maven.org/maven2/&lt;/a&gt; 是真正的&lt;code&gt;Maven&lt;/code&gt;中央仓库的地址，该地址内置在&lt;code&gt;Maven&lt;/code&gt;的源码中，其它地址包括著名的&lt;a href=&quot;http://mirrors.ibiblio.org/pub/mirrors/maven2/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;ibiblio.org&lt;/a&gt;，都是镜像。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;索引&lt;/strong&gt;：中央仓库带有索引文件以方便用户对其进行搜索，完整的索引文件至2015年12月8日大小约为1.11G，索引每周更新一次。&lt;/p&gt;

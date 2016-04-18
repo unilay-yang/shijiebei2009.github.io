@@ -61,20 +61,29 @@
 
 <meta name="description" content="对代码不满足，是任何真正有天才的程序员的根本特征。
 
-getTimestamp()报错can not be represented在MySql中对于timestamp类型的列，如果设置not null的话，其默认值是0000-00-00；如果timestamp的列默认值是null的话，那么0000-00-00和null值在数据库中都是不显示，也就是说在数据库中不管其默认值是not null还是nu">
+can not be represented as java.sql.Timestamp在查询MySql数据库某表的timestamp列的时候，发现此异常，问题来源表述如下
+
+先创建一个测试表
+123456create table test.mytest(id int PRIMARY KEY AUTO_INCREMENT ,createtime">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java之JDBC连接MySql的一点坑">
 <meta property="og:url" content="http://www.codepub.cn/2016/04/15/A-small-trap-of-JDBC-connection-to-MySql-in-java/index.html">
 <meta property="og:site_name" content="IT草根">
 <meta property="og:description" content="对代码不满足，是任何真正有天才的程序员的根本特征。
 
-getTimestamp()报错can not be represented在MySql中对于timestamp类型的列，如果设置not null的话，其默认值是0000-00-00；如果timestamp的列默认值是null的话，那么0000-00-00和null值在数据库中都是不显示，也就是说在数据库中不管其默认值是not null还是nu">
-<meta property="og:updated_time" content="2016-04-15T15:57:44.828Z">
+can not be represented as java.sql.Timestamp在查询MySql数据库某表的timestamp列的时候，发现此异常，问题来源表述如下
+
+先创建一个测试表
+123456create table test.mytest(id int PRIMARY KEY AUTO_INCREMENT ,createtime">
+<meta property="og:updated_time" content="2016-04-18T13:02:26.037Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java之JDBC连接MySql的一点坑">
 <meta name="twitter:description" content="对代码不满足，是任何真正有天才的程序员的根本特征。
 
-getTimestamp()报错can not be represented在MySql中对于timestamp类型的列，如果设置not null的话，其默认值是0000-00-00；如果timestamp的列默认值是null的话，那么0000-00-00和null值在数据库中都是不显示，也就是说在数据库中不管其默认值是not null还是nu">
+can not be represented as java.sql.Timestamp在查询MySql数据库某表的timestamp列的时候，发现此异常，问题来源表述如下
+
+先创建一个测试表
+123456create table test.mytest(id int PRIMARY KEY AUTO_INCREMENT ,createtime">
 
 
 
@@ -158,6 +167,8 @@ getTimestamp()报错can not be represented在MySql中对于timestamp类型的列
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
             首页
           </a>
         </li>
@@ -165,6 +176,8 @@ getTimestamp()报错can not be represented在MySql中对于timestamp类型的列
         
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
             归档
           </a>
@@ -174,6 +187,8 @@ getTimestamp()报错can not be represented在MySql中对于timestamp类型的列
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
             分类
           </a>
         </li>
@@ -181,6 +196,8 @@ getTimestamp()报错can not be represented在MySql中对于timestamp类型的列
         
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
             标签
           </a>
@@ -190,6 +207,8 @@ getTimestamp()报错can not be represented在MySql中对于timestamp类型的列
         <li class="menu-item menu-item-resume">
           <a href="/resume" rel="section">
             
+              <i class="menu-item-icon fa fa-question-circle fa-fw"></i> <br />
+            
             简历
           </a>
         </li>
@@ -197,6 +216,8 @@ getTimestamp()报错can not be represented在MySql中对于timestamp类型的列
         
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
             
             关于
           </a>
@@ -206,6 +227,8 @@ getTimestamp()报错can not be represented在MySql中对于timestamp类型的列
         <li class="menu-item menu-item-links">
           <a href="/links" rel="section">
             
+              <i class="menu-item-icon fa fa-question-circle fa-fw"></i> <br />
+            
             友链
           </a>
         </li>
@@ -213,6 +236,8 @@ getTimestamp()报错can not be represented在MySql中对于timestamp类型的列
         
         <li class="menu-item menu-item-commonweal">
           <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
             
             公益404
           </a>
@@ -224,6 +249,8 @@ getTimestamp()报错can not be represented在MySql中对于timestamp类型的列
           
             <a href="#" class="st-search-show-outputs">
           
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
             
             搜索
           </a>
@@ -357,15 +384,117 @@ getTimestamp()报错can not be represented在MySql中对于timestamp类型的列
       
         <blockquote class="blockquote-center"><br><strong>对代码不满足，是任何真正有天才的程序员的根本特征。</strong><br></blockquote>
 
-<h4 id="getTimestamp()报错can_not_be_represented">getTimestamp()报错can not be represented</h4><p>在<strong>MySql</strong>中对于<strong>timestamp</strong>类型的列，如果设置<strong>not null</strong>的话，其默认值是<strong>0000-00-00</strong>；如果<strong>timestamp</strong>的列默认值是<strong>null</strong>的话，那么<strong>0000-00-00</strong>和<strong>null</strong>值在数据库中都是不显示，也就是说在数据库中不管其默认值是<strong>not null</strong>还是<strong>null</strong>，该列值显示的都是空，你无法根据值去判断其类型，并且当是<strong>not null</strong>的时候，你取出来的值实际上是<strong>0000-00-00</strong>，所以使用<strong>resultSet.getTimestamp()</strong>方法会报错，<strong>java.sql.SQLException: Value ‘0000-00-00’ can not be represented as java.sql.Timestamp</strong>。</p>
+<h4 id="can_not_be_represented_as_java-sql-Timestamp">can not be represented as java.sql.Timestamp</h4><p>在查询<strong>MySql</strong>数据库某表的<strong>timestamp</strong>列的时候，发现此异常，问题来源表述如下</p>
+<ol>
+<li><p>先创建一个测试表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">create</span> <span class="keyword">table</span> test.mytest(</span><br><span class="line">id <span class="built_in">int</span> <span class="keyword">PRIMARY</span> <span class="keyword">KEY</span> AUTO_INCREMENT ,</span><br><span class="line">createtime <span class="keyword">timestamp</span> <span class="keyword">not</span> <span class="literal">null</span> <span class="keyword">default</span> <span class="keyword">current_timestamp</span> , <span class="comment">--创建时间</span></span><br><span class="line">updatetime <span class="keyword">timestamp</span> <span class="keyword">not</span> <span class="literal">null</span> , <span class="comment">--更新时间</span></span><br><span class="line">testtime <span class="keyword">timestamp</span> <span class="literal">null</span> <span class="comment">--发布时间</span></span><br><span class="line">);</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>插入两条数据，将此<strong>sql</strong>执行两次即可</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into test.mytest(createtime,testtime) values(sysdate(),null);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> mytest;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>在数据库客户端中使用SELECT查询结果如下：</strong></p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>createtime</th>
+<th>updatetime</th>
+<th>testtime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>16/4/18 10:28:18</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>16/4/18 10:28:42</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>虽然说使用<strong>SELECT</strong>语句查询到的<strong>updatetime</strong>列和<strong>testtime</strong>列都是空，但是可以通过查看表结构从而得到各个列的默认值，在<strong>Toad</strong>工具中右击表选<strong>View Details</strong>得到如下表结构，可以看到<strong>Default</strong>列的默认值。</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Collation</th>
+<th>Null</th>
+<th>Key</th>
+<th>Default</th>
+<th>Extra</th>
+<th>Privileges</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int(11)</td>
+<td>{null}</td>
+<td>NO</td>
+<td>PRI</td>
+<td>{null}</td>
+<td>auto_increment</td>
+<td>select,insert,update,references</td>
+<td>ID，主键</td>
+</tr>
+<tr>
+<td>createtime</td>
+<td>timestamp</td>
+<td>{null}</td>
+<td>NO</td>
+<td></td>
+<td>CURRENT_TIMESTAMP</td>
+<td></td>
+<td>select,insert,update,references</td>
+<td>创建时间</td>
+</tr>
+<tr>
+<td>updatetime</td>
+<td>timestamp</td>
+<td>{null}</td>
+<td>NO</td>
+<td></td>
+<td>0000-00-00 00:00:00</td>
+<td></td>
+<td>select,insert,update,references</td>
+<td>更新时间</td>
+</tr>
+<tr>
+<td>testtime</td>
+<td>timestamp</td>
+<td>{null}</td>
+<td>YES</td>
+<td></td>
+<td>{null}</td>
+<td></td>
+<td>select,insert,update,references</td>
+<td>发布时间</td>
+</tr>
+</tbody>
+</table>
+<p><strong><em>说明</em></strong>：在<strong>MySql</strong>中对于<strong>timestamp</strong>类型的列，如果设置<strong>not null</strong>的话（对应测试表的<strong>updatetime</strong>列），在程序中查询得其默认值是<strong>0000-00-00 00:00:00</strong>；如果<strong>timestamp</strong>的列默认值是<strong>null</strong>的话（对应测试表的<strong>testtime</strong>列），那么<strong>0000-00-00 00:00:00</strong>和<strong>null</strong>值在数据库中都是不显示（由查询结果，可知<strong>updatetime</strong>和<strong>testtime</strong>显示的结果都是空），也就是说在数据库中不管其默认值是<strong>not null</strong>还是<strong>null</strong>，该列值显示的都是空，你无法根据值去判断其类型，并且当是<strong>not null</strong>的时候，在程序中取出来的值实际上是<strong>0000-00-00 00:00:00</strong>，所以使用<strong>resultSet.getString()</strong>方法或其它方法都会报错，<strong>java.sql.SQLException: Value ‘0000-00-00’ can not be represented as java.sql.Timestamp</strong>。</p>
 <p>另外<strong>timestamp</strong>类型要求第一个出现的<strong>timestamp</strong>列必须是<strong>not null default current_timestamp</strong>。</p>
-<p>在<strong>Java</strong>中如果取到这种<strong>0000-00-00</strong>数据的话，转成<strong>timestamp</strong>会报错，解决办法是修改<strong>jdbc url</strong>为：</p>
+<p>在<strong>Java</strong>程序中如果取到这种<strong>0000-00-00 00:00:00</strong>数据的话报错，解决办法是修改<strong>jdbc url</strong>为：</p>
 <blockquote>
 <p>jdbc:mysql://yourserver:3306/yourdatabase?zeroDateTimeBehavior=convertToNull</p>
 </blockquote>
+<p>这样在程序中取出来的数据就是<strong>null</strong>了。</p>
 <h4 id="resultSet-getRow()总是返回0">resultSet.getRow()总是返回0</h4><p>在使用<strong>resultSet.getRow()</strong>的时候，发现总是返回0，注意该方法返回的是数据库当前的行数，所以当你没调用<strong>resultSet.next()</strong>的时候，该方法总是返回0。</p>
 <h4 id="resultSet-getFetchSize()总是返回0">resultSet.getFetchSize()总是返回0</h4><p>另外使用<strong>resultSet.getFetchSize()</strong>的时候也是每次都返回0，这是怎么回事呢？<strong>getFetchSize()</strong>方法不是获得记录数，而是获得每次抓取的记录数，默认是0，也就是说不限制。可以用<strong>setFetchSize()</strong>来设置，而<strong>getFetchSize()</strong>是用来读出那个设置值。<strong>setFetchSize()</strong>最主要是为了减少网络交互次数设计的，访问<strong>ResultSet</strong>时，如果它每次只从服务器上取一行数据，则会产生大量的开销，<strong>setFetchSize()</strong>的意思是当调用<strong>resultSet.next()</strong>时，<strong>resultSet</strong>会一次性从服务器上取多行数据回来，这样在下次<strong>resultSet.next()</strong>时，它可以直接从内存中获得数据，而不需要网络交互，提高了效率。</p>
-<p><strong>Note</strong>：有时候觉得英文确实表述更准确，请看原汁原味的解释<br>The fetch size is the number of rows that should be retrieved from the database in each roundtrip. It has nothing to do with the number of rows returned.</p>
+<p><strong>Note</strong>：有时候觉得英文确实表述更准确，请看原汁原味的解释</p>
+<blockquote>
+<p>The fetch size is the number of rows that should be retrieved from the database in each roundtrip. It has nothing to do with the number of rows returned.</p>
+</blockquote>
 <h4 id="获取查询的数据集的行数">获取查询的数据集的行数</h4><p>如果你是想获得符合条件的记录数目，最少有三种方法</p>
 <ol>
 <li><p>自己维护计数器</p>
@@ -375,8 +504,7 @@ getTimestamp()报错can not be represented在MySql中对于timestamp类型的列
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">resultSet.last();</span><br><span class="line">rowCount = resultSet.getRow();</span><br><span class="line">resultSet.beforeFirst();<span class="comment">//将数据集重新归位，这样就获取到行数了</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>利用SQL查询</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String sql = <span class="string">"select count(*) totalCount from table"</span>;</span><br><span class="line">rowCount = resultSet.getInt(<span class="string">"totalCount"</span>);</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String sql = <span class="string">"select count(*) totalCount from table"</span>;</span><br><span class="line">rowCount = resultSet.getInt(<span class="string">"totalCount"</span>);</span><br></pre></td></tr></table></figure></li>
 </ol>
 
       
@@ -636,7 +764,7 @@ getTimestamp()报错can not be represented在MySql中对于timestamp类型的列
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#getTimestamp()报错can_not_be_represented"><span class="nav-number">1.</span> <span class="nav-text">getTimestamp()报错can not be represented</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#resultSet-getRow()总是返回0"><span class="nav-number">2.</span> <span class="nav-text">resultSet.getRow()总是返回0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#resultSet-getFetchSize()总是返回0"><span class="nav-number">3.</span> <span class="nav-text">resultSet.getFetchSize()总是返回0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取查询的数据集的行数"><span class="nav-number">4.</span> <span class="nav-text">获取查询的数据集的行数</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#can_not_be_represented_as_java-sql-Timestamp"><span class="nav-number">1.</span> <span class="nav-text">can not be represented as java.sql.Timestamp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#resultSet-getRow()总是返回0"><span class="nav-number">2.</span> <span class="nav-text">resultSet.getRow()总是返回0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#resultSet-getFetchSize()总是返回0"><span class="nav-number">3.</span> <span class="nav-text">resultSet.getFetchSize()总是返回0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取查询的数据集的行数"><span class="nav-number">4.</span> <span class="nav-text">获取查询的数据集的行数</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

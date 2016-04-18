@@ -3,8 +3,28 @@
 
     
   <url>
+    <loc>http://www.codepub.cn/2016/04/15/A-small-trap-of-JDBC-connection-to-MySql-in-java/</loc>
+    <lastmod>2016-04-18T13:02:26.037Z</lastmod>
+    <data>
+        <display>
+        <title>Java之JDBC连接MySql的一点坑</title>
+        <pubTime>2016-04-15T15:51:11.000Z</pubTime>
+        
+        <tag>MySql </tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.codepub.cn/2015/12/09/IntelliJ-IDEA-in-Maven-plugin-could-not-update-the-index-of-the-solution/</loc>
-    <lastmod>2016-04-17T02:50:23.521Z</lastmod>
+    <lastmod>2016-04-17T03:18:49.820Z</lastmod>
     <data>
         <display>
         <title>IntelliJ IDEA中Maven插件无法更新索引之解决办法</title>
@@ -24,7 +44,7 @@
     
   <url>
     <loc>http://www.codepub.cn/2015/08/04/Based-on-the-extended-version-of-synonyms-Cilin-word-similarity-computing/</loc>
-    <lastmod>2016-04-17T02:50:23.510Z</lastmod>
+    <lastmod>2016-04-17T03:18:49.819Z</lastmod>
     <data>
         <display>
         <title>基于同义词词林扩展版的词语相似度计算</title>
@@ -52,26 +72,6 @@
         <pubTime>2016-04-15T15:38:41.000Z</pubTime>
         
         <tag>Log4j </tag>
-         
-         
-           
-             
-              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.codepub.cn/2016/04/15/A-small-trap-of-JDBC-connection-to-MySql-in-java/</loc>
-    <lastmod>2016-04-15T15:57:44.828Z</lastmod>
-    <data>
-        <display>
-        <title>Java之JDBC连接MySql的一点坑</title>
-        <pubTime>2016-04-15T15:51:11.000Z</pubTime>
-        
-        <tag>MySql </tag>
          
          
            
