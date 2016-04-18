@@ -34,7 +34,22 @@ categories: Git/GitHub
 - 使用多说给博客添加最近访客功能，参考[这里](http://www.arao.me/2015/hexo-next-theme-optimize-duoshuo/)
 - 给博客创建留言页面，参考[这里](http://www.arao.me/2015/hexo-next-theme-optimize-base/)
 - 开启打赏功能，参考[这里](http://theme-next.iissnan.com/theme-settings.html#reward)
-- 多说评论显示UA，即用户操作系统和浏览器版本参考[这里](http://theme-next.iissnan.com/theme-settings.html#duoshuo-ua)
+- 多说评论显示**UA**，即用户操作系统和浏览器版本参考[这里](http://theme-next.iissnan.com/theme-settings.html#duoshuo-ua)
+- **Favicon**设置后没有生效？将你的`favicon`放置到**站点**的`source`目录下，如我的站点`D:\hexo\themes\next\source\favicon.ico`，并在`D:\hexo\themes\next\_config.yml`中启用`favicon: /favicon.ico`即可
+- 如何添加非默认菜单的**Menu icon**呢？例如我的菜单中加入了简历和友链，但是并不知道这两者对应的图标是什么，很简单，点击[Awesome Icons](http://fortawesome.github.io/Font-Awesome/3.2.1/icons/) 去挑选你自己喜爱的图标即可，然后去掉图标名称前面的`icon-`，只利用后面的名字即可，例如我的配置：
+```css
+menu_icons:
+  enable: true
+  # Icon Mapping.
+  home: home
+  about: user
+  categories: th
+  tags: tags
+  archives: archive
+  commonweal: heartbeat
+  links: link
+  resume: book
+```
 - 修改侧边栏头像下面的字体及颜色参考[这里](http://fancyluo.com/2015/09/18/2015-09-18-hexo-next-update/)，修改的文件具体位置是在`D:\hexo\themes\next\source\css\_common\components\sidebar\sidebar-author.styl`中的**font-size**，将其调大即可。
 ```css
 .site-description {
