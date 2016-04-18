@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.codepub.cn/"/>
-  <updated>2016-04-18T13:02:26.037Z</updated>
+  <updated>2016-04-18T13:24:00.928Z</updated>
   <id>http://www.codepub.cn/</id>
   
   <author>
@@ -20,11 +20,11 @@
     <link href="http://www.codepub.cn/2016/04/15/A-small-trap-of-JDBC-connection-to-MySql-in-java/"/>
     <id>http://www.codepub.cn/2016/04/15/A-small-trap-of-JDBC-connection-to-MySql-in-java/</id>
     <published>2016-04-15T15:51:11.000Z</published>
-    <updated>2016-04-18T13:02:26.037Z</updated>
+    <updated>2016-04-18T13:24:00.928Z</updated>
     
     <content type="html">&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;&lt;strong&gt;对代码不满足，是任何真正有天才的程序员的根本特征。&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;
 
-&lt;h4 id=&quot;can_not_be_represented_as_java-sql-Timestamp&quot;&gt;can not be represented as java.sql.Timestamp&lt;/h4&gt;&lt;p&gt;在查询&lt;strong&gt;MySql&lt;/strong&gt;数据库某表的&lt;strong&gt;timestamp&lt;/strong&gt;列的时候，发现此异常，问题来源表述如下&lt;/p&gt;
+&lt;h4 id=&quot;Value_‘0000-00-00’_can_not_be_represented_as_java-sql-Timestamp&quot;&gt;Value ‘0000-00-00’ can not be represented as java.sql.Timestamp&lt;/h4&gt;&lt;p&gt;在查询&lt;strong&gt;MySql&lt;/strong&gt;数据库某表的&lt;strong&gt;timestamp&lt;/strong&gt;列的时候，发现此异常，问题来源表述如下&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;先创建一个测试表&lt;/p&gt;
 &lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;operator&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;table&lt;/span&gt; test.mytest(&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;id &lt;span class=&quot;built_in&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;PRIMARY&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;KEY&lt;/span&gt; AUTO_INCREMENT ,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;createtime &lt;span class=&quot;keyword&quot;&gt;timestamp&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;current_timestamp&lt;/span&gt; , &lt;span class=&quot;comment&quot;&gt;--创建时间&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;updatetime &lt;span class=&quot;keyword&quot;&gt;timestamp&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt; , &lt;span class=&quot;comment&quot;&gt;--更新时间&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;testtime &lt;span class=&quot;keyword&quot;&gt;timestamp&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;--发布时间&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;);&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -56,6 +56,7 @@
 &lt;tr&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;16/4/18 10:28:42&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -152,7 +153,7 @@
     
       &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;&lt;strong&gt;对代码不满足，是任何真正有天才的程序员的根本特征。&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;
 
-&lt;h4 id=&quot;can_not_be_represented_as_jav
+&lt;h4 id=&quot;Value_‘0000-00-00’_can_not_be
     
     </summary>
     
