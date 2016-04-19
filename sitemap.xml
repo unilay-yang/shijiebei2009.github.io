@@ -3,6 +3,26 @@
 
     
   <url>
+    <loc>http://www.codepub.cn/2016/04/15/A-small-trap-of-JDBC-connection-to-MySql-in-java/</loc>
+    <lastmod>2016-04-19T14:20:53.661Z</lastmod>
+    <data>
+        <display>
+        <title>Java之JDBC连接MySql的一点坑</title>
+        <pubTime>2016-04-15T15:51:11.000Z</pubTime>
+        
+        <tag>MySql </tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.codepub.cn/2016/03/20/Hexo-blog-theme-switching-from-Jacman-to-NexT-Mist/</loc>
     <lastmod>2016-04-18T13:42:33.728Z</lastmod>
     <data>
@@ -16,26 +36,6 @@
            
              
               <breadCrumb title="Git/GitHub" url="http://www.codepub.cn/categories/Git-GitHub/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.codepub.cn/2016/04/15/A-small-trap-of-JDBC-connection-to-MySql-in-java/</loc>
-    <lastmod>2016-04-18T13:24:00.928Z</lastmod>
-    <data>
-        <display>
-        <title>Java之JDBC连接MySql的一点坑</title>
-        <pubTime>2016-04-15T15:51:11.000Z</pubTime>
-        
-        <tag>MySql </tag>
-         
-         
-           
-             
-              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
           
         </display>
     </data>

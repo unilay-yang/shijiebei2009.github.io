@@ -75,7 +75,7 @@ Value ‘0000-00-00’ can not be represented as java.sql.Timestamp在查询MySq
 
 先创建一个测试表
 123456create table test.mytest(id int PRIMARY KEY AUTO_IN">
-<meta property="og:updated_time" content="2016-04-18T13:24:00.928Z">
+<meta property="og:updated_time" content="2016-04-19T14:20:53.661Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java之JDBC连接MySql的一点坑">
 <meta name="twitter:description" content="对代码不满足，是任何真正有天才的程序员的根本特征。
@@ -483,7 +483,7 @@ Value ‘0000-00-00’ can not be represented as java.sql.Timestamp在查询MySq
 </tr>
 </tbody>
 </table>
-<p><strong><em>说明</em></strong>：在<strong>MySql</strong>中对于<strong>timestamp</strong>类型的列，如果设置<strong>not null</strong>的话（对应测试表的<strong>updatetime</strong>列），在程序中查询得其默认值是<strong>0000-00-00 00:00:00</strong>；如果<strong>timestamp</strong>的列默认值是<strong>null</strong>的话（对应测试表的<strong>testtime</strong>列），那么<strong>0000-00-00 00:00:00</strong>和<strong>null</strong>值在数据库中都是不显示（由查询结果，可知<strong>updatetime</strong>和<strong>testtime</strong>显示的结果都是空），也就是说在数据库中不管其默认值是<strong>not null</strong>还是<strong>null</strong>，该列值显示的都是空，你无法根据值去判断其类型，并且当是<strong>not null</strong>的时候，在程序中取出来的值实际上是<strong>0000-00-00 00:00:00</strong>，所以使用<strong>resultSet.getString()</strong>方法或其它方法都会报错，<strong>java.sql.SQLException: Value ‘0000-00-00’ can not be represented as java.sql.Timestamp</strong>。</p>
+<p><strong>NOTE</strong>：<br>在<strong>MySql</strong>中对于<strong>timestamp</strong>类型的列，如果设置<strong>not null</strong>的话（对应测试表的<strong>updatetime</strong>列），在程序中查询得其默认值是<strong>0000-00-00 00:00:00</strong>；如果<strong>timestamp</strong>的列默认值是<strong>null</strong>的话（对应测试表的<strong>testtime</strong>列），那么<strong>0000-00-00 00:00:00</strong>和<strong>null</strong>值在数据库中都是不显示（由查询结果，可知<strong>updatetime</strong>和<strong>testtime</strong>显示的结果都是空），也就是说在数据库中不管其默认值是<strong>not null</strong>还是<strong>null</strong>，该列值显示的都是空，你无法根据值去判断其类型，并且当是<strong>not null</strong>的时候，在程序中取出来的值实际上是<strong>0000-00-00 00:00:00</strong>，所以使用<strong>resultSet.getString()</strong>方法或其它方法都会报错，<strong>java.sql.SQLException: Value ‘0000-00-00’ can not be represented as java.sql.Timestamp</strong>。</p>
 <p>另外<strong>timestamp</strong>类型要求第一个出现的<strong>timestamp</strong>列必须是<strong>not null default current_timestamp</strong>。</p>
 <p>在<strong>Java</strong>程序中如果取到这种<strong>0000-00-00 00:00:00</strong>数据的话报错，解决办法是修改<strong>jdbc url</strong>为：</p>
 <blockquote>
@@ -502,11 +502,29 @@ Value ‘0000-00-00’ can not be represented as java.sql.Timestamp在查询MySq
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(resultSet.next())&#123;</span><br><span class="line">  count++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>可以这样</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">resultSet.last();</span><br><span class="line">rowCount = resultSet.getRow();</span><br><span class="line">resultSet.beforeFirst();<span class="comment">//将数据集重新归位，这样就获取到行数了</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//需要设置结果集可滚动</span></span><br><span class="line">Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);</span><br><span class="line"><span class="comment">//对于PreparedStatement也需要设置</span></span><br><span class="line">PreparedStatement preparedStatement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);</span><br><span class="line"><span class="comment">//之后在操作结果集中就可以移动游标了</span></span><br><span class="line">resultSet.last();</span><br><span class="line">rowCount = resultSet.getRow();</span><br><span class="line">resultSet.beforeFirst();<span class="comment">//将数据集重新归位，这样就获取到行数了</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>利用SQL查询</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String sql = <span class="string">"select count(*) totalCount from table"</span>;</span><br><span class="line">rowCount = resultSet.getInt(<span class="string">"totalCount"</span>);</span><br></pre></td></tr></table></figure></li>
 </ol>
+<p>有关<strong>ResultSet</strong>设置结果集类型的参数说明</p>
+<ul>
+<li>ResultSet.TYPE_FORWARD_ONLY - 结果集不能滚动，这是默认值</li>
+<li>ResultSet.TYPE_SCROLL_INSENSITIVE - 结果集可以滚动，但ResuleSet对数据库中发生的数据改变不敏感</li>
+<li>ResultSet.TYPE_SCROLL_SENSITIVE -  结果集可以滚动，并且ResuleSet对数据库中发生的改变敏感</li>
+<li>ResultSet.CONCUR_READ_ONLY - 只读结果集，不能用于更新数据库</li>
+<li>ResultSet.CONCUR_UPDATABLE - 可更新结果集，可以用于更新数据库</li>
+<li>当使用TYPE_SCROLL_INSENSITIVE或者TYPE_SCROLL_SENSITIVE来创建Statement对象时，可以使用ResultSet的first()/last()/beforeFirst()/afterLast()/relative()/absolute()等方法在结果集中随意前后移动</li>
+<li>即使使用了CONCUR_UPDATABLE参数来创建Statement，得到的记录集也并非一定是“可更新的”，如果你的记录集来自于合并查询，即该查询的结果来自多个表格，那么这样的结果集就可能不是可更新的结果集。可以使用ResuleSet类的getConcurrency()方法来确定是否为可更新的的结果集。如果结果集是可更新的，那么可使用ResultSet的updateRow()，insertRow()，moveToCurrentRow()，deleteRow()，cancelRowUpdates()等方法来对数据库进行更新。<ol>
+<li>利用SQL查询<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String sql = <span class="string">"select count(*) totalCount from table"</span>;</span><br><span class="line">rowCount = resultSet.getInt(<span class="string">"totalCount"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<p><strong>Note：</strong><br>在<strong>JDBC</strong>中使用可更新的结果集来更新数据库，不能使用<code>select * from table</code>方式的<strong>SQL</strong>语句，必须将它写成如下两种形式之一：</p>
+<ul>
+<li>select table.* from table</li>
+<li>select column1,column2… from table</li>
+</ul>
+<p>参考资料<br>【1】<a href="http://blog.sina.com.cn/s/blog_50267f510100dj1m.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_50267f510100dj1m.html</a></p>
 
       
     </div>

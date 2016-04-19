@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.codepub.cn/"/>
-  <updated>2016-04-18T13:24:00.928Z</updated>
+  <updated>2016-04-19T14:20:53.661Z</updated>
   <id>http://www.codepub.cn/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.codepub.cn/2016/04/15/A-small-trap-of-JDBC-connection-to-MySql-in-java/"/>
     <id>http://www.codepub.cn/2016/04/15/A-small-trap-of-JDBC-connection-to-MySql-in-java/</id>
     <published>2016-04-15T15:51:11.000Z</published>
-    <updated>2016-04-18T13:24:00.928Z</updated>
+    <updated>2016-04-19T14:20:53.661Z</updated>
     
     <content type="html">&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;&lt;strong&gt;对代码不满足，是任何真正有天才的程序员的根本特征。&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;
 
@@ -123,7 +123,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;说明&lt;/em&gt;&lt;/strong&gt;：在&lt;strong&gt;MySql&lt;/strong&gt;中对于&lt;strong&gt;timestamp&lt;/strong&gt;类型的列，如果设置&lt;strong&gt;not null&lt;/strong&gt;的话（对应测试表的&lt;strong&gt;updatetime&lt;/strong&gt;列），在程序中查询得其默认值是&lt;strong&gt;0000-00-00 00:00:00&lt;/strong&gt;；如果&lt;strong&gt;timestamp&lt;/strong&gt;的列默认值是&lt;strong&gt;null&lt;/strong&gt;的话（对应测试表的&lt;strong&gt;testtime&lt;/strong&gt;列），那么&lt;strong&gt;0000-00-00 00:00:00&lt;/strong&gt;和&lt;strong&gt;null&lt;/strong&gt;值在数据库中都是不显示（由查询结果，可知&lt;strong&gt;updatetime&lt;/strong&gt;和&lt;strong&gt;testtime&lt;/strong&gt;显示的结果都是空），也就是说在数据库中不管其默认值是&lt;strong&gt;not null&lt;/strong&gt;还是&lt;strong&gt;null&lt;/strong&gt;，该列值显示的都是空，你无法根据值去判断其类型，并且当是&lt;strong&gt;not null&lt;/strong&gt;的时候，在程序中取出来的值实际上是&lt;strong&gt;0000-00-00 00:00:00&lt;/strong&gt;，所以使用&lt;strong&gt;resultSet.getString()&lt;/strong&gt;方法或其它方法都会报错，&lt;strong&gt;java.sql.SQLException: Value ‘0000-00-00’ can not be represented as java.sql.Timestamp&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;：&lt;br&gt;在&lt;strong&gt;MySql&lt;/strong&gt;中对于&lt;strong&gt;timestamp&lt;/strong&gt;类型的列，如果设置&lt;strong&gt;not null&lt;/strong&gt;的话（对应测试表的&lt;strong&gt;updatetime&lt;/strong&gt;列），在程序中查询得其默认值是&lt;strong&gt;0000-00-00 00:00:00&lt;/strong&gt;；如果&lt;strong&gt;timestamp&lt;/strong&gt;的列默认值是&lt;strong&gt;null&lt;/strong&gt;的话（对应测试表的&lt;strong&gt;testtime&lt;/strong&gt;列），那么&lt;strong&gt;0000-00-00 00:00:00&lt;/strong&gt;和&lt;strong&gt;null&lt;/strong&gt;值在数据库中都是不显示（由查询结果，可知&lt;strong&gt;updatetime&lt;/strong&gt;和&lt;strong&gt;testtime&lt;/strong&gt;显示的结果都是空），也就是说在数据库中不管其默认值是&lt;strong&gt;not null&lt;/strong&gt;还是&lt;strong&gt;null&lt;/strong&gt;，该列值显示的都是空，你无法根据值去判断其类型，并且当是&lt;strong&gt;not null&lt;/strong&gt;的时候，在程序中取出来的值实际上是&lt;strong&gt;0000-00-00 00:00:00&lt;/strong&gt;，所以使用&lt;strong&gt;resultSet.getString()&lt;/strong&gt;方法或其它方法都会报错，&lt;strong&gt;java.sql.SQLException: Value ‘0000-00-00’ can not be represented as java.sql.Timestamp&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;另外&lt;strong&gt;timestamp&lt;/strong&gt;类型要求第一个出现的&lt;strong&gt;timestamp&lt;/strong&gt;列必须是&lt;strong&gt;not null default current_timestamp&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;在&lt;strong&gt;Java&lt;/strong&gt;程序中如果取到这种&lt;strong&gt;0000-00-00 00:00:00&lt;/strong&gt;数据的话报错，解决办法是修改&lt;strong&gt;jdbc url&lt;/strong&gt;为：&lt;/p&gt;
 &lt;blockquote&gt;
@@ -142,11 +142,29 @@
 &lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; count = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt;(resultSet.next())&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  count++;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;可以这样&lt;/p&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;resultSet.last();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rowCount = resultSet.getRow();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;resultSet.beforeFirst();&lt;span class=&quot;comment&quot;&gt;//将数据集重新归位，这样就获取到行数了&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//需要设置结果集可滚动&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//对于PreparedStatement也需要设置&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;PreparedStatement preparedStatement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//之后在操作结果集中就可以移动游标了&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;resultSet.last();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rowCount = resultSet.getRow();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;resultSet.beforeFirst();&lt;span class=&quot;comment&quot;&gt;//将数据集重新归位，这样就获取到行数了&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;利用SQL查询&lt;/p&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;String sql = &lt;span class=&quot;string&quot;&gt;&quot;select count(*) totalCount from table&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rowCount = resultSet.getInt(&lt;span class=&quot;string&quot;&gt;&quot;totalCount&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;有关&lt;strong&gt;ResultSet&lt;/strong&gt;设置结果集类型的参数说明&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ResultSet.TYPE_FORWARD_ONLY - 结果集不能滚动，这是默认值&lt;/li&gt;
+&lt;li&gt;ResultSet.TYPE_SCROLL_INSENSITIVE - 结果集可以滚动，但ResuleSet对数据库中发生的数据改变不敏感&lt;/li&gt;
+&lt;li&gt;ResultSet.TYPE_SCROLL_SENSITIVE -  结果集可以滚动，并且ResuleSet对数据库中发生的改变敏感&lt;/li&gt;
+&lt;li&gt;ResultSet.CONCUR_READ_ONLY - 只读结果集，不能用于更新数据库&lt;/li&gt;
+&lt;li&gt;ResultSet.CONCUR_UPDATABLE - 可更新结果集，可以用于更新数据库&lt;/li&gt;
+&lt;li&gt;当使用TYPE_SCROLL_INSENSITIVE或者TYPE_SCROLL_SENSITIVE来创建Statement对象时，可以使用ResultSet的first()/last()/beforeFirst()/afterLast()/relative()/absolute()等方法在结果集中随意前后移动&lt;/li&gt;
+&lt;li&gt;即使使用了CONCUR_UPDATABLE参数来创建Statement，得到的记录集也并非一定是“可更新的”，如果你的记录集来自于合并查询，即该查询的结果来自多个表格，那么这样的结果集就可能不是可更新的结果集。可以使用ResuleSet类的getConcurrency()方法来确定是否为可更新的的结果集。如果结果集是可更新的，那么可使用ResultSet的updateRow()，insertRow()，moveToCurrentRow()，deleteRow()，cancelRowUpdates()等方法来对数据库进行更新。&lt;ol&gt;
+&lt;li&gt;利用SQL查询&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;String sql = &lt;span class=&quot;string&quot;&gt;&quot;select count(*) totalCount from table&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rowCount = resultSet.getInt(&lt;span class=&quot;string&quot;&gt;&quot;totalCount&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Note：&lt;/strong&gt;&lt;br&gt;在&lt;strong&gt;JDBC&lt;/strong&gt;中使用可更新的结果集来更新数据库，不能使用&lt;code&gt;select * from table&lt;/code&gt;方式的&lt;strong&gt;SQL&lt;/strong&gt;语句，必须将它写成如下两种形式之一：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;select table.* from table&lt;/li&gt;
+&lt;li&gt;select column1,column2… from table&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;参考资料&lt;br&gt;【1】&lt;a href=&quot;http://blog.sina.com.cn/s/blog_50267f510100dj1m.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.sina.com.cn/s/blog_50267f510100dj1m.html&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
