@@ -44,7 +44,8 @@ select * from mytest;
 |testtime|timestamp|{null}|YES||{null}||select,insert,update,references|发布时间|
 
 
-***说明***：在**MySql**中对于**timestamp**类型的列，如果设置**not null**的话（对应测试表的**updatetime**列），在程序中查询得其默认值是**0000-00-00 00:00:00**；如果**timestamp**的列默认值是**null**的话（对应测试表的**testtime**列），那么**0000-00-00 00:00:00**和**null**值在数据库中都是不显示（由查询结果，可知**updatetime**和**testtime**显示的结果都是空），也就是说在数据库中不管其默认值是**not null**还是**null**，该列值显示的都是空，你无法根据值去判断其类型，并且当是**not null**的时候，在程序中取出来的值实际上是**0000-00-00 00:00:00**，所以使用**resultSet.getString()**方法或其它方法都会报错，**java.sql.SQLException: Value '0000-00-00' can not be represented as java.sql.Timestamp**。
+**NOTE**：
+在**MySql**中对于**timestamp**类型的列，如果设置**not null**的话（对应测试表的**updatetime**列），在程序中查询得其默认值是**0000-00-00 00:00:00**；如果**timestamp**的列默认值是**null**的话（对应测试表的**testtime**列），那么**0000-00-00 00:00:00**和**null**值在数据库中都是不显示（由查询结果，可知**updatetime**和**testtime**显示的结果都是空），也就是说在数据库中不管其默认值是**not null**还是**null**，该列值显示的都是空，你无法根据值去判断其类型，并且当是**not null**的时候，在程序中取出来的值实际上是**0000-00-00 00:00:00**，所以使用**resultSet.getString()**方法或其它方法都会报错，**java.sql.SQLException: Value '0000-00-00' can not be represented as java.sql.Timestamp**。
 
 另外**timestamp**类型要求第一个出现的**timestamp**列必须是**not null default current_timestamp**。
 
@@ -73,12 +74,34 @@ while(resultSet.next()){
 ```
 2. 可以这样
 ```java
+//需要设置结果集可滚动
+Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+//对于PreparedStatement也需要设置
+PreparedStatement preparedStatement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+//之后在操作结果集中就可以移动游标了
 resultSet.last();
 rowCount = resultSet.getRow();
 resultSet.beforeFirst();//将数据集重新归位，这样就获取到行数了
 ```
+有关**ResultSet**设置结果集类型的参数说明
+ - ResultSet.TYPE_FORWARD_ONLY - 结果集不能滚动，这是默认值
+ - ResultSet.TYPE_SCROLL_INSENSITIVE - 结果集可以滚动，但ResuleSet对数据库中发生的数据改变不敏感
+ - ResultSet.TYPE_SCROLL_SENSITIVE -  结果集可以滚动，并且ResuleSet对数据库中发生的改变敏感
+ - ResultSet.CONCUR_READ_ONLY - 只读结果集，不能用于更新数据库
+ - ResultSet.CONCUR_UPDATABLE - 可更新结果集，可以用于更新数据库
+ - 当使用TYPE_SCROLL_INSENSITIVE或者TYPE_SCROLL_SENSITIVE来创建Statement对象时，可以使用ResultSet的first()/last()/beforeFirst()/afterLast()/relative()/absolute()等方法在结果集中随意前后移动
+ - 即使使用了CONCUR_UPDATABLE参数来创建Statement，得到的记录集也并非一定是“可更新的”，如果你的记录集来自于合并查询，即该查询的结果来自多个表格，那么这样的结果集就可能不是可更新的结果集。可以使用ResuleSet类的getConcurrency()方法来确定是否为可更新的的结果集。如果结果集是可更新的，那么可使用ResultSet的updateRow()，insertRow()，moveToCurrentRow()，deleteRow()，cancelRowUpdates()等方法来对数据库进行更新。
 3. 利用SQL查询
 ```java
 String sql = "select count(*) totalCount from table";
 rowCount = resultSet.getInt("totalCount");
 ```
+
+**Note：**
+在**JDBC**中使用可更新的结果集来更新数据库，不能使用`select * from table`方式的**SQL**语句，必须将它写成如下两种形式之一：
+- select table.\* from table
+- select column1,column2... from table
+
+
+参考资料
+【1】http://blog.sina.com.cn/s/blog_50267f510100dj1m.html
