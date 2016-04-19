@@ -594,7 +594,7 @@
     <link href="http://www.codepub.cn/2016/03/20/Hexo-blog-theme-switching-from-Jacman-to-NexT-Mist/"/>
     <id>http://www.codepub.cn/2016/03/20/Hexo-blog-theme-switching-from-Jacman-to-NexT-Mist/</id>
     <published>2016-03-20T15:53:34.000Z</published>
-    <updated>2016-04-18T13:42:33.728Z</updated>
+    <updated>2016-04-18T13:44:44.606Z</updated>
     
     <content type="html">&lt;h4 id=&quot;杂感&quot;&gt;杂感&lt;/h4&gt;&lt;p&gt;难得一个周末，经过五天的工作之后，本来是打算周六周日在睡觉中度过，因为最近工作确实挺累，倒不是工作有多繁忙，而是路途遥远，每天上下班路上花费三个小时，特别是早高峰挤地铁，那真是个体力活啊，每天都是七号线静安寺转二号线，换乘之前，并不能太深入地铁车厢内部，否则到了换乘站你可能根本就挤不下车去了。&lt;/p&gt;
 &lt;p&gt;最近博客流量有渐增趋势，可能是之前未被百度收录，而近期被百度收录的缘故吧，可见我天朝还是百度的天下，哎，万恶的墙啊（&lt;strong&gt;Great Firewall of China&lt;/strong&gt;）！流量渐增，访客自然增加，所以也会有猎头加我微信，我也在考虑要不要把我的个人信息撤掉，貌似泄露的有点多了。同时也会有一些人因为博客的内容加我，请教谈不上，可能是一些同学在做相同的事情的过程中遇到了一些问题，而我可能刚好做过这方面的事情而已，希望有事的同学或朋友直接电联我即可，因为这是我认为最节约我们双方时间的沟通方式，确实没有太多时间去和你在微信上慢慢切磋。&lt;/p&gt;
@@ -983,7 +983,7 @@
     <link href="http://www.codepub.cn/2015/12/09/IntelliJ-IDEA-in-Maven-plugin-could-not-update-the-index-of-the-solution/"/>
     <id>http://www.codepub.cn/2015/12/09/IntelliJ-IDEA-in-Maven-plugin-could-not-update-the-index-of-the-solution/</id>
     <published>2015-12-09T14:21:33.000Z</published>
-    <updated>2016-04-17T03:18:49.820Z</updated>
+    <updated>2016-04-18T13:45:05.239Z</updated>
     
     <content type="html">&lt;h4 id=&quot;Maven的仓库、索引&quot;&gt;Maven的仓库、索引&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;中央仓库&lt;/strong&gt;：目前来说，&lt;a href=&quot;http://repo1.maven.org/maven2/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://repo1.maven.org/maven2/&lt;/a&gt; 是真正的&lt;code&gt;Maven&lt;/code&gt;中央仓库的地址，该地址内置在&lt;code&gt;Maven&lt;/code&gt;的源码中，其它地址包括著名的&lt;a href=&quot;http://mirrors.ibiblio.org/pub/mirrors/maven2/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;ibiblio.org&lt;/a&gt;，都是镜像。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;索引&lt;/strong&gt;：中央仓库带有索引文件以方便用户对其进行搜索，完整的索引文件至2015年12月8日大小约为1.11G，索引每周更新一次。&lt;/p&gt;
