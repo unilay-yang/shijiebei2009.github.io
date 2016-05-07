@@ -2,16 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     
-    
   <url>
-    <loc>http://www.codepub.cn/2016/04/15/A-small-trap-of-JDBC-connection-to-MySql-in-java/</loc>
-    <lastmod>2016-04-19T14:20:53.661Z</lastmod>
+    <loc>http://www.codepub.cn/2016/05/07/IntelliJ-IDEA-using-maven-javadoc-plugin-to-generate-the-Java-Doc-console-gibberish/</loc>
+    <lastmod>2016-05-07T00:20:44.099Z</lastmod>
     <data>
         <display>
-        <title>Java之JDBC连接MySql的一点坑</title>
-        <pubTime>2016-04-15T15:51:11.000Z</pubTime>
+        <title>IntelliJ IDEA使用maven-javadoc-plugin生成Java Doc控制台乱码</title>
+        <pubTime>2016-05-07T00:19:40.000Z</pubTime>
         
-        <tag>MySql </tag>
+        <tag>IntelliJ </tag>
          
          
            
@@ -25,7 +24,7 @@
     
   <url>
     <loc>http://www.codepub.cn/2015/12/09/IntelliJ-IDEA-in-Maven-plugin-could-not-update-the-index-of-the-solution/</loc>
-    <lastmod>2016-04-18T13:45:05.239Z</lastmod>
+    <lastmod>2016-04-24T13:07:44.385Z</lastmod>
     <data>
         <display>
         <title>IntelliJ IDEA中Maven插件无法更新索引之解决办法</title>
@@ -45,7 +44,7 @@
     
   <url>
     <loc>http://www.codepub.cn/2015/08/04/Based-on-the-extended-version-of-synonyms-Cilin-word-similarity-computing/</loc>
-    <lastmod>2016-04-18T13:45:05.228Z</lastmod>
+    <lastmod>2016-04-24T13:07:44.374Z</lastmod>
     <data>
         <display>
         <title>基于同义词词林扩展版的词语相似度计算</title>
@@ -57,6 +56,27 @@
            
              
               <breadCrumb title="Algorithms" url="http://www.codepub.cn/categories/Algorithms/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://www.codepub.cn/2016/04/15/A-small-trap-of-JDBC-connection-to-MySql-in-java/</loc>
+    <lastmod>2016-04-19T14:33:06.851Z</lastmod>
+    <data>
+        <display>
+        <title>Java之JDBC连接MySql的一点坑</title>
+        <pubTime>2016-04-15T15:51:11.000Z</pubTime>
+        
+        <tag>MySql </tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
           
         </display>
     </data>
