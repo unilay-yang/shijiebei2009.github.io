@@ -3,14 +3,14 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2016/05/07/IntelliJ-IDEA-using-maven-javadoc-plugin-to-generate-the-Java-Doc-console-gibberish/</loc>
-    <lastmod>2016-05-07T00:20:44.099Z</lastmod>
+    <loc>http://www.codepub.cn/2016/05/11/The-correct-way-to-use-java-jar-run-an-executable-jar-package-under-Linux/</loc>
+    <lastmod>2016-05-11T12:40:10.465Z</lastmod>
     <data>
         <display>
-        <title>IntelliJ IDEA使用maven-javadoc-plugin生成Java Doc控制台乱码</title>
-        <pubTime>2016-05-07T00:19:40.000Z</pubTime>
+        <title>Linux下使用java -jar运行可执行jar包的正确方式</title>
+        <pubTime>2016-05-11T12:38:26.000Z</pubTime>
         
-        <tag>IntelliJ </tag>
+        <tag>Java </tag>
          
          
            
@@ -24,7 +24,7 @@
     
   <url>
     <loc>http://www.codepub.cn/2015/12/09/IntelliJ-IDEA-in-Maven-plugin-could-not-update-the-index-of-the-solution/</loc>
-    <lastmod>2016-04-24T13:07:44.385Z</lastmod>
+    <lastmod>2016-05-07T00:22:26.788Z</lastmod>
     <data>
         <display>
         <title>IntelliJ IDEA中Maven插件无法更新索引之解决办法</title>
@@ -44,7 +44,7 @@
     
   <url>
     <loc>http://www.codepub.cn/2015/08/04/Based-on-the-extended-version-of-synonyms-Cilin-word-similarity-computing/</loc>
-    <lastmod>2016-04-24T13:07:44.374Z</lastmod>
+    <lastmod>2016-05-07T00:22:26.777Z</lastmod>
     <data>
         <display>
         <title>基于同义词词林扩展版的词语相似度计算</title>
@@ -56,6 +56,26 @@
            
              
               <breadCrumb title="Algorithms" url="http://www.codepub.cn/categories/Algorithms/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.codepub.cn/2016/05/07/IntelliJ-IDEA-using-maven-javadoc-plugin-to-generate-the-Java-Doc-console-gibberish/</loc>
+    <lastmod>2016-05-07T00:22:07.100Z</lastmod>
+    <data>
+        <display>
+        <title>IntelliJ IDEA使用maven-javadoc-plugin生成Java Doc控制台乱码</title>
+        <pubTime>2016-05-07T00:19:40.000Z</pubTime>
+        
+        <tag>IntelliJ </tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
           
         </display>
     </data>
@@ -554,12 +574,12 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2015/07/13/Python3-beginner-s-handbook-four/</loc>
+    <loc>http://www.codepub.cn/2015/10/08/Using-the-Python-CSV-module-to-read-and-write-CSV-file/</loc>
     <lastmod>2015-10-08T06:51:57.576Z</lastmod>
     <data>
         <display>
-        <title>Python3入门手册之四</title>
-        <pubTime>2015-07-13T15:03:44.000Z</pubTime>
+        <title>使用Python的CSV模块读写CSV文件</title>
+        <pubTime>2015-10-08T04:01:00.000Z</pubTime>
         
         <tag>Python3 </tag>
          
@@ -574,12 +594,12 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2015/10/08/Using-the-Python-CSV-module-to-read-and-write-CSV-file/</loc>
+    <loc>http://www.codepub.cn/2015/07/13/Python3-beginner-s-handbook-four/</loc>
     <lastmod>2015-10-08T06:51:57.576Z</lastmod>
     <data>
         <display>
-        <title>使用Python的CSV模块读写CSV文件</title>
-        <pubTime>2015-10-08T04:01:00.000Z</pubTime>
+        <title>Python3入门手册之四</title>
+        <pubTime>2015-07-13T15:03:44.000Z</pubTime>
         
         <tag>Python3 </tag>
          
