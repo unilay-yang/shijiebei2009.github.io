@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     
+    
+  <url>
+    <loc>http://www.codepub.cn/2015/10/07/Private-Treasured-Toolkit/</loc>
+    <lastmod>2016-05-18T14:03:40.889Z</lastmod>
+    <data>
+        <display>
+        <title>私人珍藏工具箱</title>
+        <pubTime>2015-10-07T06:40:32.000Z</pubTime>
+        
+        <tag>Tools </tag>
+         
+         
+           
+             
+              <breadCrumb title="Life-Talk" url="http://www.codepub.cn/categories/Life-Talk/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
   <url>
     <loc>http://www.codepub.cn/2016/05/11/The-correct-way-to-use-java-jar-run-an-executable-jar-package-under-Linux/</loc>
     <lastmod>2016-05-11T12:40:10.465Z</lastmod>
@@ -122,7 +143,6 @@
     </data>
     </url>
 
-    
     
   <url>
     <loc>http://www.codepub.cn/2016/04/15/Log4j-print-exception-stack-information-to-the-log/</loc>
@@ -301,26 +321,6 @@
            
              
               <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.codepub.cn/2015/10/07/Private-Treasured-Toolkit/</loc>
-    <lastmod>2016-01-22T14:27:33.479Z</lastmod>
-    <data>
-        <display>
-        <title>私人珍藏工具箱</title>
-        <pubTime>2015-10-07T06:40:32.000Z</pubTime>
-        
-        <tag>Tools </tag>
-         
-         
-           
-             
-              <breadCrumb title="Life-Talk" url="http://www.codepub.cn/categories/Life-Talk/"/>
           
         </display>
     </data>
