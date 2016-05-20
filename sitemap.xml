@@ -3,6 +3,46 @@
 
     
   <url>
+    <loc>http://www.codepub.cn/2016/05/20/Lucene-6-0-in-action-2-All-kinds-of-Field-and-sort-operations/</loc>
+    <lastmod>2016-05-20T13:37:35.357Z</lastmod>
+    <data>
+        <display>
+        <title>Lucene 6.0实战（2）-各种Field及排序操作</title>
+        <pubTime>2016-05-20T13:31:45.000Z</pubTime>
+        
+        <tag>Lucene </tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.codepub.cn/2016/05/20/Lucene-6-0-in-action-3-A-variety-of-Field-query-operation/</loc>
+    <lastmod>2016-05-20T13:37:19.422Z</lastmod>
+    <data>
+        <display>
+        <title>Lucene 6.0实战（3）-各种Field查询操作</title>
+        <pubTime>2016-05-20T13:33:32.000Z</pubTime>
+        
+        <tag>Lucene </tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.codepub.cn/2016/05/20/Lucene-6-0-in-action-1-index-creation/</loc>
     <lastmod>2016-05-20T13:35:38.184Z</lastmod>
     <data>
