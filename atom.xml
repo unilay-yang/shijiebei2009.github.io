@@ -141,7 +141,7 @@
     <link href="http://www.codepub.cn/2016/05/20/Lucene-6-0-in-action-1-Index-creation/"/>
     <id>http://www.codepub.cn/2016/05/20/Lucene-6-0-in-action-1-Index-creation/</id>
     <published>2016-05-20T13:25:37.000Z</published>
-    <updated>2016-05-20T14:08:22.191Z</updated>
+    <updated>2016-05-20T14:11:20.217Z</updated>
     
     <content type="html">&lt;h3 id=&quot;引言&quot;&gt;引言&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Lucene6.0&lt;/strong&gt;于&lt;strong&gt;2016年4月8日&lt;/strong&gt;发布，要求最低Java版本是&lt;strong&gt;Java 8&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;相信大多数公司的数据库都需要采用分库分表等一些策略，而对于某些特定的业务需求，分别从不同的库不同的表中去检索特定的数据显得比较繁琐，而Lucene正好可以解决某些特殊需求，对于不同库不同表中的数据先建立全量索引，然后将需要检索的数据写入某个单独的表中，供其它业务需求方查询，以后的每天只需要做增量索引并写入数据表即可。&lt;/p&gt;
@@ -1236,7 +1236,7 @@
     <link href="http://www.codepub.cn/2015/12/09/IntelliJ-IDEA-in-Maven-plugin-could-not-update-the-index-of-the-solution/"/>
     <id>http://www.codepub.cn/2015/12/09/IntelliJ-IDEA-in-Maven-plugin-could-not-update-the-index-of-the-solution/</id>
     <published>2015-12-09T14:21:33.000Z</published>
-    <updated>2016-05-20T14:04:37.303Z</updated>
+    <updated>2016-05-20T14:10:05.858Z</updated>
     
     <content type="html">&lt;h4 id=&quot;Maven的仓库、索引&quot;&gt;Maven的仓库、索引&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;中央仓库&lt;/strong&gt;：目前来说，&lt;a href=&quot;http://repo1.maven.org/maven2/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://repo1.maven.org/maven2/&lt;/a&gt; 是真正的&lt;code&gt;Maven&lt;/code&gt;中央仓库的地址，该地址内置在&lt;code&gt;Maven&lt;/code&gt;的源码中，其它地址包括著名的&lt;a href=&quot;http://mirrors.ibiblio.org/pub/mirrors/maven2/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;ibiblio.org&lt;/a&gt;，都是镜像。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;索引&lt;/strong&gt;：中央仓库带有索引文件以方便用户对其进行搜索，完整的索引文件至2015年12月8日大小约为1.11G，索引每周更新一次。&lt;/p&gt;
