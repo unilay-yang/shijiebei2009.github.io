@@ -2,6 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     
+  <url>
+    <loc>http://www.codepub.cn/2016/05/20/Lucene-6-0-in-action-1-index-creation/</loc>
+    <lastmod>2016-05-20T13:27:22.116Z</lastmod>
+    <data>
+        <display>
+        <title>Lucene 6.0 实战（1）-创建索引</title>
+        <pubTime>2016-05-20T13:25:37.000Z</pubTime>
+        
+        <tag>Lucene </tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>http://www.codepub.cn/2015/10/07/Private-Treasured-Toolkit/</loc>
@@ -24,28 +44,8 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2016/05/11/The-correct-way-to-use-java-jar-run-an-executable-jar-package-under-Linux/</loc>
-    <lastmod>2016-05-11T12:40:10.465Z</lastmod>
-    <data>
-        <display>
-        <title>Linux下使用java -jar运行可执行jar包的正确方式</title>
-        <pubTime>2016-05-11T12:38:26.000Z</pubTime>
-        
-        <tag>Java </tag>
-         
-         
-           
-             
-              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.codepub.cn/2015/12/09/IntelliJ-IDEA-in-Maven-plugin-could-not-update-the-index-of-the-solution/</loc>
-    <lastmod>2016-05-07T00:22:26.788Z</lastmod>
+    <lastmod>2016-05-11T13:12:31.855Z</lastmod>
     <data>
         <display>
         <title>IntelliJ IDEA中Maven插件无法更新索引之解决办法</title>
@@ -65,7 +65,7 @@
     
   <url>
     <loc>http://www.codepub.cn/2015/08/04/Based-on-the-extended-version-of-synonyms-Cilin-word-similarity-computing/</loc>
-    <lastmod>2016-05-07T00:22:26.777Z</lastmod>
+    <lastmod>2016-05-11T13:12:31.844Z</lastmod>
     <data>
         <display>
         <title>基于同义词词林扩展版的词语相似度计算</title>
@@ -77,6 +77,26 @@
            
              
               <breadCrumb title="Algorithms" url="http://www.codepub.cn/categories/Algorithms/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.codepub.cn/2016/05/11/The-correct-way-to-use-java-jar-run-an-executable-jar-package-under-Linux/</loc>
+    <lastmod>2016-05-11T13:12:04.155Z</lastmod>
+    <data>
+        <display>
+        <title>Linux下使用java -jar运行可执行jar包的正确方式</title>
+        <pubTime>2016-05-11T12:38:26.000Z</pubTime>
+        
+        <tag>Java </tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
           
         </display>
     </data>
@@ -574,12 +594,12 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2015/10/08/Using-the-Python-CSV-module-to-read-and-write-CSV-file/</loc>
+    <loc>http://www.codepub.cn/2015/07/13/Python3-beginner-s-handbook-four/</loc>
     <lastmod>2015-10-08T06:51:57.576Z</lastmod>
     <data>
         <display>
-        <title>使用Python的CSV模块读写CSV文件</title>
-        <pubTime>2015-10-08T04:01:00.000Z</pubTime>
+        <title>Python3入门手册之四</title>
+        <pubTime>2015-07-13T15:03:44.000Z</pubTime>
         
         <tag>Python3 </tag>
          
@@ -594,12 +614,12 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2015/07/13/Python3-beginner-s-handbook-four/</loc>
+    <loc>http://www.codepub.cn/2015/10/08/Using-the-Python-CSV-module-to-read-and-write-CSV-file/</loc>
     <lastmod>2015-10-08T06:51:57.576Z</lastmod>
     <data>
         <display>
-        <title>Python3入门手册之四</title>
-        <pubTime>2015-07-13T15:03:44.000Z</pubTime>
+        <title>使用Python的CSV模块读写CSV文件</title>
+        <pubTime>2015-10-08T04:01:00.000Z</pubTime>
         
         <tag>Python3 </tag>
          
