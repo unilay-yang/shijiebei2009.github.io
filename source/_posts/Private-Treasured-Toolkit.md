@@ -45,23 +45,12 @@ categories: Life-Talk
 - **One Tab**：强烈推荐，使用场景是这样的，我们使用Chrome经常会一次打开好多tab，很多是会用到的，又不舍得关，内存又耗着，这个时候点击下OneTab，直接把所有tab回收，然后每天的历史都给你记录着，接着你可以一键还原某一天的tab，真乃为Chrome而生
 - **Alexa Traffic Rank**：Alexa排名是指网站的世界排名，非常有权威。直接主流网站或博客绝对是有Alexa排名的
 - **Isometric Contributions**：一个小玩意，可以让你在GitHub上的commit像盖楼一样的展示，很有趣
-- **时空隧道**：时空隧道是一款速度最快的海外网站加速插件，可轻松访问google、gmail、facebook、twitter、youtube等网站，永久免费，每天累积2小时，另外推出高级VIP服务
 - **Markdown Reader**：Read markdown file in Chrome
-
-
-###翻墙工具
-一直用的都是红杏翻墙，但是近期诸多VPN被封，红杏也难逃厄运，上不了Google对一名开发人员来说简直就是噩梦，最近终于发现一款以前免费，现在不免费了，并且速度比红杏还要快的翻墙利器。时空隧道在之前每天提供两个小时的免费使用时间，当然，可以冻结、解冻。
-
-关于安装方法请参考[这里](http://suidaoin.lofter.com/)，如果您要注册的话，很高兴你能填上我的邀请码。
-
->给你推荐一款海外网站加速工具，为科技工作者、海外归国人员、企业团队、外贸工作者提供海外上网服务，永久免费。
-国外网址：https://chrome.google.com/webstore/detail/hfinpallhogllbckokkaefjjcjhjpnln
-国外网址：http://www.suidao.in/invi/m5VBYH
-国内网址：http://suidao.wuseyi.com/invi/m5VBYH
-时空隧道邀请码 m5VBYH
-如果地址打不开的话，可以试试：http://www.jeepshoe.org/412418412.htm
-我的百度云分享时空隧道下载链接：http://pan.baidu.com/s/1eQEyMum
-
+- **ADfree.Player.Online**：一款屏蔽国内主要视频网站部分视频广告的扩展
+- **Alexa Traffic Rank**：查看网站在世界和国内的Alexa流量排名情况
+- **Imageus**：鼠标指针悬停在链接或缩略图上时直接在当前页面的弹出视图上显示这些图片、HTML5视频/音频和内容专辑
+- **网页截图:注释&批注**：捕获整个页面或任何部分，矩形，圆形，箭头，线条和文字，模糊敏感信息，一键上传分享注释
+- **任何以Chrome插件形式存在的翻墙工具**：多数的这类插件都是骗人的，这些插件会在前期提供一段时间的翻墙服务，一旦你成为年费会员，这些插件多数都开始停止服务，再也无法登录，过段时间又会换个名字换个插件出现，例如：红杏翻墙，时空隧道等
 
 ###在用机器
 - PC1：MacBook Pro MJLQ2CH/A 15.6
