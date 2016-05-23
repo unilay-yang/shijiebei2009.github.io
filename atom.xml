@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.codepub.cn/"/>
-  <updated>2016-05-23T15:31:29.639Z</updated>
+  <updated>2016-05-23T23:56:07.211Z</updated>
   <id>http://www.codepub.cn/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Lucene 6.0 in action(4)-The text analyzer</title>
+    <title>Lucene 6.0实战（4）-文本分析器</title>
     <link href="http://www.codepub.cn/2016/05/23/Lucene-6-0-in-action-4-The-text-analyzer/"/>
     <id>http://www.codepub.cn/2016/05/23/Lucene-6-0-in-action-4-The-text-analyzer/</id>
     <published>2016-05-23T15:30:05.000Z</published>
-    <updated>2016-05-23T15:31:29.639Z</updated>
+    <updated>2016-05-23T23:56:07.211Z</updated>
     
     <content type="html">&lt;h3 id=&quot;Analyzer简介&quot;&gt;Analyzer简介&lt;/h3&gt;&lt;p&gt;在Lucene的org.apache.lucene.analysis模块中提供了顶层的抽象类Analyzer，Analyzer主要是用来构建TokenStreams，如果想实现自定义的Analyzer，必须覆写createComponents(String)方法，并定义自己的TokenStreamComponents。&lt;/p&gt;
 &lt;p&gt;为什么要有Analyzer呢？对于Lucene而言，不管是索引还是检索，都是针对纯文本而言，对于纯文本的来源可以是PDF，Word，Excel，PPT，HTML等，Lucene对此并不关心，只要保证传递给Lucene的是纯文本即可。&lt;/p&gt;
