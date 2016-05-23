@@ -14,14 +14,15 @@ categories: Programming Notes
 
 Lucene是一个高效的，基于Java的全文检索库，生活中数据主要分为两种：结构化数据和非结构化数据。一般使用的XML、JSON、数据库等都是结构化数据，非结构化数据也叫全文数据，而这种全文数据正是Lucene的用武之地。全文检索主要有两个过程，索引创建（Indexing）和搜索索引（Search）。
 
-###索引存储
-索引由Lucene按照特定的格式创建，而创建出来的索引必然要存储在文件系统之上，Lucene在文件系统中存储索引的最基本的类是FSDirectory，如下是该类常用的子类
-- SimpleFSDirectory：使用Files.newByteChannel实现，对并发支持不好，它会在多线程读取同一份文件时进行同步操作
-- NIOFSDirectory：使用Java NIO中的FileChannel去读取同一份文件，可以避免同步操作，但是由于Windows平台上存在[Sun JRE bug](http://bugs.java.com/bugdatabase/view_bug.do?bug_id=6265734)，所以在Windows平台上不推荐使用
-- MMapDirectory：在读取的时候使用内存映射IO，如果你的虚拟内存足够容纳索引文件大小的话，这是一个很棒的选择
-- RAMDirectory：只对小索引好，大索引会出现频繁GC
+###存储索引
+索引由Lucene按照特定的格式创建，而创建出来的索引必然要存储在文件系统之上，Lucene在文件系统中存储索引的最基本的抽象实现类是BaseDirectory，该类继承自Directory，BaseDirectory有两个主要的实现类：
+- FSDirectory：在文件系统上存储索引文件，有六个子类，如下是三个常用的子类
+  - SimpleFSDirectory：使用Files.newByteChannel实现，对并发支持不好，它会在多线程读取同一份文件时进行同步操作
+  - NIOFSDirectory：使用Java NIO中的FileChannel去读取同一份文件，可以避免同步操作，但是由于Windows平台上存在[Sun JRE bug](http://bugs.java.com/bugdatabase/view_bug.do?bug_id=6265734)，所以在Windows平台上不推荐使用
+  - MMapDirectory：在读取的时候使用内存映射IO，如果你的虚拟内存足够容纳索引文件大小的话，这是一个很棒的选择
+- RAMDirectory：在内存中暂存索引文件，只对小索引好，大索引会出现频繁GC
 
-通常情况下，我们无需自己选择使用FSDirectory的某个实现子类，只要使用FSDirectory中的open(Path path)方法即可，英文doc如下：
+通常情况下，如果索引文件存储在文件系统之上，我们无需自己选择使用FSDirectory的某个实现子类，只要使用FSDirectory中的open(Path path)方法即可，英文doc如下：
 >Creates an FSDirectory instance, trying to pick the best implementation given the current environment. The directory returned uses the NativeFSLockFactory. The directory is created at the named location if it does not yet exist.
 
 该方法可以自动根据当前使用的系统环境而选择一个最佳的实现子类，其选择策略是
@@ -29,8 +30,15 @@ Lucene是一个高效的，基于Java的全文检索库，生活中数据主要�
 - 对于其它非Windows上的JREs，返回NIOFSDirectory
 - 对于其它Windows上的JREs，返回SimpleFSDirectory
 
-###文本分析器
-对于文本分析器Analyzer，需要注意一点，就是使用哪种Analyzer进行索引创建，查询的时候也要使用哪种Analyzer查询，否则查询结果不正确。
+###索引过程分析
+执行简单的索引过程需要用到以下几个类：
+- IndexWriter：负责创建索引或打开已有索引
+- IndexWriterConfig：持有创建IndexWriter的所有配置项
+- Directory：描述了Lucene索引的存放位置，它的子类负责具体指定索引的存储路径
+- Analyzer：负责文本分析，从被索引文本文件中提取出语汇单元。对于文本分析器Analyzer，需要注意一点，就是使用哪种Analyzer进行索引创建，查询的时候也要使用哪种Analyzer查询，否则查询结果不正确。
+- Document：代表一些域（Field）的集合，你可以将Document对象理解为虚拟文档-例如Web页面、E-mail信息或者文本文件
+- Field：索引中的每个文档都包含一个或多个不同命名的域，每个域都有一个域名和对应的域值
+
 
 ###创建索引
 索引的创建方式有三种，通过IndexWriterConfig.OpenMode进行指定，分别是
@@ -58,7 +66,7 @@ public IndexWriter getIndexWriter(String indexPath, boolean create) throws IOExc
     return indexWriter;
 }
 ```
-如果仅仅做测试用，还可以将索引写入内存，此时需要使用RAMDirectory
+如果仅仅做测试用，还可以将索引文件存储在内存之中，此时需要使用RAMDirectory
 ```java
 public class LuceneDemo {
     private Directory directory;
