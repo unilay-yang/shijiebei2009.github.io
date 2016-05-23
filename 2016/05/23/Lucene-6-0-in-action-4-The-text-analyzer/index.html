@@ -1,0 +1,964 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Lucene," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="IT草根" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="Analyzer简介在Lucene的org.apache.lucene.analysis模块中提供了顶层的抽象类Analyzer，Analyzer主要是用来构建TokenStreams，如果想实现自定义的Analyzer，必须覆写createComponents(String)方法，并定义自己的TokenStreamComponents。
+为什么要有Analyzer呢？对于Lucene而言，不管是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lucene 6.0 in action(4)-The text analyzer">
+<meta property="og:url" content="http://www.codepub.cn/2016/05/23/Lucene-6-0-in-action-4-The-text-analyzer/index.html">
+<meta property="og:site_name" content="IT草根">
+<meta property="og:description" content="Analyzer简介在Lucene的org.apache.lucene.analysis模块中提供了顶层的抽象类Analyzer，Analyzer主要是用来构建TokenStreams，如果想实现自定义的Analyzer，必须覆写createComponents(String)方法，并定义自己的TokenStreamComponents。
+为什么要有Analyzer呢？对于Lucene而言，不管是">
+<meta property="og:updated_time" content="2016-05-23T15:30:39.121Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lucene 6.0 in action(4)-The text analyzer">
+<meta name="twitter:description" content="Analyzer简介在Lucene的org.apache.lucene.analysis模块中提供了顶层的抽象类Analyzer，Analyzer主要是用来构建TokenStreams，如果想实现自定义的Analyzer，必须覆写createComponents(String)方法，并定义自己的TokenStreamComponents。
+为什么要有Analyzer呢？对于Lucene而言，不管是">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6264291807601886000,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Lucene 6.0 in action(4)-The text analyzer | IT草根 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2c61418f187553bcc869b755930233ab";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">IT草根</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">WangXu's 代码馆 BLOG</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-resume">
+          <a href="/resume" rel="section">
+            
+              <i class="menu-item-icon fa fa-book fa-fw"></i> <br />
+            
+            简历
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+              <i class="menu-item-icon fa fa-link fa-fw"></i> <br />
+            
+            友链
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'CEs2u-bRR6iHSt4ynbFA','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Lucene 6.0 in action(4)-The text analyzer
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-23T23:30:05+08:00" content="2016-05-23">
+              2016-05-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Programming-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming Notes</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+		
+		
+			<!-- 在下面的位置加上如下代码 -->
+			<span id="busuanzi_container_page_pv">&nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C</span>    
+			<!-- 在上面的位置加上如上代码 -->  
+		
+		  
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/23/Lucene-6-0-in-action-4-The-text-analyzer/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/23/Lucene-6-0-in-action-4-The-text-analyzer/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Analyzer简介">Analyzer简介</h3><p>在Lucene的org.apache.lucene.analysis模块中提供了顶层的抽象类Analyzer，Analyzer主要是用来构建TokenStreams，如果想实现自定义的Analyzer，必须覆写createComponents(String)方法，并定义自己的TokenStreamComponents。</p>
+<p>为什么要有Analyzer呢？对于Lucene而言，不管是索引还是检索，都是针对纯文本而言，对于纯文本的来源可以是PDF，Word，Excel，PPT，HTML等，Lucene对此并不关心，只要保证传递给Lucene的是纯文本即可。</p>
+<p>而通常情况下，对于大量的文本，用户在检索的时候不可能全部输入，例如有文本“Hello World，I’am javaer!”，用户在检索的时候可能只是输入了“Hello”，这里就需要Lucene索引该文本的时候预先对文本进行切分，这样在检索的时候才能将词源和文本对应起来。</p>
+<h3 id="Analyzer部分子类分词示例">Analyzer部分子类分词示例</h3><p>选取了六个实现类，并分别输出它们对英文、中文、特殊符号及邮箱等的切分效果。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnalyzerDemo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String[] examples = &#123;<span class="string">"The quick brown 1234 fox jumped over the lazy dog!"</span>, <span class="string">"XY&amp;Z 15.6 Corporation - xyz@example.com"</span>,</span><br><span class="line">            <span class="string">"北京市北京大学"</span>&#125;;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Analyzer[] ANALYZERS = <span class="keyword">new</span> Analyzer[]&#123;<span class="keyword">new</span> WhitespaceAnalyzer(), <span class="keyword">new</span> SimpleAnalyzer(), <span class="keyword">new</span> StopAnalyzer(), <span class="keyword">new</span></span><br><span class="line">            StandardAnalyzer(), <span class="keyword">new</span> CJKAnalyzer(), <span class="keyword">new</span> SmartChineseAnalyzer()&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAnalyzer</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ANALYZERS.length; i++) &#123;</span><br><span class="line">            String simpleName = ANALYZERS[i].getClass().getSimpleName();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; examples.length; j++) &#123;</span><br><span class="line">                TokenStream contents = ANALYZERS[i].tokenStream(<span class="string">"contents"</span>, examples[j]);</span><br><span class="line">                <span class="comment">//TokenStream contents = ANALYZERS[i].tokenStream("contents", new StringReader(examples[j]));</span></span><br><span class="line">                OffsetAttribute offsetAttribute = contents.addAttribute(OffsetAttribute.class);</span><br><span class="line">                TypeAttribute typeAttribute = contents.addAttribute(TypeAttribute.class);</span><br><span class="line">                contents.reset();</span><br><span class="line">                System.out.println(simpleName + <span class="string">" analyzing : "</span> + examples[j]);</span><br><span class="line">                <span class="keyword">while</span> (contents.incrementToken()) &#123;</span><br><span class="line">                    String s1 = offsetAttribute.toString();</span><br><span class="line">                    <span class="keyword">int</span> i1 = offsetAttribute.startOffset();<span class="comment">//起始偏移量</span></span><br><span class="line">                    <span class="keyword">int</span> i2 = offsetAttribute.endOffset();<span class="comment">//结束偏移量</span></span><br><span class="line">                    System.out.print(s1 + <span class="string">"["</span> + i1 + <span class="string">","</span> + i2 + <span class="string">":"</span> + typeAttribute.type() + <span class="string">"]"</span> + <span class="string">" "</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                contents.end();</span><br><span class="line">                contents.close();</span><br><span class="line">                System.out.println();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出结果如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">WhitespaceAnalyzer analyzing : The quick brown <span class="number">1234</span> fox jumped over the lazy dog!</span><br><span class="line">The[<span class="number">0</span>,<span class="number">3</span>:word] quick[<span class="number">4</span>,<span class="number">9</span>:word] brown[<span class="number">10</span>,<span class="number">15</span>:word] <span class="number">1234</span>[<span class="number">16</span>,<span class="number">20</span>:word] fox[<span class="number">21</span>,<span class="number">24</span>:word] jumped[<span class="number">25</span>,<span class="number">31</span>:word] over[<span class="number">32</span>,<span class="number">36</span>:word] the[<span class="number">37</span>,<span class="number">40</span>:word] lazy[<span class="number">41</span>,<span class="number">45</span>:word] dog![<span class="number">46</span>,<span class="number">50</span>:word] </span><br><span class="line">WhitespaceAnalyzer analyzing : XY&amp;Z <span class="number">15.6</span> Corporation - xyz<span class="annotation">@example</span>.com</span><br><span class="line">XY&amp;Z[<span class="number">0</span>,<span class="number">4</span>:word] <span class="number">15.6</span>[<span class="number">5</span>,<span class="number">9</span>:word] Corporation[<span class="number">10</span>,<span class="number">21</span>:word] -[<span class="number">22</span>,<span class="number">23</span>:word] xyz<span class="annotation">@example</span>.com[<span class="number">24</span>,<span class="number">39</span>:word] </span><br><span class="line">WhitespaceAnalyzer analyzing : 北京市北京大学</span><br><span class="line">北京市北京大学[<span class="number">0</span>,<span class="number">7</span>:word] </span><br><span class="line">SimpleAnalyzer analyzing : The quick brown <span class="number">1234</span> fox jumped over the lazy dog!</span><br><span class="line">the[<span class="number">0</span>,<span class="number">3</span>:word] quick[<span class="number">4</span>,<span class="number">9</span>:word] brown[<span class="number">10</span>,<span class="number">15</span>:word] fox[<span class="number">21</span>,<span class="number">24</span>:word] jumped[<span class="number">25</span>,<span class="number">31</span>:word] over[<span class="number">32</span>,<span class="number">36</span>:word] the[<span class="number">37</span>,<span class="number">40</span>:word] lazy[<span class="number">41</span>,<span class="number">45</span>:word] dog[<span class="number">46</span>,<span class="number">49</span>:word] </span><br><span class="line">SimpleAnalyzer analyzing : XY&amp;Z <span class="number">15.6</span> Corporation - xyz<span class="annotation">@example</span>.com</span><br><span class="line">xy[<span class="number">0</span>,<span class="number">2</span>:word] z[<span class="number">3</span>,<span class="number">4</span>:word] corporation[<span class="number">10</span>,<span class="number">21</span>:word] xyz[<span class="number">24</span>,<span class="number">27</span>:word] example[<span class="number">28</span>,<span class="number">35</span>:word] com[<span class="number">36</span>,<span class="number">39</span>:word] </span><br><span class="line">SimpleAnalyzer analyzing : 北京市北京大学</span><br><span class="line">北京市北京大学[<span class="number">0</span>,<span class="number">7</span>:word] </span><br><span class="line">StopAnalyzer analyzing : The quick brown <span class="number">1234</span> fox jumped over the lazy dog!</span><br><span class="line">quick[<span class="number">4</span>,<span class="number">9</span>:word] brown[<span class="number">10</span>,<span class="number">15</span>:word] fox[<span class="number">21</span>,<span class="number">24</span>:word] jumped[<span class="number">25</span>,<span class="number">31</span>:word] over[<span class="number">32</span>,<span class="number">36</span>:word] lazy[<span class="number">41</span>,<span class="number">45</span>:word] dog[<span class="number">46</span>,<span class="number">49</span>:word] </span><br><span class="line">StopAnalyzer analyzing : XY&amp;Z <span class="number">15.6</span> Corporation - xyz<span class="annotation">@example</span>.com</span><br><span class="line">xy[<span class="number">0</span>,<span class="number">2</span>:word] z[<span class="number">3</span>,<span class="number">4</span>:word] corporation[<span class="number">10</span>,<span class="number">21</span>:word] xyz[<span class="number">24</span>,<span class="number">27</span>:word] example[<span class="number">28</span>,<span class="number">35</span>:word] com[<span class="number">36</span>,<span class="number">39</span>:word] </span><br><span class="line">StopAnalyzer analyzing : 北京市北京大学</span><br><span class="line">北京市北京大学[<span class="number">0</span>,<span class="number">7</span>:word] </span><br><span class="line">StandardAnalyzer analyzing : The quick brown <span class="number">1234</span> fox jumped over the lazy dog!</span><br><span class="line">quick[<span class="number">4</span>,<span class="number">9</span>:&lt;ALPHANUM&gt;] brown[<span class="number">10</span>,<span class="number">15</span>:&lt;ALPHANUM&gt;] <span class="number">1234</span>[<span class="number">16</span>,<span class="number">20</span>:&lt;NUM&gt;] fox[<span class="number">21</span>,<span class="number">24</span>:&lt;ALPHANUM&gt;] jumped[<span class="number">25</span>,<span class="number">31</span>:&lt;ALPHANUM&gt;] over[<span class="number">32</span>,<span class="number">36</span>:&lt;ALPHANUM&gt;] lazy[<span class="number">41</span>,<span class="number">45</span>:&lt;ALPHANUM&gt;] dog[<span class="number">46</span>,<span class="number">49</span>:&lt;ALPHANUM&gt;] </span><br><span class="line">StandardAnalyzer analyzing : XY&amp;Z <span class="number">15.6</span> Corporation - xyz<span class="annotation">@example</span>.com</span><br><span class="line">xy[<span class="number">0</span>,<span class="number">2</span>:&lt;ALPHANUM&gt;] z[<span class="number">3</span>,<span class="number">4</span>:&lt;ALPHANUM&gt;] <span class="number">15.6</span>[<span class="number">5</span>,<span class="number">9</span>:&lt;NUM&gt;] corporation[<span class="number">10</span>,<span class="number">21</span>:&lt;ALPHANUM&gt;] xyz[<span class="number">24</span>,<span class="number">27</span>:&lt;ALPHANUM&gt;] example.com[<span class="number">28</span>,<span class="number">39</span>:&lt;ALPHANUM&gt;] </span><br><span class="line">StandardAnalyzer analyzing : 北京市北京大学</span><br><span class="line">北[<span class="number">0</span>,<span class="number">1</span>:&lt;IDEOGRAPHIC&gt;] 京[<span class="number">1</span>,<span class="number">2</span>:&lt;IDEOGRAPHIC&gt;] 市[<span class="number">2</span>,<span class="number">3</span>:&lt;IDEOGRAPHIC&gt;] 北[<span class="number">3</span>,<span class="number">4</span>:&lt;IDEOGRAPHIC&gt;] 京[<span class="number">4</span>,<span class="number">5</span>:&lt;IDEOGRAPHIC&gt;] 大[<span class="number">5</span>,<span class="number">6</span>:&lt;IDEOGRAPHIC&gt;] 学[<span class="number">6</span>,<span class="number">7</span>:&lt;IDEOGRAPHIC&gt;] </span><br><span class="line">CJKAnalyzer analyzing : The quick brown <span class="number">1234</span> fox jumped over the lazy dog!</span><br><span class="line">quick[<span class="number">4</span>,<span class="number">9</span>:&lt;ALPHANUM&gt;] brown[<span class="number">10</span>,<span class="number">15</span>:&lt;ALPHANUM&gt;] <span class="number">1234</span>[<span class="number">16</span>,<span class="number">20</span>:&lt;NUM&gt;] fox[<span class="number">21</span>,<span class="number">24</span>:&lt;ALPHANUM&gt;] jumped[<span class="number">25</span>,<span class="number">31</span>:&lt;ALPHANUM&gt;] over[<span class="number">32</span>,<span class="number">36</span>:&lt;ALPHANUM&gt;] lazy[<span class="number">41</span>,<span class="number">45</span>:&lt;ALPHANUM&gt;] dog[<span class="number">46</span>,<span class="number">49</span>:&lt;ALPHANUM&gt;] </span><br><span class="line">CJKAnalyzer analyzing : XY&amp;Z <span class="number">15.6</span> Corporation - xyz<span class="annotation">@example</span>.com</span><br><span class="line">xy[<span class="number">0</span>,<span class="number">2</span>:&lt;ALPHANUM&gt;] z[<span class="number">3</span>,<span class="number">4</span>:&lt;ALPHANUM&gt;] <span class="number">15.6</span>[<span class="number">5</span>,<span class="number">9</span>:&lt;NUM&gt;] corporation[<span class="number">10</span>,<span class="number">21</span>:&lt;ALPHANUM&gt;] xyz[<span class="number">24</span>,<span class="number">27</span>:&lt;ALPHANUM&gt;] example.com[<span class="number">28</span>,<span class="number">39</span>:&lt;ALPHANUM&gt;] </span><br><span class="line">CJKAnalyzer analyzing : 北京市北京大学</span><br><span class="line">北京[<span class="number">0</span>,<span class="number">2</span>:&lt;DOUBLE&gt;] 京市[<span class="number">1</span>,<span class="number">3</span>:&lt;DOUBLE&gt;] 市北[<span class="number">2</span>,<span class="number">4</span>:&lt;DOUBLE&gt;] 北京[<span class="number">3</span>,<span class="number">5</span>:&lt;DOUBLE&gt;] 京大[<span class="number">4</span>,<span class="number">6</span>:&lt;DOUBLE&gt;] 大学[<span class="number">5</span>,<span class="number">7</span>:&lt;DOUBLE&gt;] </span><br><span class="line">SmartChineseAnalyzer analyzing : The quick brown <span class="number">1234</span> fox jumped over the lazy dog!</span><br><span class="line">the[<span class="number">0</span>,<span class="number">3</span>:word] quick[<span class="number">4</span>,<span class="number">9</span>:word] brown[<span class="number">10</span>,<span class="number">15</span>:word] <span class="number">1234</span>[<span class="number">16</span>,<span class="number">20</span>:word] fox[<span class="number">21</span>,<span class="number">24</span>:word] jump[<span class="number">25</span>,<span class="number">31</span>:word] over[<span class="number">32</span>,<span class="number">36</span>:word] the[<span class="number">37</span>,<span class="number">40</span>:word] lazi[<span class="number">41</span>,<span class="number">45</span>:word] dog[<span class="number">46</span>,<span class="number">49</span>:word] </span><br><span class="line">SmartChineseAnalyzer analyzing : XY&amp;Z <span class="number">15.6</span> Corporation - xyz<span class="annotation">@example</span>.com</span><br><span class="line">xy[<span class="number">0</span>,<span class="number">2</span>:word] z[<span class="number">3</span>,<span class="number">4</span>:word] <span class="number">15</span>[<span class="number">5</span>,<span class="number">7</span>:word] <span class="number">6</span>[<span class="number">8</span>,<span class="number">9</span>:word] corpor[<span class="number">10</span>,<span class="number">21</span>:word] xyz[<span class="number">24</span>,<span class="number">27</span>:word] exampl[<span class="number">28</span>,<span class="number">35</span>:word] com[<span class="number">36</span>,<span class="number">39</span>:word] </span><br><span class="line">SmartChineseAnalyzer analyzing : 北京市北京大学</span><br><span class="line">北京市[<span class="number">0</span>,<span class="number">3</span>:word] 北京大学[<span class="number">3</span>,<span class="number">7</span>:word]</span><br></pre></td></tr></table></figure></p>
+<h3 id="自定义Analyzer实现扩展停用词">自定义Analyzer实现扩展停用词</h3><ol>
+<li>继承自Analyzer并覆写createComponents(String)方法</li>
+<li>维护自己的停用词词典</li>
+<li>重写TokenStreamComponents，选择合适的过滤策略</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StopAnalyzerExtend</span> <span class="keyword">extends</span> <span class="title">Analyzer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> CharArraySet stopWordSet;<span class="comment">//停止词词典</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CharArraySet <span class="title">getStopWordSet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.stopWordSet;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setStopWordSet</span><span class="params">(CharArraySet stopWordSet)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.stopWordSet = stopWordSet;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StopAnalyzerExtend</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        setStopWordSet(StopAnalyzer.ENGLISH_STOP_WORDS_SET);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * <span class="doctag">@param</span> stops 需要扩展的停止词</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StopAnalyzerExtend</span><span class="params">(List&lt;String&gt; stops)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>();</span><br><span class="line">        <span class="comment">/**如果直接为stopWordSet赋值的话，会报如下异常，这是因为在StopAnalyzer中有ENGLISH_STOP_WORDS_SET = CharArraySet.unmodifiableSet(stopSet);</span><br><span class="line">         * ENGLISH_STOP_WORDS_SET 被设置为不可更改的set集合</span><br><span class="line">         * Exception in thread "main" java.lang.UnsupportedOperationException</span><br><span class="line">         * at org.apache.lucene.analysis.util.CharArrayMap$UnmodifiableCharArrayMap.put(CharArrayMap.java:592)</span><br><span class="line">         * at org.apache.lucene.analysis.util.CharArraySet.add(CharArraySet.java:105)</span><br><span class="line">         * at java.util.AbstractCollection.addAll(AbstractCollection.java:344)</span><br><span class="line">         * at MyAnalyzer.&lt;init&gt;(AnalyzerDemo.java:146)</span><br><span class="line">         * at MyAnalyzer.main(AnalyzerDemo.java:162)</span><br><span class="line">         */</span></span><br><span class="line">        <span class="comment">//stopWordSet = getStopWordSet();</span></span><br><span class="line">        stopWordSet = CharArraySet.copy(getStopWordSet());</span><br><span class="line">        stopWordSet.addAll(StopFilter.makeStopSet(stops));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> TokenStreamComponents <span class="title">createComponents</span><span class="params">(String fieldName)</span> </span>&#123;</span><br><span class="line">        Tokenizer source = <span class="keyword">new</span> LowerCaseTokenizer();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> TokenStreamComponents(source, <span class="keyword">new</span> StopFilter(source, stopWordSet));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        ArrayList&lt;String&gt; strings = <span class="keyword">new</span> ArrayList&lt;String&gt;() &#123;&#123;</span><br><span class="line">            add(<span class="string">"小鬼子"</span>);</span><br><span class="line">            add(<span class="string">"美国佬"</span>);</span><br><span class="line">        &#125;&#125;;</span><br><span class="line">        Analyzer analyzer = <span class="keyword">new</span> StopAnalyzerExtend(strings);</span><br><span class="line">        String content = <span class="string">"小鬼子 and 美国佬 are playing together!"</span>;</span><br><span class="line">        TokenStream tokenStream = analyzer.tokenStream(<span class="string">"myfield"</span>, content);</span><br><span class="line">        tokenStream.reset();</span><br><span class="line">        CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);</span><br><span class="line">        <span class="keyword">while</span> (tokenStream.incrementToken()) &#123;</span><br><span class="line">            <span class="comment">// 已经过滤掉自定义停用词</span></span><br><span class="line">            <span class="comment">// 输出：playing   together</span></span><br><span class="line">            System.out.println(charTermAttribute.toString());</span><br><span class="line">        &#125;</span><br><span class="line">        tokenStream.end();</span><br><span class="line">        tokenStream.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="自定义Analyzer实现字长过滤">自定义Analyzer实现字长过滤</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LongFilterAnalyzer</span> <span class="keyword">extends</span> <span class="title">Analyzer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> len;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getLen</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.len;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLen</span><span class="params">(<span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.len = len;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LongFilterAnalyzer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LongFilterAnalyzer</span><span class="params">(<span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        setLen(len);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> TokenStreamComponents <span class="title">createComponents</span><span class="params">(String fieldName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> Tokenizer source = <span class="keyword">new</span> WhitespaceTokenizer();</span><br><span class="line">        <span class="comment">//过滤掉长度&lt;len，并且&gt;20的token</span></span><br><span class="line">        TokenStream tokenStream = <span class="keyword">new</span> LengthFilter(source, len, <span class="number">20</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> TokenStreamComponents(source, tokenStream);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//把长度小于2的过滤掉，开区间</span></span><br><span class="line">        Analyzer analyzer = <span class="keyword">new</span> LongFilterAnalyzer(<span class="number">2</span>);</span><br><span class="line">        String words = <span class="string">"I am a java coder! Testingtestingtesting!"</span>;</span><br><span class="line">        TokenStream stream = analyzer.tokenStream(<span class="string">"myfield"</span>, words);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            stream.reset();</span><br><span class="line">            CharTermAttribute offsetAtt = stream.addAttribute(CharTermAttribute.class);</span><br><span class="line">            <span class="keyword">while</span> (stream.incrementToken()) &#123;</span><br><span class="line">                System.out.println(offsetAtt.toString());</span><br><span class="line">            &#125;</span><br><span class="line">            stream.end();</span><br><span class="line">            stream.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">am</span><br><span class="line">java</span><br><span class="line">coder!</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，长度小于两个字符的文本都被过滤掉了。</p>
+<h3 id="对不同的Field使用不同的Analyzer">对不同的Field使用不同的Analyzer</h3><p>PerFieldAnalyzerWrapper的doc注释中提供了详细的说明，该类提供处理不同的Field使用不同的Analyzer的技术方案。PerFieldAnalyzerWrapper可以像其它的Analyzer一样使用，包括索引和查询分析。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testPerFieldAnalyzerWrapper</span><span class="params">()</span> <span class="keyword">throws</span> IOException, ParseException </span>&#123;</span><br><span class="line">    Map&lt;String, Analyzer&gt; fields = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    fields.put(<span class="string">"partnum"</span>, <span class="keyword">new</span> KeywordAnalyzer());</span><br><span class="line">    <span class="comment">//对于其他的域，默认使用SimpleAnalyzer分析器，对于指定的域partnum使用KeywordAnalyzer</span></span><br><span class="line">    PerFieldAnalyzerWrapper perFieldAnalyzerWrapper = <span class="keyword">new</span> PerFieldAnalyzerWrapper(<span class="keyword">new</span> SimpleAnalyzer(), fields);</span><br><span class="line">    Directory directory = <span class="keyword">new</span> RAMDirectory();</span><br><span class="line">    IndexWriterConfig indexWriterConfig = <span class="keyword">new</span> IndexWriterConfig(perFieldAnalyzerWrapper);</span><br><span class="line">    IndexWriter indexWriter = <span class="keyword">new</span> IndexWriter(directory, indexWriterConfig);</span><br><span class="line">    Document document = <span class="keyword">new</span> Document();</span><br><span class="line">    FieldType fieldType = <span class="keyword">new</span> FieldType();</span><br><span class="line">    fieldType.setStored(<span class="keyword">true</span>);</span><br><span class="line">    fieldType.setIndexOptions(IndexOptions.DOCS_AND_FREQS);</span><br><span class="line">    document.add(<span class="keyword">new</span> Field(<span class="string">"partnum"</span>, <span class="string">"Q36"</span>, fieldType));</span><br><span class="line">    document.add(<span class="keyword">new</span> Field(<span class="string">"description"</span>, <span class="string">"Illidium Space Modulator"</span>, fieldType));</span><br><span class="line">    indexWriter.addDocument(document);</span><br><span class="line">    indexWriter.close();</span><br><span class="line">    IndexSearcher indexSearcher = <span class="keyword">new</span> IndexSearcher(DirectoryReader.open(directory));</span><br><span class="line">    <span class="comment">//直接使用TermQuery是可以检索到的</span></span><br><span class="line">    TopDocs search = indexSearcher.search(<span class="keyword">new</span> TermQuery(<span class="keyword">new</span> Term(<span class="string">"partnum"</span>, <span class="string">"Q36"</span>)), <span class="number">10</span>);</span><br><span class="line">    Assert.assertEquals(<span class="number">1</span>, search.totalHits);</span><br><span class="line">    <span class="comment">//如果使用QueryParser，那么必须要使用PerFieldAnalyzerWrapper，否则如下所示，是检索不到的</span></span><br><span class="line">    Query description = <span class="keyword">new</span> QueryParser(<span class="string">"description"</span>, <span class="keyword">new</span> SimpleAnalyzer()).parse(<span class="string">"partnum:Q36 AND SPACE"</span>);</span><br><span class="line">    search = indexSearcher.search(description, <span class="number">10</span>);</span><br><span class="line">    Assert.assertEquals(<span class="number">0</span>, search.totalHits);</span><br><span class="line">    System.out.println(<span class="string">"SimpleAnalyzer :"</span> + description.toString());<span class="comment">//+partnum:q +description:space，原因是SimpleAnalyzer会剥离非字母字符并将字母小写化</span></span><br><span class="line">    <span class="comment">//使用PerFieldAnalyzerWrapper可以检索到</span></span><br><span class="line">    <span class="comment">//partnum:Q36 AND SPACE表示在partnum中出现Q36，在description中出现SPACE</span></span><br><span class="line">    description = <span class="keyword">new</span> QueryParser(<span class="string">"description"</span>, perFieldAnalyzerWrapper).parse(<span class="string">"partnum:Q36 AND SPACE"</span>);</span><br><span class="line">    search = indexSearcher.search(description, <span class="number">10</span>);</span><br><span class="line">    Assert.assertEquals(<span class="number">1</span>, search.totalHits);</span><br><span class="line">    System.out.println(<span class="string">"(SimpleAnalyzer,KeywordAnalyzer) :"</span> + description.toString());<span class="comment">//+partnum:Q36 +description:space</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出结果如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SimpleAnalyzer :+partnum:q +description:space</span><br><span class="line">(SimpleAnalyzer,KeywordAnalyzer) :+partnum:Q36 +description:space</span><br></pre></td></tr></table></figure></p>
+<p>由结果可以看出，在索引阶段，使用KeywordAnalyzer作为partnum域的分词器，使用<br>SimpleAnalyzer作为其它域的分词器，同样的在检索阶段，也必须这样处理，否则无法检索到结果。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://7xig3q.com1.z0.glb.clouddn.com/weixin-donate.png" alt="Wang Xu WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>微信打赏</p>
+      </div>
+    
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://7xig3q.com1.z0.glb.clouddn.com/alipay-donate.png" alt="Wang Xu Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>支付宝打赏</p>
+      </div>
+    
+  </div>
+<div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Lucene/" rel="tag">#Lucene</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/20/Lucene-6-0-in-action-3-A-variety-of-Field-query-operation/" rel="next" title="Lucene 6.0实战（3）-各种Field查询操作">
+                <i class="fa fa-chevron-left"></i> Lucene 6.0实战（3）-各种Field查询操作
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/05/23/Lucene-6-0-in-action-4-The-text-analyzer/"
+     data-title="Lucene 6.0 in action(4)-The text analyzer"
+     data-content=""
+     data-url="http://www.codepub.cn/2016/05/23/Lucene-6-0-in-action-4-The-text-analyzer/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="monthly" data-num-items="8"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/23/Lucene-6-0-in-action-4-The-text-analyzer/"
+           data-title="Lucene 6.0 in action(4)-The text analyzer" data-url="http://www.codepub.cn/2016/05/23/Lucene-6-0-in-action-4-The-text-analyzer/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/author.jpg"
+               alt="Wang Xu" />
+          <p class="site-author-name" itemprop="name">Wang Xu</p>
+          <p class="site-description motion-element" itemprop="description">志不强者智不达，言不信者行不果</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/shijiebei2009" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.linkedin.com/in/codepub" target="_blank">
+                  
+                    <i class="fa fa-linkedin"></i> Linkedin
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://stackoverflow.com/users/4204922/eric-wang" target="_blank">
+                  
+                    <i class="fa fa-stackoverflow"></i> Stackoverflow
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/codepub.cn" target="_blank">
+                  
+                    <i class="fa fa-zhihu"></i> ZhiHu
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/shijiebei2009/" target="_blank">
+                  
+                    <i class="fa fa-douban"></i> DouBan
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1779238484" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Analyzer简介"><span class="nav-number">1.</span> <span class="nav-text">Analyzer简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analyzer部分子类分词示例"><span class="nav-number">2.</span> <span class="nav-text">Analyzer部分子类分词示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义Analyzer实现扩展停用词"><span class="nav-number">3.</span> <span class="nav-text">自定义Analyzer实现扩展停用词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义Analyzer实现字长过滤"><span class="nav-number">4.</span> <span class="nav-text">自定义Analyzer实现字长过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对不同的Field使用不同的Analyzer"><span class="nav-number">5.</span> <span class="nav-text">对不同的Field使用不同的Analyzer</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Xu</span>&nbsp;&nbsp;&nbsp;
+  <a href="http://tongji.baidu.com/web/welcome/ico?s=2c61418f187553bcc869b755930233ab" target="_blank">百度统计</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <span id="busuanzi_container_site_pv">本站总访问量 <span id="busuanzi_value_site_pv"></span> 次</span><span id="busuanzi_container_site_uv">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;访客数 <span id="busuanzi_value_site_uv"></span> 人次</span><span id="busuanzi_container_page_pv">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"codepub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+<a href="https://github.com/shijiebei2009"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+</body>
+</html>
