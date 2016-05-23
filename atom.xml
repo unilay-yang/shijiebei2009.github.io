@@ -1247,7 +1247,7 @@
     <link href="http://www.codepub.cn/2015/12/09/IntelliJ-IDEA-in-Maven-plugin-could-not-update-the-index-of-the-solution/"/>
     <id>http://www.codepub.cn/2015/12/09/IntelliJ-IDEA-in-Maven-plugin-could-not-update-the-index-of-the-solution/</id>
     <published>2015-12-09T14:21:33.000Z</published>
-    <updated>2016-05-23T15:06:44.822Z</updated>
+    <updated>2016-05-23T15:22:01.873Z</updated>
     
     <content type="html">&lt;h4 id=&quot;Maven的仓库、索引&quot;&gt;Maven的仓库、索引&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;中央仓库&lt;/strong&gt;：目前来说，&lt;a href=&quot;http://repo1.maven.org/maven2/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://repo1.maven.org/maven2/&lt;/a&gt; 是真正的&lt;code&gt;Maven&lt;/code&gt;中央仓库的地址，该地址内置在&lt;code&gt;Maven&lt;/code&gt;的源码中，其它地址包括著名的&lt;a href=&quot;http://mirrors.ibiblio.org/pub/mirrors/maven2/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;ibiblio.org&lt;/a&gt;，都是镜像。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;索引&lt;/strong&gt;：中央仓库带有索引文件以方便用户对其进行搜索，完整的索引文件至2015年12月8日大小约为1.11G，索引每周更新一次。&lt;/p&gt;
