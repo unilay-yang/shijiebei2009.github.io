@@ -3,12 +3,12 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2016/05/23/Lucene-6-0-in-action-4-The-text-analyzer/</loc>
-    <lastmod>2016-05-23T15:30:39.121Z</lastmod>
+    <loc>http://www.codepub.cn/2016/05/20/Lucene-6-0-in-action-1-Index-creation/</loc>
+    <lastmod>2016-05-23T15:32:25.059Z</lastmod>
     <data>
         <display>
-        <title>Lucene 6.0 in action(4)-The text analyzer</title>
-        <pubTime>2016-05-23T15:30:05.000Z</pubTime>
+        <title>Lucene 6.0 实战（1）-创建索引</title>
+        <pubTime>2016-05-20T13:25:37.000Z</pubTime>
         
         <tag>Lucene </tag>
          
@@ -23,12 +23,12 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2016/05/20/Lucene-6-0-in-action-1-Index-creation/</loc>
-    <lastmod>2016-05-23T15:22:34.202Z</lastmod>
+    <loc>http://www.codepub.cn/2016/05/23/Lucene-6-0-in-action-4-The-text-analyzer/</loc>
+    <lastmod>2016-05-23T15:31:29.639Z</lastmod>
     <data>
         <display>
-        <title>Lucene 6.0 实战（1）-创建索引</title>
-        <pubTime>2016-05-20T13:25:37.000Z</pubTime>
+        <title>Lucene 6.0 in action(4)-The text analyzer</title>
+        <pubTime>2016-05-23T15:30:05.000Z</pubTime>
         
         <tag>Lucene </tag>
          
