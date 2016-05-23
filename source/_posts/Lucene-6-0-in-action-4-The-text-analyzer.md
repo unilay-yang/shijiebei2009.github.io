@@ -1,0 +1,253 @@
+title: Lucene 6.0实战（4）-文本分析器
+date: 2016-05-23 23:30:05
+tags: [Lucene]
+categories: Programming Notes
+
+---
+
+###Analyzer简介
+在Lucene的org.apache.lucene.analysis模块中提供了顶层的抽象类Analyzer，Analyzer主要是用来构建TokenStreams，如果想实现自定义的Analyzer，必须覆写createComponents(String)方法，并定义自己的TokenStreamComponents。
+
+为什么要有Analyzer呢？对于Lucene而言，不管是索引还是检索，都是针对纯文本而言，对于纯文本的来源可以是PDF，Word，Excel，PPT，HTML等，Lucene对此并不关心，只要保证传递给Lucene的是纯文本即可。
+
+而通常情况下，对于大量的文本，用户在检索的时候不可能全部输入，例如有文本“Hello World，I'am javaer!”，用户在检索的时候可能只是输入了“Hello”，这里就需要Lucene索引该文本的时候预先对文本进行切分，这样在检索的时候才能将词源和文本对应起来。
+
+###Analyzer部分子类分词示例
+选取了六个实现类，并分别输出它们对英文、中文、特殊符号及邮箱等的切分效果。
+```java
+public class AnalyzerDemo {
+    private static final String[] examples = {"The quick brown 1234 fox jumped over the lazy dog!", "XY&Z 15.6 Corporation - xyz@example.com",
+            "北京市北京大学"};
+    private static final Analyzer[] ANALYZERS = new Analyzer[]{new WhitespaceAnalyzer(), new SimpleAnalyzer(), new StopAnalyzer(), new
+            StandardAnalyzer(), new CJKAnalyzer(), new SmartChineseAnalyzer()};
+
+    @Test
+    public void testAnalyzer() throws IOException {
+        for (int i = 0; i < ANALYZERS.length; i++) {
+            String simpleName = ANALYZERS[i].getClass().getSimpleName();
+            for (int j = 0; j < examples.length; j++) {
+                TokenStream contents = ANALYZERS[i].tokenStream("contents", examples[j]);
+                //TokenStream contents = ANALYZERS[i].tokenStream("contents", new StringReader(examples[j]));
+                OffsetAttribute offsetAttribute = contents.addAttribute(OffsetAttribute.class);
+                TypeAttribute typeAttribute = contents.addAttribute(TypeAttribute.class);
+                contents.reset();
+                System.out.println(simpleName + " analyzing : " + examples[j]);
+                while (contents.incrementToken()) {
+                    String s1 = offsetAttribute.toString();
+                    int i1 = offsetAttribute.startOffset();//起始偏移量
+                    int i2 = offsetAttribute.endOffset();//结束偏移量
+                    System.out.print(s1 + "[" + i1 + "," + i2 + ":" + typeAttribute.type() + "]" + " ");
+                }
+                contents.end();
+                contents.close();
+                System.out.println();
+            }
+        }
+    }
+}
+```
+输出结果如下
+```java
+WhitespaceAnalyzer analyzing : The quick brown 1234 fox jumped over the lazy dog!
+The[0,3:word] quick[4,9:word] brown[10,15:word] 1234[16,20:word] fox[21,24:word] jumped[25,31:word] over[32,36:word] the[37,40:word] lazy[41,45:word] dog![46,50:word] 
+WhitespaceAnalyzer analyzing : XY&Z 15.6 Corporation - xyz@example.com
+XY&Z[0,4:word] 15.6[5,9:word] Corporation[10,21:word] -[22,23:word] xyz@example.com[24,39:word] 
+WhitespaceAnalyzer analyzing : 北京市北京大学
+北京市北京大学[0,7:word] 
+SimpleAnalyzer analyzing : The quick brown 1234 fox jumped over the lazy dog!
+the[0,3:word] quick[4,9:word] brown[10,15:word] fox[21,24:word] jumped[25,31:word] over[32,36:word] the[37,40:word] lazy[41,45:word] dog[46,49:word] 
+SimpleAnalyzer analyzing : XY&Z 15.6 Corporation - xyz@example.com
+xy[0,2:word] z[3,4:word] corporation[10,21:word] xyz[24,27:word] example[28,35:word] com[36,39:word] 
+SimpleAnalyzer analyzing : 北京市北京大学
+北京市北京大学[0,7:word] 
+StopAnalyzer analyzing : The quick brown 1234 fox jumped over the lazy dog!
+quick[4,9:word] brown[10,15:word] fox[21,24:word] jumped[25,31:word] over[32,36:word] lazy[41,45:word] dog[46,49:word] 
+StopAnalyzer analyzing : XY&Z 15.6 Corporation - xyz@example.com
+xy[0,2:word] z[3,4:word] corporation[10,21:word] xyz[24,27:word] example[28,35:word] com[36,39:word] 
+StopAnalyzer analyzing : 北京市北京大学
+北京市北京大学[0,7:word] 
+StandardAnalyzer analyzing : The quick brown 1234 fox jumped over the lazy dog!
+quick[4,9:<ALPHANUM>] brown[10,15:<ALPHANUM>] 1234[16,20:<NUM>] fox[21,24:<ALPHANUM>] jumped[25,31:<ALPHANUM>] over[32,36:<ALPHANUM>] lazy[41,45:<ALPHANUM>] dog[46,49:<ALPHANUM>] 
+StandardAnalyzer analyzing : XY&Z 15.6 Corporation - xyz@example.com
+xy[0,2:<ALPHANUM>] z[3,4:<ALPHANUM>] 15.6[5,9:<NUM>] corporation[10,21:<ALPHANUM>] xyz[24,27:<ALPHANUM>] example.com[28,39:<ALPHANUM>] 
+StandardAnalyzer analyzing : 北京市北京大学
+北[0,1:<IDEOGRAPHIC>] 京[1,2:<IDEOGRAPHIC>] 市[2,3:<IDEOGRAPHIC>] 北[3,4:<IDEOGRAPHIC>] 京[4,5:<IDEOGRAPHIC>] 大[5,6:<IDEOGRAPHIC>] 学[6,7:<IDEOGRAPHIC>] 
+CJKAnalyzer analyzing : The quick brown 1234 fox jumped over the lazy dog!
+quick[4,9:<ALPHANUM>] brown[10,15:<ALPHANUM>] 1234[16,20:<NUM>] fox[21,24:<ALPHANUM>] jumped[25,31:<ALPHANUM>] over[32,36:<ALPHANUM>] lazy[41,45:<ALPHANUM>] dog[46,49:<ALPHANUM>] 
+CJKAnalyzer analyzing : XY&Z 15.6 Corporation - xyz@example.com
+xy[0,2:<ALPHANUM>] z[3,4:<ALPHANUM>] 15.6[5,9:<NUM>] corporation[10,21:<ALPHANUM>] xyz[24,27:<ALPHANUM>] example.com[28,39:<ALPHANUM>] 
+CJKAnalyzer analyzing : 北京市北京大学
+北京[0,2:<DOUBLE>] 京市[1,3:<DOUBLE>] 市北[2,4:<DOUBLE>] 北京[3,5:<DOUBLE>] 京大[4,6:<DOUBLE>] 大学[5,7:<DOUBLE>] 
+SmartChineseAnalyzer analyzing : The quick brown 1234 fox jumped over the lazy dog!
+the[0,3:word] quick[4,9:word] brown[10,15:word] 1234[16,20:word] fox[21,24:word] jump[25,31:word] over[32,36:word] the[37,40:word] lazi[41,45:word] dog[46,49:word] 
+SmartChineseAnalyzer analyzing : XY&Z 15.6 Corporation - xyz@example.com
+xy[0,2:word] z[3,4:word] 15[5,7:word] 6[8,9:word] corpor[10,21:word] xyz[24,27:word] exampl[28,35:word] com[36,39:word] 
+SmartChineseAnalyzer analyzing : 北京市北京大学
+北京市[0,3:word] 北京大学[3,7:word]
+```
+
+###自定义Analyzer实现扩展停用词
+1. 继承自Analyzer并覆写createComponents(String)方法
+2. 维护自己的停用词词典
+3. 重写TokenStreamComponents，选择合适的过滤策略
+
+```java
+class StopAnalyzerExtend extends Analyzer {
+    private CharArraySet stopWordSet;//停止词词典
+
+    public CharArraySet getStopWordSet() {
+        return this.stopWordSet;
+    }
+
+    public void setStopWordSet(CharArraySet stopWordSet) {
+        this.stopWordSet = stopWordSet;
+    }
+
+    public StopAnalyzerExtend() {
+        super();
+        setStopWordSet(StopAnalyzer.ENGLISH_STOP_WORDS_SET);
+    }
+
+    /**
+     * @param stops 需要扩展的停止词
+     */
+    public StopAnalyzerExtend(List<String> stops) {
+        this();
+        /**如果直接为stopWordSet赋值的话，会报如下异常，这是因为在StopAnalyzer中有ENGLISH_STOP_WORDS_SET = CharArraySet.unmodifiableSet(stopSet);
+         * ENGLISH_STOP_WORDS_SET 被设置为不可更改的set集合
+         * Exception in thread "main" java.lang.UnsupportedOperationException
+         * at org.apache.lucene.analysis.util.CharArrayMap$UnmodifiableCharArrayMap.put(CharArrayMap.java:592)
+         * at org.apache.lucene.analysis.util.CharArraySet.add(CharArraySet.java:105)
+         * at java.util.AbstractCollection.addAll(AbstractCollection.java:344)
+         * at MyAnalyzer.<init>(AnalyzerDemo.java:146)
+         * at MyAnalyzer.main(AnalyzerDemo.java:162)
+         */
+        //stopWordSet = getStopWordSet();
+        stopWordSet = CharArraySet.copy(getStopWordSet());
+        stopWordSet.addAll(StopFilter.makeStopSet(stops));
+    }
+
+    @Override
+    protected TokenStreamComponents createComponents(String fieldName) {
+        Tokenizer source = new LowerCaseTokenizer();
+        return new TokenStreamComponents(source, new StopFilter(source, stopWordSet));
+    }
+
+    public static void main(String[] args) throws IOException {
+        ArrayList<String> strings = new ArrayList<String>() {{
+            add("小鬼子");
+            add("美国佬");
+        }};
+        Analyzer analyzer = new StopAnalyzerExtend(strings);
+        String content = "小鬼子 and 美国佬 are playing together!";
+        TokenStream tokenStream = analyzer.tokenStream("myfield", content);
+        tokenStream.reset();
+        CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
+        while (tokenStream.incrementToken()) {
+            // 已经过滤掉自定义停用词
+            // 输出：playing   together
+            System.out.println(charTermAttribute.toString());
+        }
+        tokenStream.end();
+        tokenStream.close();
+    }
+}
+```
+###自定义Analyzer实现字长过滤
+```java
+class LongFilterAnalyzer extends Analyzer {
+    private int len;
+
+    public int getLen() {
+        return this.len;
+    }
+
+    public void setLen(int len) {
+        this.len = len;
+    }
+
+    public LongFilterAnalyzer() {
+        super();
+    }
+
+    public LongFilterAnalyzer(int len) {
+        super();
+        setLen(len);
+    }
+
+    @Override
+    protected TokenStreamComponents createComponents(String fieldName) {
+        final Tokenizer source = new WhitespaceTokenizer();
+        //过滤掉长度<len，并且>20的token
+        TokenStream tokenStream = new LengthFilter(source, len, 20);
+        return new TokenStreamComponents(source, tokenStream);
+    }
+
+    public static void main(String[] args) {
+        //把长度小于2的过滤掉，开区间
+        Analyzer analyzer = new LongFilterAnalyzer(2);
+        String words = "I am a java coder! Testingtestingtesting!";
+        TokenStream stream = analyzer.tokenStream("myfield", words);
+        try {
+            stream.reset();
+            CharTermAttribute offsetAtt = stream.addAttribute(CharTermAttribute.class);
+            while (stream.incrementToken()) {
+                System.out.println(offsetAtt.toString());
+            }
+            stream.end();
+            stream.close();
+        } catch (IOException e) {
+        }
+    }
+}
+```
+输出结果如下
+```java
+am
+java
+coder!
+```
+可以看到，长度小于两个字符的文本都被过滤掉了。
+
+###对不同的Field使用不同的Analyzer
+PerFieldAnalyzerWrapper的doc注释中提供了详细的说明，该类提供处理不同的Field使用不同的Analyzer的技术方案。PerFieldAnalyzerWrapper可以像其它的Analyzer一样使用，包括索引和查询分析。
+```java
+public void testPerFieldAnalyzerWrapper() throws IOException, ParseException {
+    Map<String, Analyzer> fields = new HashMap<>();
+    fields.put("partnum", new KeywordAnalyzer());
+    //对于其他的域，默认使用SimpleAnalyzer分析器，对于指定的域partnum使用KeywordAnalyzer
+    PerFieldAnalyzerWrapper perFieldAnalyzerWrapper = new PerFieldAnalyzerWrapper(new SimpleAnalyzer(), fields);
+    Directory directory = new RAMDirectory();
+    IndexWriterConfig indexWriterConfig = new IndexWriterConfig(perFieldAnalyzerWrapper);
+    IndexWriter indexWriter = new IndexWriter(directory, indexWriterConfig);
+    Document document = new Document();
+    FieldType fieldType = new FieldType();
+    fieldType.setStored(true);
+    fieldType.setIndexOptions(IndexOptions.DOCS_AND_FREQS);
+    document.add(new Field("partnum", "Q36", fieldType));
+    document.add(new Field("description", "Illidium Space Modulator", fieldType));
+    indexWriter.addDocument(document);
+    indexWriter.close();
+    IndexSearcher indexSearcher = new IndexSearcher(DirectoryReader.open(directory));
+    //直接使用TermQuery是可以检索到的
+    TopDocs search = indexSearcher.search(new TermQuery(new Term("partnum", "Q36")), 10);
+    Assert.assertEquals(1, search.totalHits);
+    //如果使用QueryParser，那么必须要使用PerFieldAnalyzerWrapper，否则如下所示，是检索不到的
+    Query description = new QueryParser("description", new SimpleAnalyzer()).parse("partnum:Q36 AND SPACE");
+    search = indexSearcher.search(description, 10);
+    Assert.assertEquals(0, search.totalHits);
+    System.out.println("SimpleAnalyzer :" + description.toString());//+partnum:q +description:space，原因是SimpleAnalyzer会剥离非字母字符并将字母小写化
+    //使用PerFieldAnalyzerWrapper可以检索到
+    //partnum:Q36 AND SPACE表示在partnum中出现Q36，在description中出现SPACE
+    description = new QueryParser("description", perFieldAnalyzerWrapper).parse("partnum:Q36 AND SPACE");
+    search = indexSearcher.search(description, 10);
+    Assert.assertEquals(1, search.totalHits);
+    System.out.println("(SimpleAnalyzer,KeywordAnalyzer) :" + description.toString());//+partnum:Q36 +description:space
+}
+```
+输出结果如下
+```java
+SimpleAnalyzer :+partnum:q +description:space
+(SimpleAnalyzer,KeywordAnalyzer) :+partnum:Q36 +description:space
+```
+由结果可以看出，在索引阶段，使用KeywordAnalyzer作为partnum域的分词器，使用SimpleAnalyzer作为其它域的分词器，同样的在检索阶段，也必须这样处理，否则无法检索到结果。
