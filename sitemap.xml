@@ -3,6 +3,26 @@
 
     
   <url>
+    <loc>http://www.codepub.cn/2016/05/20/Lucene-6-0-in-action-1-Index-creation/</loc>
+    <lastmod>2016-06-09T01:09:59.400Z</lastmod>
+    <data>
+        <display>
+        <title>Lucene 6.0 实战（1）-创建索引</title>
+        <pubTime>2016-05-20T13:25:37.000Z</pubTime>
+        
+        <tag>Lucene </tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.codepub.cn/2016/05/24/Lucene-6-0-in-action-5-The-index-search-an-IndexSearcher/</loc>
     <lastmod>2016-05-24T13:52:33.248Z</lastmod>
     <data>
@@ -71,26 +91,6 @@
         <pubTime>2015-12-09T14:21:33.000Z</pubTime>
         
         <tag>IntelliJ </tag>
-         
-         
-           
-             
-              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.codepub.cn/2016/05/20/Lucene-6-0-in-action-1-Index-creation/</loc>
-    <lastmod>2016-05-23T15:32:25.059Z</lastmod>
-    <data>
-        <display>
-        <title>Lucene 6.0 实战（1）-创建索引</title>
-        <pubTime>2016-05-20T13:25:37.000Z</pubTime>
-        
-        <tag>Lucene </tag>
          
          
            
