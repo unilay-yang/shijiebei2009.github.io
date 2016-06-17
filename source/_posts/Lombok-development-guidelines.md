@@ -64,12 +64,12 @@ Download the [latest release](https://github.com/mplushnikov/lombok-intellij-plu
 - `@Synchronized`：用在方法上，将方法声明为同步的，并自动加锁，而锁对象是一个私有的属性$lock或$LOCK，而java中的synchronized关键字锁对象是this，锁在this或者自己的类对象上存在副作用，就是你不能阻止非受控代码去锁this或者类对象，这可能会导致竞争条件或者其它线程错误
 - `@Getter(lazy=true)`：可以替代经典的Double Check Lock样板代码
 - `@Log`：根据不同的注解生成不同类型的log对象，但是实例名称都是log，有六种可选实现类
-  - `@CommonsLog` Creates private static final org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(LogExample.class);
-  - `@Log` Creates private static final java.util.logging.Logger log = java.util.logging.Logger.getLogger(LogExample.class.getName());
-  - `@Log4j` Creates private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(LogExample.class);
-  - `@Log4j2` Creates private static final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(LogExample.class);
-  - `@Slf4j` Creates private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(LogExample.class);
-  - `@XSlf4j` Creates private static final org.slf4j.ext.XLogger log = org.slf4j.ext.XLoggerFactory.getXLogger(LogExample.class);
+  - `@CommonsLog` Creates log = org.apache.commons.logging.LogFactory.getLog(LogExample.class);
+  - `@Log` Creates log = java.util.logging.Logger.getLogger(LogExample.class.getName());
+  - `@Log4j` Creates log = org.apache.log4j.Logger.getLogger(LogExample.class);
+  - `@Log4j2` Creates log = org.apache.logging.log4j.LogManager.getLogger(LogExample.class);
+  - `@Slf4j` Creates log = org.slf4j.LoggerFactory.getLogger(LogExample.class);
+  - `@XSlf4j` Creates log = org.slf4j.ext.XLoggerFactory.getXLogger(LogExample.class);
 
 ###Lombok使用示例
 - val示例
@@ -194,8 +194,8 @@ public class Menu {
     private float totalScore = 0;
 }
 ```
-在IntelliJ中按下Ctrl+F12就可以看到Lombok已经为我们自动生成了一系列的方法。
-![](http://7xig3q.com1.z0.glb.clouddn.com/IntelliJ-lombok-java-demo.jpg)
+  在IntelliJ中按下Ctrl+F12就可以看到Lombok已经为我们自动生成了一系列的方法。
+  ![](http://7xig3q.com1.z0.glb.clouddn.com/IntelliJ-lombok-java-demo.jpg)
 - @Value示例
 ```java
 @Value
@@ -281,7 +281,7 @@ public class GetterLazyExample {
     }
 }
 ```
-相当于：
+  相当于如下所示
 ```java
 import java.util.concurrent.atomic.AtomicReference;
 public class GetterLazyExample {
