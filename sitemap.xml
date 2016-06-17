@@ -3,6 +3,26 @@
 
     
   <url>
+    <loc>http://www.codepub.cn/2015/07/30/Lombok-development-guidelines/</loc>
+    <lastmod>2016-06-17T14:32:50.116Z</lastmod>
+    <data>
+        <display>
+        <title>Lombok开发指南</title>
+        <pubTime>2015-07-30T13:33:11.000Z</pubTime>
+        
+        <tag>Lombok </tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.codepub.cn/2015/10/07/Private-Treasured-Toolkit/</loc>
     <lastmod>2016-06-14T14:05:36.797Z</lastmod>
     <data>
@@ -590,26 +610,6 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2015/07/30/Lombok-development-guidelines/</loc>
-    <lastmod>2015-11-11T14:11:55.343Z</lastmod>
-    <data>
-        <display>
-        <title>Lombok开发指南</title>
-        <pubTime>2015-07-30T13:33:11.000Z</pubTime>
-        
-        <tag>Lombok </tag>
-         
-         
-           
-             
-              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.codepub.cn/2015/07/02/Python3-beginner-s-handbook-one/</loc>
     <lastmod>2015-10-28T03:05:55.320Z</lastmod>
     <data>
@@ -694,12 +694,12 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2015/07/13/Python3-beginner-s-handbook-four/</loc>
+    <loc>http://www.codepub.cn/2015/10/08/Using-the-Python-CSV-module-to-read-and-write-CSV-file/</loc>
     <lastmod>2015-10-08T06:51:57.576Z</lastmod>
     <data>
         <display>
-        <title>Python3入门手册之四</title>
-        <pubTime>2015-07-13T15:03:44.000Z</pubTime>
+        <title>使用Python的CSV模块读写CSV文件</title>
+        <pubTime>2015-10-08T04:01:00.000Z</pubTime>
         
         <tag>Python3 </tag>
          
@@ -714,12 +714,12 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2015/10/08/Using-the-Python-CSV-module-to-read-and-write-CSV-file/</loc>
+    <loc>http://www.codepub.cn/2015/07/13/Python3-beginner-s-handbook-four/</loc>
     <lastmod>2015-10-08T06:51:57.576Z</lastmod>
     <data>
         <display>
-        <title>使用Python的CSV模块读写CSV文件</title>
-        <pubTime>2015-10-08T04:01:00.000Z</pubTime>
+        <title>Python3入门手册之四</title>
+        <pubTime>2015-07-13T15:03:44.000Z</pubTime>
         
         <tag>Python3 </tag>
          
