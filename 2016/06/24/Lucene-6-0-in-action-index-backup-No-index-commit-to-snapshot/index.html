@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Elite,IT," />
+  <meta name="keywords" content="Lucene," />
 
 
 
@@ -59,16 +59,22 @@
 
 
 
-<meta name="description" content="当今快节奏高压力的生活导致猝死事件频发，我知道，这是一群迫切的希望用自己勤劳的双手快速致富的人。当然我认为绝大多数过劳死都是来自农村或者是家庭条件一般的人，试想国民老公王思聪会过劳死吗？显然不会，再退一万步，在上海有房有车无还款压力的人会过劳死吗？显然亦不会，过劳猝死的这些人，我不知道是你们个人的悲哀还是这个历史悠久的文明古国的悲哀，GDP虽然是年年暴增，但是并没有给我们普通的劳苦大众带来任何的实">
+<meta name="description" content="备份之前先提交在使用Lucene进行索引备份的时候，报错
+
+Exception in thread “main” java.lang.IllegalStateException: No index commit to snapshotat org.apache.lucene.index.SnapshotDeletionPolicy.snapshot(SnapshotDeletionPolicy.j">
 <meta property="og:type" content="article">
-<meta property="og:title" content="又见IT精英过劳猝死">
-<meta property="og:url" content="http://www.codepub.cn/2015/04/09/See-also-IT-elite-death-from-overwork/index.html">
+<meta property="og:title" content="Lucene 6.0实战-索引备份No index commit to snapshot">
+<meta property="og:url" content="http://www.codepub.cn/2016/06/24/Lucene-6-0-in-action-index-backup-No-index-commit-to-snapshot/index.html">
 <meta property="og:site_name" content="IT草根">
-<meta property="og:description" content="当今快节奏高压力的生活导致猝死事件频发，我知道，这是一群迫切的希望用自己勤劳的双手快速致富的人。当然我认为绝大多数过劳死都是来自农村或者是家庭条件一般的人，试想国民老公王思聪会过劳死吗？显然不会，再退一万步，在上海有房有车无还款压力的人会过劳死吗？显然亦不会，过劳猝死的这些人，我不知道是你们个人的悲哀还是这个历史悠久的文明古国的悲哀，GDP虽然是年年暴增，但是并没有给我们普通的劳苦大众带来任何的实">
-<meta property="og:updated_time" content="2015-10-07T15:38:23.928Z">
+<meta property="og:description" content="备份之前先提交在使用Lucene进行索引备份的时候，报错
+
+Exception in thread “main” java.lang.IllegalStateException: No index commit to snapshotat org.apache.lucene.index.SnapshotDeletionPolicy.snapshot(SnapshotDeletionPolicy.j">
+<meta property="og:updated_time" content="2016-06-24T15:18:53.081Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="又见IT精英过劳猝死">
-<meta name="twitter:description" content="当今快节奏高压力的生活导致猝死事件频发，我知道，这是一群迫切的希望用自己勤劳的双手快速致富的人。当然我认为绝大多数过劳死都是来自农村或者是家庭条件一般的人，试想国民老公王思聪会过劳死吗？显然不会，再退一万步，在上海有房有车无还款压力的人会过劳死吗？显然亦不会，过劳猝死的这些人，我不知道是你们个人的悲哀还是这个历史悠久的文明古国的悲哀，GDP虽然是年年暴增，但是并没有给我们普通的劳苦大众带来任何的实">
+<meta name="twitter:title" content="Lucene 6.0实战-索引备份No index commit to snapshot">
+<meta name="twitter:description" content="备份之前先提交在使用Lucene进行索引备份的时候，报错
+
+Exception in thread “main” java.lang.IllegalStateException: No index commit to snapshotat org.apache.lucene.index.SnapshotDeletionPolicy.snapshot(SnapshotDeletionPolicy.j">
 
 
 
@@ -86,7 +92,7 @@
   };
 </script>
 
-  <title> 又见IT精英过劳猝死 | IT草根 </title>
+  <title> Lucene 6.0实战-索引备份No index commit to snapshot | IT草根 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -286,7 +292,7 @@
             
             
               
-                又见IT精英过劳猝死
+                Lucene 6.0实战-索引备份No index commit to snapshot
               
             
           </h1>
@@ -298,8 +304,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-04-09T16:03:13+08:00" content="2015-04-09">
-              2015-04-09
+            <time itemprop="dateCreated" datetime="2016-06-24T23:16:03+08:00" content="2016-06-24">
+              2016-06-24
             </time>
           </span>
 
@@ -312,8 +318,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Life-Talk/" itemprop="url" rel="index">
-                    <span itemprop="name">Life-Talk</span>
+                  <a href="/categories/Programming-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming Notes</span>
                   </a>
                 </span>
 
@@ -334,8 +340,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/04/09/See-also-IT-elite-death-from-overwork/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/09/See-also-IT-elite-death-from-overwork/" itemprop="commentsCount"></span>
+                <a href="/2016/06/24/Lucene-6-0-in-action-index-backup-No-index-commit-to-snapshot/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/24/Lucene-6-0-in-action-index-backup-No-index-commit-to-snapshot/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -357,15 +363,15 @@
       
 
       
-        <p>当今快节奏高压力的生活导致猝死事件频发，我知道，这是一群迫切的希望用自己勤劳的双手快速致富的人。当然我认为绝大多数过劳死都是来自农村或者是家庭条件一般的人，试想国民老公王思聪会过劳死吗？显然不会，再退一万步，在上海有房有车无还款压力的人会过劳死吗？显然亦不会，过劳猝死的这些人，我不知道是你们个人的悲哀还是这个历史悠久的文明古国的悲哀，GDP虽然是年年暴增，但是并没有给我们普通的劳苦大众带来任何的实质性实惠，医疗费用高居不下，癌症死亡率急剧攀升，CPI远超收入增幅，基尼系数早已超越国际警戒线，资源肆无忌惮的用，环境大摇大摆的污染，重点大学农村生源已不足20%，这个传承了五千多年的习俗已不再奏效——知识改变命运。</p>
-<p>人人都夸小平好，唯我独爱毛主席，那时虽然没钱，但是环境好，社会风气好，国家再穷也敢打美帝，人人公平，一月十几块钱的工资就足以养活全家老少七八口人。当然社会性问题还轮不到我来指点江山，所以就此打住。</p>
-<p>接着谈过劳猝死的话题，作为没有根基单靠自己打拼一族，我很理解他们拼命工作的心境，那是种极迫切渴望着挣钱，又可能会莫名焦躁的心境，但是我一定要狠劝那些农家出来的孩子们，千万保重自己的身体，否则你挣再多钱又怎样，还不是money留给别人花，老婆留给别人睡，孩子留给别人打。我知道你们想快速的发家致富，急于脱下自己那三代贫下中农的帽子，我又何尝不想，但是身体是自己的，你不珍惜，没人会替你珍惜。现在不知怎么了，与父母的交流越来越困难，我不知道其它人有没有类似的问题。他们说的我基本没任何兴趣，无非都是谁家娶儿媳妇谁家抱孙子的各种琐事，一天到晚除了催我还是催我，我感兴趣的他们完全不懂，他们从来也不懂我想要的是什么，好像我只要尽快给他们生个孙子就完事一样，对于我来说，如果下一代像我一样要从山里走出来，那么我宁愿不生，因为很有可能他是不愿意过这种生活的。但是百善孝为先，不管怎么样，先做一个孝子吧，当我在不断努力向上爬的时候，总会感觉有一双手在后面拖着我一样，而这双手就是农村的各种落后思想以及世俗的枷锁，偏偏我父母也是这种枷锁的缔造者之一，因为他们不愿意不一样，不愿意成为别人的谈资，更不愿意成为别人关注的焦点，在农村，焦点就代表着各种压力。</p>
-<p>不管怎样，时间在流淌，生活在继续，希望大家对未来要充满信心，饭要一口一口吃，路要一步一步走，你每前进一步，生活都会变的更加美好。记得丘吉尔曾经做过三句话的演讲，第一句，永不放弃；第二句，永远永远不要放弃；第三句，永远永远永远都不要放弃。</p>
-<p>送大家一段名言：</p>
-<p>当我年轻自由的时候，我的想象力没有任何局限，我梦想改变这个世界，当我渐渐成熟明智的时候，我发现这个世界是不可能改变的，于是我将眼光放得短浅了一些，那就只改变我的国家吧。但是我的国家似乎也是不能改变的。当我到了迟暮之年，抱着最后一丝努力的希望，我决定只改变我的家庭，我亲近的人，但是，唉！他们根本不接受改变。</p>
-<p>现在在我临终之时，我才突然意识到：如果起初我只改变自己，接着我就可以依此改变我的家人。在他们的激发和鼓励下，我可能就能改善我的国家，接下来，谁又知道呢，也许我连整个世界都可以改变。</p>
-<hr>
-<p>—— 献给每一个都在靠自己不断打拼，努力奋斗的孩子们！</p>
+        <h3 id="备份之前先提交">备份之前先提交</h3><p>在使用Lucene进行索引备份的时候，报错</p>
+<blockquote>
+<p>Exception in thread “main” java.lang.IllegalStateException: No index commit to snapshot<br>at org.apache.lucene.index.SnapshotDeletionPolicy.snapshot(SnapshotDeletionPolicy.java:160)</p>
+</blockquote>
+<p>其中导致抛错的代码是<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SnapshotDeletionPolicy snapshotDeletionPolicy = (SnapshotDeletionPolicy) indexWriter.getConfig().getIndexDeletionPolicy();</span><br><span class="line">IndexCommit snapshot = snapshotDeletionPolicy.snapshot();</span><br></pre></td></tr></table></figure></p>
+<p>查看snapshot()源码发现<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (lastCommit == <span class="keyword">null</span>) &#123;</span><br><span class="line">  <span class="comment">// No commit yet, eg this is a new IndexWriter:</span></span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"No index commit to snapshot"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可见如果是第一次也就是说还没有commit过，这种情况通常是第一次使用IndexWriter的时候，那么就会抛此异常。解决办法很简单，就是在热备之前commit索引，将所有的缓存flush到硬盘，这也是热备的正确逻辑，可以确保将索引的最新变动保存到备份之中。</p>
+<h3 id="确保使用同一个SnapshotDeletionPolicy">确保使用同一个SnapshotDeletionPolicy</h3><p>另外还有一点需要注意，如果你在备份的时候使用的是新new的SnapshotDeletionPolicy，那么同样会抛出此异常<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SnapshotDeletionPolicy snapshot= <span class="keyword">new</span> SnapshotDeletionPolicy(<span class="keyword">new</span> KeepOnlyLastCommitDeletionPolicy());</span><br><span class="line">IndexCommit commit = snapshot.snapshot();</span><br><span class="line">Collection&lt;String&gt; fileNames = commit.getFileNames();</span><br></pre></td></tr></table></figure></p>
+<p>这是因为采用new的形式得到的SnapshotDeletionPolicy和最初实例化IndexWriter的时候使用的并不是同一个，所以对于IndexWriter所做的提交，新的SnapshotDeletionPolicy是无法知道的。正确方式如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">IndexWriterConfig config = (IndexWriterConfig) indexWriter.getConfig();</span><br><span class="line">SnapshotDeletionPolicy snapshotDeletionPolicy = (SnapshotDeletionPolicy) config.getIndexDeletionPolicy();</span><br><span class="line">IndexCommit snapshot = snapshotDeletionPolicy.snapshot();</span><br><span class="line"><span class="comment">//设置索引提交点，默认是null，会打开最后一次提交的索引点</span></span><br><span class="line">config.setIndexCommit(snapshot);</span><br><span class="line">Collection&lt;String&gt; fileNames = snapshot.getFileNames();</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -401,9 +407,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Elite/" rel="tag">#Elite</a>
-          
-            <a href="/tags/IT/" rel="tag">#IT</a>
+            <a href="/tags/Lucene/" rel="tag">#Lucene</a>
           
         </div>
       
@@ -412,16 +416,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/04/06/Github-Pages-personal-blog-from-Octopress-to-Hexo/" rel="next" title="Github Pages个人博客，从Octopress转向Hexo">
-                <i class="fa fa-chevron-left"></i> Github Pages个人博客，从Octopress转向Hexo
+              <a href="/2016/06/10/Read-treat-time-as-a-friend/" rel="next" title="读《把时间当作朋友》">
+                <i class="fa fa-chevron-left"></i> 读《把时间当作朋友》
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/04/10/Java's-volatile-boolean-AutomaticBoolean-analysis/" rel="prev" title="Java之volatile boolean，AutomaticBoolean分析">
-                Java之volatile boolean，AutomaticBoolean分析 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/06/24/Lucene-6-0-in-action-the-index-of-hot-backup-and-recovery/" rel="prev" title="Lucene 6.0实战-索引热备份及恢复">
+                Lucene 6.0实战-索引热备份及恢复 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -437,10 +441,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2015/04/09/See-also-IT-elite-death-from-overwork/"
-     data-title="又见IT精英过劳猝死"
+        <div class="ds-share flat" data-thread-key="2016/06/24/Lucene-6-0-in-action-index-backup-No-index-commit-to-snapshot/"
+     data-title="Lucene 6.0实战-索引备份No index commit to snapshot"
      data-content=""
-     data-url="http://www.codepub.cn/2015/04/09/See-also-IT-elite-death-from-overwork/">
+     data-url="http://www.codepub.cn/2016/06/24/Lucene-6-0-in-action-index-backup-No-index-commit-to-snapshot/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -470,8 +474,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/04/09/See-also-IT-elite-death-from-overwork/"
-           data-title="又见IT精英过劳猝死" data-url="http://www.codepub.cn/2015/04/09/See-also-IT-elite-death-from-overwork/">
+      <div class="ds-thread" data-thread-key="2016/06/24/Lucene-6-0-in-action-index-backup-No-index-commit-to-snapshot/"
+           data-title="Lucene 6.0实战-索引备份No index commit to snapshot" data-url="http://www.codepub.cn/2016/06/24/Lucene-6-0-in-action-index-backup-No-index-commit-to-snapshot/">
       </div>
     
   </div>
@@ -630,7 +634,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#备份之前先提交"><span class="nav-number">1.</span> <span class="nav-text">备份之前先提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#确保使用同一个SnapshotDeletionPolicy"><span class="nav-number">2.</span> <span class="nav-text">确保使用同一个SnapshotDeletionPolicy</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

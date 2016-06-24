@@ -288,6 +288,255 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/24/Lucene-6-0-in-action-the-index-of-hot-backup-and-recovery/" itemprop="url">
+                  Lucene 6.0实战-索引热备份及恢复
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-24T23:24:43+08:00" content="2016-06-24">
+              2016-06-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Programming-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming Notes</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+		
+		
+		  
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/24/Lucene-6-0-in-action-the-index-of-hot-backup-and-recovery/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/24/Lucene-6-0-in-action-the-index-of-hot-backup-and-recovery/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          索引备份的几个关键问题
+最简单的备份方式是关闭IndexWriter，然后逐一拷贝索引文件，但是如果索引比较大，那么这种备份操作会持续较长时间，而在备份期间，程序无法对索引文件进行修改，很多搜索程序是不能接受索引操作期间如此长时间停顿的
+那么不关闭IndexWriter又如何呢？这样也不行，因为在拷贝索引期间，如果索引文件发生变化，会导致备份的索引文件损坏
+另外一个问题就是如果原索引文件损坏的话，
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/06/24/Lucene-6-0-in-action-the-index-of-hot-backup-and-recovery/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/24/Lucene-6-0-in-action-index-backup-No-index-commit-to-snapshot/" itemprop="url">
+                  Lucene 6.0实战-索引备份No index commit to snapshot
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-24T23:16:03+08:00" content="2016-06-24">
+              2016-06-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Programming-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming Notes</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+		
+		
+		  
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/24/Lucene-6-0-in-action-index-backup-No-index-commit-to-snapshot/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/24/Lucene-6-0-in-action-index-backup-No-index-commit-to-snapshot/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          备份之前先提交在使用Lucene进行索引备份的时候，报错
+
+Exception in thread “main” java.lang.IllegalStateException: No index commit to snapshotat org.apache.lucene.index.SnapshotDeletionPolicy.snapshot(SnapshotDeletionPolicy.j
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/06/24/Lucene-6-0-in-action-index-backup-No-index-commit-to-snapshot/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/10/Read-treat-time-as-a-friend/" itemprop="url">
                   读《把时间当作朋友》
                 </a>
@@ -1885,256 +2134,6 @@ Lucene和Solr下载地址：http://lucene.apache.org/Windows选择下载zip压�
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/20/Hexo-blog-theme-switching-from-Jacman-to-NexT-Mist/" itemprop="url">
-                  Hexo博客主题从Jacman切换到NexT.Mist
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-20T23:53:34+08:00" content="2016-03-20">
-              2016-03-20
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Git-GitHub/" itemprop="url" rel="index">
-                    <span itemprop="name">Git/GitHub</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-		
-		
-		  
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/03/20/Hexo-blog-theme-switching-from-Jacman-to-NexT-Mist/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/20/Hexo-blog-theme-switching-from-Jacman-to-NexT-Mist/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          杂感难得一个周末，经过五天的工作之后，本来是打算周六周日在睡觉中度过，因为最近工作确实挺累，倒不是工作有多繁忙，而是路途遥远，每天上下班路上花费三个小时，特别是早高峰挤地铁，那真是个体力活啊，每天都是七号线静安寺转二号线，换乘之前，并不能太深入地铁车厢内部，否则到了换乘站你可能根本就挤不下车去了。
-最近博客流量有渐增趋势，可能是之前未被百度收录，而近期被百度收录的缘故吧，可见我天朝还是百度的天下，
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/20/Hexo-blog-theme-switching-from-Jacman-to-NexT-Mist/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/26/Asynchronous-non-blocking-message-communication-framework-based-on-Java-NIO2/" itemprop="url">
-                  基于Java NIO2实现的异步非阻塞消息通信框架
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-26T22:11:30+08:00" content="2016-02-26">
-              2016-02-26
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Programming-Notes/" itemprop="url" rel="index">
-                    <span itemprop="name">Programming Notes</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-		
-		
-		  
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/02/26/Asynchronous-non-blocking-message-communication-framework-based-on-Java-NIO2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/26/Asynchronous-non-blocking-message-communication-framework-based-on-Java-NIO2/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          前奏因为NIO并不容易掌握，所以这注定会是一篇长文，而且即便篇幅很大，亦难以把很多细节解释清楚，只能侧重于从整体上进行把握，并实现一个简单的客户端服务端消息通信框架作为例子，以便有需要的开发人员参考之。借用淘宝伯岩给出的忠告就是
-
-尽量不要尝试实现自己的NIO框架，除非有经验丰富的工程师
-尽量使用经过广泛实践的开源NIO框架Mina/Netty/xSocket
-尽量使用最新版稳定版JDK
-遇到问题
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/26/Asynchronous-non-blocking-message-communication-framework-based-on-Java-NIO2/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2180,7 +2179,7 @@ Lucene和Solr下载地址：http://lucene.apache.org/Windows选择下载zip压�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-count">59</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

@@ -3,8 +3,48 @@
 
     
   <url>
+    <loc>http://www.codepub.cn/2016/06/24/Lucene-6-0-in-action-the-index-of-hot-backup-and-recovery/</loc>
+    <lastmod>2016-06-24T15:25:49.168Z</lastmod>
+    <data>
+        <display>
+        <title>Lucene 6.0实战-索引热备份及恢复</title>
+        <pubTime>2016-06-24T15:24:43.000Z</pubTime>
+        
+        <tag>Lucene </tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.codepub.cn/2016/06/24/Lucene-6-0-in-action-index-backup-No-index-commit-to-snapshot/</loc>
+    <lastmod>2016-06-24T15:18:53.081Z</lastmod>
+    <data>
+        <display>
+        <title>Lucene 6.0实战-索引备份No index commit to snapshot</title>
+        <pubTime>2016-06-24T15:16:03.000Z</pubTime>
+        
+        <tag>Lucene </tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.codepub.cn/2015/07/30/Lombok-development-guidelines/</loc>
-    <lastmod>2016-06-17T15:25:28.034Z</lastmod>
+    <lastmod>2016-06-17T15:38:43.304Z</lastmod>
     <data>
         <display>
         <title>Lombok开发指南</title>
@@ -24,7 +64,7 @@
     
   <url>
     <loc>http://www.codepub.cn/2015/10/07/Private-Treasured-Toolkit/</loc>
-    <lastmod>2016-06-14T14:05:36.797Z</lastmod>
+    <lastmod>2016-06-14T14:08:30.131Z</lastmod>
     <data>
         <display>
         <title>私人珍藏工具箱</title>
@@ -44,7 +84,7 @@
     
   <url>
     <loc>http://www.codepub.cn/2016/06/10/Read-treat-time-as-a-friend/</loc>
-    <lastmod>2016-06-10T07:34:22.420Z</lastmod>
+    <lastmod>2016-06-10T07:36:23.451Z</lastmod>
     <data>
         <display>
         <title>读《把时间当作朋友》</title>
@@ -64,7 +104,7 @@
     
   <url>
     <loc>http://www.codepub.cn/2016/05/20/Lucene-6-0-in-action-1-Index-creation/</loc>
-    <lastmod>2016-06-09T01:24:59.660Z</lastmod>
+    <lastmod>2016-06-10T07:36:23.450Z</lastmod>
     <data>
         <display>
         <title>Lucene 6.0 实战（1）-创建索引</title>
@@ -488,26 +528,6 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2015/12/21/CCF-sixth-CSP-certification-exams-Solutions/</loc>
-    <lastmod>2016-01-03T08:38:07.440Z</lastmod>
-    <data>
-        <display>
-        <title>CCF第六次CSP认证考试题解</title>
-        <pubTime>2015-12-21T15:27:52.000Z</pubTime>
-        
-        <tag>CCF </tag>
-         
-         
-           
-             
-              <breadCrumb title="Algorithms" url="http://www.codepub.cn/categories/Algorithms/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.codepub.cn/2015/12/31/2015-year-end-summary/</loc>
     <lastmod>2016-01-03T08:38:07.440Z</lastmod>
     <data>
@@ -521,6 +541,26 @@
            
              
               <breadCrumb title="Life-Talk" url="http://www.codepub.cn/categories/Life-Talk/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.codepub.cn/2015/12/21/CCF-sixth-CSP-certification-exams-Solutions/</loc>
+    <lastmod>2016-01-03T08:38:07.440Z</lastmod>
+    <data>
+        <display>
+        <title>CCF第六次CSP认证考试题解</title>
+        <pubTime>2015-12-21T15:27:52.000Z</pubTime>
+        
+        <tag>CCF </tag>
+         
+         
+           
+             
+              <breadCrumb title="Algorithms" url="http://www.codepub.cn/categories/Algorithms/"/>
           
         </display>
     </data>
