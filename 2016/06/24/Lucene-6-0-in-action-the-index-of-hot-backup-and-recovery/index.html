@@ -71,7 +71,7 @@
 最简单的备份方式是关闭IndexWriter，然后逐一拷贝索引文件，但是如果索引比较大，那么这种备份操作会持续较长时间，而在备份期间，程序无法对索引文件进行修改，很多搜索程序是不能接受索引操作期间如此长时间停顿的
 那么不关闭IndexWriter又如何呢？这样也不行，因为在拷贝索引期间，如果索引文件发生变化，会导致备份的索引文件损坏
 另外一个问题就是如果原索引文件损坏的话，">
-<meta property="og:updated_time" content="2016-06-24T15:25:49.168Z">
+<meta property="og:updated_time" content="2016-06-24T15:43:47.110Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lucene 6.0实战-索引热备份及恢复">
 <meta name="twitter:description" content="索引备份的几个关键问题
@@ -373,7 +373,7 @@
 <li>每次在备份之前，如果程序将要覆盖上一个备份，需要先删除备份中未出现在当前快照中的文件，因为这些文件已经不会被当前索引引用了；如果每次都更改备份路径的话，那么就直接拷贝即可</li>
 </ul>
 <h3 id="索引热备份">索引热备份</h3><p>从Lucene 2.3版本开始，Lucene提供了一个热备策略，就是SnapshotDeletionPolicy，这样就能在不关闭IndexWriter的情况下，对程序最近一次索引修改提交操作时的文件引用进行备份，从而能建立一个连续的索引备份镜像。那么你也许会有疑问，在备份期间，索引出现变化怎么办呢？这就是SnapshotDeletionPolicy的牛逼之处，在使用SnapshotDeletionPolicy.snapshot()获取快照之后，索引更新提交时刻的所有文件引用都不会被IndexWriter删除，只要IndexWriter并未关闭，即使IndexWriter在进行更新、优化操作等也不会删除这些文件。如果说索引拷贝过程耗时较长也不会出现问题，因为被拷贝的文件时索引快照，在快照的有效期，其引用的文件会一直存在于磁盘上。</p>
-<p>所以在备份期间，索引会比通常情况下占用更大的磁盘空间，当索引备份完成后，可以调用SnapshotDeletionPolicy.release(IndexCommit commit)释放指定的某次提交，以便让IndexWriter删除这些已被关闭或下次将要更新的文件。</p>
+<p>所以在备份期间，索引会比通常情况下占用更大的磁盘空间，当索引备份完成后，可以调用SnapshotDeletionPolicy.release (IndexCommit commit) 释放指定的某次提交，以便让IndexWriter删除这些已被关闭或下次将要更新的文件。</p>
 <p>需要注意的是，Lucene对索引文件的写入操作是一次性完成的。这意味着你可以简单通过文件名比对来完成对索引的增量备份备份，你不必查看每个文件的内容，也不必查看该文件上次被修改的时间戳，因为一旦程序从快照中完成文件写入和引用操作，这些文件就不会改变了。</p>
 <p>segments.gen文件在每次程序提交索引更新时都会被重写，因此备份模块必须要经常备份该文件，但是在Lucene 6.0中注意segments.gen已经从Lucene索引文件格式中移除，所以无需单独考虑segments.gen的备份策略了。在备份期间，write.lock文件不用拷贝。</p>
 <p>SnapshotDeletionPolicy类有两个使用限制</p>
