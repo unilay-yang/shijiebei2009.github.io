@@ -3,6 +3,26 @@
 
     
   <url>
+    <loc>http://www.codepub.cn/2016/05/23/Lucene-6-0-in-action-4-The-text-analyzer/</loc>
+    <lastmod>2016-06-27T13:31:30.130Z</lastmod>
+    <data>
+        <display>
+        <title>Lucene 6.0实战（4）-文本分析器</title>
+        <pubTime>2016-05-23T15:30:05.000Z</pubTime>
+        
+        <tag>Lucene </tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.codepub.cn/2016/06/24/Lucene-6-0-in-action-the-index-of-hot-backup-and-recovery/</loc>
     <lastmod>2016-06-24T15:43:47.110Z</lastmod>
     <data>
@@ -129,26 +149,6 @@
         <display>
         <title>Lucene 6.0实战（5）-索引搜索器IndexSearcher</title>
         <pubTime>2016-05-24T13:51:49.000Z</pubTime>
-        
-        <tag>Lucene </tag>
-         
-         
-           
-             
-              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.codepub.cn/2016/05/23/Lucene-6-0-in-action-4-The-text-analyzer/</loc>
-    <lastmod>2016-05-24T14:36:19.109Z</lastmod>
-    <data>
-        <display>
-        <title>Lucene 6.0实战（4）-文本分析器</title>
-        <pubTime>2016-05-23T15:30:05.000Z</pubTime>
         
         <tag>Lucene </tag>
          
