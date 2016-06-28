@@ -24,7 +24,6 @@ Lucene常用分析器整理如下
 | SmartChineseAnalyzer  | SmartChineseAnalyzer是一个智能中文分词模块，能够利用概率对汉语句子进行最优切分，并内嵌英文tokenizer，能有效处理中英文混合的文本内容。它的原理基于自然语言处理领域的隐马尔科夫模型（HMM），利用大量语料库的训练来统计汉语词汇的词频和跳转概率，从而根据这些统计结果对整个汉语句子计算最似然（likelihood）的切分。因为智能分词需要词典来保存词汇的统计值，SmartChineseAnalyzer的运行需要指定词典位置，如何指定词典位置请参考org.apache.lucene.analysis.cn.smart.AnalyzerProfile。SmartChineseAnalyzer的算法和语料库词典来自于[ICTCLAS](http://ictclas.nlpir.org/downloads)|
 | CJKAnalyzer  | CJK表示中日韩，目的是要把分别来自中文、日文、韩文、越文中，本质、意义相同、形状一样或稍异的表意文字（主要为汉字，但也有仿汉字如日本国字、韩国独有汉字、越南的喃字）在ISO 10646及Unicode标准内赋予相同编码。对于中文是交叉双字分割，二元分词法  |
 
-
 ###Analyzer部分子类分词示例
 选取了六个实现类，并分别输出它们对英文、中文、特殊符号及邮箱等的切分效果。
 ```java
@@ -99,6 +98,142 @@ SmartChineseAnalyzer analyzing : 北京市北京大学
 北京市[0,3:word] 北京大学[3,7:word]
 ```
 
+###Analyzer之TokenStream
+TokenStream是分析处理组件中的一种中间数据格式，它从一个reader中获取文本，并以TokenStream作为输出结果。在所有的过滤器中，TokenStream同时充当着输入和输出格式。Tokenizer和TokenFilter继承自TokenStream，Tokenizer是一个TokenStream，其输入源是一个Reader；TokenFilter也是一个TokenStream，其输入源是另一个TokenStream。而TokenStream简单点说就是生成器的输出结果。TokenStream是一个分词后的Token结果组成的流，通过流能够不断的得到下一个Token。
+```java
+@Test
+public void testTokenStream() throws IOException {
+    Analyzer analyzer = new WhitespaceAnalyzer();
+    String inputText = "This is a test text for token!";
+    TokenStream tokenStream = analyzer.tokenStream("text", new StringReader(inputText));
+    //保存token字符串
+    CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
+    //在调用incrementToken()开始消费token之前需要重置stream到一个干净的状态
+    tokenStream.reset();
+    while (tokenStream.incrementToken()) {
+        //打印分词结果
+        System.out.print("[" + charTermAttribute + "]");
+    }
+}
+```
+输出结果：
+>[This][is][a][test][text][for][token!]
+
+###Analyzer之TokenAttribute
+在调用tokenStream()方法之后，我们可以通过为之添加多个Attribute，从而可以了解到分词之后详细的词元信息，比如CharTermAttribute用于保存词元的内容，TypeAttribute用于保存词元的类型。
+
+在Lucene中提供了几种类型的Attribute，每种类型的Attribute提供一个不同的方面或者token的元数据，罗列如下
+
+| 名称  | 作用  |
+| ------------ | ------------ |
+| CharTermAttribute | 表示token本身的内容  |
+| PositionIncrementAttribute | 表示当前token相对于前一个token的相对位置，也就是相隔的词语数量（例如“text for attribute”，text和attribute之间的getPositionIncrement为2），如果两者之间没有停用词，那么该值被置为默认值1  |
+| OffsetAttribute | 表示token的首字母和尾字母在原文本中的位置 |
+| TypeAttribute | 表示token的词汇类型信息，默认值为word，其它值有&lt;ALPHANUM&gt; &lt;APOSTROPHE&gt; &lt;ACRONYM&gt; &lt;COMPANY&gt; &lt;EMAIL&gt; &lt;HOST&gt; &lt;NUM&gt; &lt;CJ&gt; &lt;ACRONYM_DEP&gt; |
+|FlagsAttribute |与TypeAttribute类似，假设你需要给token添加额外的信息，而且希望该信息可以通过分析链，那么就可以通过flags去传递|
+|PayloadAttribute|在每个索引位置都存储了payload（关键信息），当使用基于Payload的查询时，该信息在评分中非常有用|
+
+```java
+@Test
+public void testAttribute() throws IOException {
+    Analyzer analyzer = new StandardAnalyzer();
+    String input = "This is a test text for attribute! Just add-some word.";
+    TokenStream tokenStream = analyzer.tokenStream("text", new StringReader(input));
+    CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
+    PositionIncrementAttribute positionIncrementAttribute = tokenStream.addAttribute(PositionIncrementAttribute.class);
+    OffsetAttribute offsetAttribute = tokenStream.addAttribute(OffsetAttribute.class);
+    TypeAttribute typeAttribute = tokenStream.addAttribute(TypeAttribute.class);
+    PayloadAttribute payloadAttribute = tokenStream.addAttribute(PayloadAttribute.class);
+    payloadAttribute.setPayload(new BytesRef("Just"));
+    tokenStream.reset();
+    while (tokenStream.incrementToken()) {
+        System.out.print("[" + charTermAttribute + " increment:" + positionIncrementAttribute.getPositionIncrement() +
+                " start:" + offsetAttribute
+                .startOffset() + " end:" +
+                offsetAttribute
+                        .endOffset() + " type:" + typeAttribute.type() + " payload:" + payloadAttribute.getPayload() +
+                "]\n");
+    }
+
+    tokenStream.end();
+    tokenStream.close();
+}
+```
+在调用incrementToken()结束迭代之后，调用end()和close()方法，其中end()可以唤醒当前TokenStream的处理器去做一些收尾工作，close()可以关闭TokenStream和Analyzer去释放在分析过程中使用的资源。
+
+输出结果如下，其中停用词被分词器过滤掉了
+>[test increment:4 start:10 end:14 type:<ALPHANUM> payload:null]
+[text increment:1 start:15 end:19 type:<ALPHANUM> payload:null]
+[attribute increment:2 start:24 end:33 type:<ALPHANUM> payload:null]
+[just increment:1 start:35 end:39 type:<ALPHANUM> payload:null]
+[add increment:1 start:40 end:43 type:<ALPHANUM> payload:null]
+[some increment:1 start:44 end:48 type:<ALPHANUM> payload:null]
+[word increment:1 start:49 end:53 type:<ALPHANUM> payload:null]
+
+###Analyzer之TokenFilter
+TokenFilter主要用于TokenStream的过滤操作，用来处理Tokenizer或者上一个TokenFilter处理后的结果，如果是对现有分词器进行扩展或修改，推荐使用自定义TokenFilter方式。自定义TokenFilter需要实现incrementToken()抽象函数，并且该方法需要声明为final的，在此函数中对过滤Term的CharTermAttribute和PositionIncrementAttribute等属性进行操作，就能实现过滤功能，例如一个简单的词扩展过滤器如下
+```java
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.TokenFilter;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+public class TestTokenFilter {
+    @Test
+    public void test() throws IOException {
+        String text = "Hi, Dr Wang, Mr Liu asks if you stay with Mrs Liu yesterday!";
+        Analyzer analyzer = new WhitespaceAnalyzer();
+        CourtesyTitleFilter filter = new CourtesyTitleFilter(analyzer.tokenStream("text", text));
+        CharTermAttribute charTermAttribute = filter.addAttribute(CharTermAttribute.class);
+        filter.reset();
+        while (filter.incrementToken()) {
+            System.out.print(charTermAttribute + " ");
+        }
+    }
+}
+
+/**
+ * 自定义词扩展过滤器
+ */
+class CourtesyTitleFilter extends TokenFilter {
+    Map<String, String> courtesyTitleMap = new HashMap<>();
+    private CharTermAttribute termAttribute;
+
+    /**
+     * Construct a token stream filtering the given input.
+     *
+     * @param input
+     */
+    protected CourtesyTitleFilter(TokenStream input) {
+        super(input);
+        termAttribute = addAttribute(CharTermAttribute.class);
+        courtesyTitleMap.put("Dr", "doctor");
+        courtesyTitleMap.put("Mr", "mister");
+        courtesyTitleMap.put("Mrs", "miss");
+    }
+
+    @Override
+    public final boolean incrementToken() throws IOException {
+        if (!input.incrementToken()) {
+            return false;
+        }
+        String small = termAttribute.toString();
+        if (courtesyTitleMap.containsKey(small)) {
+            termAttribute.setEmpty().append(courtesyTitleMap.get(small));
+        }
+        return true;
+    }
+}
+```
+输出结果如下
+>Hi, doctor Wang, mister Liu asks if you stay with miss Liu yesterday!
+
 ###自定义Analyzer实现扩展停用词
 1. 继承自Analyzer并覆写createComponents(String)方法
 2. 维护自己的停用词词典
@@ -166,6 +301,7 @@ class StopAnalyzerExtend extends Analyzer {
     }
 }
 ```
+
 ###自定义Analyzer实现字长过滤
 ```java
 class LongFilterAnalyzer extends Analyzer {
@@ -222,7 +358,7 @@ coder!
 ```
 可以看到，长度小于两个字符的文本都被过滤掉了。
 
-###对不同的Field使用不同的Analyzer
+###Analyzer之PerFieldAnalyzerWrapper
 PerFieldAnalyzerWrapper的doc注释中提供了详细的说明，该类提供处理不同的Field使用不同的Analyzer的技术方案。PerFieldAnalyzerWrapper可以像其它的Analyzer一样使用，包括索引和查询分析。
 ```java
 public void testPerFieldAnalyzerWrapper() throws IOException, ParseException {
