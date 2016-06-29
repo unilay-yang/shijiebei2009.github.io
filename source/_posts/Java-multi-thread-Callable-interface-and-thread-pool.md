@@ -166,7 +166,7 @@ public class ThreadTest<T> implements Callable {
         for (int i = 0; i < 5; i++) {
             tasks.add(threadTest);
         }
-        //改方法返回某个完成的任务
+        //该方法返回某个完成的任务
         Object o = executorService.invokeAny(tasks);
         System.out.println(o);
         System.out.println("One completed!");
@@ -183,7 +183,6 @@ public class ThreadTest<T> implements Callable {
             System.out.println(futures.get(i).get());
         }
     }
-
 }
 ```
 运行结果
@@ -217,7 +216,6 @@ public class ThreadTest implements Callable {
         }
         return atomicInteger.get();
     }
-
 
     @org.junit.Test
     public void test() throws InterruptedException, ExecutionException {
