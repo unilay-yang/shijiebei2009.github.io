@@ -3,8 +3,48 @@
 
     
   <url>
+    <loc>http://www.codepub.cn/2015/07/30/Lombok-development-guidelines/</loc>
+    <lastmod>2016-06-29T13:24:38.144Z</lastmod>
+    <data>
+        <display>
+        <title>Lombok开发指南</title>
+        <pubTime>2015-07-30T13:33:11.000Z</pubTime>
+        
+        <tag>Lombok </tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.codepub.cn/2016/02/01/Java-multi-thread-Callable-interface-and-thread-pool/</loc>
+    <lastmod>2016-06-29T13:24:20.433Z</lastmod>
+    <data>
+        <display>
+        <title>Java多线程之Callable接口及线程池</title>
+        <pubTime>2016-02-01T14:16:59.000Z</pubTime>
+        
+        <tag>Java </tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.codepub.cn/2016/05/23/Lucene-6-0-in-action-4-The-text-analyzer/</loc>
-    <lastmod>2016-06-28T13:33:46.944Z</lastmod>
+    <lastmod>2016-06-28T13:36:01.308Z</lastmod>
     <data>
         <display>
         <title>Lucene 6.0实战（4）-文本分析器</title>
@@ -24,7 +64,7 @@
     
   <url>
     <loc>http://www.codepub.cn/2016/06/24/Lucene-6-0-in-action-the-index-of-hot-backup-and-recovery/</loc>
-    <lastmod>2016-06-24T15:43:47.110Z</lastmod>
+    <lastmod>2016-06-24T15:47:12.475Z</lastmod>
     <data>
         <display>
         <title>Lucene 6.0实战-索引热备份及恢复</title>
@@ -44,33 +84,13 @@
     
   <url>
     <loc>http://www.codepub.cn/2016/06/24/Lucene-6-0-in-action-index-backup-No-index-commit-to-snapshot/</loc>
-    <lastmod>2016-06-24T15:40:53.111Z</lastmod>
+    <lastmod>2016-06-24T15:47:12.438Z</lastmod>
     <data>
         <display>
         <title>Lucene 6.0实战-索引备份No index commit to snapshot</title>
         <pubTime>2016-06-24T15:16:03.000Z</pubTime>
         
         <tag>Lucene </tag>
-         
-         
-           
-             
-              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.codepub.cn/2015/07/30/Lombok-development-guidelines/</loc>
-    <lastmod>2016-06-17T15:38:43.304Z</lastmod>
-    <data>
-        <display>
-        <title>Lombok开发指南</title>
-        <pubTime>2015-07-30T13:33:11.000Z</pubTime>
-        
-        <tag>Lombok </tag>
          
          
            
@@ -345,7 +365,7 @@
 
     
   <url>
-    <loc>http://www.codepub.cn/2016/03/27/Reading-the-programmer-you-can-not-afford-injuries/</loc>
+    <loc>http://www.codepub.cn/2016/03/27/Read-the-programmer-you-can-not-afford-injuries/</loc>
     <lastmod>2016-04-02T03:27:27.141Z</lastmod>
     <data>
         <display>
@@ -441,26 +461,6 @@
            
              
               <breadCrumb title="Algorithms" url="http://www.codepub.cn/categories/Algorithms/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.codepub.cn/2016/02/01/Java-multi-thread-Callable-interface-and-thread-pool/</loc>
-    <lastmod>2016-02-26T14:22:53.597Z</lastmod>
-    <data>
-        <display>
-        <title>Java多线程之Callable接口及线程池</title>
-        <pubTime>2016-02-01T14:16:59.000Z</pubTime>
-        
-        <tag>Java </tag>
-         
-         
-           
-             
-              <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
           
         </display>
     </data>
