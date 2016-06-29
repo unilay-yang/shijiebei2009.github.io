@@ -3,8 +3,48 @@
 
     
   <url>
+    <loc>http://www.codepub.cn/2016/06/29/Read-Hackers-and-Painters-Big-Ideas-from-the-Computer-Age/</loc>
+    <lastmod>2016-06-29T15:22:47.843Z</lastmod>
+    <data>
+        <display>
+        <title>读《黑客与画家》</title>
+        <pubTime>2016-06-29T15:21:40.000Z</pubTime>
+        
+        <tag>Thinking </tag>
+         
+         
+           
+             
+              <breadCrumb title="Life-Talk" url="http://www.codepub.cn/categories/Life-Talk/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.codepub.cn/2016/03/27/Read-the-programmer-you-can-not-afford-injuries/</loc>
+    <lastmod>2016-06-29T14:04:33.708Z</lastmod>
+    <data>
+        <display>
+        <title>读《程序员，你伤不起》</title>
+        <pubTime>2016-03-27T04:53:21.000Z</pubTime>
+        
+        <tag>Thinking </tag>
+         
+         
+           
+             
+              <breadCrumb title="Life-Talk" url="http://www.codepub.cn/categories/Life-Talk/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.codepub.cn/2015/07/30/Lombok-development-guidelines/</loc>
-    <lastmod>2016-06-29T13:24:38.144Z</lastmod>
+    <lastmod>2016-06-29T14:04:33.707Z</lastmod>
     <data>
         <display>
         <title>Lombok开发指南</title>
@@ -24,7 +64,7 @@
     
   <url>
     <loc>http://www.codepub.cn/2016/02/01/Java-multi-thread-Callable-interface-and-thread-pool/</loc>
-    <lastmod>2016-06-29T13:24:20.433Z</lastmod>
+    <lastmod>2016-06-29T14:04:33.706Z</lastmod>
     <data>
         <display>
         <title>Java多线程之Callable接口及线程池</title>
@@ -358,26 +398,6 @@
            
              
               <breadCrumb title="Programming Notes" url="http://www.codepub.cn/categories/Programming-Notes/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.codepub.cn/2016/03/27/Read-the-programmer-you-can-not-afford-injuries/</loc>
-    <lastmod>2016-04-02T03:27:27.141Z</lastmod>
-    <data>
-        <display>
-        <title>读《程序员，你伤不起》</title>
-        <pubTime>2016-03-27T04:53:21.000Z</pubTime>
-        
-        <tag>Thinking </tag>
-         
-         
-           
-             
-              <breadCrumb title="Life-Talk" url="http://www.codepub.cn/categories/Life-Talk/"/>
           
         </display>
     </data>
